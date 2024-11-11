@@ -4,3 +4,8 @@ export interface UserRegister {
     e_mail:string;
     password:string;
 }
+
+export interface UserLogin{
+    e_mail:string;
+    password:string;
+}

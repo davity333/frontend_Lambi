@@ -22,6 +22,10 @@ import { TablaComponent } from './Pages/gestion-productos/Components/tabla/tabla
 import { DatosComponent } from './Pages/gestion-productos/Components/datos/datos.component';
 import { CommonModule } from '@angular/common';
 import { FormControl,ReactiveFormsModule,FormGroup } from '@angular/forms';
+import { provideHttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NgxToastNotifierModule } from 'ngx-toast-notifier';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +44,7 @@ import { FormControl,ReactiveFormsModule,FormGroup } from '@angular/forms';
     DatosNegocioComponent,
     GestionProductosComponent,
     TablaComponent,
-    DatosComponent
+    DatosComponent,
     ],
     
   imports: [
@@ -54,7 +58,8 @@ import { FormControl,ReactiveFormsModule,FormGroup } from '@angular/forms';
     RegisterComponent
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })
