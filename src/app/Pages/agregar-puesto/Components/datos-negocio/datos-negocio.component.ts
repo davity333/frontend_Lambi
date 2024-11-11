@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './datos-negocio.component.css'
 })
 export class DatosNegocioComponent {
-
   
 
 }
