@@ -1,0 +1,25 @@
+<div class="flex items-center justify-center text-center space-x-16 p-7">
+    <hr class="w-[50vh] border-[0.2vh] border-[#00000043]">
+    <p id="titulo" class="text-[#796767] text-[4vh]">Encuentra puestos que ofrezcan</p>
+    <hr class="w-[50vh] border-[0.2vh] border-[#00000043]">
+</div>
+
+<div class="p-16">
+<div class="carousel-container">
+    <button class="prev-button" (click)="prevCard()">⟨</button>
+    <div class="carousel" #carousel>
+      <div class="cards-wrapper" [style.transform]="getTransformStyle()">
+        <div class="card-container" *ngFor="let sugerencia of sugerencias">
+          <img [src]="sugerencia.img" alt="{{ sugerencia.nombre }}" class="card-image">
+          <div class="card-content">
+            <p class="badge">{{ sugerencia.nombre }}</p>
+            <h2 class="card-title">{{ sugerencia.categoria }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <button class="next-button" (click)="nextCard()">⟩</button>
+  </div>
+</div>
+<div class="h-[0.8vh] bg-[#BFAAAA]"></div>

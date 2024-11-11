@@ -1,0 +1,15 @@
+
+#whatsap:hover{
+    cursor: pointer;
+    transition-duration: 3ms;
+    transform: translateY(-10px);
+    transition-duration: 90ms;
+}
+
+
+#estrella:hover{
+    cursor: pointer;
+    transition-duration: 3ms;
+    transform: translateY(-10px);
+    transition-duration: 90ms;
+}

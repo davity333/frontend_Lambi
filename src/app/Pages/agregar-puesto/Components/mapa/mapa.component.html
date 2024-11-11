@@ -1,0 +1,20 @@
+<div class="file-upload flex flex-col gap-2 mt-[8vh]">
+    <label for="fileInput" class="file-label">Subir fotos</label>
+    <label for="fileInput" class="custom-file-upload">
+        Subir foto
+    </label>
+    <input type="file" id="fileInput" class="file-input" />
+
+    <p>SELECCIONAR UBICACION</p>
+    <google-map 
+      [height]="'280px'" 
+      [width]="'200%'" 
+      [zoom]="zoom" 
+      [center]="center" 
+      (mapClick)="onMapClick($event)">
+      <map-marker [position]="center"></map-marker>
+    </google-map>
+    <p>Latitud: {{latitude}}</p>
+    <p>Longitud: {{longitude}}</p>
+    <button (click)="guardarCoordenadas()">Guardar Coordenadas</button>
+</div>
