@@ -24,21 +24,23 @@ export class RegisterComponent {
     });
   }
 
-  login(){
-    if(this.users.valid){
-      this.user.createUser(this.users.value).pipe(tap({
-        next(response){
-          alert("Usuario registrado con exito")
-        },
-        error(err){
-          alert("error con la api")
-          console.error('Error creating user', err);
-        }
-      })).subscribe
-    }else{
-      alert("Por favor llene todos los campos correctamente")
+  login() {
+    if (this.users.valid) {
+      this.user.createUser(this.users.value).pipe(
+        tap({
+          next: (response) => {
+            alert("Usuario registrado con éxito");
+            console.log(response);
+          },
+          error: (err) => {
+            alert("Error con la API");
+            console.error('Error creating user', err);
+          }
+        })
+      ).subscribe();
+    } else {
+      alert("Por favor llene todos los campos correctamente");
     }
-
   }
 
 }
