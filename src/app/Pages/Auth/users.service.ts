@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserRegister } from '../register/models/user';
+import { UserLogin, UserRegister } from '../register/models/user';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,12 @@ export class UsersService {
 
   createUser(user: UserRegister): Observable<UserRegister>{
     let url = "http://52.72.44.45:8000/api/registerBuyer/";
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpClient.post<UserRegister>(url, user);
+  }
+
+  login(user: UserLogin): Observable<any>{
+    let url = "http://52.72.44.45:8000/api/loginBuyer/";
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.httpClient.post<UserRegister>(url, user);
   }

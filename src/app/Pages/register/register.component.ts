@@ -15,7 +15,7 @@ export class RegisterComponent {
   users:FormGroup;
   userInterface:UserRegister[]=[];
 
-  constructor(private user:UsersService,) {
+  constructor(private user:UsersService) {
     this.users = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       apellidos: new FormControl('', [Validators.required]),
