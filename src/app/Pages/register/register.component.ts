@@ -12,14 +12,21 @@ export class RegisterComponent {
 
   constructor() {
     this.users = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      email: new FormControl('', [Validators.required, Validators.email])
+      nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      apellidos: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      email: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
   login(){
+    if(this.users.valid){
+      alert("usuario agregado")
+    }else{
+      alert("Por favor llene todos los campos correctamente")
+    }
+
+    
 
   }
 
