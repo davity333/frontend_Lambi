@@ -1,67 +1,68 @@
-<img src="./assets/logo.png" alt="logo" class="h-[7vh] transition-all duration-150 hover:h-20 
-hover:cursor-pointer absolute" title="Home" id="logo">
-<div class="absolute inset-0 z-10 shine-effect"></div>
+<div class="min-h-screen relative" id="fondo">
 
-<div class="flex items-center justify-center min-h-screen" id="fondo">
-    <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80
-        sm:w-96" [formGroup]="users">
+    <img src="./assets/logo.png" alt="logo" 
+         class="h-[7vh] transition-all duration-150 hover:h-20 hover:cursor-pointer absolute  left-4" 
+         title="Home" id="logo" [routerLink]="['/']">
 
-        <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center top-10 sm:top-16">
-            <img src="./assets/logosolo.png" class="h-16 sm:h-20" alt="Logotipo">
-        </div>
+    <div class="flex items-center justify-center min-h-screen">
+        <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 sm:w-96" [formGroup]="users">
+            <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center top-10 sm:top-16">
+                <img src="./assets/logosolo.png" class="h-16 sm:h-20" alt="Logotipo">
+            </div>
+            <p class="text-2xl font-semibold p-5 mt-5">Iniciar sesión</p>
+            <!-- Input para Email -->
+            <div class="w-full relative flex rounded-xl mb-5">
+                <input
+                    required=""
+                    class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
+                    id="email"
+                    type="email"
+                    formControlName="e_mail"/>
+                <label
+                    class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
+                    for="email">
+                    Email
+                </label>
+            </div>
 
-        <p class="text-2xl font-semibold p-5 mt-5">Iniciar sesión</p>
+            <!-- Input para Contraseña -->
+            <div class="w-full relative flex rounded-xl mb-4">
+                <input
+                    required=""
+                    class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
+                    id="password"
+                    type="password"
+                    formControlName="password"/>
+                <label
+                    class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
+                    for="password">
+                    Contraseña
+                </label>
+            </div>
 
-        <!-- Input para Email -->
-        <div class="w-full relative flex rounded-xl mb-5">
-            <input
-                required=""
-                class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
-                id="email"
-                type="email"
-                formControlName="e_mail"/>
-            <label
-                class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
-                for="email">
-                Email</label>
-        </div>
+            <!-- Botón de Login -->
+            <button
+                class="w-full bg-[#C8AB6F] text-white py-2 rounded-md shadow-md hover:bg-[#a58c5a] transition duration-300 mt-2 font-bold text-[#4d4747]" 
+                (click)="logear()">
+                Entrar
+            </button>
 
-        <!-- Input para Contraseña -->
-        <div class="w-full relative flex rounded-xl mb-4">
-            <input
-                required=""
-                class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
-                id="password"
-                type="password"
-                formControlName="password"/>
-            <label
-                class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
-                for="password">
-                Contraseña</label>
-        </div>
+            <!-- Botón de Registro -->
+            <p class="text-sm text-gray-800 mt-4">¿Aún no tienes cuenta? 
+                <a href="register" class="text-sky-500 hover:underline">Regístrate</a>
+            </p>
 
-        <!-- Botón de Login -->
-        <button
-            class="w-full bg-[#C8AB6F] text-white py-2 rounded-md shadow-md hover:bg-[#a58c5a] transition duration-300 mt-2 font-bold 
-            text-[#4d4747]" (click)="logear()">
-            Entrar
-        </button>
+            <!-- Botón de Google -->
+            <button
+                class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
+                <img src="./assets/google.png" class="h-5 mr-2" alt="">Continuar con Google
+            </button>
 
-        <!-- Botón de Registro -->
-        <p class="text-sm text-gray-800 mt-4">¿Aún no tienes cuenta? 
-            <a href="register" class="text-sky-500 hover:underline">Regístrate</a>
-        </p>
-
-        <!-- Botón de Google -->
-        <button
-            class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
-            <img src="./assets/google.png" class="h-5 mr-2" alt="">Continuar con Google
-        </button>
-
-        <!-- Botón de Facebook -->
-        <button
-            class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
-            <img src="./assets/faceebok.png" class="h-5 mr-2" alt="">Continuar con Facebook
-        </button>
-    </form>
+            <!-- Botón de Facebook -->
+            <button
+                class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
+                <img src="./assets/faceebok.png" class="h-5 mr-2" alt="">Continuar con Facebook
+            </button>
+        </form>
+    </div>
 </div>

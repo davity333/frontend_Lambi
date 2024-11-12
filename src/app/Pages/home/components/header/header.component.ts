@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersService } from '../../../Auth/users.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -6,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  router = inject(Router);
+  usersService = inject(UsersService);
+
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }

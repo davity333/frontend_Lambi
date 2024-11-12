@@ -28,6 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxToastNotifierModule } from 'ngx-toast-notifier';
 import { NegociosComponent } from './Pages/negocios/negocios.component';
 import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
+import { HeaderAdminComponent } from './Pages/home/components/header-admin/header-admin.component';
+import { FavoritesComponent } from './Pages/favorites/favorites.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +50,8 @@ import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
     DatosComponent,
     NegociosComponent,
     BusquedaComponent,
+    HeaderAdminComponent,
+    FavoritesComponent,
     ],
     
   imports: [

@@ -3,7 +3,7 @@ import { UsersService } from '../Auth/users.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { UserLogin } from '../register/models/user';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +12,7 @@ import { UserLogin } from '../register/models/user';
 export class LoginComponent {
   users: FormGroup;
 
-  constructor(private user: UsersService) {
+  constructor(private user: UsersService, private navegar: Router) {
     this.users = new FormGroup({
       e_mail: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
@@ -40,6 +40,7 @@ export class LoginComponent {
               
               alert("Usuario encontrado con éxito");
               console.log("Token almacenado:", token);
+              this.navegar.navigate(['/'])
             } else {
               console.error("Token no encontrado en el encabezado Authorization");
             }

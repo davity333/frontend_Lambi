@@ -8,7 +8,7 @@
 }
 
 #logo:hover{
-    filter: drop-shadow(0px 2px 4px #ffffffad);
+    filter: drop-shadow(0px 0px 9px rgba(135, 115, 79, 1));
 }
 
 .shine-effect {
@@ -42,4 +42,8 @@
         transform: translateX(100%);
         opacity: 0; 
     }
+}
+
+#logo{
+    filter: drop-shadow(0px 0px 9px rgba(255, 255, 255, 1));
 }

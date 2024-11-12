@@ -25,6 +25,8 @@
     height: 80vh;
     display: block;
     object-fit: contain;
+    opacity: 0;
+    animation: imagen 2s forwards;
 }
 
 @media (max-width: 768px) {
@@ -49,11 +51,60 @@
     }
 }
 
+@keyframes imagen {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 @keyframes slide {
-    0% { transform: translateX(0%); }
-    30% { transform: translateX(0%); }
-    35% { transform: translateX(-100%); }
-    65% { transform: translateX(-100%); }
-    70% { transform: translateX(-200%); }
-    100% { transform: translateX(-200%); }
+    0% { transform: translateX(0%);}
+    25% { transform: translateX(0%);}
+    30% { transform: translateX(-100%);}
+    55% { transform: translateX(-100%);}
+    60% { transform: translateX(-200%);}
+    85% { transform: translateX(-200%);}
+    90% { transform: translateX(-300%);}
+    100% { transform: translateX(-300%);}
+}
+
+
+.slide-in {
+    transform: translateX(-100%); /* Comienza fuera de la pantalla a la izquierda */
+    opacity: 0;
+    animation: slideInAnimation 1s ease-out forwards; /* La animación dura 1 segundo */
+  }
+  
+  @keyframes slideInAnimation {
+    0% {
+      transform: translateX(-100%); /* Empieza fuera de la pantalla */
+      opacity: 0; /* Empieza invisible */
+    }
+    100% {
+      transform: translateX(0); /* Llega a su posición original */
+      opacity: 1; /* Se vuelve completamente visible */
+    }
+  }
+  
+/*TEXTO PARRAFO*/
+.escribiendo{
+    opacity: 0;
+    animation: texto 3s ease forwards;
+}
+
+@keyframes texto{
+    to {
+        width: 100%;
+        opacity: 1;
+      }
+
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }

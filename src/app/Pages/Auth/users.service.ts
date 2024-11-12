@@ -53,4 +53,8 @@ getUser(): Observable<any> {
       }
     }))
   }
+
+  isLogged() :boolean{
+    return localStorage.getItem('token') ? true : false;
+  }
 }

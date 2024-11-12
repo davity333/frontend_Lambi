@@ -7,14 +7,17 @@ import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.co
 import { GestionProductosComponent } from './Pages/gestion-productos/gestion-productos.component';
 import { NegociosComponent } from './Pages/negocios/negocios.component';
 import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
+import { loginGuard } from '../guards/login.guard';
+import { FavoritesComponent } from './Pages/favorites/favorites.component';
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'crearPuesto', component: AgregarPuestoComponent},
+  {path: 'crearPuesto', component: AgregarPuestoComponent, canActivate:[loginGuard]},
   {path: 'gestionProducto', component: GestionProductosComponent},
   {path: 'negocios', component: NegociosComponent},
-  {path: 'busqueda', component: BusquedaComponent}
+  {path: 'busqueda', component: BusquedaComponent},
+  {path: 'favorites', component: FavoritesComponent},
 ];
 
 @NgModule({
