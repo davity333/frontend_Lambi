@@ -26,6 +26,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxToastNotifierModule } from 'ngx-toast-notifier';
+import { NegociosComponent } from './Pages/negocios/negocios.component';
+import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,8 @@ import { NgxToastNotifierModule } from 'ngx-toast-notifier';
     GestionProductosComponent,
     TablaComponent,
     DatosComponent,
+    NegociosComponent,
+    BusquedaComponent,
     ],
     
   imports: [

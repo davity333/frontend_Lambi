@@ -14,20 +14,20 @@ export class RegisterComponent {
 
   users:FormGroup;
   userInterface:UserRegister[]=[];
+  
 
   constructor(private user:UsersService) {
     this.users = new FormGroup({
-      nombre: new FormControl('', [Validators.required]),
-      apellidos: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.email]),
+      name: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      e_mail: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
 
   login() {
     if (this.users.valid) {
-      this.user.createUser(this.users.value).pipe(
-        tap({
+      this.user.createUser(this.users.value).pipe(tap({
           next: (response) => {
             alert("Usuario registrado con éxito");
             console.log(response);

@@ -1,4 +1,4 @@
-<section class="flex justify-center p-8 gap-10">
+<section class="flex justify-center p-8 gap-10 pt-12">
     <div class="bg-[#C1E3BA] flex pr-10 pl-10 gap-4 w-full max-w-[45%] items-center shadow-md rounded-md" id="whatsap">
         <div class="flex flex-col justify-center">
             <h1 class="text-2xl font-bold opacity-70">Comunicate con el vendedor</h1>
@@ -24,6 +24,20 @@
     </div>
 </section>
 
-<footer class="flex items-center justify-center w-full max-w-[89%] mx-auto">
-    <img src="./assets/footer.jpg" alt="Footer Image" class="w-full rounded-md shadow-md">
+<footer class="flex items-center justify-center w-full max-w-[89%] mx-auto pt-5">
+    <div class="w-full shadow-md text-center flex justify-center items-center" id="fondo">
+        <div class="">
+        <p id="titulo" class="text-[6vh] text-white">Cuentas con algun negocio?</p>
+        <div class="pl-[46vh] pr-[46vh]">
+        <p class="text-white text-[3vh] font-medium">Si tienes algun puesto de cualquier categoría, publícalo y permite que 
+            los usuarios descubran lo que ofreces</p>
+        </div>
+            <button class="bg-[#a19d95] text-white px-16 py-[1.4vh] rounded-3xl font-semibold hover:bg-[#7b7260] duration-150 mt-6"
+            [routerLink]="('/crearPuesto')">
+                Publicar
+            </button>
+            <marquee behavior="" direction="" scrollamount="30" class="text-white text-[3.5vh] mt-10 font-semibold">!Haz que tu negocio crezca!</marquee>
+        </div>
+        </div>
 </footer>
+

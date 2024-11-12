@@ -16,6 +16,8 @@ export class GestionPuestoComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerUbicacion();
+
+    
   }
 
   // Función para obtener la ubicación actual

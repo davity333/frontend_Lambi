@@ -6,12 +6,16 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { GestionPuestoComponent } from './Pages/gestion-puesto/gestion-puesto.component';
 import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.component';
 import { GestionProductosComponent } from './Pages/gestion-productos/gestion-productos.component';
+import { NegociosComponent } from './Pages/negocios/negocios.component';
+import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'crearPuesto', component: AgregarPuestoComponent},
-  {path: 'gestionProducto', component: GestionProductosComponent}
+  {path: 'gestionProducto', component: GestionProductosComponent},
+  {path: 'negocios', component: NegociosComponent},
+  {path: 'busqueda', component: BusquedaComponent}
 ];
 
 @NgModule({

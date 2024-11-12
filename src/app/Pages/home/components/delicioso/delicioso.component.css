@@ -4,6 +4,12 @@
     background-image: url("../../../../../../public/assets/delicioso.jpg");
     background-size: cover;
     animation: animate 10s infinite;
+    filter: brightness(40%);
+    transition-duration: 200ms;
+}
+
+#fondo:hover{
+    filter:brightness(90%)
 }
 
 #titulo{

@@ -1,40 +1,67 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../Auth/users.service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
+import { UserLogin } from '../register/models/user';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  users:FormGroup;
+  users: FormGroup;
 
-  constructor(private user:UsersService) {
+  constructor(private user: UsersService) {
     this.users = new FormGroup({
-      email: new FormControl('', [Validators.email]),
+      e_mail: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
-
-  logear(){
-    if (this.users.valid) {
-      this.user.login(this.users.value).pipe(tap({
-          next (response)  {
-            if(response != null) {
+  logear() {
+    let userLogin: UserLogin = {
+      e_mail: this.users.value.e_mail,
+      password: this.users.value.password
+    };
+  
+    console.log("Datos que se van a enviar:", userLogin);
+  
+    this.user.login(userLogin).pipe(
+      tap({
+        next: (response) => {
+          console.log("Respuesta completa:", response); 
+          const authorizationHeader = response.headers?.get('Authorization');
+          console.log("Encabezado Authorization:", authorizationHeader); 
+  
+          if (authorizationHeader?.startsWith('Bearer ')) {
+            const token = authorizationHeader.split(' ')[1];
+            if (token) {
+              localStorage.setItem('token', token);
+              
               alert("Usuario encontrado con éxito");
-              console.log(response);
+              console.log("Token almacenado:", token);
+            } else {
+              console.error("Token no encontrado en el encabezado Authorization");
             }
-          },
-          error (err)  {
-            alert("Error con la API");
-            console.error('Error creating user', err);
+          } else {
+            console.error("Encabezado Authorization no encontrado o vacío en la respuesta");
           }
-        })
-      ).subscribe();
-    } else {
-      alert("Por favor llene todos los campos correctamente");
-    }
+        },
+        error: (err) => {
+          console.error('Error durante el login:', err);
+          if (err.status === 404) {
+            alert("Email no encontrado");
+          } else if (err.status === 401) {
+            alert("Contraseña incorrecta");
+          } else if (err.status === 422) {
+            alert("Error de validación");
+          } else {
+            alert("Error inesperado");
+          }
+        }
+      })
+    ).subscribe();
   }
-
+  
+  
 }

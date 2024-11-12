@@ -1,4 +1,3 @@
-
 #whatsap:hover{
     cursor: pointer;
     transition-duration: 3ms;
@@ -12,4 +11,18 @@
     transition-duration: 3ms;
     transform: translateY(-10px);
     transition-duration: 90ms;
+}
+
+#fondo{
+    height: 47vh;
+    width: 100%;
+    background-image: url("../../../../../../public/assets/footer.jpg");
+    background-size: cover;
+    animation: animate 10s infinite;
+}
+
+#titulo{
+    font-family: "Jockey One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
