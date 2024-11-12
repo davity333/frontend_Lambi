@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Pages/home/home.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
-import { GestionPuestoComponent } from './Pages/gestion-puesto/gestion-puesto.component';
 import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.component';
 import { GestionProductosComponent } from './Pages/gestion-productos/gestion-productos.component';
 import { NegociosComponent } from './Pages/negocios/negocios.component';

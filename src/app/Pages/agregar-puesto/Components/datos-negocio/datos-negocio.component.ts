@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { PuestoService } from '../../../gestion-puesto/service/puesto.service';
+import { PuestoService } from '../../Services/puesto.service';
 import { tap } from 'rxjs';
-import { Estados } from '../../../gestion-puesto/models/puestos';
+import { Estados, Estado, Pais, Municipio } from '../../Models/estados';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../../Auth/users.service';
 @Component({
@@ -11,7 +11,8 @@ import { UsersService } from '../../../Auth/users.service';
   styleUrl: './datos-negocio.component.css'
 })
 export class DatosNegocioComponent implements OnInit{
-  
+
+
   datos:FormGroup;
 
   constructor(private puesto: PuestoService, private user: UsersService){
@@ -76,10 +77,12 @@ export class DatosNegocioComponent implements OnInit{
           console.log(response);
         },
         error: (err) => {
-          alert("Error con la API");
-          console.error('Error creating user', err);
+          alert("Error con la API: " + err.message);
+          console.error('Error creando el negocio', err);
         }
   
-    })).subscribe()
+    })).subscribe();
   }
+
+  
 }

@@ -12,7 +12,7 @@ import { SugerenciasComponent } from './Pages/home/components/sugerencias/sugere
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { DeliciosoComponent } from './Pages/home/components/delicioso/delicioso.component';
 import { ComunicacionComponent } from './Pages/home/components/comunicacion/comunicacion.component';
-import { GestionPuestoComponent } from './Pages/gestion-puesto/gestion-puesto.component';
+
 import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.component';
 import { DatosNegocioComponent } from './Pages/agregar-puesto/Components/datos-negocio/datos-negocio.component';
 import { MapaComponent } from './Pages/agregar-puesto/Components/mapa/mapa.component';
@@ -40,7 +40,6 @@ import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
     SugerenciasComponent,
     DeliciosoComponent,
     ComunicacionComponent,
-    GestionPuestoComponent,
     AgregarPuestoComponent,
     MapaComponent,
     DatosNegocioComponent,
