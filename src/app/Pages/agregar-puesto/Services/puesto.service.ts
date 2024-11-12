@@ -29,13 +29,9 @@ export class PuestoService {
   }
   
 
-  agregarPuesto(puesto: Puesto): Observable<any>{
+  agregarPuesto(puesto: any): Observable<any>{
     let url = "http://52.72.44.45:8000/api/stand";
-    const headers = new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'accept': 'application/json'
-    });
-    return this.httpClient.post<Puesto>(url, puesto);
+    return this.httpClient.post<any>(url, puesto);
   }
 
 }

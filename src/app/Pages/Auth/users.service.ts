@@ -3,6 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserLogin, UserRegister } from '../register/models/user';
 import { Observable,map ,tap} from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
+
+export interface Coordenadas {
+  latitud: string;
+  altitud: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -22,12 +27,14 @@ export class UsersService {
 
     return this.httpClient.post<UserRegister>(url, user, { observe: 'response' });
   }
-  setCoordernadas(lat: string, lng: string){
-      this.latitud= lat;
-      this.altitud = lng;
+  setCoordernadas(lat: string, lng: string) {
+    this.latitud = lat;
+    this.altitud = lng;
+    console.log("Coordenadas guardadas en el servicio: Latitud - " + this.latitud + ", Longitud - " + this.altitud);
   }
-  getCoordernadas(): Coordenadas{
-    return {latitud: this.latitud, altitud: this.altitud} ;
+  // Método para obtener las coordenadas como string
+  getCoordernadas(): Coordenadas {
+    return { latitud: this.latitud, altitud: this.altitud };
   }
   login(userLogin: UserLogin): Observable<HttpResponse<any>> {
     let loginUrl = "http://52.72.44.45:8000/api/loginBuyer/";
@@ -46,8 +53,4 @@ getUser(): Observable<any> {
       }
     }))
   }
-}
-export interface Coordenadas {
-  latitud: string;
-  altitud: string;
 }

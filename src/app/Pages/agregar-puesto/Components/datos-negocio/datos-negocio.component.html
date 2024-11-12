@@ -1,5 +1,5 @@
 <div class="flex justify-center">
-<form class="flex mt-16 space-x-60"> <!--AQUI SE SEPARA LOS DATOS Y EL MAPA-->
+<form class="flex mt-16 space-x-60" [formGroup]="datos"> <!--AQUI SE SEPARA LOS DATOS Y EL MAPA-->
     <div class="">
     <p id="titulo" class="text-[#796767] text-[3.5vh]">Gestion del puesto</p>
     <h1 class="text-gray-600">Datos del establecimiento</h1>
@@ -35,7 +35,7 @@
     
     <div class="flex flex-col gap-y-1">
         <label for="">No.Casa</label>
-        <input type="number" class="border-[0.2vh] border-[#00000049] w-[10vh] rounded-[4px]" formControlName="no_house">
+        <input type="text" class="border-[0.2vh] border-[#00000049] w-[10vh] rounded-[4px]" formControlName="no_house">
     </div>
 </div>
 
@@ -69,7 +69,7 @@
 
 <div class="flex flex-col gap-y-1 mt-3">
     <label for="" class="text-[#434141]">Numero de telefonico</label>
-    <input type="number" name="" id="" class="border-[0.2vh] border-[#00000049] w-[40vh] rounded-[4px]" formControlName="phone">
+    <input type="text" name="" id="" class="border-[0.2vh] border-[#00000049] w-[40vh] rounded-[4px]" formControlName="phone">
 </div>
 
 <div class="flex justify-between mt-5 pb-4 text-[#494435]">

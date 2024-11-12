@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../../../Auth/users.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-mapa',
@@ -52,14 +53,13 @@ export class MapaComponent {
 
   guardarCoordenadas(event: Event) {
     event.preventDefault(); 
-    alert("Se guardaron las coordenadas")
-  
+    alert("Se guardaron las coordenadas");
+    
     if (this.latitude !== null && this.longitude !== null) {
-      console.log(`Coordenadas guardadas: Lat: ${this.latitude}, Lng: ${this.longitude}`);
-      let latitudString = String(this.latitude);
-      let longitudString = String(this.longitude);
-  
+      let latitudString = this.latitude.toString();
+      let longitudString = this.longitude.toString();
       this.user.setCoordernadas(latitudString, longitudString);
+      console.log("Coordenadas guardadas en el servicio.");
     } else {
       alert("No se han seleccionado las coordenadas");
       console.log("No se han seleccionado coordenadas aún.");
