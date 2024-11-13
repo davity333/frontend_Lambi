@@ -4,7 +4,7 @@
         <div>
             <p id="titulo" class="text-3xl text-[#796767]">Búsqueda</p>
         </div>
-        <div class="flex sm:flex-row items-center pt-5 gap-2">
+        <div class="flex sm:flex-row items-center pt-5 gap-2" [formGroup]="categoryToSearch">
             <div class="flex-grow flex"> 
                 <div class="flex items-center justify-center rounded-tl-lg rounded-bl-lg bg-white p-3 border-2 border-[#0000002c] border-r-0">
                     <svg viewBox="0 0 20 20" aria-hidden="true" class="pointer-events-none w-5 fill-gray-500 transition">
@@ -12,13 +12,13 @@
                     </svg>
                 </div>
 
-                <input type="text" class="w-full bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] border-[#00000049] border-l-0 rounded-md rounded-l-none" placeholder="Buscar por categoría" id="search-input">
+                <input type="text" class="w-full bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] border-[#00000049] border-l-0 rounded-md rounded-l-none" placeholder="Buscar por categoría" id="search-input" formControlName="category">
             </div>
 
-            <select class="w-[40vh] h-[6.3vh] border-[0.2vh] border-[#00000049] rounded-md" formControlName="categoria">
-                <option class="bg-[#c5bfbf] text-gray-800"></option>
+            <select class="w-[40vh] h-[6.3vh] border-[0.2vh] border-[#00000049] rounded-md" formControlName="idcategory">
+                <option  *ngFor="let item of categories" [value]="item.idcategory" class="bg-[#c5bfbf] text-gray-800">{{item.category}}</option>
             </select>
-            <input type="button" value="Buscar" class="bg-[#E4C246] p-[1.4vh] mt-2 sm:mt-0 rounded-lg text-white font-semibold px-10 hover:bg-[#bea23c] transition-colors w-full sm:w-auto text-[#62562E]">
+            <input (click)="searchStands()" type="button" value="Buscar" class="bg-[#E4C246] p-[1.4vh] mt-2 sm:mt-0 rounded-lg text-white font-semibold px-10 hover:bg-[#bea23c] transition-colors w-full sm:w-auto text-[#62562E]">
         </div>
 
         <div class="mt-4">
