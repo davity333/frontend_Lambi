@@ -12,13 +12,13 @@ export class FavoritesComponent {
       nombre: "MetalClotes", categoria:"Ropa", duenio:"MetalVit", img:'/assets/ejemplo.jpeg'
     },
     {
-      nombre: "Comiditas somer", categoria:"comidas", duenio:"Somer", img:'/assets/ejemplo.jpeg'
+      nombre: "Comiditas somer", categoria:"comidas", duenio:"Somer", img:'/assets/comiditasSomer.jpeg'
     },
     {
       nombre: "Dahomey la bailarina", categoria:"Servicio", duenio:"Dahomey", img:'/assets/dahomeyBailarina.jpeg'
     },
     {
-      nombre: "ChuyCode", categoria:"Servicio", duenio:"Jesus Imanol", img:'/assets/ejemplo.jpeg'
+      nombre: "ChuyCode", categoria:"Servicio", duenio:"Jesus Imanol", img:'/assets/chuy.jpg'
     },
   ]
 

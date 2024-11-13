@@ -33,6 +33,7 @@ google-map {
     width: 100%;  
     display: flex;
     margin-bottom: 1rem;
+    flex-shrink: 0;
 }
 
 button {
@@ -50,3 +51,28 @@ button {
 button:hover {
     background-color: #0056b3; 
 }
+
+/*FOTOS*/
+.image-preview {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+    width: 100%; 
+    max-width: 800px;
+    margin: auto; 
+    display: relative;
+}
+
+
+.preview-img {
+    width: 28vh;
+    height: 22vh;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#foto:hover{
+    filter: brightness(0.6) ;
+}
+

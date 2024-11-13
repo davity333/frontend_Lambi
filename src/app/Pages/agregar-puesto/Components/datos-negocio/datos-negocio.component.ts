@@ -1,28 +1,35 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
-import { PuestoService } from '../../Services/puesto.service';
-import { tap } from 'rxjs';
-import { Estados, Estado, Pais, Municipio } from '../../Models/estados';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PuestoService } from '../../Services/puesto.service';
 import { UsersService } from '../../../Auth/users.service';
-
+import { Estados } from '../../Models/estados';
 
 @Component({
   selector: 'app-datos-negocio',
   templateUrl: './datos-negocio.component.html',
-  styleUrl: './datos-negocio.component.css'
+  styleUrls: ['./datos-negocio.component.css']
 })
 export class DatosNegocioComponent implements OnInit {
 
   datos: FormGroup;
+  estados: Estados[] = [];
+  phone: string[] = [];
+  idSeller: number = 16;
+  image: File[] = [];
+  latitud: string = "";
+  altitud: string = "";
 
-  constructor(private puesto: PuestoService, private user: UsersService) {
+  municipio = [
+    { nombre: "Tuxtla" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
+  ];
+
+  constructor(private puesto: PuestoService, private user: UsersService, private cdRef: ChangeDetectorRef) {
     this.datos = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       category: new FormControl(1, [Validators.required]),
       street: new FormControl('', [Validators.required]),
-      no_house: new FormControl('', [Validators.required]), 
+      no_house: new FormControl('', [Validators.required]),
       colonia: new FormControl('', [Validators.required]),
       municipio: new FormControl('', [Validators.required]),
       estado: new FormControl('', [Validators.required]),
@@ -30,17 +37,6 @@ export class DatosNegocioComponent implements OnInit {
       horario: new FormControl('', [Validators.required]),
     });
   }
-
-  estados: Estados[] = [];
-  phone: string[] = [];
-  idSeller: number = 16;
-  image: string = "png";
-  latitud: string = "";
-  altitud: string = "";
-
-  municipio = [
-    { nombre: "Tuxtla" }, { nombre: "Suchiapa" }, { nombre: "San cristobal de las casas" }
-  ];
 
   ngOnInit(): void {
     this.puesto.getEstados().subscribe(
@@ -51,26 +47,47 @@ export class DatosNegocioComponent implements OnInit {
     );
   }
 
+  // Función para manejar la selección de archivos
+  onFilesSelected(event: any) {
+    this.image = Array.from(event.target.files); // Convertir el FileList a un arreglo
+    console.log("Imágenes seleccionadas:", this.image);  // Verificar que todas las imágenes están siendo seleccionadas
+  }
+
+  // Función para enviar los datos del formulario y las imágenes
   publicar() {
     const phoneValue = this.datos.get('phone')?.value;
     if (phoneValue) {
       this.phone.push(phoneValue.toString());
     }
-  
+
+    // Obtener las coordenadas del usuario
     const coordenadas = this.user.getCoordernadas();
-    const datosNegocio = {
-      ...this.datos.value,
-      category: 1,
-      latitud: coordenadas.latitud, 
-      altitud: coordenadas.altitud, 
-      idseller: 35,
-      image: this.image,
-      phone: this.phone
-    };
-    
-    console.log("Soy los datos del negocio", datosNegocio);
-  
-    this.puesto.agregarPuesto(datosNegocio).pipe(tap({
+
+    const formData = new FormData();
+    formData.append('name', this.datos.get('name')?.value);
+    formData.append('description', this.datos.get('description')?.value);
+    formData.append('category', this.datos.get('category')?.value.toString());
+    formData.append('street', this.datos.get('street')?.value);
+    formData.append('no_house', this.datos.get('no_house')?.value);
+    formData.append('colonia', this.datos.get('colonia')?.value);
+    formData.append('municipio', this.datos.get('municipio')?.value);
+    formData.append('estado', this.datos.get('estado')?.value);
+    formData.append('phone', this.phone.join(','));  // Asegúrate de unir los números de teléfono si hay varios
+    formData.append('horario', this.datos.get('horario')?.value);
+    formData.append('latitud', coordenadas.latitud);
+    formData.append('altitud', coordenadas.altitud);
+    formData.append('idseller', this.idSeller.toString());
+
+    // Agregar las imágenes al FormData
+    this.image.forEach((file) => {
+      formData.append('images', file, file.name);
+    });
+
+    // Imprimir el contenido del FormData para verificar
+
+
+    // Enviar el FormData
+    this.puesto.agregarPuesto(formData).subscribe({
       next: (response) => {
         alert("Datos de negocio publicados con éxito");
         console.log(response);
@@ -79,7 +96,7 @@ export class DatosNegocioComponent implements OnInit {
         alert("Error con la API: " + err.message);
         console.error('Error creando el negocio', err);
       }
-    })).subscribe();
+    });
   }
   
 }

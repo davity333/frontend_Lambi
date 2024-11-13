@@ -61,24 +61,26 @@
 }
 
 @keyframes slide {
-    0% { transform: translateX(0%);}
-    25% { transform: translateX(0%);}
-    30% { transform: translateX(-100%);}
-    55% { transform: translateX(-100%);}
-    60% { transform: translateX(-200%);}
-    85% { transform: translateX(-200%);}
-    90% { transform: translateX(-300%);}
-    100% { transform: translateX(-300%);}
+    0% { transform: translateX(0%); }
+    20% { transform: translateX(0%); }        /* Mostrar la primera imagen */
+    25% { transform: translateX(-100%); }     /* Mover a la segunda imagen */
+    45% { transform: translateX(-100%); }     /* Mostrar la segunda imagen */
+    50% { transform: translateX(-200%); }     /* Mover a la tercera imagen */
+    70% { transform: translateX(-200%); }     /* Mostrar la tercera imagen */
+    75% { transform: translateX(-300%); }     /* Mover a la cuarta imagen */
+    95% { transform: translateX(-300%); }     /* Mostrar la cuarta imagen */
+    100% { transform: translateX(-400%); }    /* Mover a la quinta imagen */
 }
+
 
 
 .slide-in {
     transform: translateX(-100%); /* Comienza fuera de la pantalla a la izquierda */
     opacity: 0;
     animation: slideInAnimation 1s ease-out forwards; /* La animación dura 1 segundo */
-  }
-  
-  @keyframes slideInAnimation {
+}
+
+@keyframes slideInAnimation {
     0% {
       transform: translateX(-100%); /* Empieza fuera de la pantalla */
       opacity: 0; /* Empieza invisible */
@@ -87,8 +89,8 @@
       transform: translateX(0); /* Llega a su posición original */
       opacity: 1; /* Se vuelve completamente visible */
     }
-  }
-  
+}
+
 /*TEXTO PARRAFO*/
 .escribiendo{
     opacity: 0;

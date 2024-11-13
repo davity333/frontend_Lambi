@@ -65,6 +65,30 @@ export class MapaComponent {
       console.log("No se han seleccionado coordenadas aún.");
     }
   }
+
+  /*ALMCENAR FOTOS */
+  fotos:string[] =[];
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.fotos = [];  // Limpiar las vistas previas anteriores
+      for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+        const reader = new FileReader();
+        
+        reader.onload = (e) => {
+          const result = e.target?.result as string;
+          this.fotos.push(result);
+        };
+
+        reader.readAsDataURL(file);  // Leer el archivo como Data URL
+      }
+    }
+  }
+
+  removeImage(image: string) {
+    this.fotos = this.fotos.filter(img => img !== image);
+  }
   
 }
 
