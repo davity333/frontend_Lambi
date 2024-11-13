@@ -19,6 +19,7 @@
     }
     categories : Category[] = [];
     ngOnInit() {
+      this.getUserLocation();
       this.categoryService.getAllCategories().pipe(tap({
         next: (response) => {
         },
@@ -93,6 +94,62 @@
     
  
     window.open(url, '_blank');
+  }
+  userLatitude: number | null = null;
+  userLongitude: number | null = null;
+
+  // Arreglo de coordenadas predefinidas
+  coordinates = [
+    { name: 'Lugar 1', latitude: 16.6272, longitude: -93.1005 },
+    { name: 'Lugar 2', latitude: 16.6162, longitude: -93.1101 },
+    { name: 'Lugar 3', latitude: 16.6400, longitude: -93.1200 },
+    // Agrega más lugares aquí
+  ];
+
+  closestLocations: any[] = [];
+
+
+  getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.userLatitude = position.coords.latitude;
+        this.userLongitude = position.coords.longitude;
+        
+        // Calcula los puntos más cercanos
+        this.calculateClosestLocations();
+      });
+    } else {
+      alert("La Geolocalización no está soportada por este navegador.");
+    }
+  }
+
+  // Calcula la distancia entre dos puntos con la fórmula de Haversine
+  getDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = this.deg2rad(lat2 - lat1);
+    const dLon = this.deg2rad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distancia en km
+    return distance;
+  }
+
+  deg2rad(deg: number): number {
+    return deg * (Math.PI / 180);
+  }
+
+  calculateClosestLocations() {
+    if (this.userLatitude !== null && this.userLongitude !== null) {
+      this.closestLocations = this.coordinates
+        .map(location => ({
+          ...location,
+          distance: this.getDistance(this.userLatitude!, this.userLongitude!, location.latitude, location.longitude)
+        }))
+        .sort((a, b) => a.distance - b.distance); // Ordena por distancia ascendente
+    }
   }
   
   }

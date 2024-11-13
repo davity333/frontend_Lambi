@@ -26,4 +26,18 @@
         </div>
     </div>
     <button (click)="goToLocation()">Abrir google maps</button>
+    
 </section>
+<div *ngIf="closestLocations.length > 0">
+    <h3>Puntos de coordenadas más cercanos a tu ubicación</h3>
+    <ul>
+      <li *ngFor="let location of closestLocations">
+        {{ location.name }} - Distancia: {{ location.distance | number:'1.1-2' }} km
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="!userLatitude || !userLongitude">
+    <p>Esperando obtener tu ubicación...</p>
+  </div>
+  
