@@ -85,4 +85,14 @@
         }
       }
    }
+   goToLocation() {
+    const latitude = "16.6272";
+    const longitude = "-93.1005";
+  
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    
+ 
+    window.open(url, '_blank');
+  }
+  
   }
