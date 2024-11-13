@@ -7,12 +7,10 @@ import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.co
 import { GestionProductosComponent } from './Pages/gestion-productos/gestion-productos.component';
 import { NegociosComponent } from './Pages/negocios/negocios.component';
 import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
-<<<<<<< HEAD
+
 import { loginGuard } from '../guards/login.guard';
 import { FavoritesComponent } from './Pages/favorites/favorites.component';
-=======
 import { ViewstandComponent } from './Pages/viewstand/components/viewstand/viewstand.component';
->>>>>>> b9d0e31 (view stand with products)
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -21,11 +19,10 @@ const routes: Routes = [
   {path: 'gestionProducto', component: GestionProductosComponent},
   {path: 'negocios', component: NegociosComponent},
   {path: 'busqueda', component: BusquedaComponent},
-<<<<<<< HEAD
+
   {path: 'favorites', component: FavoritesComponent},
-=======
+
   {path: 'viewstand', component: ViewstandComponent}
->>>>>>> b9d0e31 (view stand with products)
 ];
 
 @NgModule({

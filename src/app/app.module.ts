@@ -28,14 +28,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxToastNotifierModule } from 'ngx-toast-notifier';
 import { NegociosComponent } from './Pages/negocios/negocios.component';
 import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
-<<<<<<< HEAD
 import { HeaderAdminComponent } from './Pages/home/components/header-admin/header-admin.component';
 import { FavoritesComponent } from './Pages/favorites/favorites.component';
-=======
+
 import { ViewstandComponent } from './Pages/viewstand/components/viewstand/viewstand.component';
 import { SectionviewstandComponent } from './Pages/viewstand/components/sectionviewstand/sectionviewstand.component';
 import { ProductstandComponent } from './Pages/viewstand/components/productstand/productstand.component';
->>>>>>> b9d0e31 (view stand with products)
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,14 +54,12 @@ import { ProductstandComponent } from './Pages/viewstand/components/productstand
     DatosComponent,
     NegociosComponent,
     BusquedaComponent,
-<<<<<<< HEAD
     HeaderAdminComponent,
     FavoritesComponent,
-=======
+
     ViewstandComponent,
     SectionviewstandComponent,
     ProductstandComponent,
->>>>>>> b9d0e31 (view stand with products)
     ],
     
   imports: [
