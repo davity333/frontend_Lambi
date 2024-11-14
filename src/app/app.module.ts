@@ -34,6 +34,7 @@ import { FavoritesComponent } from './Pages/favorites/favorites.component';
 import { ViewstandComponent } from './Pages/viewstand/components/viewstand/viewstand.component';
 import { SectionviewstandComponent } from './Pages/viewstand/components/sectionviewstand/sectionviewstand.component';
 import { ProductstandComponent } from './Pages/viewstand/components/productstand/productstand.component';
+import { RolComponent } from './Pages/user-option/components/rol/rol.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ProductstandComponent } from './Pages/viewstand/components/productstand
     ViewstandComponent,
     SectionviewstandComponent,
     ProductstandComponent,
+    RolComponent,
     ],
     
   imports: [
