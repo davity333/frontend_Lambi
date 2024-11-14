@@ -11,6 +11,7 @@ import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
 import { loginGuard } from '../guards/login.guard';
 import { FavoritesComponent } from './Pages/favorites/favorites.component';
 import { ViewstandComponent } from './Pages/viewstand/components/viewstand/viewstand.component';
+import { RolComponent } from './Pages/user-option/components/rol/rol.component';
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -22,7 +23,9 @@ const routes: Routes = [
 
   {path: 'favorites', component: FavoritesComponent},
 
-  {path: 'viewstand', component: ViewstandComponent}
+  {path: 'viewstand', component: ViewstandComponent},
+
+  {path: 'rol', component: RolComponent}
 ];
 
 @NgModule({
