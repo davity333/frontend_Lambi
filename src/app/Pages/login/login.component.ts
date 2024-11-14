@@ -19,6 +19,7 @@ export class LoginComponent {
     });
   }
   logear() {
+    
     let userLogin: UserLogin = {
       e_mail: this.users.value.e_mail,
       password: this.users.value.password
@@ -63,6 +64,7 @@ export class LoginComponent {
       })
     ).subscribe();
   }
+  
   
   
 }

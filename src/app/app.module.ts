@@ -57,7 +57,6 @@ import { ProductstandComponent } from './Pages/viewstand/components/productstand
     BusquedaComponent,
     HeaderAdminComponent,
     FavoritesComponent,
-
     ViewstandComponent,
     SectionviewstandComponent,
     ProductstandComponent,
@@ -69,6 +68,8 @@ import { ProductstandComponent } from './Pages/viewstand/components/productstand
     GoogleMapsModule,  //este el router-outlet
     ReactiveFormsModule,
     CommonModule,
+    BrowserAnimationsModule,
+    NgxToastNotifierModule.forRoot()
   ],
   exports: [
     RegisterComponent

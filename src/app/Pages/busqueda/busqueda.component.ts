@@ -18,6 +18,7 @@
       });
     }
     categories : Category[] = [];
+    
     ngOnInit() {
       this.getUserLocation();
       this.categoryService.getAllCategories().pipe(tap({

@@ -33,11 +33,11 @@
     <ul>
       <li *ngFor="let location of closestLocations">
         {{ location.name }} - Distancia: {{ location.distance | number:'1.1-2' }} km
-      </li>
+    </li>
     </ul>
-  </div>
-  
+</div>
+
   <div *ngIf="!userLatitude || !userLongitude">
     <p>Esperando obtener tu ubicación...</p>
-  </div>
-  
+</div>
+
