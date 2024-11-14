@@ -87,8 +87,8 @@
       }
    }
    goToLocation() {
-    const latitude = "16.6272";
-    const longitude = "-93.1005";
+    const latitude = "16.615491448112827";
+    const longitude = "-93.08950717304513";
   
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
     

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../../../Auth/users.service';
-import { log } from 'console';
 import { PuestoService } from '../../Services/puesto.service';
 
 @Component({

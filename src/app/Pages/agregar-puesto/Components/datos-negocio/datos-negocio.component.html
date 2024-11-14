@@ -18,7 +18,12 @@
 <div class=" mt-3 flex justify-between">
     <div class="flex flex-col gap-y-1">
         <label for="">Categoria</label>
-        <input type="text" class="border-[0.2vh] border-[#00000049] w-[30vh] rounded-[4px]" formControlName="category">
+        <select class="w-[30vh] h-[5vh] border-[0.2vh] border-[#00000049]" formControlName="category">
+            <option value="">Seleccionar categoria</option>
+            <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of categorias" [value]="object.idcategory">
+                {{object.category}}
+            </option>
+        </select>
 
         <div class="flex flex-col gap-y-1">
             <label for="">Colonia</label>
