@@ -35,3 +35,7 @@ export interface Municipio {
     city_name: string;
 }
 
+export interface Categoria{
+    category : string;
+    idcategory : number;
+}
