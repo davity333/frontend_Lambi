@@ -1,28 +1,36 @@
-  import { Component,OnInit } from '@angular/core';
-  import { CategoryService } from './services/category.service';
-  import { Category } from './models/category';
-  import { map, tap } from 'rxjs';
-  import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-  @Component({
-    selector: 'app-busqueda',
-    templateUrl: './busqueda.component.html',
-    styleUrl: './busqueda.component.css'
-  })
-  export class BusquedaComponent implements OnInit {
-    categoryToSearch : FormGroup;
-    stand: any;
-    constructor(private categoryService: CategoryService){
-      this.categoryToSearch = new FormGroup({
-        idcategory: new FormControl(''),
-        category : new FormControl(''),
-      });
-    }
-    categories : Category[] = [];
-    ngOnInit() {
-      this.getUserLocation();
-      this.categoryService.getAllCategories().pipe(tap({
-        next: (response) => {
-        },
+
+import { Component, OnInit } from '@angular/core';
+import { CategoryService } from './services/category.service';
+import { Category } from './models/category';
+import { map, tap } from 'rxjs';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-busqueda',
+  templateUrl: './busqueda.component.html',
+  styleUrl: './busqueda.component.css'
+})
+export class BusquedaComponent implements OnInit {
+  categoryToSearch: FormGroup;
+  stand: any[] = []; // Array para almacenar los stands obtenidos
+  userLatitude: number | null = null;
+  userLongitude: number | null = null;
+  closestLocations: any[] = [];
+
+  constructor(private categoryService: CategoryService) {
+    this.categoryToSearch = new FormGroup({
+      idcategory: new FormControl(''),
+      category: new FormControl(''),
+    });
+  }
+
+  categories: Category[] = [];
+
+  ngOnInit() {
+    this.getUserLocation();
+    this.categoryService.getAllCategories().pipe(
+      tap({
+        next: (response) => {},
         error: (response) => {
           alert("Ha habido un error en la página");
         }
