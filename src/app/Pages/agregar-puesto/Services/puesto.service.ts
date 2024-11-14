@@ -12,6 +12,7 @@ export class PuestoService {
   constructor(readonly httpClient: HttpClient) { }
   private apiUrl = 'https://www.universal-tutorial.com/api';
   private token = 'Jnx1WfSC6w3Z4i6gpxMRF-fg89YzRj2AHO4gYOPDnrqgPFfsH-Bxfuyey1IEWUz07R4';
+  private seccionFotos:string[]=[];
 
   getEstados(): Observable<Estados[]> {
     let url = "https://gaia.inegi.org.mx/wscatgeo/mgee/";
@@ -33,5 +34,17 @@ export class PuestoService {
     let url = "http://52.72.44.45:8000/api/stand";
     return this.httpClient.post<any>(url, puesto);
   }
+
+  //SERVICE//
+  setFotos(fotos : any[]){
+    this.seccionFotos = fotos;
+    console.log("arreglo en el servicio")
+    console.log(this.seccionFotos);
+  }
+
+  getFotos(){
+    return this.seccionFotos;
+  }
+
 
 }

@@ -34,6 +34,7 @@ import { FavoritesComponent } from './Pages/favorites/favorites.component';
 import { ViewstandComponent } from './Pages/viewstand/components/viewstand/viewstand.component';
 import { SectionviewstandComponent } from './Pages/viewstand/components/sectionviewstand/sectionviewstand.component';
 import { ProductstandComponent } from './Pages/viewstand/components/productstand/productstand.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,8 +48,8 @@ import { ProductstandComponent } from './Pages/viewstand/components/productstand
     DeliciosoComponent,
     ComunicacionComponent,
     AgregarPuestoComponent,
-    MapaComponent,
     DatosNegocioComponent,
+    MapaComponent,
     GestionProductosComponent,
     TablaComponent,
     DatosComponent,

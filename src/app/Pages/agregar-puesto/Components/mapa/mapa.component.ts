@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../../../Auth/users.service';
 import { log } from 'console';
+import { PuestoService } from '../../Services/puesto.service';
 
 @Component({
   selector: 'app-mapa',
@@ -17,7 +18,7 @@ export class MapaComponent {
   ngOnInit(): void {
     this.obtenerUbicacion();
   }
-  constructor(private user: UsersService){}
+  constructor(private user: UsersService, private puestoService: PuestoService){}
 
   obtenerUbicacion() {
     if (navigator.geolocation) {
@@ -68,10 +69,11 @@ export class MapaComponent {
 
   /*ALMCENAR FOTOS */
   fotos:string[] =[];
+  fotosSeleccionadas:number=0
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
-      this.fotos = [];  // Limpiar las vistas previas anteriores
+
       for (let i = 0; i < input.files.length; i++) {
         const file = input.files[i];
         const reader = new FileReader();
@@ -82,12 +84,21 @@ export class MapaComponent {
         };
 
         reader.readAsDataURL(file);  // Leer el archivo como Data URL
+        console.log("Imágenes seleccionadas:", this.fotos);
+        this.fotosSeleccionadas++;
+        this.puestoService.setFotos(this.fotos);
       }
     }
   }
 
-  removeImage(image: string) {
-    this.fotos = this.fotos.filter(img => img !== image);
+  removeImage(image: string) { 
+    if (this.fotosSeleccionadas === 0) {
+      this.fotosSeleccionadas = 0;
+    }else{
+      this.fotos = this.fotos.filter(img => img !== image);
+      this.fotosSeleccionadas = this.fotosSeleccionadas -1;
+      this.puestoService.setFotos(this.fotos);
+    }
   }
   
 }

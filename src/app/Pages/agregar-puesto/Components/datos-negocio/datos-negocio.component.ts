@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PuestoService } from '../../Services/puesto.service';
 import { UsersService } from '../../../Auth/users.service';
 import { Estados } from '../../Models/estados';
-
+import { Input } from '@angular/core';
 @Component({
   selector: 'app-datos-negocio',
   templateUrl: './datos-negocio.component.html',
@@ -18,6 +18,8 @@ export class DatosNegocioComponent implements OnInit {
   image: File[] = [];
   latitud: string = "";
   altitud: string = "";
+  
+  imagenesData:string[] = [];
 
   municipio = [
     { nombre: "Tuxtla" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
@@ -45,6 +47,7 @@ export class DatosNegocioComponent implements OnInit {
         console.log(this.estados);
       }
     );
+    
   }
 
   // Función para manejar la selección de archivos
@@ -55,6 +58,9 @@ export class DatosNegocioComponent implements OnInit {
 
   // Función para enviar los datos del formulario y las imágenes
   publicar() {
+    this.imagenesData = this.puesto.getFotos();
+    console.log("imagenes al publicar puesto")
+    console.log(this.imagenesData)
     const phoneValue = this.datos.get('phone')?.value;
     if (phoneValue) {
       this.phone.push(phoneValue.toString());
@@ -78,16 +84,12 @@ export class DatosNegocioComponent implements OnInit {
     formData.append('altitud', coordenadas.altitud);
     formData.append('idseller', this.idSeller.toString());
 
-    // Agregar las imágenes al FormData
-    this.image.forEach((file) => {
-      formData.append('images', file, file.name);
+    this.imagenesData.forEach((image) => {
+      formData.append('images', image); // Suponiendo que 'image' es un string con la URL o nombre
     });
-
-    // Imprimir el contenido del FormData para verificar
-
-
     // Enviar el FormData
     this.puesto.agregarPuesto(formData).subscribe({
+      
       next: (response) => {
         alert("Datos de negocio publicados con éxito");
         console.log(response);
@@ -95,6 +97,8 @@ export class DatosNegocioComponent implements OnInit {
       error: (err) => {
         alert("Error con la API: " + err.message);
         console.error('Error creando el negocio', err);
+        console.log("fotos")
+        console.log(this.imagenesData)
       }
     });
   }
