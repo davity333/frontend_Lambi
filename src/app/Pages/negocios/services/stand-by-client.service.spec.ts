@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { createSellerUsersService } from './users.service';
+import { StandByClientService } from './stand-by-client.service';
 
-describe('UsersService', () => {
-  let service: createSellerUsersService;
+describe('StandByClientService', () => {
+  let service: StandByClientService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(createSellerUsersService);
+    service = TestBed.inject(StandByClientService);
   });
 
   it('should be created', () => {

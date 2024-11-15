@@ -12,12 +12,12 @@ export interface Coordenadas {
   providedIn: 'root'
 })
 
-export class UsersService {
+export class createSellerUsersService {
 
   constructor(readonly httpClient: HttpClient) { }
   private latitud : string = ""
   private altitud : string = ""
-  
+  private urlSeller : string = "http://52.72.44.45:8000/sellers"
   createUser(user: UserRegister): Observable<any>{
     let url = "http://52.72.44.45:8000/api/registerBuyer/";
     const headers = new HttpHeaders({ 
@@ -38,6 +38,14 @@ export class UsersService {
   }
   login(userLogin: UserLogin): Observable<HttpResponse<any>> {
     let loginUrl = "http://52.72.44.45:8000/api/loginBuyer/";
+    return this.httpClient.post<HttpResponse<any>>(loginUrl, userLogin, { observe: 'response' });
+  }
+  createSeller(user: UserRegister):Observable<any> {
+    return this.httpClient.post<UserRegister>(`${this.urlSeller}`, user)
+
+  }
+  loginSeller(userLogin : UserLogin): Observable<HttpResponse<any>> {
+    let loginUrl = "http://52.72.44.45:8000/loginSeller/";
     return this.httpClient.post<HttpResponse<any>>(loginUrl, userLogin, { observe: 'response' });
   }
   

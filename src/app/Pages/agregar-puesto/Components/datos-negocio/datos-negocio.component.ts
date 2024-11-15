@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PuestoService } from '../../Services/puesto.service';
-import { UsersService } from '../../../Auth/users.service';
+import { createSellerUsersService } from '../../../Auth/users.service';
 import { Categoria, Estados } from '../../Models/estados';
 import { tap } from 'rxjs';
 @Component({
@@ -27,7 +27,7 @@ export class DatosNegocioComponent implements OnInit {
     { nombre: "Tuxtla" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
   ];
 
-  constructor(private puesto: PuestoService, private user: UsersService, private cdRef: ChangeDetectorRef) {
+  constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef) {
     this.datos = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),

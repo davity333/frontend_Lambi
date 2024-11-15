@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UsersService } from '../Auth/users.service';
+import { createSellerUsersService } from '../Auth/users.service';
 import { tap } from 'rxjs';
 import { UserRegister } from './models/user';
 
@@ -16,7 +16,7 @@ export class RegisterComponent {
   userInterface:UserRegister[]=[];
   
 
-  constructor(private user:UsersService) {
+  constructor(private user:createSellerUsersService) {
     this.users = new FormGroup({
       name: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),

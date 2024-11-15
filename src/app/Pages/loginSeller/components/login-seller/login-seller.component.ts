@@ -1,33 +1,36 @@
 import { Component } from '@angular/core';
-import { createSellerUsersService } from '../Auth/users.service';
+import { createSellerUsersService } from '../../../Auth/users.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
-import { UserLogin } from '../register/models/user';
+import { UserLogin } from '../../../register/models/user';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  selector: 'app-login-seller',
+  templateUrl: './login-seller.component.html',
+  styleUrl: './login-seller.component.css'
 })
-export class LoginComponent {
-  users: FormGroup;
-
-  constructor(private user: createSellerUsersService, private navegar: Router) {
-    this.users = new FormGroup({
+export class LoginSellerComponent {
+  userSeller: FormGroup;
+  constructor(private usersService: createSellerUsersService, private router: Router){
+    this.userSeller = new FormGroup({
       e_mail: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
-  logear() {
+
+  ngOnInit(){
+
+  }
+  loginSeller() {
     
     let userLogin: UserLogin = {
-      e_mail: this.users.value.e_mail,
-      password: this.users.value.password
+      e_mail: this.userSeller.value.e_mail,
+      password: this.userSeller.value.password
     };
   
     console.log("Datos que se van a enviar:", userLogin);
   
-    this.user.login(userLogin).pipe(
+    this.usersService.loginSeller(userLogin).pipe(
       tap({
         next: (response) => {
           console.log("Respuesta completa:", response.body); 
@@ -42,7 +45,7 @@ export class LoginComponent {
               
               alert("Usuario encontrado con éxito");
               console.log("Token almacenado:", token);
-              this.navegar.navigate(['/home'])
+              this.router.navigate(['/home'])
             } else {
               console.error("Token no encontrado en el encabezado Authorization");
             }
@@ -65,7 +68,4 @@ export class LoginComponent {
       })
     ).subscribe();
   }
-  
-  
-  
 }

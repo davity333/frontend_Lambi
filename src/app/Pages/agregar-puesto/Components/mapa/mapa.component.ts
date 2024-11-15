@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../../../Auth/users.service';
+import { createSellerUsersService } from '../../../Auth/users.service';
 import { PuestoService } from '../../Services/puesto.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class MapaComponent {
   ngOnInit(): void {
     this.obtenerUbicacion();
   }
-  constructor(private user: UsersService, private puestoService: PuestoService){}
+  constructor(private user: createSellerUsersService, private puestoService: PuestoService){}
 
   obtenerUbicacion() {
     if (navigator.geolocation) {
