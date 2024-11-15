@@ -12,8 +12,11 @@ import { loginGuard } from '../guards/login.guard';
 import { FavoritesComponent } from './Pages/favorites/favorites.component';
 import { ViewstandComponent } from './Pages/viewstand/components/viewstand/viewstand.component';
 import { RolComponent } from './Pages/user-option/components/rol/rol.component';
+import { RegisterSellerComponent } from './Pages/registerSeller/components/register-seller/register-seller.component';
+import { LoginSellerComponent } from './Pages/loginSeller/components/login-seller/login-seller.component';
 const routes: Routes = [
-  {path: '', component:HomeComponent},
+  {path: '', component:RolComponent},
+  {path:'home', component:HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'crearPuesto', component: AgregarPuestoComponent, canActivate:[loginGuard]},
@@ -21,6 +24,10 @@ const routes: Routes = [
   {path: 'negocios', component: NegociosComponent},
   {path: 'busqueda', component: BusquedaComponent},
 
+
+
+  {path: 'registerSeller', component:RegisterSellerComponent},
+  {path: 'loginSeller', component:LoginSellerComponent},
   {path: 'favorites', component: FavoritesComponent},
 
   {path: 'viewstand', component: ViewstandComponent},

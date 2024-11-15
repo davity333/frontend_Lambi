@@ -35,6 +35,9 @@ import { ViewstandComponent } from './Pages/viewstand/components/viewstand/views
 import { SectionviewstandComponent } from './Pages/viewstand/components/sectionviewstand/sectionviewstand.component';
 import { ProductstandComponent } from './Pages/viewstand/components/productstand/productstand.component';
 import { RolComponent } from './Pages/user-option/components/rol/rol.component';
+import { AppCardStandSellerComponent } from './Pages/negocios/components/app-card-stand-seller/app-card-stand-seller.component';
+import { LoginSellerComponent } from './Pages/loginSeller/components/login-seller/login-seller.component';
+import { RegisterSellerComponent } from './Pages/registerSeller/components/register-seller/register-seller.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { RolComponent } from './Pages/user-option/components/rol/rol.component';
     SectionviewstandComponent,
     ProductstandComponent,
     RolComponent,
+    AppCardStandSellerComponent,
+    LoginSellerComponent,
+    RegisterSellerComponent,
     ],
     
   imports: [
@@ -74,7 +80,7 @@ import { RolComponent } from './Pages/user-option/components/rol/rol.component';
     NgxToastNotifierModule.forRoot()
   ],
   exports: [
-    RegisterComponent
+
   ],
   providers: [
     provideClientHydration(),
