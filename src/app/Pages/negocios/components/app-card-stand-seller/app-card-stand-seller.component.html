@@ -1,3 +1,7 @@
-<div class="w-[300px] h-[500px]">
-
+<div (click)="sendIdStand()" class="cursor-pointer w-[90%] h-[100px] gap-4 flex shadow-md lg:flex lg:flex-col lg:w-[300px] lg:h-[300px]">
+    <img src="./assets/ejemplo.jpeg" class="w-[150px] lg:w-[300px]" alt="img stand">
+    <div>
+        <p class="text-slate-900 text-xl  p-4 ">{{mystand.name}}</p>
+    <p>{{mystand.calle}}</p>
+    </div>
 </div>

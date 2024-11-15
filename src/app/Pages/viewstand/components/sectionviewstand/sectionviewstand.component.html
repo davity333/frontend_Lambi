@@ -14,23 +14,22 @@
     </div>
    </div>
     <div id="text" class="sm:flex gap-7 flex  flex-col mx-auto ">
-        <h2 class="text-[36px]">Taqueria Juquilita</h2>
-        <p id="text" class="text-xl">Disfruta de tacos hechos al momento, con ingredientes frescos y salsas caseras. ¡Tacos al pastor, de cochinita, asada y más! Ven y prueba el verdadero sabor de México en cada bocado.
-          ¡Te esperamos con los mejores tacos de la ciudad!
+        <h2 class="text-[36px]">{{standClient.name}}</h2>
+        <p id="text" class="text-xl">{{standClient.description}}
         </p>
         <p class="text-xl">
-          Ubicación:  Suchiapa, Chiapas
+          Ubicación:  {{standClient.municipio}}, {{standClient.estado}}
         </p>
         <p class="text-xl">
-          Horario: lunes a viernes
+          Horario: {{standClient.horario}}
           <br>8:00 - 9:00 pm
         </p>
         <div class="bg-green-200 flex flex-row w-96 items-center h-16 gap-20 ">
-          <p class="text-xl"> Contacto: 96113223</p>
+          <p class="text-xl"> Contacto: {{standClient.phone}}</p>
           <img class="w-10" src="./assets/logo_whatsap.svg" alt="WhatsApp logo">
         </div>
-        <p id="text" class="text-xl">Calificanos</p>
-        <div class="flex items-center w-96">
+        <p id="text" class="text-xl" *ngIf="status">Calificanos</p>
+        <div class="flex items-center w-96" *ngIf="status">
           <img class="w-10" src="./assets/star.svg" alt="Star">
           <img class="w-10" src="./assets/star.svg" alt="Star">
           <img class="w-10" src="./assets/star.svg" alt="Star">
