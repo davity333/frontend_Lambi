@@ -14,6 +14,7 @@ import { ViewstandComponent } from './Pages/viewstand/components/viewstand/views
 import { RolComponent } from './Pages/user-option/components/rol/rol.component';
 import { RegisterSellerComponent } from './Pages/registerSeller/components/register-seller/register-seller.component';
 import { LoginSellerComponent } from './Pages/loginSeller/components/login-seller/login-seller.component';
+import { ProductsComponent } from './Pages/products/products.component';
 const routes: Routes = [
   {path: '', component:RolComponent},
   {path:'home', component:HomeComponent},
@@ -23,8 +24,7 @@ const routes: Routes = [
   {path: 'gestionProducto', component: GestionProductosComponent},
   {path: 'negocios', component: NegociosComponent},
   {path: 'busqueda', component: BusquedaComponent},
-
-
+  {path: 'products', component:ProductsComponent},
 
   {path: 'registerSeller', component:RegisterSellerComponent},
   {path: 'loginSeller', component:LoginSellerComponent},

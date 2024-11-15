@@ -14,6 +14,7 @@ export class SectionviewstandComponent {
   status = true
   constructor(private standByClient : StandByClientService){}
 
+
   ngOnInit(){
     const storedSeller = localStorage.getItem('standId');
     this.idstand = storedSeller ? JSON.parse(storedSeller): null;

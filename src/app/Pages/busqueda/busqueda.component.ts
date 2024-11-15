@@ -30,8 +30,7 @@ export class BusquedaComponent implements OnInit {
 
   ngOnInit() {
     this.getUserLocation();
-    this.categoryService.getAllCategories().pipe(
-      tap({
+    this.categoryService.getAllCategories().pipe(tap({
         next: (response) => {},
         error: (response) => {
           alert("Ha habido un error en la página");
