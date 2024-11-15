@@ -4,6 +4,7 @@ import { CategoryService } from './services/category.service';
 import { Category } from './models/category';
 import { map, tap } from 'rxjs';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Puesto } from '../agregar-puesto/Models/estados';
 
 @Component({
   selector: 'app-busqueda',
@@ -16,6 +17,7 @@ export class BusquedaComponent implements OnInit {
   userLatitude: number | null = null;
   userLongitude: number | null = null;
   closestLocations: any[] = [];
+  negocios: Puesto[]=[];
 
   constructor(private categoryService: CategoryService) {
     this.categoryToSearch = new FormGroup({
@@ -59,6 +61,7 @@ export class BusquedaComponent implements OnInit {
         }
         this.stand = data; // Guardamos los stands en el arreglo
         console.log(this.stand);
+        
         this.calculateClosestLocations(); // Llamamos la función para calcular las ubicaciones cercanas
       });
     }

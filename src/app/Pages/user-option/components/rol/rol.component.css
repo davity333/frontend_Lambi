@@ -2,4 +2,6 @@
     background-image: url("../../../../../../public/assets/bg_option.svg");
     background-size: cover;
     width: 100%;
+    display: flex;
+    justify-content: center;
 }

@@ -1,0 +1,38 @@
+<div class="bg-[#ffffff] shadow-xl rounded-t-xl relative">
+    <img src="{{stand.img}}" alt="" class="rounded-t-xl" id="image">
+
+    <!-- Contenedor principal de contenido en blanco -->
+    <div class="pl-4 pr-4 pb-4 bg-white rounded-b-xl relative">
+        
+        <!-- Contenedor del icono de corazón sobre el fondo blanco -->
+        <div class="absolute top-2 right-2">
+            <label class="ui-bookmark">
+                <input type="checkbox" />
+                <div class="bookmark">
+                    <svg
+                        viewBox="0 0 16 16"
+                        class="bi bi-heart-fill"
+                        height="25"
+                        width="25"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
+                            fill-rule="evenodd"
+                        ></path>
+                    </svg>
+                </div>
+            </label>
+        </div>
+
+        <div>
+            <h1 class="mt-2 font-semibold">{{stand.name || null}}</h1>
+            <h2 class="font-normal">{{stand.municipio || "No existe"}}</h2>
+            <h3 class="font-light text-center mt-2">{{categori || "null"}}</h3>
+        </div>
+
+        <div class="flex justify-center mt-4">
+            <button class="text-center bg-[#ffb66e7e] rounded-lg w-full p-[0.4vh]">Ver puesto</button>
+        </div> 
+    </div>
+</div>
