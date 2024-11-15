@@ -16,6 +16,7 @@
             </div>
 
             <select class="w-[40vh] h-[6.3vh] border-[0.2vh] border-[#00000049] rounded-md" formControlName="idcategory">
+                <option value="">Selecciona la categoria</option>
                 <option  *ngFor="let item of categories" [value]="item.idcategory" class="bg-[#c5bfbf] text-gray-800">{{item.category}}</option>
             </select>
             <input (click)="searchStands()" type="button" value="Buscar" class="bg-[#E4C246] p-[1.4vh] mt-2 sm:mt-0 rounded-lg text-white font-semibold px-10 hover:bg-[#bea23c] transition-colors w-full sm:w-auto text-[#62562E]">
@@ -24,19 +25,21 @@
         <div class="mt-4">
             <p class="text-[#6E6666]">Categoría seleccionada:</p>
         </div>
+        
+        <div *ngIf="closestLocations.length > 0">
+            
+            <div class="flex flex-wrap gap-4 justify-between">
+                    <app-cards *ngFor="let item of closestLocations" [stand]="item"></app-cards>
+        
+            </div>
+        </div>
     </div>
-    
 </section>
-<div *ngIf="closestLocations.length > 0">
-    <h3>Puntos de coordenadas más cercanos a tu ubicación</h3>
-    <ul>
-      <li *ngFor="let location of closestLocations">
-        {{ location.name }} - Distancia: {{ location.distance | number:'1.1-2' }} km
-    </li>
-    </ul>
-</div>
+
 
   <div *ngIf="!userLatitude || !userLongitude">
     <p>Esperando obtener tu ubicación...</p>
 </div>
+
+
 
