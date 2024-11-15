@@ -40,6 +40,9 @@ import { AppCardStandSellerComponent } from './Pages/negocios/components/app-car
 import { LoginSellerComponent } from './Pages/loginSeller/components/login-seller/login-seller.component';
 import { RegisterSellerComponent } from './Pages/registerSeller/components/register-seller/register-seller.component';
 import { CardsComponent } from './Pages/agregar-puesto/Components/cards/cards.component';
+import { ProductsComponent } from './Pages/products/products.component';
+import { CardProductComponent } from './Pages/products/Components/card-product/card-product.component';
+import { ViewProductsComponent } from './Pages/products/Components/view-products/view-products.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,9 @@ import { CardsComponent } from './Pages/agregar-puesto/Components/cards/cards.co
     LoginSellerComponent,
     RegisterSellerComponent,
     CardsComponent,
+    ProductsComponent,
+    CardProductComponent,
+    ViewProductsComponent,
     ],
     
   imports: [

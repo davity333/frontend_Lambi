@@ -1,0 +1,23 @@
+<div class="relative flex w-60 flex-col rounded-xl bg-white shadow-md">
+    <img src="./assets/comiditas.jpg" class="w-[40vh] h-[20vh] object-cover" alt="">
+    <div class="p-4">
+      <h5 class="block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+        {{products.name}}
+      </h5>
+      <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
+          {{categori || "null"}}
+      </p>
+      <p class="block font-sans text-3xl font-light leading-relaxed text-inherit antialiased">
+          ${{products.price}}
+      </p>
+    </div>
+    <div class="p-4 pt-0">
+      <button data-ripple-light="true" type="button" class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+        Ir a puesto
+      </button>
+    </div>
+</div>
+  
+  
+
+    <!--<img src={{products.image}} alt="" class="rounded-t-xl" id="image">--> <!--ESTE ES LA ETIQUETA REAL, LA DE ABAJO ES SOLO VERIFICACION SI JALA-->
