@@ -14,7 +14,7 @@ export class DatosNegocioComponent implements OnInit {
   datos: FormGroup;
   estados: Estados[] = [];
   phone: string[] = [];
-  idSeller: number = 16;
+  idSeller = "";
   image: File[] = [];
   latitud: string = "";
   altitud: string = "";
@@ -43,6 +43,9 @@ export class DatosNegocioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const storedSeller = localStorage.getItem('seller');
+    this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+    alert(this.idSeller)
     this.puesto.getEstados().subscribe(
       (data) => {
         this.estados = data;
@@ -70,7 +73,6 @@ export class DatosNegocioComponent implements OnInit {
 
   // Función para enviar los datos del formulario y las imágenes
   publicar() {
-    alert(this.datos.value.category)
     this.imagenesData = this.puesto.getFotos();
     console.log("imagenes al publicar puesto")
     console.log(this.imagenesData)
@@ -85,7 +87,7 @@ export class DatosNegocioComponent implements OnInit {
     const formData = new FormData();
     formData.append('name', this.datos.get('name')?.value);
     formData.append('description', this.datos.get('description')?.value);
-
+    formData.append('image', "http://")
     formData.append('street', this.datos.get('street')?.value);
     formData.append('no_house', this.datos.get('no_house')?.value);
     formData.append('colonia', this.datos.get('colonia')?.value);

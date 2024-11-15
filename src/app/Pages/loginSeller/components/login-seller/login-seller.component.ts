@@ -34,7 +34,7 @@ export class LoginSellerComponent {
       tap({
         next: (response) => {
           console.log("Respuesta completa:", response.body); 
-          localStorage.setItem('buyer', JSON.stringify(response.body))
+          localStorage.setItem('seller', JSON.stringify(response.body))
           const authorizationHeader = response.headers?.get('Authorization');
           console.log("Encabezado Authorization:", authorizationHeader); 
   
@@ -44,8 +44,7 @@ export class LoginSellerComponent {
               localStorage.setItem('token', token);
               
               alert("Usuario encontrado con éxito");
-              console.log("Token almacenado:", token);
-              this.router.navigate(['/home'])
+              this.router.navigate(['/negocios'])
             } else {
               console.error("Token no encontrado en el encabezado Authorization");
             }
