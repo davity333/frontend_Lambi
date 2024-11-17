@@ -40,7 +40,7 @@ export class LoginSellerComponent {
           console.log("Respuesta completa:", response.body); 
           const seller = response.body; 
           const sellerName = seller?.name;
-          localStorage.setItem("userName", sellerName);
+          localStorage.setItem("usergiName", sellerName);
 
           localStorage.setItem('seller', JSON.stringify(response.body))
           const authorizationHeader = response.headers?.get('Authorization');
