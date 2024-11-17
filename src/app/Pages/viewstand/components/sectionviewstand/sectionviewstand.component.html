@@ -16,6 +16,34 @@
         <button (click)="next()" class="carousel-button right absolute top-1/2 -translate-y-1/2 -right-4">&gt;</button>
       </div>
     </div>
+   </div>
+    <div id="text" class="sm:flex gap-7 flex  flex-col mx-auto ">
+        <h2 class="text-[36px]">{{standClient.name}}</h2>
+        <p id="text" class="text-xl">{{standClient.description}}
+        </p>
+        <p class="text-xl">
+          Ubicación:  {{standClient.municipio}}, {{standClient.estado}}
+        </p>
+        <p class="text-xl">
+          Horario: {{standClient.horario}}
+          <br>8:00 - 9:00 pm
+        </p>
+        <div class="bg-green-200 flex flex-row w-96 items-center h-16 gap-20 ">
+          <p class="text-xl"> Contacto: {{standClient.phone}}</p>
+          <img class="w-10" src="./assets/logo_whatsap.svg" alt="WhatsApp logo">
+        </div>
+        <p id="text" class="text-xl" *ngIf="status">Calificanos</p>
+        <div class="flex items-center w-96" *ngIf="status">
+          <img 
+            *ngFor="let isFilled of getStarArray(); let i = index" 
+            [src]="isFilled ? './assets/star_fill.svg' : './assets/star.svg'" 
+            [alt]="'Star ' + (i + 1)" 
+            class="w-10 cursor-pointer" 
+            (click)="updateStars(i)" 
+          />
+          <button (click)="rating()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-orange-300 ">Enviar Rating</button>
+        </div>
+
 
     <div class="w-full md:w-1/2  md:text-left p-4">
       <p class="text-[4.4vh] font-bold">{{standClient.name}}</p>
