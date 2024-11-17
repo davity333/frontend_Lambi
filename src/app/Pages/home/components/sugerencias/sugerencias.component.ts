@@ -6,36 +6,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sugerencias.component.css']
 })
 
-export class SugerenciasComponent implements OnInit {
-  sugerencias = [
-    { nombre: "El Buen Sabor", categoria: "comida", img: "assets/puesto1.png" },
-    { nombre: "La Tienda de Accesorios", categoria: "accesorios", img: "assets/puesto2.png" },
-    { nombre: "Dulces Sueños", categoria: "antojos", img: "assets/puesto3.png" },
-    { nombre: "Taller de Servicios Rápidos", categoria: "servicio", img: "assets/puesto4.png" },
-    { nombre: "La Esquina del Postre", categoria: "comida", img: "assets/puesto5.png" },
-    { nombre: "El café", categoria: "comida", img: "assets/puesto6.png" }
+export class SugerenciasComponent  {
+  items = [
+    { img: 'https://via.placeholder.com/150', name: 'Prem Shahi', description: 'Web Developer' },
+    { img: 'https://via.placeholder.com/150', name: 'Deepa Chand', description: 'App Developer' },
+    { img: 'https://via.placeholder.com/150', name: 'Praka Shahi', description: 'Photographer' },
+    { img: 'https://via.placeholder.com/150', name: 'Nina Patel', description: 'Graphic Designer' },
+    { img: 'https://via.placeholder.com/150', name: 'Ravi Kumar', description: 'SEO Specialist' },
+    { img: 'https://via.placeholder.com/150', name: 'Sara Khan', description: 'Content Writer' }
   ];
 
-  currentCardIndex = 0;
-  cardsToShow = 3;  // Mostrar 3 tarjetas a la vez
+  currentSlide = 0;
+  itemsPerView = 3; // Number of items visible at a time
 
-  ngOnInit(): void {}
-
-  nextCard() {
-    // Si la siguiente posición es mayor al límite, vuelve a la primera tarjeta
-    this.currentCardIndex = (this.currentCardIndex + 1) % this.sugerencias.length;
+  next() {
+    if (this.currentSlide < this.items.length - this.itemsPerView) {
+      this.currentSlide++;
+    } else {
+      this.currentSlide = 0; // Loop back to the start
+    }
   }
-  
 
-  prevCard() {
-    // Si está en la primera tarjeta y retrocede, ve a la última tarjeta
-    this.currentCardIndex =
-      (this.currentCardIndex - 1 + this.sugerencias.length) % this.sugerencias.length;
-  }
-  
-
-  getTransformStyle() {
-    // Aplicar el desplazamiento de las tarjetas con la transición
-    return `translateX(-${this.currentCardIndex * 320}px)`;  // Desplazamiento en función de la tarjeta actual
+  prev() {
+    if (this.currentSlide > 0) {
+      this.currentSlide--;
+    } else {
+      this.currentSlide = this.items.length - this.itemsPerView; // Loop back to the end
+    }
   }
 }
