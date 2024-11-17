@@ -17,7 +17,7 @@ export class StandByClientService {
   }
   addRating(idBuyer:number, idStand:number, starss:number): Observable<any> {
     return this.http.post<any>(`${this.url}api/rate`,{idstand:idStand,idbuyer:idBuyer,stars:starss})
-
+  }
 
   getProductsStand(staindId: number): Observable<Product[]> {
       let url = `http://52.72.44.45:8000/api/productsWithStandId/${staindId}`;
