@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { UserLogin } from '../../../register/models/user';
 import { Router } from '@angular/router';
+import { NegationComponent } from '../../../Alerts/negation/negation.component';
 @Component({
   selector: 'app-login-seller',
   templateUrl: './login-seller.component.html',
@@ -17,6 +18,9 @@ export class LoginSellerComponent {
       password: new FormControl('', [Validators.required])
     });
   }
+  
+  alerta:boolean = false;
+  alertaEmail:string ='Email no encontrado bro';
 
   ngOnInit(){
 
@@ -55,7 +59,7 @@ export class LoginSellerComponent {
         error: (err) => {
           console.error('Error durante el login:', err);
           if (err.status === 404) {
-            alert("Email no encontrado");
+            this.alerta = true;
           } else if (err.status === 401) {
             alert("Contraseña incorrecta");
           } else if (err.status === 422) {

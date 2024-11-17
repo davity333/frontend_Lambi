@@ -1,0 +1,16 @@
+#alert {
+    opacity: 0; 
+    animation: fadeIn 1s ease-in-out forwards; 
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0; /* Comienza invisible */
+    }
+
+    100% {
+      opacity: 1; 
+    }
+  }
+  
+  

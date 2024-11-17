@@ -1,41 +1,38 @@
-<section class="carousel  sm:ml-1 sm:flex sm:flex-col sm:p-4 md:flex md:flex-row p-3 md:bg-slate-50 gap-5 w-[100%] mx-auto">
-   <div class="md:100% ">
-    <div class="carousel-container md:flex  ">
-      <button (click)="previous()" class="carousel-button left ">&lt;</button>
-      <div class="carousel-images">
-        <img 
-          *ngFor="let image of images; let i = index"
-          [src]="image"
-          [alt]="'Imagen ' + i"
-          [class.active]="i === currentImageIndex"
-        />
+
+<section class="carousel sm:ml-1 sm:flex sm:flex-col sm:p-16 md:flex md:flex-row p-3 0 gap-5 w-[100%] mx-auto items-center justify-center">
+  <div class="flex flex-col md:flex-row  w-full">
+    <div class="w-full md:w-1/2">
+      <div class="carousel-container md:flex items-center relative">
+        <button (click)="previous()" class="carousel-button left absolute top-1/2 -translate-y-1/2 -left-4">&lt;</button>
+        <div class="carousel-images flex overflow-hidden">
+          <img 
+            *ngFor="let image of images; let i = index"
+            [src]="image"
+            [alt]="'Imagen ' + i"
+            [class.active]="i === currentImageIndex"
+            class="h-80 w-auto object-cover transition-opacity duration-300"
+          />
+        </div>
+        <button (click)="next()" class="carousel-button right absolute top-1/2 -translate-y-1/2 -right-4">&gt;</button>
       </div>
-      <button (click)="next()" class="carousel-button right">&gt;</button>
     </div>
-   </div>
-    <div id="text" class="sm:flex gap-7 flex  flex-col mx-auto ">
-        <h2 class="text-[36px]">{{standClient.name}}</h2>
-        <p id="text" class="text-xl">{{standClient.description}}
-        </p>
-        <p class="text-xl">
-          Ubicación:  {{standClient.municipio}}, {{standClient.estado}}
-        </p>
-        <p class="text-xl">
-          Horario: {{standClient.horario}}
-          <br>8:00 - 9:00 pm
-        </p>
-        <div class="bg-green-200 flex flex-row w-96 items-center h-16 gap-20 ">
-          <p class="text-xl"> Contacto: {{standClient.phone}}</p>
-          <img class="w-10" src="./assets/logo_whatsap.svg" alt="WhatsApp logo">
-        </div>
-        <p id="text" class="text-xl" *ngIf="status">Calificanos</p>
-        <div class="flex items-center w-96" *ngIf="status">
-          <img class="w-10" src="./assets/star.svg" alt="Star">
-          <img class="w-10" src="./assets/star.svg" alt="Star">
-          <img class="w-10" src="./assets/star.svg" alt="Star">
-          <img class="w-10" src="./assets/star.svg" alt="Star">
-          <img class="w-10" src="./assets/star.svg" alt="Star">          
-        </div>
+
+    <div class="w-full md:w-1/2  md:text-left p-4">
+      <p class="text-[4.4vh] font-bold">{{standClient.name}}</p>
+      <p class="text-[18px] tracking-wide font-light pt-3 pb-3">{{standClient.description}}</p>
+
+      <div class="flex flex-col md:flex-row md:items-center md:space-x-2">
+        <p class="font-bold opacity-60 text-[2.6vh]">Ubicación:</p>
+        <p class="font-light opacity-90 tracking-wider text-[2.6vh]">{{standClient.estado}}, {{standClient.municipio}}</p>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-center md:space-x-2 pt-2 pb-2">
+        <p class="font-bold opacity-60 text-[2.6vh]">Contacto:</p>
+        <p class="font-light opacity-90 tracking-wider text-[2.6vh]">{{standClient.phone}}</p>
+      </div>
     </div>
-  </section>
-  
+  </div>
+</section>
+<app-productstand [standid]="idstand"></app-productstand>
+
+
