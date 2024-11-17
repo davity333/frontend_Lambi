@@ -12,7 +12,7 @@ import { SugerenciasComponent } from './Pages/home/components/sugerencias/sugere
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { DeliciosoComponent } from './Pages/home/components/delicioso/delicioso.component';
 import { ComunicacionComponent } from './Pages/home/components/comunicacion/comunicacion.component';
-
+import { FormsModule } from '@angular/forms';
 import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.component';
 import { DatosNegocioComponent } from './Pages/agregar-puesto/Components/datos-negocio/datos-negocio.component';
 import { MapaComponent } from './Pages/agregar-puesto/Components/mapa/mapa.component';
@@ -83,12 +83,13 @@ import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogati
     ConfirmationComponent,
     NegationComponent,
     InterrogationComponent,
-    ],
-    
+  ],
+  
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    GoogleMapsModule,  //este el router-outlet
+    FormsModule,
+    AppRoutingModule, //este el router-outlet
+    GoogleMapsModule,  
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,

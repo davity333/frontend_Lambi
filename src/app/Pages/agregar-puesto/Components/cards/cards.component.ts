@@ -83,7 +83,7 @@ export class CardsComponent {
     const idstand = this.stand.idstand;
     this.categoryService.changeStatusFalse(this.idbuyer,idstand).pipe(tap({
       next: (response) => {
-        console.log(response);
+        console.log("id:",response);
         this.stand.favorite_status = false;
         alert("Quitado a favoritos");
       },
@@ -93,12 +93,14 @@ export class CardsComponent {
       },
     })).subscribe()
   }
+  
   changeStatusFavoriteTrue(){
     const idstand = this.stand.idstand;
     alert(this.stand.idstand)
     this.categoryService.changeStatusTrue(this.idbuyer,idstand).pipe(tap({
       next: (response) => {
-        console.log(response);
+        console.log("id agregada",response);
+        console.log("idbuyer:",this.idbuyer, "idStand:",idstand);
         this.stand.favorite_status = true
         alert("Agregado a favoritos");
       },

@@ -31,6 +31,9 @@ export class LoginComponent {
       tap({
         next: (response) => {
           console.log("Respuesta completa:", response.body); 
+          const seller = response.body; 
+          const buyerName = seller?.name;
+          localStorage.setItem("userName", buyerName);
           localStorage.setItem('buyer', JSON.stringify(response.body))
           const authorizationHeader = response.headers?.get('Authorization');
           console.log("Encabezado Authorization:", authorizationHeader); 

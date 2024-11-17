@@ -29,6 +29,7 @@ shadow-[0px_9px_5px_-1px_rgba(0,0,0,0.13)] z-40 sticky top-0">
         cursor-pointer hover:duration-150 hidden sm:block" [routerLink]="['/crearPuesto']" *ngIf="!usersService.isLogged()">Registrarse</p>
         <img src="./assets/menu.svg" class="block w-[5vh] sm:hidden opacity-45"/>
         <img src="./assets/user.svg" class="block w-[5vh] sm:hidden opacity-65"/>
+        <p class="text-[#3d3838]">{{nombreUsuario}}</p>
 
         <div id="logout" class="hover:bg-[#a75c5c48] rounded-2xl p-[0.6vh] cursor-pointer duration-150 opacity-65" 
         *ngIf="usersService.isLogged()" (click)="logout()" title="Cerrar sesión">

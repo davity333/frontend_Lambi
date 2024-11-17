@@ -7,18 +7,25 @@ import { Component } from '@angular/core';
 })
 export class FavoritesComponent {
 
+  palabraInput: string='';
+  textoBuscador: string='';
+
+  buscar(){
+    this.textoBuscador = this.palabraInput;
+  }
+
   favoritos = [
     {
-      nombre: "MetalClotes", categoria:"Ropa", duenio:"MetalVit", img:'/assets/ejemplo.jpeg'
+      name: "MetalClotes", municipio:"suchiapa", distance:"33", category:'1'
     },
     {
-      nombre: "Comiditas somer", categoria:"comidas", duenio:"Somer", img:'/assets/comiditasSomer.jpeg'
+      name: "Comiditas somer", municipio:"suchiapa", distance:"33", category:'1'
     },
     {
-      nombre: "Dahomey la bailarina", categoria:"Servicio", duenio:"Dahomey", img:'/assets/dahomeyBailarina.jpeg'
+      name: "Dahomey la bailarina", municipio:"suchiapa", distance:"33", category:'1'
     },
     {
-      nombre: "ChuyCode", categoria:"Servicio", duenio:"Jesus Imanol", img:'/assets/chuy.jpg'
+      name: "ChuyCode", municipio:"suchiapa", distance:"33", category:'1'
     },
   ]
 
