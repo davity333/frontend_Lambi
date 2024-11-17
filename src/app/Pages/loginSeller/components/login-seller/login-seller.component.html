@@ -1,8 +1,8 @@
 <div class="min-h-screen relative" id="fondo">
 
     <img src="./assets/logo.png" alt="logo" 
-         class="h-[7vh] transition-all duration-150 hover:h-20 hover:cursor-pointer absolute  left-4" 
-         title="Home" id="logo" [routerLink]="['/']">
+        class="h-[7vh] transition-all duration-150 hover:h-20 hover:cursor-pointer absolute  left-4" 
+        title="Home" id="logo" [routerLink]="['/']">
 
     <div class="flex items-center justify-center min-h-screen">
         <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 sm:w-96" [formGroup]="userSeller">
@@ -64,6 +64,8 @@
                 <img src="./assets/faceebok.png" class="h-5 mr-2" alt="">Continuar con Facebook
             </button>
         </form>
+        <div id="alerta" *ngIf="alerta">
+            <app-negation [mensajeEmail]="alertaEmail"></app-negation>
+        </div>
     </div>
 </div>
-<ngx-toast-notifier></ngx-toast-notifier>

@@ -43,6 +43,9 @@ import { CardsComponent } from './Pages/agregar-puesto/Components/cards/cards.co
 import { ProductsComponent } from './Pages/products/products.component';
 import { CardProductComponent } from './Pages/products/Components/card-product/card-product.component';
 import { ViewProductsComponent } from './Pages/products/Components/view-products/view-products.component';
+import { ConfirmationComponent } from './Pages/Alerts/confirmation/confirmation.component';
+import { NegationComponent } from './Pages/Alerts/negation/negation.component';
+import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogation.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { ViewProductsComponent } from './Pages/products/Components/view-products
     ProductsComponent,
     CardProductComponent,
     ViewProductsComponent,
+    ConfirmationComponent,
+    NegationComponent,
+    InterrogationComponent,
     ],
     
   imports: [

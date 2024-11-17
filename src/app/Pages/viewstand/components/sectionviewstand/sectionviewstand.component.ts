@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
-
+import { Product } from '../../../gestion-productos/Models/product';
 @Component({
   selector: 'app-sectionviewstand',
   templateUrl: './sectionviewstand.component.html',
@@ -17,6 +17,8 @@ export class SectionviewstandComponent {
   constructor(private standByClient : StandByClientService){}
 
 
+  constructor(private standByClient : StandByClientService){}
+
   ngOnInit(){
     const storedSeller = localStorage.getItem('standId');
     this.idstand = storedSeller ? JSON.parse(storedSeller): null;
@@ -24,6 +26,8 @@ export class SectionviewstandComponent {
     this.idSeller = standByClient ? JSON.parse(standByClient): null;
     const idBuyer = localStorage.getItem('buyer');
     this.idBuyer = idBuyer ? JSON.parse(idBuyer).idbuyer: null;
+    this.idSeller = standByClient ? JSON.parse(standByClient).idseller: null;
+    console.log("la idStand es"+this.idstand)
     if(this.idSeller > 0) {
         this.status = false
     }
@@ -40,6 +44,7 @@ export class SectionviewstandComponent {
         console.log(this.standClient);
       }
     )
+
   }
   images: string[] = [
     'https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_website/es/cms/SEO/recipes/albondigas-caseras-de-cerdo-con-salsa-barbacoa.jpeg',
