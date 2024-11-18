@@ -1,0 +1,47 @@
+#modal {
+    height: 90%;
+    width: 30%; 
+    display: flex;
+    position: fixed;
+    right: 10px; 
+    bottom: 55px;
+    top: 57px; 
+    background-color: rgb(255, 255, 255); 
+    transition-duration: 100ms; 
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    animation-name: modal;
+}
+
+#fondo {
+    background-color: rgba(0, 0, 0, 0.532);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: end;   
+    align-items: end;     
+    position: fixed;
+    inset: 0;                
+    margin: auto; 
+}
+
+#image{
+    height: 12vh;
+    width: 15vh;
+    background-size: cover;
+    border: 2px solid #8a8996;
+}
+
+@media (max-width: 768px) {
+    #modal {
+        width: 70%; /* En pantallas pequeñas, el modal ocupará el 70% del ancho */
+    }
+}
+
+@media (max-width: 480px) {
+    #modal {
+        width: 80%; /* En pantallas muy pequeñas, el modal ocupará el 90% del ancho */
+
+    }
+}

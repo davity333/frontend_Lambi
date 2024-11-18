@@ -4,7 +4,11 @@ export interface Product {
     price: number,
     amount: number,
     category: string,
-    image: string,
+    image: string[],
     sellerid: number,
     idproduct: number
+}
+
+export interface ProductCarr {
+    Product: Product[];  
 }

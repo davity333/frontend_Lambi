@@ -1,0 +1,38 @@
+p<div id="fondo">
+    <div id="modal" class="rounded-2xl">
+        <form id="body">
+            <div class="flex justify-between">
+                <p class="text-[4vh] font-semibold text-[#000000a3]">Mi carrito</p>
+                <img src="./assets/exit.svg" alt="" (click)="cerrar()" class="h-8 m-2 opacity-65 cursor-pointer" title="Cerrar">
+
+            </div>
+
+            <div *ngIf="productCarr">
+                <div class="flex pt-5">
+                    <img *ngIf="productCarr.image && productCarr.image.length > 0" [src]="productCarr.image[0]" 
+                    alt="Product image" id="image" 
+                    class="shadow-[6px_7px_8px_-3px_rgba(0,0,0,0.18)]"/>
+
+                    <div class="flex flex-col ml-6 leading-7">
+                    <h3 class="text-[3vh] font-bold text-[#252143]">{{ productCarr.name }}</h3>
+                    <p class="text-[3vh] font-light">Price: ${{ productCarr.price }}</p>
+                    <p class="text-[2vh] font-light">Disponible:{{ productCarr.amount }}</p>
+                    </div>
+
+                    <div class="flex gap-3 items-center ml-5">
+                        <button class="px-4 py-3 ">
+                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]">-</p>
+                        </button>
+                        <p>0</p>
+                        <button class="px-4 py-3 ">
+                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]">+</p>
+                        </button>
+                    </div>
+            
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
