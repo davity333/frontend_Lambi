@@ -56,8 +56,8 @@ export class MapaComponent {
     alert("Se guardaron las coordenadas");
     
     if (this.latitude !== null && this.longitude !== null) {
-      let latitudString = this.latitude.toString();
-      let longitudString = this.longitude.toString();
+      let latitudString = this.latitude;
+      let longitudString = this.longitude;
       this.user.setCoordernadas(latitudString, longitudString);
       console.log("Coordenadas guardadas en el servicio.");
     } else {
@@ -66,39 +66,44 @@ export class MapaComponent {
     }
   }
 
-  /*ALMCENAR FOTOS */
-  fotos:string[] =[];
-  fotosSeleccionadas:number=0
+  fotos: File[] = [];
+  fotosSeleccionadas: number = 0;
+  fotosPreview: string[] = []; 
+  
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
+    
     if (input.files) {
-
       for (let i = 0; i < input.files.length; i++) {
         const file = input.files[i];
+
+        this.puestoService.addFoto(file); 
         const reader = new FileReader();
-        
         reader.onload = (e) => {
           const result = e.target?.result as string;
-          this.fotos.push(result);
+          this.fotosPreview.push(result);
         };
-
-        reader.readAsDataURL(file);  // Leer el archivo como Data URL
-        console.log("Imágenes seleccionadas:", this.fotos);
-        this.fotosSeleccionadas++;
-        this.puestoService.setFotos(this.fotos);
+        reader.readAsDataURL(file); 
       }
+      
+      this.fotos = this.puestoService.getFotos();
+      this.fotosSeleccionadas = this.fotos.length;
     }
   }
+  
+  removeImage(image: string): void {
+    this.fotosPreview = this.fotosPreview.filter(img => img !== image);
+    
 
-  removeImage(image: string) { 
-    if (this.fotosSeleccionadas === 0) {
-      this.fotosSeleccionadas = 0;
-    }else{
-      this.fotos = this.fotos.filter(img => img !== image);
-      this.fotosSeleccionadas = this.fotosSeleccionadas -1;
-      this.puestoService.setFotos(this.fotos);
-    }
+    const fotosActualizadas = this.fotos.filter((img) => img.name !== image);
+    this.puestoService.setFotos(fotosActualizadas);
+  
+    this.fotos = fotosActualizadas;
+    this.fotosSeleccionadas = this.fotos.length;
+
   }
+  
+  
   
 }
 
