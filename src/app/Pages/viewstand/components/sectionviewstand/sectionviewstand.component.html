@@ -6,7 +6,7 @@
         <button (click)="previous()" class="carousel-button left absolute top-1/2 -translate-y-1/2 -left-4">&lt;</button>
         <div class="carousel-images flex overflow-hidden">
           <img 
-            *ngFor="let image of images; let i = index"
+            *ngFor="let image of standClient.image; let i = index"
             [src]="image"
             [alt]="'Imagen ' + i"
             [class.active]="i === currentImageIndex"

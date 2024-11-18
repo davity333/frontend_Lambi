@@ -12,9 +12,10 @@
       [style.transform]="'translateX(-' + currentSlide * 100 / itemsPerView + '%)'"
       [style.transition]="'transform 0.5s ease-in-out'"
     >
-      <div class="carousel-item" *ngFor="let item of items">
+      <div class="carousel-item" *ngFor="let item of stands">
         <div class="card">
-          <img [src]="item.img" alt="Card image">
+          <img *ngFor="let image of item.image; let i = index"
+           [src]="image" alt="Card image">
           <h3>{{ item.name }}</h3>
           <p>{{ item.description }}</p>
           <div class="actions">

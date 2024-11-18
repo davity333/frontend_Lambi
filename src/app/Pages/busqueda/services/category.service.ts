@@ -26,5 +26,10 @@ export class CategoryService {
   changeStatusFalse(idBuyer: number, idStand:number): Observable<any> {
     return this.http.put<any>(`${this.url}changeToFalse/favorite/${idBuyer}/${idStand}`, null)
   }
-
+  getFavorites(idBuyer: number): Observable<any> {
+    return this.http.get<any>(`${this.url}favorite${idBuyer}`)
+  }
+  getStands():Observable<any>{
+    return this.http.get<any>(`${this.url}stand`)
+  }
 }

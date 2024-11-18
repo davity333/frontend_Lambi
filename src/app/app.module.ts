@@ -46,6 +46,7 @@ import { ViewProductsComponent } from './Pages/products/Components/view-products
 import { ConfirmationComponent } from './Pages/Alerts/confirmation/confirmation.component';
 import { NegationComponent } from './Pages/Alerts/negation/negation.component';
 import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogation.component';
+import { PaymentComponent } from './Pages/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogati
     ConfirmationComponent,
     NegationComponent,
     InterrogationComponent,
+    PaymentComponent,
   ],
   
   imports: [

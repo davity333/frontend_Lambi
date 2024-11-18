@@ -1,4 +1,4 @@
-<div class="bg-[#ffffff] shadow-xl rounded-t-xl relative">
+<div class="bg-[#ffffff] shadow-xl rounded-t-xl relative" *ngIf="stand.favorite_status && stand.favorite_user">
     <img src="https://lambifile.s3.us-east-1.amazonaws.com/f058f16f-95c6-40eb-b5c3-d805a0669e33.jpg" 
          alt="" 
          class="rounded-t-xl" 
@@ -10,7 +10,7 @@
         <!-- Contenedor del icono de corazón sobre el fondo blanco -->
         <div class="absolute top-2 right-2" (click)="toggleFavorite()">
             <label class="ui-bookmark">
-              <div class="bookmark" [class.filled]="stand.favorite_status">
+              <div class="bookmark" [class.filled]="stand.favorite_status && stand.favorite_user">
                 <svg
                   viewBox="0 0 16 16"
                   class="bi bi-heart-fill ng"

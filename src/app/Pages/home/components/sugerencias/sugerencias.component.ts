@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../../../busqueda/services/category.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-sugerencias',
@@ -6,7 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sugerencias.component.css']
 })
 
-export class SugerenciasComponent  {
+
+export class SugerenciasComponent implements OnInit {
+  stands: any[] = [];
+  constructor(private categoryService: CategoryService){}
+  ngOnInit(): void {
+  this.categoryService.getStands().pipe(tap({
+    next: (response) => {
+      console.log('Estandar:', response);
+      // TODO: Implement your logic here to display the stands.
+    },
+    error: (response) => {
+      console.log('Error:', response);
+    }
+  })).subscribe(data => this.stands = data);
+  }
+
   items = [
     { img: 'https://via.placeholder.com/150', name: 'Prem Shahi', description: 'Web Developer' },
     { img: 'https://via.placeholder.com/150', name: 'Deepa Chand', description: 'App Developer' },

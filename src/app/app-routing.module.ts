@@ -15,6 +15,7 @@ import { RolComponent } from './Pages/user-option/components/rol/rol.component';
 import { RegisterSellerComponent } from './Pages/registerSeller/components/register-seller/register-seller.component';
 import { LoginSellerComponent } from './Pages/loginSeller/components/login-seller/login-seller.component';
 import { ProductsComponent } from './Pages/products/products.component';
+import { PaymentComponent } from './Pages/payment/payment.component';
 const routes: Routes = [
   {path: '', component:RolComponent},
   {path:'home', component:HomeComponent},
@@ -32,7 +33,10 @@ const routes: Routes = [
 
   {path: 'viewstand', component: ViewstandComponent},
 
-  {path: 'rol', component: RolComponent}
+  {path: 'rol', component: RolComponent},
+
+
+  {path: 'payment', component:PaymentComponent}
 ];
 
 @NgModule({
