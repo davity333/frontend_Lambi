@@ -40,16 +40,26 @@ export class PuestoService {
     return this.httpClient.post<any>(url, puesto);
   }
 
-  //SERVICE//
-  setFotos(fotos : any[]){
-    this.seccionFotos = fotos;
-    console.log("arreglo en el servicio")
-    console.log(this.seccionFotos);
+  private fotos: File[] = []; // Archivos se almacenan como objetos File
+
+  // Agregar una foto a la lista
+  addFoto(foto: File): void {
+    this.fotos.push(foto);
   }
 
-  getFotos(){
-    return this.seccionFotos;
+  // Establecer una lista completa de fotos
+  setFotos(fotos: File[]): void {
+    this.fotos = fotos;
   }
 
+  // Obtener la lista de fotos
+  getFotos(): File[] {
+    return this.fotos;
+  }
+
+  // Limpiar todas las fotos
+  clearFotos(): void {
+    this.fotos = [];
+  }
 
 }

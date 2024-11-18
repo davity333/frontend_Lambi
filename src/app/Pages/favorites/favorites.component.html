@@ -27,8 +27,8 @@
         <div class="mt-7">
             <p class="text-[#6E6666] mb-7 text-center text-[2.2vh]">Busqueda: {{textoBuscador}}</p>
             
-            <div class="flex justify-between">
-                <app-cards *ngFor="let item of favoritos" [stand]="item"></app-cards>
+            <div class="flex justify-between flex-wrap" >
+                <app-cards *ngFor="let item of closestLocations" [stand]="item" (idStand)="receiveIdStand($event)"></app-cards>
             </div>
         </div>
 

@@ -46,7 +46,11 @@ import { ViewProductsComponent } from './Pages/products/Components/view-products
 import { ConfirmationComponent } from './Pages/Alerts/confirmation/confirmation.component';
 import { NegationComponent } from './Pages/Alerts/negation/negation.component';
 import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogation.component';
+<<<<<<< HEAD
 import { ModalComponent } from './Pages/viewstand/components/modal/modal.component';
+=======
+import { PaymentComponent } from './Pages/payment/payment.component';
+>>>>>>> origin/main
 
 @NgModule({
   declarations: [
@@ -84,7 +88,11 @@ import { ModalComponent } from './Pages/viewstand/components/modal/modal.compone
     ConfirmationComponent,
     NegationComponent,
     InterrogationComponent,
+<<<<<<< HEAD
     ModalComponent,
+=======
+    PaymentComponent,
+>>>>>>> origin/main
   ],
   
   imports: [

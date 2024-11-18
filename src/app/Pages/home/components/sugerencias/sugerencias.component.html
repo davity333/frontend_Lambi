@@ -4,22 +4,33 @@
     <hr class="w-[50vh] border-[0.2vh] border-[#00000043]">
 </div>
 
-<div class="p-16">
-<div class="carousel-container">
-    <button class="prev-button" (click)="prevCard()">⟨</button>
-    <div class="carousel" #carousel>
-      <div class="cards-wrapper" [style.transform]="getTransformStyle()">
-        <div class="card-container" *ngFor="let sugerencia of sugerencias">
-          <img [src]="sugerencia.img" alt="{{ sugerencia.nombre }}" class="card-image">
-          <div class="card-content">
-            <p class="badge">{{ sugerencia.nombre }}</p>
-            <h2 class="card-title">{{ sugerencia.categoria }}</h2>
+<div class="carousel-container p-10">
+  <button class="carousel-button prev" (click)="prev()">‹</button>
+  <div class="carousel-wrapper">
+    <div
+      class="carousel"
+      [style.transform]="'translateX(-' + currentSlide * 100 / itemsPerView + '%)'"
+      [style.transition]="'transform 0.5s ease-in-out'"
+    >
+      <div class="carousel-item" *ngFor="let item of stands">
+        <div class="card">
+          <img *ngFor="let image of item.image; let i = index"
+           [src]="image" alt="Card image">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.description }}</p>
+          <div class="actions">
+            <button>About Me</button>
+            <button>Hire Me</button>
           </div>
         </div>
       </div>
     </div>
-  
-    <button class="next-button" (click)="nextCard()">⟩</button>
   </div>
+  <button class="carousel-button next" (click)="next()">›</button>
 </div>
+
+
+
+
+
 <div class="h-[0.8vh] bg-[#BFAAAA]"></div>
