@@ -29,7 +29,7 @@
   </div>
 
   <div class="image-preview mt-3 grid grid-cols-4 gap-4 w-full max-w-3xl mx-auto overflow-auto h-[36vh]">
-    <div class="image-container" *ngFor="let image of fotos">
+    <div class="image-container" *ngFor="let image of fotosPreview">
       <img [src]="image" alt="Vista previa" class="preview-img duration-100 cursor-pointer" 
       id="foto" title="Da click para eliminar" (click)="removeImage(image)"/>
     </div>
