@@ -12,6 +12,7 @@ import { NegationComponent } from '../../../Alerts/negation/negation.component';
 })
 export class LoginSellerComponent {
   userSeller: FormGroup;
+  mensajeAlerta:string ='';
   constructor(private usersService: createSellerUsersService, private router: Router){
     this.userSeller = new FormGroup({
       e_mail: new FormControl('', [Validators.email]),
@@ -20,7 +21,6 @@ export class LoginSellerComponent {
   }
   
   alerta:boolean = false;
-  alertaEmail:string ='Email no encontrado bro';
 
   ngOnInit(){
 
@@ -40,7 +40,7 @@ export class LoginSellerComponent {
           console.log("Respuesta completa:", response.body); 
           const seller = response.body; 
           const sellerName = seller?.name;
-          localStorage.setItem("usergiName", sellerName);
+          localStorage.setItem("userName", sellerName);
 
           localStorage.setItem('seller', JSON.stringify(response.body))
           const authorizationHeader = response.headers?.get('Authorization');
@@ -66,7 +66,8 @@ export class LoginSellerComponent {
           if (err.status === 404) {
             this.alerta = true;
           } else if (err.status === 401) {
-            alert("Contraseña incorrecta");
+            this.alerta = true;
+            this.mensajeAlerta = "Contraseña incorrecta";
           } else if (err.status === 422) {
             alert("Error de validación");
           } else {
