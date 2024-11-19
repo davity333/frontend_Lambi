@@ -65,5 +65,7 @@
             </button>
         </form>
     </div>
+    <div *ngIf="alerta">
+    <app-negation [mensaje]="mensajeAlerta"></app-negation>
+    </div>
 </div>
-<ngx-toast-notifier></ngx-toast-notifier>

@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   users: FormGroup;
+  alerta:boolean = false;
+  mensajeAlerta:string='';
 
   constructor(private user: createSellerUsersService, private navegar: Router) {
     this.users = new FormGroup({
@@ -62,7 +64,9 @@ export class LoginComponent {
           } else if (err.status === 422) {
             alert("Error de validación");
           } else {
-            alert("Error inesperado");
+            this.alerta = true;
+            this.mensajeAlerta = "Error inesperado";
+
           }
         }
       })

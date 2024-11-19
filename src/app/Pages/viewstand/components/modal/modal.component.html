@@ -7,25 +7,25 @@ p<div id="fondo">
 
             </div>
 
-            <div *ngIf="productCarr">
+            <div *ngFor="let object of productCarr let i=index">
                 <div class="flex pt-5">
-                    <img *ngIf="productCarr.image && productCarr.image.length > 0" [src]="productCarr.image[0]" 
-                    alt="Product image" id="image" 
-                    class="shadow-[6px_7px_8px_-3px_rgba(0,0,0,0.18)]"/>
 
+                    <img src={{object.datos.image}} alt="" id="image">
                     <div class="flex flex-col ml-6 leading-7">
-                    <h3 class="text-[3vh] font-bold text-[#252143]">{{ productCarr.name }}</h3>
-                    <p class="text-[3vh] font-light">Price: ${{ productCarr.price }}</p>
-                    <p class="text-[2vh] font-light">Disponible:{{ productCarr.amount }}</p>
+                    <h3 class="text-[3vh] font-bold text-[#252143]">{{ object.datos.name }}</h3>
+                    <p class="text-[3vh] font-light">Price: ${{ object.datos.price }}</p>
+                    <p class="text-[2vh] font-light">Disponible:{{ object.datos.amount }}</p>
                     </div>
 
                     <div class="flex gap-3 items-center ml-5">
-                        <button class="px-4 py-3 ">
+                        <button class="px-4 py-3 " (click)="agregarMenos(object, i)">
                             <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]">-</p>
                         </button>
-                        <p>0</p>
-                        <button class="px-4 py-3 ">
-                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]">+</p>
+                        <p>{{object.amountCantidad}}</p>
+                        
+                        <button class="px-4 py-3 " [disabled]="statusBoton" >
+                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]"
+                            (click)="agregarMas(object)">+</p>
                         </button>
                     </div>
             

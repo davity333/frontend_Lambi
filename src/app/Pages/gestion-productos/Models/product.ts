@@ -10,5 +10,6 @@ export interface Product {
 }
 
 export interface ProductCarr {
+    cantidad: number,
     Product: Product[];  
 }
