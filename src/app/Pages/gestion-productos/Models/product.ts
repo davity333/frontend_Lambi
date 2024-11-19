@@ -11,5 +11,5 @@ export interface Productos {
   
 export interface ProductCarr {
     cantidad: number,
-    Product: Productos[];  
+    product: Productos[];  
 }
