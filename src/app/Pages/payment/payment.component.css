@@ -1,0 +1,22 @@
+.container {
+  background: linear-gradient(135deg, orange, #3B82F6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  width: 100;
+}
+
+button:hover {
+  background-color: #2563EB;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}

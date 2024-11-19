@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
-import { Product } from '../../Models/product';
 import { ProductsService } from '../../service/products.service';
 import { CategoryProduct } from '../../Models/categoryProduct';
 import { OnInit } from '@angular/core';

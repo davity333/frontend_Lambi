@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { UserLogin } from '../../../register/models/user';
 import { Router } from '@angular/router';
+import { NegationComponent } from '../../../Alerts/negation/negation.component';
 @Component({
   selector: 'app-login-seller',
   templateUrl: './login-seller.component.html',
@@ -11,12 +12,15 @@ import { Router } from '@angular/router';
 })
 export class LoginSellerComponent {
   userSeller: FormGroup;
+  mensajeAlerta:string ='';
   constructor(private usersService: createSellerUsersService, private router: Router){
     this.userSeller = new FormGroup({
       e_mail: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
+  
+  alerta:boolean = false;
 
   ngOnInit(){
 
@@ -34,6 +38,10 @@ export class LoginSellerComponent {
       tap({
         next: (response) => {
           console.log("Respuesta completa:", response.body); 
+          const seller = response.body; 
+          const sellerName = seller?.name;
+          localStorage.setItem("userName", sellerName);
+
           localStorage.setItem('seller', JSON.stringify(response.body))
           const authorizationHeader = response.headers?.get('Authorization');
           console.log("Encabezado Authorization:", authorizationHeader); 
@@ -43,7 +51,8 @@ export class LoginSellerComponent {
             if (token) {
               localStorage.setItem('token', token);
               
-              alert("Usuario encontrado con éxito");
+              alert("vendedor encontrado con éxito");
+              alert(`¡Vendedor encontrado con éxito: ${sellerName}!`);
               this.router.navigate(['/negocios'])
             } else {
               console.error("Token no encontrado en el encabezado Authorization");
@@ -55,9 +64,10 @@ export class LoginSellerComponent {
         error: (err) => {
           console.error('Error durante el login:', err);
           if (err.status === 404) {
-            alert("Email no encontrado");
+            this.alerta = true;
           } else if (err.status === 401) {
-            alert("Contraseña incorrecta");
+            this.alerta = true;
+            this.mensajeAlerta = "Contraseña incorrecta";
           } else if (err.status === 422) {
             alert("Error de validación");
           } else {

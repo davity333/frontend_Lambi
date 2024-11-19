@@ -12,7 +12,7 @@ import { SugerenciasComponent } from './Pages/home/components/sugerencias/sugere
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { DeliciosoComponent } from './Pages/home/components/delicioso/delicioso.component';
 import { ComunicacionComponent } from './Pages/home/components/comunicacion/comunicacion.component';
-
+import { FormsModule } from '@angular/forms';
 import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.component';
 import { DatosNegocioComponent } from './Pages/agregar-puesto/Components/datos-negocio/datos-negocio.component';
 import { MapaComponent } from './Pages/agregar-puesto/Components/mapa/mapa.component';
@@ -43,6 +43,14 @@ import { CardsComponent } from './Pages/agregar-puesto/Components/cards/cards.co
 import { ProductsComponent } from './Pages/products/products.component';
 import { CardProductComponent } from './Pages/products/Components/card-product/card-product.component';
 import { ViewProductsComponent } from './Pages/products/Components/view-products/view-products.component';
+import { ConfirmationComponent } from './Pages/Alerts/confirmation/confirmation.component';
+import { NegationComponent } from './Pages/Alerts/negation/negation.component';
+import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogation.component';
+
+import { ModalComponent } from './Pages/viewstand/components/modal/modal.component';
+
+import { PaymentComponent } from './Pages/payment/payment.component';
+
 
 @NgModule({
   declarations: [
@@ -77,12 +85,18 @@ import { ViewProductsComponent } from './Pages/products/Components/view-products
     ProductsComponent,
     CardProductComponent,
     ViewProductsComponent,
-    ],
-    
+    ConfirmationComponent,
+    NegationComponent,
+    InterrogationComponent,
+    ModalComponent,
+    PaymentComponent,
+  ],
+  
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    GoogleMapsModule,  //este el router-outlet
+    FormsModule,
+    AppRoutingModule, //este el router-outlet
+    GoogleMapsModule,  
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,

@@ -1,0 +1,61 @@
+#modal {
+  height: 6vh;
+  width: 25%;
+  display: flex;
+  position: fixed;
+  bottom: 100%; 
+  left: 50%; 
+  transform: translateX(-50%);
+  margin: auto;
+  background-color: rgb(118, 18, 18);
+  transition-duration: 100ms;
+  flex-direction: column; 
+  padding: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 13px;
+  justify-content: center;
+  box-shadow: 14px -3px 4px -8px rgba(157, 31, 31, 1) inset;
+  -webkit-box-shadow: 14px -3px 4px -8px rgba(157, 31, 31, 1) inset;
+  -moz-box-shadow: 14px -3px 4px -8px rgba(157, 31, 31, 1) inset;
+  opacity: 0;
+  animation: alerta 0.5s ease forwards;
+}
+
+@keyframes alerta {
+  0% {
+      bottom: 120%;
+      opacity: 0;
+  }
+
+  50%{
+      opacity: 0.5;
+  }
+  100% {
+      bottom: 91%; 
+      opacity: 1;
+  }
+}
+
+#modal.hide {
+  animation: alerta 1s forwards; /* Ejecuta la animación cuando se agrega la clase .hide */
+}
+
+#image{
+  height: 12vh;
+  width: 15vh;
+  background-size: cover;
+  border: 2px solid #8a8996;
+}
+
+@media (max-width: 768px) {
+  #modal {
+      width: 70%; /* En pantallas pequeñas, el modal ocupará el 70% del ancho */
+  }
+}
+
+@media (max-width: 480px) {
+  #modal {
+      width: 80%; /* En pantallas muy pequeñas, el modal ocupará el 90% del ancho */
+
+  }
+}

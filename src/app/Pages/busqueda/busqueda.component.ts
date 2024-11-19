@@ -5,6 +5,7 @@ import { Category } from './models/category';
 import { map, tap } from 'rxjs';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Puesto } from '../agregar-puesto/Models/estados';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-busqueda',
@@ -18,8 +19,9 @@ export class BusquedaComponent implements OnInit {
   userLongitude: number | null = null;
   closestLocations: any[] = [];
   negocios: Puesto[]=[];
+  idbuyer:number = 0
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private route: Router) {
     this.categoryToSearch = new FormGroup({
       idcategory: new FormControl(''),
       category: new FormControl(''),
@@ -29,6 +31,8 @@ export class BusquedaComponent implements OnInit {
   categories: Category[] = [];
 
   ngOnInit() {
+    const Idbuyer = localStorage.getItem('buyer');
+    this.idbuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
     this.getUserLocation();
     this.categoryService.getAllCategories().pipe(tap({
         next: (response) => {},
@@ -45,45 +49,64 @@ export class BusquedaComponent implements OnInit {
   searchStands() {
     let idCategory = this.categoryToSearch.value.idcategory;
     if (idCategory !== "") {
-      this.categoryService.searchStandByCategory(idCategory).pipe(
+      this.categoryService.searchStandByCategory(idCategory,this.idbuyer).pipe(
         tap({
           next: (response) => {
             console.log(response);
           },
           error: (response) => {
             alert("Ha habido un error en la búsqueda");
+            console.log(response);
+            
           }
         })
       ).subscribe(data => {
         if (data === false) {
           alert("No hay stands en esta categoría");
         }
-        this.stand = data; // Guardamos los stands en el arreglo
+        this.stand = data; 
         console.log(this.stand);
         
-        this.calculateClosestLocations(); // Llamamos la función para calcular las ubicaciones cercanas
+        this.calculateClosestLocations(); 
       });
     }
-    // Código para la búsqueda por nombre de categoría omitido por brevedad
-  }
-
-  goToLocation(latitude: number, longitude: number) {
-    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-    window.open(url, '_blank');
+    else {
+      let namePuesto = this.categoryToSearch.value.category;
+      this.categoryService.searchStandByName(namePuesto,this.idbuyer).pipe(tap({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (response) => {
+          alert("Ha habido un error en la búsqueda");
+        }
+      })).subscribe(
+        data => {
+        if (data === false) {
+          alert("No hay stands en esta categoría");
+        }
+        this.stand = data; 
+        console.log(this.stand);
+        
+        this.calculateClosestLocations();
+      }
+      )
+    }
   }
 
   getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log("User location obtained:", position);
         this.userLatitude = position.coords.latitude;
         this.userLongitude = position.coords.longitude;
         this.calculateClosestLocations();
+      }, (error) => {
+        console.error("Error getting location:", error);
       });
     } else {
       alert("La Geolocalización no está soportada por este navegador.");
     }
   }
-
   getDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const R = 6371;
     const dLat = this.deg2rad(lat2 - lat1);
@@ -103,11 +126,16 @@ export class BusquedaComponent implements OnInit {
   calculateClosestLocations() {
     if (this.userLatitude !== null && this.userLongitude !== null && this.stand.length > 0) {
       this.closestLocations = this.stand
-        .map(location => ({
-          ...location,
-          distance: this.getDistance(this.userLatitude!, this.userLongitude!, location.altitud, location.longitud)
-        }))
-        .sort((a, b) => a.distance - b.distance);
+      .map(location => ({
+        ...location,
+        distance: this.getDistance(this.userLatitude!, this.userLongitude!, location.latitud, location.altitud) // Usa altitud como longitud
+      }))
+      .sort((a, b) => a.distance - b.distance);
     }
+  }
+  receiveIdStand($event: any){
+    localStorage.setItem('standId', $event)
+    this.route.navigate(['/viewstand']);
+    
   }
 }

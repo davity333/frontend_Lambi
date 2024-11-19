@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
-
+import { Product } from '../../../gestion-productos/Models/product';
 @Component({
   selector: 'app-sectionviewstand',
   templateUrl: './sectionviewstand.component.html',
@@ -9,17 +9,22 @@ import { tap } from 'rxjs';
 })
 export class SectionviewstandComponent {
   idstand = 0
+  idBuyer = 0
   standClient: any;
   idSeller = 0
   status = true
+  stars =0
   constructor(private standByClient : StandByClientService){}
-
 
   ngOnInit(){
     const storedSeller = localStorage.getItem('standId');
     this.idstand = storedSeller ? JSON.parse(storedSeller): null;
     const standByClient = localStorage.getItem('seller');
+    this.idSeller = standByClient ? JSON.parse(standByClient): null;
+    const idBuyer = localStorage.getItem('buyer');
+    this.idBuyer = idBuyer ? JSON.parse(idBuyer).idbuyer: null;
     this.idSeller = standByClient ? JSON.parse(standByClient).idseller: null;
+    console.log("la idStand es"+this.idstand)
     if(this.idSeller > 0) {
         this.status = false
     }
@@ -36,6 +41,7 @@ export class SectionviewstandComponent {
         console.log(this.standClient);
       }
     )
+
   }
   images: string[] = [
     'https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_website/es/cms/SEO/recipes/albondigas-caseras-de-cerdo-con-salsa-barbacoa.jpeg',
@@ -52,5 +58,32 @@ export class SectionviewstandComponent {
     this.currentImageIndex =
       (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
+  rating() {
+    alert(`${this.idBuyer}, ${this.idstand}, ${this.stars}`)
+    if (this.stars === 0) {
+      this.stars = 5;
+    }
+    this.standByClient.addRating(this.idBuyer, this.idstand, this.stars).pipe(
+      tap({
+        next: (response) => {
+          alert("Rating enviando exitosamente!")
+          console.log("Rating enviado correctamente", response);
+        },
+        error: (err) => {
+          console.error('Error al calificar el stand', err);
+        }
+      })
+    ).subscribe();
+  }
+  
+  getStarArray(): boolean[] {
+    return Array(5).fill(false).map((_, index) => index < this.stars);
+  }
+  
+  updateStars(starIndex: number): void {
+    this.stars = starIndex + 1; 
+    console.log("Nuevo rating:", this.stars);
+  }
+  
 
 }

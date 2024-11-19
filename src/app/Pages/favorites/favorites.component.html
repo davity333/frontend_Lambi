@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div>
-<section class="flex justify-center mt-16">
-    <div class="w-full max-w-7xl">
+<section class="flex justify-center mt-16 ">
+    <div class="w-full max-w-7xl border-2 border-black">
         <div>
             <p id="titulo" class="text-3xl text-[#796767]">Favoritos</p>
         </div>
@@ -13,19 +13,25 @@
                     </svg>
                 </div>
 
-                <input type="text" class="w-full bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] border-[#00000049] border-l-0 rounded-md rounded-l-none" placeholder="Buscar por categoría" id="search-input">
+                <input type="text" class="w-full bg-white text-[#696262] pl-2 text-base f
+                ont-semibold outline-0 border-[0.2vh] border-[#00000049] border-l-0 
+                rounded-md rounded-l-none" placeholder="Buscar puesto" id="search-input" 
+                [(ngModel)]="palabraInput">
             </div>
             
-            <input type="button" value="Buscar" class="bg-[#E4C246] p-[1.4vh] mt-2 sm:mt-0 rounded-lg text-white font-semibold px-10 hover:bg-[#bea23c] transition-colors w-full sm:w-auto text-[#62562E]">
+            <input type="button" value="Buscar" class="bg-[#E4C246] p-[1.4vh] mt-2 sm:mt-0 rounded-lg 
+            text-white font-semibold px-10 hover:bg-[#bea23c] transition-colors w-full sm:w-auto 
+            text-[#62562E]" (click)="buscar()">
         </div>
 
         <div class="mt-7">
-            <p class="text-[#6E6666] mb-7 text-center text-[2.2vh]">Busqueda:</p>
+            <p class="text-[#6E6666] mb-7 text-center text-[2.2vh]">Busqueda: {{textoBuscador}}</p>
             
-            <div class="flex justify-between">
-            
+            <div class="flex justify-between flex-wrap" >
+                <app-cards *ngFor="let item of closestLocations" [stand]="item" (idStand)="receiveIdStand($event)"></app-cards>
             </div>
         </div>
+
             
     </div>
 </section>

@@ -111,7 +111,16 @@
     -o-transition-delay: 0.3s;
     transition-delay: 0.3s;
   }
+  .ui-bookmark .bookmark {
+    fill: var(--icon-default-color); /* Color por defecto (gris) */
+    transition: fill 0.3s ease;
+  }
   
+  .ui-bookmark .bookmark.filled {
+    fill: var(--icon-primary-color); /* Color lleno (rojo) */
+  }
+  
+
   .ui-bookmark input:checked + .bookmark::before {
     -webkit-animation: circle var(--icon-anmt-duration)
       cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;

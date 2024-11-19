@@ -29,7 +29,7 @@
         <div *ngIf="closestLocations.length > 0">
             
             <div class="flex flex-wrap gap-4 justify-between">
-                    <app-cards *ngFor="let item of closestLocations" [stand]="item"></app-cards>
+                    <app-cards *ngFor="let item of closestLocations" [stand]="item" (idStand)="receiveIdStand($event)"></app-cards>
         
             </div>
         </div>

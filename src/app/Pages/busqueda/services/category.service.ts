@@ -11,7 +11,25 @@ export class CategoryService {
   getAllCategories(): Observable<Category[]> {
     return this.http.get<any>(`${this.url}category`)
   }
-  searchStandByCategory(id:number): Observable<any> {
-    return this.http.get<any>(`${this.url}stand/category/${id}`)
+  searchStandByCategory(id:number, idbuyer:number): Observable<any> {
+    return this.http.get<any>(`${this.url}favoriteWIthCategory/${id}/${idbuyer}`)
+  }
+  searchStandByName(name:string, idbuyer:number): Observable<any>{
+    return this.http.get<any>(`${this.url}favoriteWIthName/${name}/${idbuyer}`)
+  }
+  addFavorite(idStand:number, idBuyer: number): Observable<any>{
+    return this.http.post<any>(`${this.url}favorites`, {iduser:idBuyer, idstand:idStand})
+  }
+  changeStatusTrue(idBuyer: number ,idStand:number): Observable<any> {
+    return this.http.put<any>(`${this.url}changeToTrue/favorite/${idBuyer}/${idStand}`,null)
+  }
+  changeStatusFalse(idBuyer: number, idStand:number): Observable<any> {
+    return this.http.put<any>(`${this.url}changeToFalse/favorite/${idBuyer}/${idStand}`, null)
+  }
+  getFavorites(idBuyer: number): Observable<any> {
+    return this.http.get<any>(`${this.url}favorite${idBuyer}`)
+  }
+  getStands():Observable<any>{
+    return this.http.get<any>(`${this.url}stand`)
   }
 }

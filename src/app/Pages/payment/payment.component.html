@@ -1,0 +1,27 @@
+<div class="container mx-auto p-6 items-center rounded-lg shadow-xl max-w-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-800">Realizar Pago</h2>
+      <p class="text-gray-600">Por favor ingresa los detalles para completar tu compra</p>
+    </div>
+  
+    <form (ngSubmit)="submitPayment()">
+      <div class="space-y-4">
+       
+        <!-- Aquí se monta el campo de tarjeta de Stripe -->
+        <div id="card-element"></div>
+  
+        <div class="flex justify-between items-center mt-4">
+          <p class="text-lg font-semibold text-gray-700">Total:</p>
+          <p class="text-xl font-bold text-blue-600">${{ totalPrice | number }}</p>
+        </div>
+  
+        <button
+          type="submit"
+          class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Pagar
+        </button>
+      </div>
+    </form>
+  </div>
+  

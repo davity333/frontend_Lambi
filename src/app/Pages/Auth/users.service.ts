@@ -5,8 +5,8 @@ import { Observable,map ,tap} from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 
 export interface Coordenadas {
-  latitud: string;
-  altitud: string;
+  latitud: number;
+  altitud: number;
 }
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export interface Coordenadas {
 export class createSellerUsersService {
 
   constructor(readonly httpClient: HttpClient) { }
-  private latitud : string = ""
-  private altitud : string = ""
+  private latitud : number = 0
+  private altitud : number = 0
   private urlSeller : string = "http://52.72.44.45:8000/sellers"
   createUser(user: UserRegister): Observable<any>{
     let url = "http://52.72.44.45:8000/api/registerBuyer/";
@@ -27,7 +27,7 @@ export class createSellerUsersService {
 
     return this.httpClient.post<UserRegister>(url, user, { observe: 'response' });
   }
-  setCoordernadas(lat: string, lng: string) {
+  setCoordernadas(lat: number, lng: number) {
     this.latitud = lat;
     this.altitud = lng;
     console.log("Coordenadas guardadas en el servicio: Latitud - " + this.latitud + ", Longitud - " + this.altitud);
@@ -44,6 +44,7 @@ export class createSellerUsersService {
     return this.httpClient.post<UserRegister>(`${this.urlSeller}`, user)
 
   }
+  
   loginSeller(userLogin : UserLogin): Observable<HttpResponse<any>> {
     let loginUrl = "http://52.72.44.45:8000/loginSeller/";
     return this.httpClient.post<HttpResponse<any>>(loginUrl, userLogin, { observe: 'response' });

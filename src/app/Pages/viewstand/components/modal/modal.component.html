@@ -1,0 +1,38 @@
+p<div id="fondo">
+    <div id="modal" class="rounded-2xl">
+        <form id="body">
+            <div class="flex justify-between">
+                <p class="text-[4vh] font-semibold text-[#000000a3]">Mi carrito</p>
+                <img src="./assets/exit.svg" alt="" (click)="cerrar()" class="h-8 m-2 opacity-65 cursor-pointer" title="Cerrar">
+
+            </div>
+
+            <div *ngFor="let object of productCarr let i=index">
+                <div class="flex pt-5">
+
+                    <img src={{object.datos.image}} alt="" id="image">
+                    <div class="flex flex-col ml-6 leading-7">
+                    <h3 class="text-[3vh] font-bold text-[#252143]">{{ object.datos.name }}</h3>
+                    <p class="text-[3vh] font-light">Price: ${{ object.datos.price }}</p>
+                    <p class="text-[2vh] font-light">Disponible:{{ object.datos.amount }}</p>
+                    </div>
+
+                    <div class="flex gap-3 items-center ml-5">
+                        <button class="px-4 py-3 " (click)="agregarMenos(object, i)">
+                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]">-</p>
+                        </button>
+                        <p>{{object.amountCantidad}}</p>
+                        
+                        <button class="px-4 py-3 " [disabled]="statusBoton" >
+                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]"
+                            (click)="agregarMas(object)">+</p>
+                        </button>
+                    </div>
+            
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
