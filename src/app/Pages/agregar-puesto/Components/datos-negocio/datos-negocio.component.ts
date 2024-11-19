@@ -64,7 +64,7 @@ export class DatosNegocioComponent implements OnInit {
       }
     })).subscribe();
   }
- 
+
   publicar(): void {
     const formData = new FormData();
     this.imageFiles = this.puesto.getFotos();
