@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Carrito } from '../Models/carrito';
-import { Productos } from '../Models/product';
+import { Product, ProductCarr } from '../Models/product';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,12 +12,10 @@ export class ProductsService {
 
   private carrito:Carrito [] = []; 
 
-  getProducts(): Observable<Productos[]> {
+  getProducts(): Observable<Product[]> {
     let url = 'http://52.72.44.45:8000/api/products/';
-    return this.httpClient.get<Productos[]>(url);
+    return this.httpClient.get<Product[]>(url);
   }
-
- 
 
   addProduct(producto: any): Observable<any>{
     let url = "http://52.72.44.45:8000/api/products/";
@@ -35,10 +32,11 @@ export class ProductsService {
     return this.httpClient.delete<any>(url);
   }
 
-  getProductId(index: number): Observable<Productos[]> {
+  getProductId(index: number): Observable<Product[]> {
     let url = `http://52.72.44.45:8000/api/productsWithStandId/${index}`;
-    return this.httpClient.get<Productos[]>(url);
+    return this.httpClient.get<Product[]>(url);
   }
+
 
   getCar(): Carrito[] {  
     return this.carrito;
@@ -73,4 +71,20 @@ export class ProductsService {
   }
 }
 
+export interface Productos {
+  name: string;
+  description: string;
+  price: number;
+  amount: number;
+  category: string;
+  image: string[];
+  sellerid: number;
+  idproduct: number;
+}
 
+export interface Carrito {
+  datos: Productos;
+  amountCantidad: number;
+  standId: string | null;
+  idproduct: number;
+}

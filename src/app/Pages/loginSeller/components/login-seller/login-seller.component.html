@@ -6,38 +6,70 @@
 
     <div class="flex items-center justify-center min-h-screen">
         <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 sm:w-96" [formGroup]="userSeller">
-            <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center top-10 sm:top-16">
-                <img src="./assets/logosolo.png" class="h-16 sm:h-20" alt="Logotipo">
+            <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center 
+            top-10 sm:top-[3vh] md:top-[3vh] lg:top-[4vh]  xl:top-[4vh] 2xl:top-[4vh]">
+                <img src="./assets/logosolo.png" class="h-16 sm:h-20" alt="Logotipo"
+                [ngClass]="{
+                    'top-12': (userSeller.get('password')?.invalid && userSeller.get('password')?.touched)
+                }">
             </div>
-            <p class="text-2xl font-semibold p-5 mt-5">Iniciar sesión</p>
+            <p class="text-2xl font-semibold p-5 mt-5 z-50">Iniciar sesión</p>
             <!-- Input para Email -->
-            <div class="w-full relative flex rounded-xl mb-5">
+            <div class="w-full relative flex flex-col rounded-xl mb-5">
+                <!-- Input con corrección para evitar el color azul interno -->
                 <input
                     required=""
-                    class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
+                    [ngClass]="{
+                        'border-red-500': userSeller.get('e_mail')?.invalid && userSeller.get('e_mail')?.touched, 
+                        'border-[#4070f4]': !(userSeller.get('e_mail')?.invalid && userSeller.get('e_mail')?.touched)
+                    }"
+                    class="peer w-full bg-white outline-none px-4 py-2 text-base rounded-md border focus:shadow-md focus:ring-0"
                     id="email"
                     type="email"
-                    formControlName="e_mail"/>
+                    formControlName="e_mail"
+                    style="appearance: none;" />
+            
+                <!-- Label dinámico -->
                 <label
                     class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
-                    for="email">
+                    for="email"
+                    [ngClass]="{
+                        'top-5 hidden': userSeller.get('e_mail')?.invalid && userSeller.get('e_mail')?.touched, 
+                    }">
                     Email
                 </label>
+            
+                <!-- Mensaje de error debajo del input -->
+                <p *ngIf="userSeller.get('e_mail')?.invalid && userSeller.get('e_mail')?.touched" class="text-red-500 text-sm mt-1 pl-1">
+                    Correo no válido
+                </p>
             </div>
-
+            
             <!-- Input para Contraseña -->
-            <div class="w-full relative flex rounded-xl mb-4">
+            <div class="w-full relative flex rounded-xl mb-4 flex-col">
                 <input
                     required=""
-                    class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
+                    [ngClass]="{
+                        'border-red-500': userSeller.get('password')?.invalid && userSeller.get('password')?.touched, 
+                        'border-[#4070f4]': !(userSeller.get('password')?.invalid && userSeller.get('password')?.touched)
+                    }"
+                    class="peer w-full bg-white outline-none px-4 py-2 text-base rounded-md border focus:shadow-md focus:ring-0"
                     id="password"
                     type="password"
                     formControlName="password"/>
-                <label
+                    <label
                     class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
-                    for="password">
+                    for="email"
+                    [ngClass]="{
+                        'top-5 hidden': userSeller.get('password')?.invalid && userSeller.get('password')?.touched, 
+                    }">
                     Contraseña
                 </label>
+            
+                <!-- Mensaje de error debajo del input -->
+                <p *ngIf="userSeller.get('password')?.invalid && userSeller.get('password')?.touched" class="text-red-500 text-sm mt-1 pl-1">
+                    Campo requerido
+                </p>
             </div>
 
             <!-- Botón de Login -->
@@ -64,8 +96,14 @@
                 <img src="./assets/faceebok.png" class="h-5 mr-2" alt="">Continuar con Facebook
             </button>
         </form>
-        <div *ngIf="alerta">
+        <div *ngIf="alertaNegative">
         <app-negation [mensaje]="mensajeAlerta"></app-negation>
+        </div>
+        
+        <div *ngIf="alertaPositiva">
+            <app-confirmation [mensaje]="mensajeAlerta"></app-confirmation>
         </div>
     </div>
 </div>
+
+

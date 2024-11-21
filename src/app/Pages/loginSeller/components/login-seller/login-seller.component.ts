@@ -21,14 +21,15 @@ export class LoginSellerComponent {
     });
   }
   
-  alerta:boolean = false;
+  alertaNegative:boolean = false;
+  alertaPositiva:boolean = false;
 
     ngOnInit(){
       this.isLoading = false;
 
   }
+  
   loginSeller() {
-    
     let userLogin: UserLogin = {
       e_mail: this.userSeller.value.e_mail,
       password: this.userSeller.value.password
@@ -36,6 +37,13 @@ export class LoginSellerComponent {
   
     console.log("Datos que se van a enviar:", userLogin);
     this.isLoading = true;
+    if(this.userSeller.valid){
+      
+      if (this.userSeller.get('e_mail')?.invalid) {
+        this.alertaNegative = true;
+        this.mensajeAlerta = 'Gmail no validado';
+        return; 
+      }
     this.usersService.loginSeller(userLogin).pipe(
       tap({
         next: (response) => {
@@ -48,14 +56,17 @@ export class LoginSellerComponent {
           const authorizationHeader = response.headers?.get('Authorization');
           console.log("Encabezado Authorization:", authorizationHeader); 
   
+
           if (authorizationHeader?.startsWith('Bearer ')) {
             const token = authorizationHeader.split(' ')[1];
             if (token) {
               localStorage.setItem('token', token);
               
-              alert("vendedor encontrado con éxito");
-              alert(`¡Vendedor encontrado con éxito: ${sellerName}!`);
-              this.router.navigate(['/negocios'])
+              this.alertaPositiva = true;
+              this.mensajeAlerta = "Usuario encontrado con exito";
+              setTimeout(() => {
+                this.router.navigate(['/negocios']);
+              }, 3000);
             } else {
               console.error("Token no encontrado en el encabezado Authorization");
             }
@@ -67,9 +78,9 @@ export class LoginSellerComponent {
         error: (err) => {
           console.error('Error durante el login:', err);
           if (err.status === 404) {
-            this.alerta = true;
+            this.alertaNegative = true;
           } else if (err.status === 401) {
-            this.alerta = true;
+            this.alertaNegative = true;
             this.mensajeAlerta = "Contraseña incorrecta";
           } else if (err.status === 422) {
             alert("Error de validación");
@@ -80,5 +91,11 @@ export class LoginSellerComponent {
         }
       })
     ).subscribe();
+  }else{
+    this.alertaNegative = true;
+    this.mensajeAlerta = "Todos los campos son obligatorios";
   }
+
+
+}
 }

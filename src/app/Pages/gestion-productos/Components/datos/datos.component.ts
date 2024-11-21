@@ -5,18 +5,17 @@ import { PuestoService } from '../../../agregar-puesto/Services/puesto.service';
 import { OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Categoria } from '../../../agregar-puesto/Models/estados';
 import { ProductsService } from '../../service/products.service';
-import { Productos } from '../../Models/product';
+import { Product, ProductUpdate } from '../../Models/product';
 import { TablaComponent } from '../tabla/tabla.component';
 @Component({
   selector: 'app-datos',
   templateUrl: './datos.component.html',
   styleUrl: './datos.component.css'
 })
-
 export class DatosComponent implements OnInit{
   productForm: FormGroup;
   indexProduct: number=0;
-  products:Productos[]= [];
+  products:Product[]= [];
   categorias: Categoria[] = [];
   descripcion: string='descripcion';
 
@@ -40,6 +39,9 @@ export class DatosComponent implements OnInit{
   idstand : number = 0;
   idProducto:number = 0;
 
+  actualizarProduct($event: {index: number, id: number}){
+    
+  }
   recibirProducts($event: any){
       this.products = $event;
       const index = localStorage.getItem('indexProduct');
@@ -71,7 +73,6 @@ export class DatosComponent implements OnInit{
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    
     if (input.files) {
       for (let i = 0; i < input.files.length; i++) {
         const file = input.files[i];
@@ -91,16 +92,14 @@ export class DatosComponent implements OnInit{
 
   removeImage(image: string): void {
     this.fotosPreview = this.fotosPreview.filter(img => img !== image);
-    
-
     const fotosActualizadas = this.fotos.filter((img) => img.name !== image);
     this.fotos = fotosActualizadas;
-  
     this.fotos = fotosActualizadas;
     this.fotosSeleccionadas = this.fotos.length;
-
   }
+ updateProductWithoutImage(){
 
+ }
   agregarProducto(){
     const formData = new FormData();
   
@@ -130,26 +129,20 @@ export class DatosComponent implements OnInit{
     })).subscribe()
   }
 
-  actualizarProducto(){
+//actualizarProductoWithoutImage(){
+    
+      //let productUpdate : ProductUpdate; 
+      //console.log("el objeto que voy a actualizar",productUpdate);
 
-      const objeto={
-          dataProdutc: this.productForm.value,
-          description: this.descripcion,
-          image: this.fotos,
-      }
-
-      console.log("el objeto que voy a actualizar",objeto);
-
-      this.productService.updateProduct(objeto).pipe(tap({
-        next: (response) => {
-          console.log(response);
-          alert("Producto actualizado con éxito");
-        },
-        error: (err) => {
-          console.error('Error al actualizar el producto', err);
-          alert("Ha ocurrido un error al actualizar el producto");
-        }
-      })).subscribe()
-  }
+     // this.productService.updateProduct(productUpdate).pipe(tap({
+     //   next: (response) => {
+       //   console.log(response);
+//          alert("Producto actualizado con éxito");
+       // },
+       // error: (err) => {
+//          console.error('Error al actualizar el producto', err);
+  //        alert("Ha ocurrido un error al actualizar el producto");
+    //    }
+      //})).subscribe()
+  //}
 }
-

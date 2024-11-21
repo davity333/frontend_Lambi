@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from '../../service/products.service';
 import { tap } from 'rxjs';
-import { Productos } from '../../Models/product';
+import { Product } from '../../Models/product';
 import { stringify } from 'querystring';
 @Component({
   selector: 'app-tabla',
@@ -12,7 +12,10 @@ import { stringify } from 'querystring';
 export class TablaComponent implements OnInit {
   @Output() enviarId = new EventEmitter<string>();
   @Output() enviarProducts = new EventEmitter<any[]>();
-  products: Productos[] = [];
+
+  products: Product[] = [];
+
+  product: Product[] = [];
   indexProduct: number = 0;
   idProduct: number = 0;
 
@@ -32,8 +35,12 @@ export class TablaComponent implements OnInit {
 
     
   }
+  @Output() actualizarProducto = new EventEmitter<{index: number, id: number}>
 
+  
+  
   actualizar(index: number, id: number): void {
+    this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
     this.indexProduct = Number(index);
     this.idProduct = Number(id);
 
@@ -49,6 +56,13 @@ export class TablaComponent implements OnInit {
 
         this.productService.deletedProduct(this.indexProduct).pipe(tap({
           next: (response) => {
+
+            if(response){
+              console.log('Producto eliminado con éxito');
+            }else{
+              console.log('Este producto no existe');
+            }
+
             console.log('Producto eliminado con éxito');
             this.ngOnInit();
           },
@@ -57,5 +71,6 @@ export class TablaComponent implements OnInit {
           }
         })).subscribe()
   }
-  
+
 }
+
