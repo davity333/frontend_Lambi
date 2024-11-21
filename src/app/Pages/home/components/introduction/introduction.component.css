@@ -93,18 +93,30 @@
 
 /*TEXTO PARRAFO*/
 .escribiendo{
+    transform: translateX(-100%); /* Comienza fuera de la pantalla a la izquierda */
     opacity: 0;
-    animation: texto 3s ease forwards;
+    animation: slideInAnimation 1s ease-out forwards;
 }
 
 @keyframes texto{
     to {
-        width: 100%;
         opacity: 1;
       }
 
+}
+
+#buscador{
+    opacity: 0;
+    animation: slideInAnimation 2s ease-out forwards;
+    animation-name: input;
+
+}
+@keyframes input{
     0%{
         opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
     }
     100%{
         opacity: 1;

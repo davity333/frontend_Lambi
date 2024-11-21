@@ -18,9 +18,26 @@ export class ProductsService {
     return this.httpClient.get<Productos[]>(url);
   }
 
-  getProductId(index: number): Observable<Productos> {
-    let url = `http://52.72.44.45:8000/api/products/${index}`;
-    return this.httpClient.get<Productos>(url);
+ 
+
+  addProduct(producto: any): Observable<any>{
+    let url = "http://52.72.44.45:8000/api/products/";
+    return this.httpClient.post<any>(url, producto);
+  }
+
+  updateProduct(producto: any): Observable<any>{
+    let url = `http://52.72.44.45:8000/api/products/${producto}`;
+    return this.httpClient.put<any>(url, producto);
+  }
+
+  deletedProduct(id: number): Observable<any>{
+    let url = `http://52.72.44.45:8000/api/products?product_id=${id}`;
+    return this.httpClient.delete<any>(url);
+  }
+
+  getProductId(index: number): Observable<Productos[]> {
+    let url = `http://52.72.44.45:8000/api/productsWithStandId/${index}`;
+    return this.httpClient.get<Productos[]>(url);
   }
 
   getCar(): Carrito[] {  

@@ -40,6 +40,7 @@ export class PuestoService {
     return this.httpClient.post<any>(url, puesto);
   }
 
+
   private fotos: File[] = []; // Archivos se almacenan como objetos File
 
   // Agregar una foto a la lista

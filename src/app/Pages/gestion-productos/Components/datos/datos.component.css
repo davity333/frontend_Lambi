@@ -27,3 +27,24 @@
 .file-input {
     display: none;
 }
+
+.image-preview {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+    margin: auto; 
+    display: relative;
+}
+
+
+.preview-img {
+    width: 28vh;
+    height: 22vh;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#foto:hover{
+    filter: brightness(0.6) ;
+}

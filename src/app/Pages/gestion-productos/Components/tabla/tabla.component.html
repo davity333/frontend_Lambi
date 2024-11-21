@@ -11,16 +11,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="py-2 px-8 border"></td>
-                <td class="py-2 px-8 border"></td>
-                <td class="py-2 px-8 border"></td>
-                <td class="py-2 px-8 border"></td>
+            <tr *ngFor="let object of products let i=index">
+                <td class="py-2 px-8 border text-center">{{object.name}}</td>
+                <td class="py-2 px-8 border text-center">{{object.category}}</td>
+                <td class="py-2 px-8 border text-center">{{object.amount}}</td>
+                <td class="py-2 px-8 border text-center">{{object.price}}</td>
                 <td class="py-2 px-8 border flex justify-center gap-6">
                     <img src="./assets/actualizar.png" class="h-[3vh] 
-                    hover:bg-[#504c4c24] cursor-pointer rounded-lg" alt="" title="Actualizar">
+                    hover:bg-[#504c4c24] cursor-pointer rounded-lg" alt="" title="Actualizar" (click)="actualizar(i, object.idproduct)">
                     <img src="./assets/eliminar.png" class="h-[3vh] 
-                    hover:bg-[#504c4c24] cursor-pointer rounded-lg" alt="" title="Eliminar">
+                    hover:bg-[#504c4c24] cursor-pointer rounded-lg" alt="" title="Eliminar" (click)="eliminar(object.idproduct)">
                 </td>
             </tr>
         </tbody>
