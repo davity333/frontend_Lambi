@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product, ProductCarr } from '../Models/product';
+import { Product, ProductCarr, ProductUpdate } from '../Models/product';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,9 +22,9 @@ export class ProductsService {
     return this.httpClient.post<any>(url, producto);
   }
 
-  updateProduct(producto: any): Observable<any>{
-    let url = `http://52.72.44.45:8000/api/products/${producto}`;
-    return this.httpClient.put<any>(url, producto);
+  updateProduct(id: number, producto: ProductUpdate): Observable<Product | boolean>{
+    let url = `http://52.72.44.45:8000/api/products/${id}`;
+    return this.httpClient.put<Product | boolean>(url, producto);
   }
 
   deletedProduct(id: number): Observable<any>{

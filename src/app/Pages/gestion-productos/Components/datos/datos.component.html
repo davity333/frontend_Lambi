@@ -9,7 +9,11 @@
             <input type="text" name="" id="" class="border-[0.2vh] border-[#00000049] w-[50vh] rounded-[4px] h-[4vh]"
             formControlName="name" [(ngModel)]="nombre">
         </div>
-        
+        <div class="flex flex-col gap-y-1 mt-2">
+            <label for="" class="text-[#434141]">Descripción del producto</label>
+            <textarea type="text" id="" class="border-[0.2vh] border-[#00000049] w-[50vh] rounded-[4px] h-[12vh] resize-none"
+            formControlName="description" [(ngModel)]="descripcion"></textarea>
+        </div>
         <div class="flex flex-col gap-y-1 mt-2">
             <label for="" class="text-[#434141]">Tipo de categoria</label>
             <select class="w-[30vh] h-[4vh] border-[0.2vh] border-[#00000049]" formControlName="category" [(ngModel)]="category">
@@ -63,5 +67,6 @@
         <div>
             <app-tabla (enviarProducts)="cargarProducts($event)" (actualizarProducto)="actualizarProduct($event)"></app-tabla>
         </div>
-        </section>        
+        </section>
+        
 </div>
