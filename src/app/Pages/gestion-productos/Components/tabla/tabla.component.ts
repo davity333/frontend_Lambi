@@ -11,14 +11,15 @@ import { stringify } from 'querystring';
 })
 export class TablaComponent implements OnInit {
   @Output() enviarId = new EventEmitter<string>();
-  @Output() enviarProducts = new EventEmitter<any[]>();
-
+  @Output() enviarProducts = new EventEmitter<Product[]>();
   products: Product[] = [];
 
   product: Product[] = [];
   indexProduct: number = 0;
   idProduct: number = 0;
-
+  emitirProducts(){
+    this.enviarProducts.emit(this.products);
+  }
   constructor(private productService:ProductsService) { }
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
@@ -36,18 +37,12 @@ export class TablaComponent implements OnInit {
     
   }
   @Output() actualizarProducto = new EventEmitter<{index: number, id: number}>
-
-  
-  
   actualizar(index: number, id: number): void {
     this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
     this.indexProduct = Number(index);
     this.idProduct = Number(id);
-
-  localStorage.setItem('productId',  this.idProduct.toString())
-  localStorage.setItem('indexProduct', this.indexProduct.toString());
+  this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
   alert("Actualizar en el producto: " + this.indexProduct);
-  
   this.enviarProducts.emit(this.products);
   }
 
@@ -56,14 +51,11 @@ export class TablaComponent implements OnInit {
 
         this.productService.deletedProduct(this.indexProduct).pipe(tap({
           next: (response) => {
-
             if(response){
               console.log('Producto eliminado con éxito');
             }else{
               console.log('Este producto no existe');
             }
-
-            console.log('Producto eliminado con éxito');
             this.ngOnInit();
           },
           error: (err) => {

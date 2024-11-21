@@ -18,7 +18,7 @@ export class DatosComponent implements OnInit{
   products:Product[]= [];
   categorias: Categoria[] = [];
   descripcion: string='descripcion';
-
+  productToUpdate: number = 0;
   fotos: File[] = [];
   fotosSeleccionadas: number = 0;
   fotosPreview: string[] = []; 
@@ -40,7 +40,19 @@ export class DatosComponent implements OnInit{
   idProducto:number = 0;
 
   actualizarProduct($event: {index: number, id: number}){
-    
+    console.log("Hola")
+    this.productToUpdate = $event.id;
+    this.indexProduct = $event.index;
+    console.log(this.indexProduct)
+    console.log(this.products)
+    this.nombre = this.products[this.indexProduct].name;
+    console.log(this.nombre)
+    this.cantidad = this.products[this.indexProduct].amount;
+    this.precio = this.products[this.indexProduct].price;
+    this.category = this.products[this.indexProduct].category;
+  }
+  cargarProducts($event: Product[]){
+    this.products = $event; 
   }
   recibirProducts($event: any){
       this.products = $event;
@@ -98,7 +110,16 @@ export class DatosComponent implements OnInit{
     this.fotosSeleccionadas = this.fotos.length;
   }
  updateProductWithoutImage(){
+    let productUpdate : ProductUpdate =
+     {
+      name:this.nombre,
+      amount:this.cantidad, 
+      price:this.precio, 
+      category:this.category,
+      description:this.descripcion
+    };
 
+    console.log("el objeto que voy a actualizar",productUpdate);  
  }
   agregarProducto(){
     const formData = new FormData();
