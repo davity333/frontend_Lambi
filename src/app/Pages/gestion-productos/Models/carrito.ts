@@ -1,7 +1,6 @@
-import { Productos } from "./product";
-
+import { Product } from "./product";
 export interface Carrito {
-    datos: Productos;
+    datos: Product;
     amountCantidad: number;
     standId: string | null;
     idproduct: number;

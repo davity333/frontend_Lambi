@@ -3,7 +3,7 @@ import { Input } from '@angular/core';
 import { OnInit, Output } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
-import { Productos } from '../../../gestion-productos/Models/product';
+import { Product} from '../../../gestion-productos/Models/product';
 import { CurrencyPipe } from '@angular/common';
 import { Sell } from '../Models/sell';
 import EventEmitter from 'events';
@@ -18,7 +18,7 @@ import { Carrito } from '../../../gestion-productos/Models/carrito';
 export class ProductstandComponent implements OnInit {
   @Input() standid: number=0;
   @Output() sellProduct: EventEmitter<any> = new EventEmitter<any>();
-  products:Productos[]=[];
+  products:Product[]=[];
   cantidadInput:number=0;
   idStand:number=0;
   idBuyer:number=0;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
-import { Productos } from '../../../gestion-productos/Models/product';
+import { Product } from '../../../gestion-productos/Models/product';
 @Component({
   selector: 'app-sectionviewstand',
   templateUrl: './sectionviewstand.component.html',
