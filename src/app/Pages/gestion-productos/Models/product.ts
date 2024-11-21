@@ -8,7 +8,13 @@ export interface Product {
     sellerid: number,
     idproduct: number
 }
-
+export interface ProductUpdate{ 
+    name?: string
+    description?: string
+    price?: number
+    amount?: number
+    category?: string
+}
 export interface ProductCarr {
     cantidad: number,
     Product: Product[];  

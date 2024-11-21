@@ -5,7 +5,7 @@ import { PuestoService } from '../../../agregar-puesto/Services/puesto.service';
 import { OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Categoria } from '../../../agregar-puesto/Models/estados';
 import { ProductsService } from '../../service/products.service';
-import { Product } from '../../Models/product';
+import { Product, ProductUpdate } from '../../Models/product';
 import { TablaComponent } from '../tabla/tabla.component';
 @Component({
   selector: 'app-datos',
@@ -18,7 +18,7 @@ export class DatosComponent implements OnInit{
   products:Product[]= [];
   categorias: Categoria[] = [];
   descripcion: string='descripcion';
-
+  productToUpdate: number = 0;
   fotos: File[] = [];
   fotosSeleccionadas: number = 0;
   fotosPreview: string[] = []; 
@@ -39,6 +39,21 @@ export class DatosComponent implements OnInit{
   idstand : number = 0;
   idProducto:number = 0;
 
+  actualizarProduct($event: {index: number, id: number}){
+    console.log("Hola")
+    this.productToUpdate = $event.id;
+    this.indexProduct = $event.index;
+    console.log(this.indexProduct)
+    console.log(this.products)
+    this.nombre = this.products[this.indexProduct].name;
+    console.log(this.nombre)
+    this.cantidad = this.products[this.indexProduct].amount;
+    this.precio = this.products[this.indexProduct].price;
+    this.category = this.products[this.indexProduct].category;
+  }
+  cargarProducts($event: Product[]){
+    this.products = $event; 
+  }
   recibirProducts($event: any){
       this.products = $event;
       const index = localStorage.getItem('indexProduct');
@@ -70,7 +85,6 @@ export class DatosComponent implements OnInit{
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    
     if (input.files) {
       for (let i = 0; i < input.files.length; i++) {
         const file = input.files[i];
@@ -90,16 +104,23 @@ export class DatosComponent implements OnInit{
 
   removeImage(image: string): void {
     this.fotosPreview = this.fotosPreview.filter(img => img !== image);
-    
-
     const fotosActualizadas = this.fotos.filter((img) => img.name !== image);
     this.fotos = fotosActualizadas;
-  
     this.fotos = fotosActualizadas;
     this.fotosSeleccionadas = this.fotos.length;
-
   }
+ updateProductWithoutImage(){
+    let productUpdate : ProductUpdate =
+     {
+      name:this.nombre,
+      amount:this.cantidad, 
+      price:this.precio, 
+      category:this.category,
+      description:this.descripcion
+    };
 
+    console.log("el objeto que voy a actualizar",productUpdate);  
+ }
   agregarProducto(){
     const formData = new FormData();
   
@@ -129,25 +150,20 @@ export class DatosComponent implements OnInit{
     })).subscribe()
   }
 
-  actualizarProducto(){
+//actualizarProductoWithoutImage(){
+    
+      //let productUpdate : ProductUpdate; 
+      //console.log("el objeto que voy a actualizar",productUpdate);
 
-      const objeto={
-          dataProdutc: this.productForm.value,
-          description: this.descripcion,
-          image: this.fotos,
-      }
-
-      console.log("el objeto que voy a actualizar",objeto);
-
-      this.productService.updateProduct(objeto).pipe(tap({
-        next: (response) => {
-          console.log(response);
-          alert("Producto actualizado con éxito");
-        },
-        error: (err) => {
-          console.error('Error al actualizar el producto', err);
-          alert("Ha ocurrido un error al actualizar el producto");
-        }
-      })).subscribe()
-  }
+     // this.productService.updateProduct(productUpdate).pipe(tap({
+     //   next: (response) => {
+       //   console.log(response);
+//          alert("Producto actualizado con éxito");
+       // },
+       // error: (err) => {
+//          console.error('Error al actualizar el producto', err);
+  //        alert("Ha ocurrido un error al actualizar el producto");
+    //    }
+      //})).subscribe()
+  //}
 }
