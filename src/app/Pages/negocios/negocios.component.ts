@@ -12,6 +12,8 @@ export class NegociosComponent {
   idSeller = 0
   status = true
   stands:any[] = [];
+  isLoading = true;
+
   constructor(private standByClientService: StandByClientService, private router : Router){}
   ngOnInit(): void {
     const storedSeller = localStorage.getItem('seller');
@@ -20,11 +22,15 @@ export class NegociosComponent {
       next: (response) => {
         if(response == false) {
           this.status = false;
+    
         }
         console.log( "OK",response);
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error getting stands', err);
+        this.isLoading = false;
+    
       }
     })).subscribe( data => {
       this.stands = data;
@@ -32,6 +38,7 @@ export class NegociosComponent {
         this.receiveIdStand(this.stands[0].idstand);
       }
       console.log(this.stands);
+
     }
     )
     

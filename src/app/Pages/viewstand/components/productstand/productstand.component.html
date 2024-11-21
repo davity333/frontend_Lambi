@@ -1,4 +1,6 @@
 <section class="flex mx-auto gap-4 flex-col w-full">
+  <app-modal-view *ngIf="statusModalModal" [product]="productToSend" (statusModalClose)="closeModal($event)"></app-modal-view>
+ 
   <h1 class="text-4xl font-semibold">Productos y servicios</h1>
   <p class="text-xl">Encuentra la variedad de productos y servicios diseñados para satisfacer tus necesidades</p>
   
@@ -6,12 +8,12 @@
 
     <div 
       class="flex bg-[#ffffff] xl:h-[60vh] h-24 gap-0 shadow-md flex-row xl:flex-col xl:w-[22%] w-full"
-      *ngFor="let object of products; let i = index"
-    >
+      *ngFor="let object of products; let i = index">
+      
       <img 
         class="w-full h-full xl:w-[50vh] xl:h-[30vh] object-cover" 
         src="https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_s3/image/HF_Y24_R16_W24_ES_ESSGPB21283-2_Main_high-97359b19.jpg" 
-        alt="Producto"
+        alt="Producto" (click)="openModal(object)"
       >
       
       <div class="flex flex-col gap-2 p-2 w-full">

@@ -1,5 +1,5 @@
 <div class="min-h-screen relative" id="fondo">
-
+    <app-loader *ngIf="isLoading"></app-loader>
     <img src="./assets/logo.png" alt="logo" 
         class="h-[7vh] transition-all duration-150 hover:h-20 hover:cursor-pointer absolute  left-4" 
         title="Home" id="logo" [routerLink]="['/']">

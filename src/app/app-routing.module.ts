@@ -16,6 +16,7 @@ import { RegisterSellerComponent } from './Pages/registerSeller/components/regis
 import { LoginSellerComponent } from './Pages/loginSeller/components/login-seller/login-seller.component';
 import { ProductsComponent } from './Pages/products/products.component';
 import { PaymentComponent } from './Pages/payment/payment.component';
+import { ModalViewComponent } from './Pages/products/Components/modal-view/modal-view.component';
 const routes: Routes = [
   {path: '', component:RolComponent},
   {path:'home', component:HomeComponent},
@@ -36,7 +37,9 @@ const routes: Routes = [
   {path: 'rol', component: RolComponent},
 
 
-  {path: 'payment', component:PaymentComponent}
+  {path: 'payment', component:PaymentComponent},
+
+  {path: 'productModal', component: ModalViewComponent}
 ];
 
 @NgModule({

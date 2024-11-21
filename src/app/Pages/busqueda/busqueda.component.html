@@ -1,5 +1,6 @@
 <app-header></app-header>
-<section class="flex justify-center mt-16">
+<app-loader *ngIf="isLoading"></app-loader>
+<section class="flex justify-center mt-16" *ngIf="!isLoading" >
     <div class="w-full max-w-4xl">
         <div>
             <p id="titulo" class="text-3xl text-[#796767]">Búsqueda</p>
