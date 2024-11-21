@@ -117,7 +117,8 @@ export class DatosComponent implements OnInit{
       
       formData.append('image', file, file.name); 
     });
-
+    
+    console.log("el formdata a enviar",formData)
     this.productService.addProduct(formData).pipe(tap({
       next: (response) => {
         console.log(response);

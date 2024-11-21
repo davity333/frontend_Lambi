@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   users: FormGroup;
-  alerta:boolean = false;
+  alertaNegacion:boolean = false;
+  alertaAfirmacion: boolean = false;
   mensajeAlerta:string='';
 
   constructor(private user: createSellerUsersService, private navegar: Router) {
@@ -45,9 +46,12 @@ export class LoginComponent {
             if (token) {
               localStorage.setItem('token', token);
               
-              alert("Usuario encontrado con éxito");
+              this.alertaAfirmacion = true;
+              this.mensajeAlerta = "Bienvenido usuario"
               console.log("Token almacenado:", token);
-              this.navegar.navigate(['/home'])
+              setTimeout(() => {
+                this.navegar.navigate(['/home'])
+              }, 2000);
             } else {
               console.error("Token no encontrado en el encabezado Authorization");
             }
@@ -58,13 +62,17 @@ export class LoginComponent {
         error: (err) => {
           console.error('Error durante el login:', err);
           if (err.status === 404) {
-            alert("Email no encontrado");
+
+            this.alertaNegacion = true;
+            this.mensajeAlerta = "Email no encontrado";
           } else if (err.status === 401) {
-            alert("Contraseña incorrecta");
+            this.alertaNegacion = true;
+            this.mensajeAlerta = "Contrasela incorrecta";
           } else if (err.status === 422) {
-            alert("Error de validación");
+            this.alertaNegacion = true;
+            this.mensajeAlerta = "Error en validación";
           } else {
-            this.alerta = true;
+            this.alertaNegacion = true;
             this.mensajeAlerta = "Error inesperado";
 
           }

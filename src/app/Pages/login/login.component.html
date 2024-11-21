@@ -6,7 +6,8 @@
 
     <div class="flex items-center justify-center min-h-screen">
         <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 sm:w-96" [formGroup]="users">
-            <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center top-10 sm:top-16">
+            <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center 
+            top-10 sm:top-[3vh] md:top-[3vh] lg:top-[4vh]  xl:top-[4vh] 2xl:top-[4vh]">
                 <img src="./assets/logosolo.png" class="h-16 sm:h-20" alt="Logotipo">
             </div>
             <p class="text-2xl font-semibold p-5 mt-5">Iniciar sesión</p>
@@ -65,7 +66,10 @@
             </button>
         </form>
     </div>
-    <div *ngIf="alerta">
+    <div *ngIf="alertaNegacion">
     <app-negation [mensaje]="mensajeAlerta"></app-negation>
     </div>
+    <div *ngIf="alertaAfirmacion">
+        <app-confirmation [mensaje]="mensajeAlerta"></app-confirmation>
+        </div>
 </div>
