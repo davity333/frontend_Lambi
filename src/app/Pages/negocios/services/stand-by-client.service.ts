@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Productos } from '../../gestion-productos/Models/product';
+import { Product } from '../../gestion-productos/Models/product';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -15,15 +15,18 @@ export class StandByClientService {
     return this.http.get<any>(`${this.url}api/stand/seller/${standById}`);
   }
   getStandByClient(standId: number) {
-    return this.http.get<any>(`${this.url}api/stand/${standId}`);
+    return this.http.get<any>(`${this.url}api/standWithRating/${standId}`);
   }
   addRating(idBuyer:number, idStand:number, starss:number): Observable<any> {
     return this.http.post<any>(`${this.url}api/rate`,{idstand:idStand,idbuyer:idBuyer,stars:starss})
   }
 
-  getProductsStand(staindId: number): Observable<Productos[]> {
+  getProductsStand(staindId: number): Observable<Product[]> {
       let url = `http://52.72.44.45:8000/api/productsWithStandId/${staindId}`;
-      return this.http.get<Productos[]>(url);
+      return this.http.get<Product[]>(url);
+  }
+  updateRatingStand(idStand: number,idBuyer: number, rating: number): Observable<any> {
+    return this.http.put<any>(`${this.url}api/rate?idstand=${idStand}&idbuyer=${idBuyer}`, {stars: rating});
   }
 
 }

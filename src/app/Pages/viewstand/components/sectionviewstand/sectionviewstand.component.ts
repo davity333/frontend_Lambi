@@ -44,7 +44,7 @@ export class SectionviewstandComponent {
     })).subscribe(
       data => {
         this.standClient = data;
-        console.log(this.standClient);
+        console.log("standClient",this.standClient);
       }
     )
 
@@ -64,8 +64,15 @@ export class SectionviewstandComponent {
     this.currentImageIndex =
       (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
-  rating() {
-    this.isLoading = true;
+  rating(){
+    if(this.standClient.rating == null){
+      this.addRating()  
+    }else{
+      this.updateRatingStand()
+    }
+  }
+
+  addRating() {
     if (this.stars === 0) {
       this.stars = 5;
     }
@@ -91,6 +98,21 @@ export class SectionviewstandComponent {
   updateStars(starIndex: number): void {
     this.stars = starIndex + 1; 
   }
- 
+
+  updateRatingStand(){
+    this.standByClient.updateRatingStand(this.idstand, this.idBuyer, this.stars).pipe(
+      tap({
+        next: (response) => {
+          alert("Rating enviando exitosamente!")
+          console.log("Rating enviado correctamente", response);
+        },
+        error: (err) => {
+          console.error('Error al calificar el stand', err);
+        }
+      })
+    ).subscribe();
+
+  }
+
 
 }

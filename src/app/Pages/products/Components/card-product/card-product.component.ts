@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { Productos } from '../../../gestion-productos/Models/product';
+import { Product } from '../../../gestion-productos/Models/product';
 import { Categoria } from '../../../agregar-puesto/Models/estados';
 import { PuestoService } from '../../../agregar-puesto/Services/puesto.service';
 import { OnInit } from '@angular/core';
