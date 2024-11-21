@@ -14,6 +14,9 @@ export class SectionviewstandComponent {
   idSeller = 0
   status = true
   stars = 0
+  statusModalModal:boolean = false;
+  isLoading = true;
+  isError = false;
   constructor(private standByClient : StandByClientService){}
 
   ngOnInit(){
@@ -28,12 +31,16 @@ export class SectionviewstandComponent {
     if(this.idSeller > 0) {
         this.status = false
     }
+    this.isLoading = false;
     this.standByClient.getStandByClient(this.idstand).pipe(tap({
       next: (response) => {
         console.log( "OK",response);
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error getting stand', err);
+        this.isLoading = false;
+        this.isError = true;
       }
     })).subscribe(
       data => {
@@ -59,7 +66,7 @@ export class SectionviewstandComponent {
       (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
   rating() {
-    alert(`${this.idBuyer}, ${this.idstand}, ${this.stars}`)
+    this.isLoading = true;
     if (this.stars === 0) {
       this.stars = 5;
     }
@@ -68,9 +75,11 @@ export class SectionviewstandComponent {
         next: (response) => {
           alert("Rating enviando exitosamente!")
           console.log("Rating enviado correctamente", response);
+          this.isLoading = false;
         },
         error: (err) => {
           console.error('Error al calificar el stand', err);
+          this.isLoading = false;
         }
       })
     ).subscribe();
@@ -82,8 +91,7 @@ export class SectionviewstandComponent {
   
   updateStars(starIndex: number): void {
     this.stars = starIndex + 1; 
-    console.log("Nuevo rating:", this.stars);
   }
-  
+ 
 
 }

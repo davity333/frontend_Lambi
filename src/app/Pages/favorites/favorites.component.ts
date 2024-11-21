@@ -15,17 +15,21 @@ export class FavoritesComponent {
   userLatitude: number | null = null;
   userLongitude: number | null = null;
   closestLocations: any[] = [];
+  isLoading = true;
   constructor(private categoryService: CategoryService, private route : Router){}
   ngOnInit(): void {
     const Idbuyer = localStorage.getItem('buyer');
     this.idbuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
     this.getUserLocation();
+
     this.categoryService.getFavorites(this.idbuyer).pipe(tap({
       next: (response) => {
-        console.log(response);
+          console.log(response);
+          this.isLoading = false;
       },
       error: (response) => {
         console.log(response);
+        this.isLoading = false;
       }
     })).subscribe(
       data => {

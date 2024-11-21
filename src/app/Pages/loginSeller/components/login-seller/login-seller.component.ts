@@ -13,6 +13,7 @@ import { NegationComponent } from '../../../Alerts/negation/negation.component';
 export class LoginSellerComponent {
   userSeller: FormGroup;
   mensajeAlerta:string ='';
+  isLoading = true;
   constructor(private usersService: createSellerUsersService, private router: Router){
     this.userSeller = new FormGroup({
       e_mail: new FormControl('', [Validators.email]),
@@ -22,7 +23,8 @@ export class LoginSellerComponent {
   
   alerta:boolean = false;
 
-  ngOnInit(){
+    ngOnInit(){
+      this.isLoading = false;
 
   }
   loginSeller() {
@@ -33,7 +35,7 @@ export class LoginSellerComponent {
     };
   
     console.log("Datos que se van a enviar:", userLogin);
-  
+    this.isLoading = true;
     this.usersService.loginSeller(userLogin).pipe(
       tap({
         next: (response) => {
@@ -60,6 +62,7 @@ export class LoginSellerComponent {
           } else {
             console.error("Encabezado Authorization no encontrado o vacío en la respuesta");
           }
+          this.isLoading = false;
         },
         error: (err) => {
           console.error('Error durante el login:', err);
@@ -73,6 +76,7 @@ export class LoginSellerComponent {
           } else {
             alert("Error inesperado");
           }
+          this.isLoading = false;
         }
       })
     ).subscribe();

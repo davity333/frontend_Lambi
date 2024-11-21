@@ -1,4 +1,5 @@
-<div class="flex items-center justify-center text-center space-x-16 p-7">
+<app-loader *ngIf="isLoading"></app-loader>
+<div class="flex items-center justify-center text-center space-x-16 p-7" *ngIf="!isLoading">
     <hr class="w-[50vh] border-[0.2vh] border-[#00000043]">
     <p id="titulo" class="text-[#796767] text-[4vh]">Encuentra puestos que ofrezcan</p>
     <hr class="w-[50vh] border-[0.2vh] border-[#00000043]">
