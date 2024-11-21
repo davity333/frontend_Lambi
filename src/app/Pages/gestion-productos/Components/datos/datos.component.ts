@@ -43,28 +43,18 @@ export class DatosComponent implements OnInit{
     console.log("Hola")
     this.productToUpdate = $event.id;
     this.indexProduct = $event.index;
-    console.log(this.indexProduct)
-    console.log(this.products)
     this.nombre = this.products[this.indexProduct].name;
-    console.log(this.nombre)
     this.cantidad = this.products[this.indexProduct].amount;
     this.precio = this.products[this.indexProduct].price;
     this.category = this.products[this.indexProduct].category;
   }
   cargarProducts($event: Product[]){
     this.products = $event; 
+    this.nombre = this.products[this.indexProduct].name
+    this.cantidad = this.products[this.indexProduct].amount
+    this.precio = this.products[this.indexProduct].price
+    this.category = this.products[this.indexProduct].category
   }
-  recibirProducts($event: any){
-      this.products = $event;
-      const index = localStorage.getItem('indexProduct');
-      this.indexProduct = Number(index);
-
-      console.log("el nombre cambiado es",this.nombre)
-      this.nombre = this.products[this.indexProduct].name
-      this.cantidad = this.products[this.indexProduct].amount
-      this.precio = this.products[this.indexProduct].price
-      this.category = this.products[this.indexProduct].category
-    }
     
     ngOnInit(): void {
       const storedSeller = localStorage.getItem('standId');

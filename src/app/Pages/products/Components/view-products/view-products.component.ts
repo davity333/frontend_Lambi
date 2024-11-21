@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ProductsService } from '../../../gestion-productos/service/products.service';
 import { tap } from 'rxjs';
-import { Productos } from '../../../gestion-productos/Models/product';
+import { Product } from '../../../gestion-productos/Models/product';
 import { PuestoService } from '../../../agregar-puesto/Services/puesto.service';
 import { Categoria } from '../../../agregar-puesto/Models/estados';
 @Component({
@@ -13,7 +13,7 @@ import { Categoria } from '../../../agregar-puesto/Models/estados';
 export class ViewProductsComponent implements OnInit {
 
   constructor(private productService: ProductsService, private puestoService:PuestoService){}
-  products:Productos[]= [];
+  products:Product[]= [];
 
   ngOnInit():void {
     this.productService.getProducts().pipe(tap({
