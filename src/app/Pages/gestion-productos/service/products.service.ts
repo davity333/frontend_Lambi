@@ -33,8 +33,11 @@ export class ProductsService {
   }
 
   deletedProduct(id: number): Observable<any>{
-    let url = `http://52.72.44.45:8000/api/products?product_id=${id}`;
-    return this.httpClient.delete<any>(url);
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/products?product_id=${id}`;
+    return this.httpClient.delete<any>(url, {headers});
   }
 
   getProductId(index: number): Observable<Product[]> {
