@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl,ReactiveFormsModule,FormGroup } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RouterModule } from '@angular/router';
 import { NgxToastNotifierModule } from 'ngx-toast-notifier';
 import { NegociosComponent } from './Pages/negocios/negocios.component';
 import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
@@ -50,6 +50,10 @@ import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogati
 import { ModalComponent } from './Pages/viewstand/components/modal/modal.component';
 
 import { PaymentComponent } from './Pages/payment/payment.component';
+import { ModalViewComponent } from './Pages/products/Components/modal-view/modal-view.component';
+import { FavoriteByBuyerComponent } from './Pages/agregar-puesto/Components/favorite-by-buyer/favorite-by-buyer.component';
+import { LoaderComponent } from './loader/loader.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 @NgModule({
@@ -90,6 +94,10 @@ import { PaymentComponent } from './Pages/payment/payment.component';
     InterrogationComponent,
     ModalComponent,
     PaymentComponent,
+    ModalViewComponent,
+    FavoriteByBuyerComponent,
+    LoaderComponent,
+    ErrorPageComponent,
   ],
   
   imports: [
@@ -100,6 +108,7 @@ import { PaymentComponent } from './Pages/payment/payment.component';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
+    RouterModule,
     NgxToastNotifierModule.forRoot()
   ],
   exports: [

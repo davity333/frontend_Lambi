@@ -10,16 +10,20 @@ import { tap } from 'rxjs';
 
 
 export class SugerenciasComponent implements OnInit {
+  isLoading = true;
   stands: any[] = [];
   constructor(private categoryService: CategoryService){}
   ngOnInit(): void {
+
   this.categoryService.getStands().pipe(tap({
     next: (response) => {
       console.log('Estandar:', response);
       // TODO: Implement your logic here to display the stands.
+      this.isLoading = false;
     },
     error: (response) => {
       console.log('Error:', response);
+      this.isLoading = false;
     }
   })).subscribe(data => this.stands = data);
   }

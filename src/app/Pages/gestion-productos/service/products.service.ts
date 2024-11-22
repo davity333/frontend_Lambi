@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product, ProductCarr } from '../Models/product';
+import { Product, ProductCarr, ProductUpdate } from '../Models/product';
+import { HttpHeaders } from '@angular/common/http';
+import { BlobOptions } from 'buffer';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,20 +24,27 @@ export class ProductsService {
     return this.httpClient.post<any>(url, producto);
   }
 
-  updateProduct(producto: any): Observable<any>{
-    let url = `http://52.72.44.45:8000/api/products/${producto}`;
-    return this.httpClient.put<any>(url, producto);
+  updateProduct( id: number, producto: ProductUpdate): Observable<Product | boolean>{
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/products/${id}`;
+    return this.httpClient.put<Product | boolean>(url, producto, {headers});
   }
 
   deletedProduct(id: number): Observable<any>{
-    let url = `http://52.72.44.45:8000/api/products?product_id=${id}`;
-    return this.httpClient.delete<any>(url);
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/products?product_id=${id}`;
+    return this.httpClient.delete<any>(url, {headers});
   }
 
   getProductId(index: number): Observable<Product[]> {
     let url = `http://52.72.44.45:8000/api/productsWithStandId/${index}`;
     return this.httpClient.get<Product[]>(url);
   }
+
 
   getCar(): Carrito[] {  
     return this.carrito;

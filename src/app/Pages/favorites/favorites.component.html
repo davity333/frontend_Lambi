@@ -1,6 +1,7 @@
 <app-header></app-header>
-<div>
-<section class="flex justify-center mt-16 ">
+<app-loader *ngIf="isLoading"></app-loader>
+<div *ngIf="!isLoading">
+<section class="flex justify-center mt-16">
     <div class="w-full max-w-7xl border-2 border-black">
         <div>
             <p id="titulo" class="text-3xl text-[#796767]">Favoritos</p>
@@ -28,7 +29,7 @@
             <p class="text-[#6E6666] mb-7 text-center text-[2.2vh]">Busqueda: {{textoBuscador}}</p>
             
             <div class="flex justify-between flex-wrap" >
-                <app-cards *ngFor="let item of closestLocations" [stand]="item" (idStand)="receiveIdStand($event)"></app-cards>
+                <app-favorite-by-buyer *ngFor="let item of closestLocations" [stand]="item" (idStand)="receiveIdStand($event)"></app-favorite-by-buyer>
             </div>
         </div>
 

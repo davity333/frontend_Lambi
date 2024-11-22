@@ -36,8 +36,11 @@ export class PuestoService {
   
 
   agregarPuesto(puesto: any): Observable<any>{
-    let url = "http://52.72.44.45:8000/api/stand";
-    return this.httpClient.post<any>(url, puesto);
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = "http://52.72.44.45:8000/api/protected/stand";
+    return this.httpClient.post<any>(url, puesto, {headers});
   }
 
 

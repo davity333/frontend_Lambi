@@ -7,6 +7,7 @@ import { Categoria } from '../../../agregar-puesto/Models/estados';
 import { ProductsService } from '../../service/products.service';
 import { Product, ProductUpdate } from '../../Models/product';
 import { TablaComponent } from '../tabla/tabla.component';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-datos',
   templateUrl: './datos.component.html',
@@ -17,7 +18,6 @@ export class DatosComponent implements OnInit{
   indexProduct: number=0;
   products:Product[]= [];
   categorias: Categoria[] = [];
-  descripcion: string='descripcion';
   productToUpdate: number = 0;
   fotos: File[] = [];
   fotosSeleccionadas: number = 0;
@@ -30,6 +30,7 @@ export class DatosComponent implements OnInit{
       category: new FormControl('', [Validators.required]),
       amount: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required])
     });
   }
 
@@ -39,33 +40,24 @@ export class DatosComponent implements OnInit{
   category:string ='';
   idstand : number = 0;
   idProducto:number = 0;
-
+  descripcion: string = '';
   actualizarProduct($event: {index: number, id: number}){
     console.log("Hola")
     this.productToUpdate = $event.id;
     this.indexProduct = $event.index;
-    console.log(this.indexProduct)
-    console.log(this.products)
     this.nombre = this.products[this.indexProduct].name;
-    console.log(this.nombre)
     this.cantidad = this.products[this.indexProduct].amount;
     this.precio = this.products[this.indexProduct].price;
     this.category = this.products[this.indexProduct].category;
   }
   cargarProducts($event: Product[]){
     this.products = $event; 
+    this.nombre = this.products[this.indexProduct].name
+    this.cantidad = this.products[this.indexProduct].amount
+    this.precio = this.products[this.indexProduct].price
+    this.category = this.products[this.indexProduct].category
+    this.descripcion = this.products[this.indexProduct].description;
   }
-  recibirProducts($event: any){
-      this.products = $event;
-      const index = localStorage.getItem('indexProduct');
-      this.indexProduct = Number(index);
-
-      console.log("el nombre cambiado es",this.nombre)
-      this.nombre = this.products[this.indexProduct].name
-      this.cantidad = this.products[this.indexProduct].amount
-      this.precio = this.products[this.indexProduct].price
-      this.category = this.products[this.indexProduct].category
-    }
     
     ngOnInit(): void {
       const storedSeller = localStorage.getItem('standId');
@@ -79,9 +71,6 @@ export class DatosComponent implements OnInit{
         console.error('Error al obtener las categorias', err);
       }
     })).subscribe();
-
-    
-
   }
 
   onFileSelected(event: Event): void {
@@ -114,17 +103,27 @@ export class DatosComponent implements OnInit{
 
     let productUpdate : ProductUpdate =
      {
-      name:this.nombre,
-      amount:this.cantidad, 
-      price:this.precio, 
-      category:this.category,
-      description:this.descripcion
+      name:this.productForm.value.name,
+      amount:this.productForm.value.amount, 
+      price:this.productForm.value.price, 
+      category:this.productForm.value.category,
+      description:this.productForm.value.description
     };
-     
-    console.log("el objeto que voy a actualizar",productUpdate);  
- }
- updateImageOfProduct(){
- 
+    console.log("el objeto que voy a actualizar",productUpdate, this.productToUpdate);  
+    this.productService.updateProduct(this.productToUpdate, productUpdate).pipe(tap({
+    next: (response) => {
+      console.log("hola")
+      if(response == false){
+        alert("Error al actualizar")
+      }else{
+        alert("Producto actualizado con éxito");
+      }
+    },
+    error: (err) => {
+      alert("Ha ocurrido un error al actualizar el producto"+JSON.stringify(err));
+
+    }
+    })).subscribe()
  }
   agregarProducto(){
     const formData = new FormData();
@@ -134,7 +133,7 @@ export class DatosComponent implements OnInit{
     formData.append('amount', this.productForm.get('amount')?.value);
     formData.append('price', this.productForm.get('price')?.value);
     formData.append('standid', this.idstand.toString())
-    formData.append('description', this.descripcion)
+    formData.append('description', this.productForm.value.description)
     this.fotos.forEach(file => {
       console.log("Se ha agregado");
       

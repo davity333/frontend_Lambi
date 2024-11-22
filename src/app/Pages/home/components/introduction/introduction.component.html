@@ -9,7 +9,7 @@
                     los vendedores publican.
                 </p>
 
-                <div class="flex flex-col sm:flex-row items-center">
+                <div class="flex flex-col sm:flex-row items-center" id="buscador" [formGroup]="form">
                     <div class="flex w-full sm:w-auto">
                         <div class="flex w-10 items-center justify-center rounded-tl-lg rounded-bl-lg border-r border-gray-200 bg-white p-5 border-2 border-[#0000002c]">
                             <svg viewBox="0 0 20 20" aria-hidden="true" class="pointer-events-none absolute w-5 fill-gray-500 transition">
@@ -17,10 +17,10 @@
                             </svg>
                         </div>
                         <input type="text" class="w-full max-w-[40vh] bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-2 border-[#0000002c]" 
-                        placeholder="Buscar puesto" id="search-input">
+                        placeholder="Buscar puesto" id="search-input" formControlName="search">
                     </div>
                     <input type="button" value="Buscar" class="bg-[#E4C246] p-2 mt-2 sm:mt-0 sm:ml-2 rounded-lg text-white font-semibold px-10 hover:bg-[#bea23c] transition-colors w-full sm:w-auto cursor-pointer"
-                     [routerLink]="('/busqueda')">
+                     (click)="onSubmit()">
                 </div>
             </div>
             

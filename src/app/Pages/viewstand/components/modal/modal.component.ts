@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { EventEmitter, Output } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { OnInit } from '@angular/core';
-import { Carrito, Productos, ProductsService } from '../../../gestion-productos/service/products.service';
+import { Carrito } from '../../../gestion-productos/Models/carrito';
+import { ProductsService } from '../../../gestion-productos/service/products.service';
 import { tap } from 'rxjs';
-import { Product, ProductCarr } from '../../../gestion-productos/Models/product';
 import { Sell } from '../Models/sell';
 @Component({
   selector: 'app-modal',

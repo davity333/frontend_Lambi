@@ -13,6 +13,8 @@ export class TablaComponent implements OnInit {
   @Output() enviarId = new EventEmitter<string>();
   @Output() enviarProducts = new EventEmitter<Product[]>();
   products: Product[] = [];
+
+  product: Product[] = [];
   indexProduct: number = 0;
   idProduct: number = 0;
   emitirProducts(){
@@ -36,6 +38,7 @@ export class TablaComponent implements OnInit {
   }
   @Output() actualizarProducto = new EventEmitter<{index: number, id: number}>
   actualizar(index: number, id: number): void {
+    this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
     this.indexProduct = Number(index);
     this.idProduct = Number(id);
   this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
@@ -60,5 +63,6 @@ export class TablaComponent implements OnInit {
           }
         })).subscribe()
   }
-  
+
 }
+

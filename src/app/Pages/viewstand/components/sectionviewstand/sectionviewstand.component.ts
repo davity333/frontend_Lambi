@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
-import { Product } from '../../../gestion-productos/Models/product';
 @Component({
   selector: 'app-sectionviewstand',
   templateUrl: './sectionviewstand.component.html',
@@ -13,7 +12,10 @@ export class SectionviewstandComponent {
   standClient: any;
   idSeller = 0
   status = true
-  stars =0
+  stars = 0
+  statusModalModal:boolean = false;
+  isLoading = true;
+  isError = false;
   constructor(private standByClient : StandByClientService){}
 
   ngOnInit(){
@@ -28,17 +30,21 @@ export class SectionviewstandComponent {
     if(this.idSeller > 0) {
         this.status = false
     }
+    this.isLoading = false;
     this.standByClient.getStandByClient(this.idstand).pipe(tap({
       next: (response) => {
         console.log( "OK",response);
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error getting stand', err);
+        this.isLoading = false;
+        this.isError = true;
       }
     })).subscribe(
       data => {
         this.standClient = data;
-        console.log(this.standClient);
+        console.log("standClient",this.standClient);
       }
     )
 
@@ -58,8 +64,15 @@ export class SectionviewstandComponent {
     this.currentImageIndex =
       (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
-  rating() {
-    alert(`${this.idBuyer}, ${this.idstand}, ${this.stars}`)
+  rating(){
+    if(this.standClient.rating == null){
+      this.addRating()  
+    }else{
+      this.updateRatingStand()
+    }
+  }
+
+  addRating() {
     if (this.stars === 0) {
       this.stars = 5;
     }
@@ -68,9 +81,11 @@ export class SectionviewstandComponent {
         next: (response) => {
           alert("Rating enviando exitosamente!")
           console.log("Rating enviado correctamente", response);
+          this.isLoading = false;
         },
         error: (err) => {
           console.error('Error al calificar el stand', err);
+          this.isLoading = false;
         }
       })
     ).subscribe();
@@ -82,8 +97,22 @@ export class SectionviewstandComponent {
   
   updateStars(starIndex: number): void {
     this.stars = starIndex + 1; 
-    console.log("Nuevo rating:", this.stars);
   }
-  
+
+  updateRatingStand(){
+    this.standByClient.updateRatingStand(this.idstand, this.idBuyer, this.stars).pipe(
+      tap({
+        next: (response) => {
+          alert("Rating enviando exitosamente!")
+          console.log("Rating enviado correctamente", response);
+        },
+        error: (err) => {
+          console.error('Error al calificar el stand', err);
+        }
+      })
+    ).subscribe();
+
+  }
+
 
 }
