@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ProductsService } from '../../../gestion-productos/service/products.service';
 import { tap } from 'rxjs';
-import { Product } from '../../../gestion-productos/Models/product';
+import { Product} from '../../../gestion-productos/Models/product';
 import { PuestoService } from '../../../agregar-puesto/Services/puesto.service';
 import { Categoria } from '../../../agregar-puesto/Models/estados';
 @Component({
