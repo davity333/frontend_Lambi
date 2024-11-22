@@ -22,7 +22,8 @@ export class DatosComponent implements OnInit{
   fotos: File[] = [];
   fotosSeleccionadas: number = 0;
   fotosPreview: string[] = []; 
-
+  imagesToShow: string[] = []; 
+  updateOrNot : boolean = false; 
   constructor(private puesto: PuestoService, private productService: ProductsService){
     this.productForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -110,6 +111,7 @@ export class DatosComponent implements OnInit{
     this.fotosSeleccionadas = this.fotos.length;
   }
  updateProductWithoutImage(){
+
     let productUpdate : ProductUpdate =
      {
       name:this.nombre,
@@ -118,8 +120,11 @@ export class DatosComponent implements OnInit{
       category:this.category,
       description:this.descripcion
     };
-
+     
     console.log("el objeto que voy a actualizar",productUpdate);  
+ }
+ updateImageOfProduct(){
+ 
  }
   agregarProducto(){
     const formData = new FormData();
