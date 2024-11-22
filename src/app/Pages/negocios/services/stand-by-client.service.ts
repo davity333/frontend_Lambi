@@ -15,7 +15,7 @@ export class StandByClientService {
     return this.http.get<any>(`${this.url}api/stand/seller/${standById}`);
   }
   getStandByClient(standId: number) {
-    return this.http.get<any>(`${this.url}api/stand/${standId}`);
+    return this.http.get<any>(`${this.url}api/standWithRating/${standId}`);
   }
   addRating(idBuyer:number, idStand:number, starss:number): Observable<any> {
     return this.http.post<any>(`${this.url}api/rate`,{idstand:idStand,idbuyer:idBuyer,stars:starss})
@@ -25,5 +25,9 @@ export class StandByClientService {
       let url = `http://52.72.44.45:8000/api/productsWithStandId/${staindId}`;
       return this.http.get<Product[]>(url);
   }
+  updateRatingStand(idStand: number,idBuyer: number, rating: number): Observable<any> {
+    return this.http.put<any>(`${this.url}api/rate?idstand=${idStand}&idbuyer=${idBuyer}`, {stars: rating});
+  }
+  }
 
-}
+

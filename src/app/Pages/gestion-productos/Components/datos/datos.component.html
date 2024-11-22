@@ -1,67 +1,67 @@
 <div class="flex justify-center">
     <section class="flex justify-between gap-28 mt-16"> 
-    <form [formGroup]="productForm">
-    <p id="titulo" class="text-[3.5vh]">Gestion de productos</p>
-    <p>Añade, actualiza y elimina tus productos en esta sección</p>
-    
-    <div class="flex flex-col gap-y-1 mt-2">
-        <label for="" class="text-[#434141]">Nombre del producto</label>
-        <input type="text" name="" id="" class="border-[0.2vh] border-[#00000049] w-[50vh] rounded-[4px] h-[4vh]"
-        formControlName="name" [(ngModel)]="nombre">
-    </div>
-    
-    <div class="flex flex-col gap-y-1 mt-2">
-        <label for="" class="text-[#434141]">Tipo de categoria</label>
-        <select class="w-[30vh] h-[4vh] border-[0.2vh] border-[#00000049]" formControlName="category" [(ngModel)]="category">
-            <option value="">Selecciona una categoria</option>
-            <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of categorias" [value]="object.idcategory">
-                {{object.category}}
-            </option>
-        </select>
-    </div>
-    
-    <div class="flex flex-col gap-y-1 mt-2">
-        <label for="" class="text-[#434141]">Cantidad del producto</label>
-        <input type="number" name="" id="" class="border-[0.2vh] border-[#00000049] w-[20vh] rounded-[4px] h-[4vh]" 
-        formControlName="amount" [(ngModel)]="cantidad">
-    </div>
-    
-    <div class="flex flex-col gap-y-1 mt-2">
-        <label for="" class="text-[#434141]">Precio</label>
-        <input type="number" name="" id="" class="border-[0.2vh] border-[#00000049] w-[20vh] rounded-[4px] h-[4vh]" 
-        formControlName="price" [(ngModel)]="precio">
-    </div>
-    
-    <div class="flex flex-col mt-2">
+        <form [formGroup]="productForm">
+        <p id="titulo" class="text-[3.5vh]">Gestion de productos</p>
+        <p>Añade, actualiza y elimina tus productos en esta sección</p>
+        
+        <div class="flex flex-col gap-y-1 mt-2">
+            <label for="" class="text-[#434141]">Nombre del producto</label>
+            <input type="text" name="" id="" class="border-[0.2vh] border-[#00000049] w-[50vh] rounded-[4px] h-[4vh]"
+            formControlName="name" [(ngModel)]="nombre">
+        </div>
+        
+        <div class="flex flex-col gap-y-1 mt-2">
+            <label for="" class="text-[#434141]">Tipo de categoria</label>
+            <select class="w-[30vh] h-[4vh] border-[0.2vh] border-[#00000049]" formControlName="category" [(ngModel)]="category">
+                <option value="">Selecciona una categoria</option>
+                <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of categorias" [value]="object.idcategory">
+                    {{object.category}}
+                </option>
+            </select>
+        </div>
+        
+        <div class="flex flex-col gap-y-1 mt-2">
+            <label for="" class="text-[#434141]">Cantidad del producto</label>
+            <input type="number" name="" id="" class="border-[0.2vh] border-[#00000049] w-[20vh] rounded-[4px] h-[4vh]" 
+            formControlName="amount" [(ngModel)]="cantidad">
+        </div>
+        
+        <div class="flex flex-col gap-y-1 mt-2">
+            <label for="" class="text-[#434141]">Precio</label>
+            <input type="number" name="" id="" class="border-[0.2vh] border-[#00000049] w-[20vh] rounded-[4px] h-[4vh]" 
+            formControlName="price" [(ngModel)]="precio">
+        </div>
+        
+        <div class="flex flex-col mt-2">
+            <div>
+                <label for="fileInput" class="file-label text-[#434141]">Subir fotos</label>
+            </div>
+            <div>
+                <label for="fileInput" class="custom-file-upload">
+                    Subir foto
+                </label>
+                <input type="file" id="fileInput" class="file-input" (change)="onFileSelected($event)" multiple/>
+            </div>
+        </div>
+        <p>0 Fotos seleccionadas</p>
+        
+        <div class="image-preview mt-3 grid grid-cols-4 gap-4 mx-auto overflow-auto h-[26vh]">
+            <div class="image-container" *ngFor="let image of fotosPreview">
+              <img [src]="image" alt="Vista previa" class="preview-img duration-100 cursor-pointer" 
+              id="foto" title="Da click para eliminar" (click)="removeImage(image)"/>
+            </div>
+          </div>
+        
+        <div class="flex text-white gap-10 mt-3">
+        <button class="bg-[#4b4949] px-6 py-2" (click)="agregarProducto()">Agregar</button>
+        <button class="bg-[#4b4949] px-6 py-2" (click)="updateProductWithoutImage()">Actualizar</button>
+        
+        <button class="bg-[#4b4949] px-6 py-2">Volver</button>
+        </div>
+        </form>
+        
         <div>
-            <label for="fileInput" class="file-label text-[#434141]">Subir fotos</label>
+            <app-tabla (enviarProducts)="cargarProducts($event)" (actualizarProducto)="actualizarProduct($event)"></app-tabla>
         </div>
-        <div>
-            <label for="fileInput" class="custom-file-upload">
-                Subir foto
-            </label>
-            <input type="file" id="fileInput" class="file-input" (change)="onFileSelected($event)" multiple/>
-        </div>
-    </div>
-    <p>0 Fotos seleccionadas</p>
-    
-    <div class="image-preview mt-3 grid grid-cols-4 gap-4 mx-auto overflow-auto h-[26vh]">
-        <div class="image-container" *ngFor="let image of fotosPreview">
-          <img [src]="image" alt="Vista previa" class="preview-img duration-100 cursor-pointer" 
-          id="foto" title="Da click para eliminar" (click)="removeImage(image)"/>
-        </div>
-      </div>
-    
-    <div class="flex text-white gap-10 mt-3">
-    <button class="bg-[#4b4949] px-6 py-2" (click)="agregarProducto()">Agregar</button>
-    <button class="bg-[#4b4949] px-6 py-2" (click)="updateProductWithoutImage()">Actualizar</button>
-    
-    <button class="bg-[#4b4949] px-6 py-2">Volver</button>
-    </div>
-    </form>
-    
-    <div>
-        <app-tabla (enviarProducts)="recibirProducts($event)" (actualizarProducto)="actualizarProduct($event)"></app-tabla>
-    </div>
-    </section>
-    </div>
+        </section>        
+</div>

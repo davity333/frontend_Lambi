@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { OnInit, Output } from '@angular/core';
+import { OnInit, Output, EventEmitter } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
-import { Product} from '../../../gestion-productos/Models/product';
+import { Product } from '../../../gestion-productos/Models/product';
 import { CurrencyPipe } from '@angular/common';
 import { Sell } from '../Models/sell';
-import EventEmitter from 'events';
 import { ProductsService } from '../../../gestion-productos/service/products.service';
 import { Carrito } from '../../../gestion-productos/Models/carrito';
 @Component({
@@ -23,6 +22,11 @@ export class ProductstandComponent implements OnInit {
   idStand:number=0;
   idBuyer:number=0;
   ventanaModal:boolean=false;
+  statusModalModal:boolean=false;
+  productToSend:any
+  @Output() statusModal:EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  
 
 
   constructor(private standByClientService:StandByClientService, private currencyPipe: CurrencyPipe, private product: ProductsService) { }
@@ -44,7 +48,6 @@ export class ProductstandComponent implements OnInit {
     })).subscribe();
   }
   
-
   abrirModal(object: any): void {
     this.ventanaModal=true;
     
@@ -70,5 +73,14 @@ export class ProductstandComponent implements OnInit {
   cerrarModal($event : any){
       this.ventanaModal = $event;
   }
+  openModal(object:any){
+    this.productToSend = object;
+    this.statusModalModal = true;
+  }
+  closeModal(event:any){
+    this.statusModalModal = event;
+    this.productToSend = null;
+  }
+
 
 }

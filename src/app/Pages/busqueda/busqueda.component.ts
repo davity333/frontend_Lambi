@@ -20,6 +20,7 @@ export class BusquedaComponent implements OnInit {
   closestLocations: any[] = [];
   negocios: Puesto[]=[];
   idbuyer:number = 0
+  isLoading = true;
 
   constructor(private categoryService: CategoryService, private route: Router) {
     this.categoryToSearch = new FormGroup({
@@ -34,16 +35,21 @@ export class BusquedaComponent implements OnInit {
     const Idbuyer = localStorage.getItem('buyer');
     this.idbuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
     this.getUserLocation();
+    this.isLoading = true;
     this.categoryService.getAllCategories().pipe(tap({
-        next: (response) => {},
+        next: (response) => {
+          this.isLoading = false;
+        },
         error: (response) => {
           alert("Ha habido un error en la página");
+          this.isLoading = false;
         }
       })
     ).subscribe(data => {
       this.categories = data;
       console.log(data);
     });
+    this.isLoading = false;
   }
 
   searchStands() {
@@ -53,11 +59,12 @@ export class BusquedaComponent implements OnInit {
         tap({
           next: (response) => {
             console.log(response);
+            this.isLoading = false;
           },
           error: (response) => {
             alert("Ha habido un error en la búsqueda");
             console.log(response);
-            
+            this.isLoading = false;
           }
         })
       ).subscribe(data => {
@@ -75,9 +82,11 @@ export class BusquedaComponent implements OnInit {
       this.categoryService.searchStandByName(namePuesto,this.idbuyer).pipe(tap({
         next: (response) => {
           console.log(response);
+          this.isLoading = false;
         },
         error: (response) => {
           alert("Ha habido un error en la búsqueda");
+          this.isLoading = false;
         }
       })).subscribe(
         data => {
