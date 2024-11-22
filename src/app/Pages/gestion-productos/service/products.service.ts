@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product, ProductCarr, ProductUpdate } from '../Models/product';
+import { HttpHeaders } from '@angular/common/http';
+import { BlobOptions } from 'buffer';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,9 +24,12 @@ export class ProductsService {
     return this.httpClient.post<any>(url, producto);
   }
 
-  updateProduct(id: number, producto: ProductUpdate): Observable<Product | boolean>{
-    let url = `http://52.72.44.45:8000/api/products/${id}`;
-    return this.httpClient.put<Product | boolean>(url, producto);
+  updateProduct( id: number, producto: ProductUpdate): Observable<Product | boolean>{
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/products/${id}`;
+    return this.httpClient.put<Product | boolean>(url, producto, {headers});
   }
 
   deletedProduct(id: number): Observable<any>{

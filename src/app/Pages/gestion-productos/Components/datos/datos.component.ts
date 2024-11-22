@@ -7,6 +7,7 @@ import { Categoria } from '../../../agregar-puesto/Models/estados';
 import { ProductsService } from '../../service/products.service';
 import { Product, ProductUpdate } from '../../Models/product';
 import { TablaComponent } from '../tabla/tabla.component';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-datos',
   templateUrl: './datos.component.html',
@@ -107,14 +108,20 @@ export class DatosComponent implements OnInit{
       description:this.productForm.value.description
     };
     console.log("el objeto que voy a actualizar",productUpdate, this.productToUpdate);  
-    this.productService.updateProduct(this.productToUpdate, productUpdate).subscribe(value=>{
-      if(value == false){
-        alert("Error al actualizar el producto");
+    this.productService.updateProduct(this.productToUpdate, productUpdate).pipe(tap({
+    next: (response) => {
+      console.log("hola")
+      if(response == false){
+        alert("Error al actualizar")
       }else{
-        alert("Actualizado con éxito")
-        console.log(value);
+        alert("Producto actualizado con éxito");
       }
-    })
+    },
+    error: (err) => {
+      alert("Ha ocurrido un error al actualizar el producto"+JSON.stringify(err));
+
+    }
+    })).subscribe()
  }
   agregarProducto(){
     const formData = new FormData();
