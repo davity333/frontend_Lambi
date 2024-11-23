@@ -54,7 +54,7 @@ import { ModalViewComponent } from './Pages/products/Components/modal-view/modal
 import { FavoriteByBuyerComponent } from './Pages/agregar-puesto/Components/favorite-by-buyer/favorite-by-buyer.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
-
+import { ModalProductComponent } from './Pages/gestion-productos/Components/modal-product/modal-product.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +98,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     FavoriteByBuyerComponent,
     LoaderComponent,
     ErrorPageComponent,
+    ModalProductComponent,
   ],
   
   imports: [
