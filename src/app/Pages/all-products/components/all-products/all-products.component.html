@@ -1,7 +1,8 @@
 <app-header></app-header>
 
-<div id="rectangulo" class="w-[100%] h-[16vh] fix flex justify-center items-center flex-col  fixed z-50">
-  <div class="flex flex-col h-auto z-50">
+<div id="rectangulo" class="w-[100%] h-[16vh] fix flex justify-center items-center flex-col z-50" [ngClass]="{ 'fixed': fixed }">
+
+  <div class="flex flex-col h-auto">
   <div class="flex" [formGroup]="searchForm">
     <input
 type="text"

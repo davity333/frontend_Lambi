@@ -22,6 +22,7 @@ export class AllProductsComponent {
   palabra: boolean = false;
   searchForm: FormGroup;
   productsFound: Product[] = [];
+  fixed:boolean = true;
   constructor(private categoryService: CategoryService, private product: ProductsService) { 
     this.searchForm = new FormGroup({
       searchProducts: new FormControl('', Validators.required)
@@ -38,7 +39,7 @@ export class AllProductsComponent {
       }
     })).subscribe(
       data => {
-       this.products = data;
+      this.products = data;
       }
     )
   }
@@ -61,7 +62,7 @@ export class AllProductsComponent {
   }
   abrirModal(object: any): void {
     this.ventanaModal=true;
-    
+    this.fixed = false
     const productId = localStorage.getItem('productId');
     const standId = localStorage.getItem('standId');
     console.log("ProductID",productId, "StandID",standId)
@@ -83,6 +84,7 @@ export class AllProductsComponent {
 
   cerrarModal($event : any){
       this.ventanaModal = $event;
+      this.fixed = true;
   }
   openModal(object:any){
     this.productToSend = object;

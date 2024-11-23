@@ -1,28 +1,49 @@
-<div class="overflow-y-auto h-[28vh]">
+<div class="flex flex-col justify-center items-center w-full px-6 mt-16">
+    <div class="text-center">
+    <p id="titulo" class="text-[3.5vh]">Gestion de productos</p>
+    <p>Añade, actualiza y elimina tus productos en esta sección</p>
+    </div>
+
+    <div class="overflow-y-auto w-full max-w-7xl mt-5">
     <table class="min-w-full bg-white border border-gray-300">
         <thead>
-            <tr class="bg-[#D9D9D9]">
-                <th class="py-2 px-8 border">Nombre</th>
-                <th class="py-2 px-8 border">Tipo</th>
-                <th class="py-2 px-8 border">Cantidad</th>
-                <th class="py-2 px-8 border">Precio</th>
-                <th class="py-2 px-8 border">Funciones</th>
-
-            </tr>
+          <tr class="bg-gray-300">
+            <th class="py-3 px-6 border text-center">Nombre</th>
+            <th class="py-3 px-6 border text-center">Tipo</th>
+            <th class="py-3 px-6 border text-center">Cantidad</th>
+            <th class="py-3 px-6 border text-center">Precio</th>
+            <th class="py-3 px-6 border text-center">Funciones</th>
+          </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let object of products let i=index">
-                <td class="py-2 px-8 border text-center">{{object.name}}</td>
-                <td class="py-2 px-8 border text-center">{{object.category}}</td>
-                <td class="py-2 px-8 border text-center">{{object.amount}}</td>
-                <td class="py-2 px-8 border text-center">{{object.price}}</td>
-                <td class="py-2 px-8 border flex justify-center gap-6">
-                    <img src="./assets/actualizar.png" class="h-[3vh] 
-                    hover:bg-[#504c4c24] cursor-pointer rounded-lg" alt="" title="Actualizar" (click)="actualizar(i, object.idproduct)">
-                    <img src="./assets/eliminar.png" class="h-[3vh] 
-                    hover:bg-[#504c4c24] cursor-pointer rounded-lg" alt="" title="Eliminar" (click)="eliminar(object.idproduct)">
-                </td>
-            </tr>
+          <tr *ngFor="let object of products; let i = index">
+            <td class="py-3 px-6 border text-center">{{object.name}}</td>
+            <td class="py-3 px-6 border text-center">{{object.category}}</td>
+            <td class="py-3 px-6 border text-center">{{object.amount}}</td>
+            <td class="py-3 px-6 border text-center">{{object.price}}</td>
+            <td class="py-3 px-6 border flex justify-center gap-4">
+              <img
+                src="./assets/actualizar.png"
+                class="h-8 w-8 hover:bg-gray-200 cursor-pointer rounded-md"
+                alt="Actualizar"
+                title="Actualizar"
+                (click)="actualizar(i, object.idproduct)"
+              />
+              <img
+                src="./assets/eliminar.png"
+                class="h-8 w-8 hover:bg-gray-200 cursor-pointer rounded-md"
+                alt="Eliminar"
+                title="Eliminar"
+                (click)="eliminar(object.idproduct)"
+              />
+            </td>
+          </tr>
         </tbody>
-    </table>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="modal">
+  <app-modal-product (cerrarModal)="closeModal($event)"></app-modal-product>
 </div>
+
