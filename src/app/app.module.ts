@@ -55,6 +55,8 @@ import { FavoriteByBuyerComponent } from './Pages/agregar-puesto/Components/favo
 import { LoaderComponent } from './loader/loader.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AllProductsComponent } from './Pages/all-products/components/all-products/all-products.component';
+import { NothingInPageComponent } from './nothing-in-page/nothing-in-page.component';
+import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +101,8 @@ import { AllProductsComponent } from './Pages/all-products/components/all-produc
     LoaderComponent,
     ErrorPageComponent,
     AllProductsComponent,
+    NothingInPageComponent,
+    ServicesStandsComponent,
   ],
   
   imports: [
