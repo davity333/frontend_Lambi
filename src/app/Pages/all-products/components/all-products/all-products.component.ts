@@ -17,7 +17,8 @@ export class AllProductsComponent {
   statusModalModal: boolean = false;
   filteredProducts: Product[] = [];
   palabraInput: string = '';
-
+  textoMostrado: string = '';
+  palabra: boolean = false;
   constructor(private categoryService: CategoryService, private product: ProductsService) { }
   ngOnInit(): void {
     this.categoryService.getAllProducts().pipe(tap({
@@ -83,6 +84,11 @@ export class AllProductsComponent {
   closeModal(event:any){
     this.statusModalModal = event;
     this.productToSend = null;
+  }
+
+  mostrarTexto(){
+      this.textoMostrado = this.palabraInput;
+      this.palabra = true;
   }
 
 }

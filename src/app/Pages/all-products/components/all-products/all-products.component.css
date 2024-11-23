@@ -6,8 +6,8 @@
 }
 
 .card:hover {
-    transform: translateY(-10px); /* Levanta la tarjeta hacia arriba */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); 
 }
 
 #rectangulo{

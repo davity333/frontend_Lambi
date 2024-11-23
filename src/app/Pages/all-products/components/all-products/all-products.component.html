@@ -1,46 +1,52 @@
 <app-header></app-header>
 <app-nothing-in-page *ngIf="products.length === 0" message="No hay productos en este rubro"></app-nothing-in-page>
 <section *ngIf="products.length > 0" class="flex mx-auto gap-4 flex-col w-full ">
-    <div id="rectangulo" class="w-[100%] h-[18vh] flex justify-center items-center gap-9 flex-col bg-[#91655b]">
+
+    <div id="rectangulo" class="w-[100%] h-[16vh] fix flex justify-center items-center flex-col bg-[#91655b] fixed z-50">
+      <div class="flex flex-col h-auto z-50">
       <div class="flex">
         <input
   type="text"
-  class="w-[100%] bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] 
+  class="px-60 bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] 
   border-[#00000049] rounded-l-md h-10"
   placeholder="Buscar puesto"
   id="search-input"
   [(ngModel)]="palabraInput"
   (input)="searchProduct(palabraInput)"
 />
-<button class="bg-orange-300 px-10 rounded-r-md">Buscar</button>
-</div>
-<ul
-  *ngIf="filteredProducts.length > 0"
-  class="bg-white border border-gray-300 rounded-md mt-2 max-h-40 overflow-auto"
->
-  <li
-    *ngFor="let product of filteredProducts"
-    (click)="selectProduct(product)"
-    class="p-2 hover:bg-gray-200 cursor-pointer w-[100%]"
-  >
-    {{ product.name }}
-  </li>
-</ul>
+<button (click)="mostrarTexto()" class="bg-orange-300 px-10 rounded-r-md">Buscar</button>
 
+</div>
+
+<div class="w-[29.2%] mt-[5.4vh] fixed">
+  <ul
+    *ngIf="filteredProducts.length > 0"
+    class="bg-white border border-gray-300 rounded-md max-h-40 overflow-auto"
+  >
+    <li
+      *ngFor="let product of filteredProducts"
+      (click)="selectProduct(product)"
+      class="p-2 hover:bg-gray-200 cursor-pointer w-[100%]"
+    >
+      {{ product.name }}
+    </li>
+  </ul>
+  </div>
+
+</div>
     </div>
+
     <app-modal-view *ngIf="statusModalModal" [product]="productToSend" (statusModalClose)="closeModal($event)"></app-modal-view>
     
-    
-    <div class="flex flex-col pl-28 mt-2">   
+    <div class="flex flex-col pl-28 mt-36">   
     <h1 class="text-4xl font-semibold">Productos y servicios</h1>
     <p class="text-xl font-light">Encuentra la variedad de productos y servicios diseñados para satisfacer tus necesidades</p>
+    <p class="mt-2" *ngIf="palabra">Busquedas con: {{palabraInput}}</p>
     </div>
     <div class="flex flex-col xl:flex-row items-center xl:items-start justify-center gap-4 
     xl:gap-4 p-4 w-full flex-wrap pl-10 pr-10">
     
-    <!-- cambios -->
-<div 
-class="card flex flex-row xl:flex-col gap-4 p-4 xl:w-[22%] w-full rounded-lg shadow-lg"
+<div class="card flex flex-row xl:flex-col gap-4 p-4 xl:w-[22%] w-full rounded-lg shadow-lg"
 *ngFor="let object of products; let i = index">
 
 <img 
