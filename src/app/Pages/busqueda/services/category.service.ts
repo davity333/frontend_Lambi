@@ -57,4 +57,10 @@ export class CategoryService {
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.get<any>(`${this.url}protected/products/`, {headers})
   }
+  searchProducts(name:string):Observable<any>{
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.get<any>(`${this.url}products/found/product/${name}`, {headers})
+  }
 }
