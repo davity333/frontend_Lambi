@@ -5,28 +5,26 @@
     display: flex;
     justify-content: center;
 }
+/*
+#display-options {
+    background-image: url("../../../../../../public/assets/bg_option.svg");
+    background-size: cover;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+        font-family: "Bungee", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+*/
+
+#textos{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 1px;
+    color:aliceblue;
+}
 
 
 /* From Uiverse.io by neerajbaniwal */ 
-.btn-shine {
-    color: #fff;
-    background: linear-gradient(to right, #9f9f9f 0%, #fff 50%, #868686 100%);
-    background-size: 500%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 5s infinite linear;
-    font-weight: 600;
-    font-size: 50px;
-    text-decoration: none;
-    white-space: nowrap;
-    font-family: "Poppins", sans-serif;
-}
 
-@keyframes shine {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
-}

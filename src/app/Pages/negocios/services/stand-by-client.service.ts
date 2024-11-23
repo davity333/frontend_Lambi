@@ -42,5 +42,6 @@ export class StandByClientService {
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.put<any>(`${this.url}api/protected/rate?idstand=${idStand}&idbuyer=${idBuyer}`, {stars: rating}, {headers});
   }
+  }
 
-}
+

@@ -17,6 +17,8 @@ import { LoginSellerComponent } from './Pages/loginSeller/components/login-selle
 import { ProductsComponent } from './Pages/products/products.component';
 import { PaymentComponent } from './Pages/payment/payment.component';
 import { ModalViewComponent } from './Pages/products/Components/modal-view/modal-view.component';
+import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
+import { AllProductsComponent } from './Pages/all-products/components/all-products/all-products.component';
 const routes: Routes = [
   {path: '', component:RolComponent},
   {path:'home', component:HomeComponent},
@@ -39,7 +41,10 @@ const routes: Routes = [
 
   {path: 'payment', component:PaymentComponent},
 
-  {path: 'productModal', component: ModalViewComponent}
+  {path: 'productModal', component: ModalViewComponent},
+
+  {path: 'services', component: ServicesStandsComponent},
+  {path: 'all-products', component: AllProductsComponent}
 ];
 
 @NgModule({
