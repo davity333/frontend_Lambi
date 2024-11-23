@@ -25,6 +25,16 @@
       <div>
         <p class="text-[4.4vh] font-bold">{{standClient.name}}</p>
         <p class="text-[18px] tracking-wide font-light pt-3 pb-3">{{standClient.description}}</p>
+        <div class="flex items-center justify-center md:justify-start gap-2 w-full">
+          <p class="font-bold opacity-60 text-[2.6vh]">Calificación:</p>
+          <img 
+            *ngFor="let isFilled of getStarArrayStand(); let i = index" 
+            [src]="isFilled ? './assets/star_fill.svg' : './assets/star.svg'" 
+            [alt]="'Star ' + (i + 1)" 
+            class="w-8 cursor-pointer" 
+          />
+        </div>
+
 
         <div class="flex flex-col md:flex-row md:items-center md:space-x-2">
           <p class="font-bold opacity-60 text-[2.6vh]">Ubicación:</p>

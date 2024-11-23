@@ -30,11 +30,31 @@ export class BusquedaComponent implements OnInit {
   }
 
   categories: Category[] = [];
+  initSearchStands(idbuyer:number,palabra:string){
+    this.categoryService.searchStandByName(palabra,idbuyer).pipe(
+      tap({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (response) => {
+          console.log(response);
+        }
+      })
+    ).subscribe(data=>{
+      this.stand = data;
+      this.calculateClosestLocations();
+      this.isLoading = false;
 
+    })
+  }
   ngOnInit() {
     const Idbuyer = localStorage.getItem('buyer');
     this.idbuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
+    const palabra = localStorage.getItem('search');
     this.getUserLocation();
+    if(palabra !== null){
+      this.initSearchStands(this.idbuyer,palabra);
+    }
     this.isLoading = true;
     this.categoryService.getAllCategories().pipe(tap({
         next: (response) => {
@@ -131,6 +151,7 @@ export class BusquedaComponent implements OnInit {
   deg2rad(deg: number): number {
     return deg * (Math.PI / 180);
   }
+
 
   calculateClosestLocations() {
     if (this.userLatitude !== null && this.userLongitude !== null && this.stand.length > 0) {

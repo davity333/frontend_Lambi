@@ -19,7 +19,6 @@ export class IntroductionComponent {
 
   onSubmit(){
     localStorage.setItem('search', this.form.value.search);
-    alert(this.form.value.search);
     this.router.navigate(['/busqueda']);
   }
 }
