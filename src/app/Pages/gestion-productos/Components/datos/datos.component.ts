@@ -56,7 +56,6 @@ export class DatosComponent implements OnInit{
     this.category = this.products[this.indexProduct].category
     this.descripcion = this.products[this.indexProduct].description;
   }
-
     ngOnInit(): void {
       const storedSeller = localStorage.getItem('standId');
       this.idstand = storedSeller ? JSON.parse(storedSeller): null;
@@ -98,8 +97,9 @@ export class DatosComponent implements OnInit{
     this.fotos = fotosActualizadas;
     this.fotosSeleccionadas = this.fotos.length;
   }
- updateProductWithoutImages(){
-    let productUpdate : ProductUpdate =
+ updateProductWithoutImage(){
+
+    let productUpdatetin : ProductUpdate =
      {
       name:"prueba",
       amount:this.productForm.value.amount, 
@@ -107,15 +107,21 @@ export class DatosComponent implements OnInit{
       category:this.productForm.value.category,
       description:this.productForm.value.description
     };
-    console.log("el objeto que voy a actualizar",productUpdate, this.productToUpdate);  
-    this.productService.updateProduct(this.productToUpdate, productUpdate).subscribe(value=>{
-      if(value == false){
-        alert("Error al actualizar el producto");
+    console.log(productUpdatetin)
+    this.productService.updateProduct(this.productToUpdate, productUpdatetin).pipe(tap({
+    next: (response) => {
+      console.log("hola")
+      if(response == false){
+        alert("Error al actualizar")
       }else{
-        alert("Actualizado con éxito")
-        console.log(value);
+        console.log("this is", response)
+        alert("Producto actualizado con éxito");
       }
-    })
+    },
+    error: (err) => {
+      alert("Ha ocurrido un error al actualizar el producto"+JSON.stringify(err));
+    }
+    })).subscribe()
  }
   agregarProducto(){
     const formData = new FormData();
