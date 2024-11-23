@@ -46,7 +46,7 @@ export class createSellerUsersService {
   }
   
   loginSeller(userLogin : UserLogin): Observable<HttpResponse<any>> {
-    let loginUrl = "http://52.72.44.45:8000/loginSeller/";
+    let loginUrl = "http://127.0.0.1:8000/loginSeller/";
     return this.httpClient.post<HttpResponse<any>>(loginUrl, userLogin, { observe: 'response' });
   }
   

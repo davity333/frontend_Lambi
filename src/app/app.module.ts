@@ -54,6 +54,9 @@ import { ModalViewComponent } from './Pages/products/Components/modal-view/modal
 import { FavoriteByBuyerComponent } from './Pages/agregar-puesto/Components/favorite-by-buyer/favorite-by-buyer.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
+import { AllProductsComponent } from './Pages/all-products/components/all-products/all-products.component';
+import { NothingInPageComponent } from './nothing-in-page/nothing-in-page.component';
 
 
 @NgModule({
@@ -98,6 +101,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     FavoriteByBuyerComponent,
     LoaderComponent,
     ErrorPageComponent,
+    ServicesStandsComponent,
+    AllProductsComponent,
+    NothingInPageComponent,
   ],
   
   imports: [

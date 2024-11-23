@@ -1,0 +1,12 @@
+<app-header></app-header>
+<app-nothing-in-page *ngIf="standsService.length === 0" message="No hay estandares en este rubro"></app-nothing-in-page>
+
+<section *ngIf="standsService.length > 0" class="w-[100%] h-[80vh] flex justify-center items-center flex-col  ">
+  <div class="w-[100%] flex flex-col gap-4 ml-10">
+    <h1 class="text-4xl font-semibold">Estandares</h1>
+    <p class="text-xl">Encuentra la variedad de estandares diseñados para satisfacer tus necesidades</p>
+  </div>
+  <div class="w-[80%] h-[80%] flex flex-wrap gap-4 justify-center items-center">
+    <app-cards *ngFor="let item of closestLocations" [stand]="item" (idStand)="receiveIdStand($event)"></app-cards>
+  </div>
+</section>

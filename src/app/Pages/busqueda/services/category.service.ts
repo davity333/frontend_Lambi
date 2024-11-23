@@ -51,4 +51,10 @@ export class CategoryService {
   getStands():Observable<any>{
     return this.http.get<any>(`${this.url}stand`)
   }
+  getAllProducts():Observable<any>{
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.get<any>(`${this.url}protected/products/`, {headers})
+  }
 }
