@@ -1,5 +1,5 @@
 #display-options {
-    background-image: url("../../../../../../public/assets/mercado.jpg");
+    background-image: url("../../../../../../public/assets/bg_option.svg");
     background-size: cover;
     width: 100%;
     display: flex;
@@ -12,74 +12,19 @@
     width: 100%;
     display: flex;
     justify-content: center;
+
+        font-family: "Bungee", sans-serif;
+    font-weight: 200;
+    font-style: normal;
 }
 */
 
 #textos{
-    font-family: "Bungee", sans-serif;
-    font-weight: 200;
-    font-style: normal;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 1px;
+    color:aliceblue;
 }
 
 
 /* From Uiverse.io by neerajbaniwal */ 
-.btn-shine {
-    color: #fdd647;
-    background: linear-gradient(to right, #e2df41 0%, #ffffff 50%, #e5ce4e 100%);
-    background-size: 500%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 5s infinite linear;
-    font-weight: 600;
-    font-size: 50px;
-    text-decoration: none;
-    white-space: nowrap;
-    font-family: "Poppins", sans-serif;
-}
 
-@keyframes shine {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* From Uiverse.io by akshat-patel28 */ 
-.loader {
-    position: relative;
-    overflow: hidden;
-    border-right: 3px solid;
-    width: 0px;
-    animation: typewriter 2s steps(10)  infinite alternate , blink 0.5s steps(10) infinite;
-  }
-  
-  .loader-text {
-    font-size: 40px;
-    font-weight: 700;
-    background: linear-gradient(to right,#159957, #155799);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  @keyframes typewriter {
-    0% {
-      width: 0px;
-    }
-  
-    100% {
-      width: 240px;
-    }
-  }
-  
-  @keyframes blink {
-    0% {
-      border-right-color: rgba(255,255,255,.75);
-      ;
-    }
-  
-    100% {
-      border-right-color: transparent;
-    }
-  }
