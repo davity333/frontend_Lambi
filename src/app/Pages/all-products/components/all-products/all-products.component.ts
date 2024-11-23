@@ -4,6 +4,7 @@ import { tap } from 'rxjs';
 import { Product } from '../../../gestion-productos/Models/product';
 import { Carrito } from '../../../gestion-productos/Models/carrito';
 import { ProductsService } from '../../../gestion-productos/service/products.service';
+import { FormGroup, FormControl ,Validators} from '@angular/forms';
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
@@ -17,8 +18,16 @@ export class AllProductsComponent {
   statusModalModal: boolean = false;
   filteredProducts: Product[] = [];
   palabraInput: string = '';
-
-  constructor(private categoryService: CategoryService, private product: ProductsService) { }
+  textoMostrado: string = '';
+  palabra: boolean = false;
+  searchForm: FormGroup;
+  productsFound: Product[] = [];
+  fixed:boolean = true;
+  constructor(private categoryService: CategoryService, private product: ProductsService) { 
+    this.searchForm = new FormGroup({
+      searchProducts: new FormControl('', Validators.required)
+    })
+  }
   ngOnInit(): void {
     this.categoryService.getAllProducts().pipe(tap({
       next: (response) => {
@@ -30,7 +39,7 @@ export class AllProductsComponent {
       }
     })).subscribe(
       data => {
-       this.products = data;
+      this.products = data;
       }
     )
   }
@@ -53,7 +62,7 @@ export class AllProductsComponent {
   }
   abrirModal(object: any): void {
     this.ventanaModal=true;
-    
+    this.fixed = false
     const productId = localStorage.getItem('productId');
     const standId = localStorage.getItem('standId');
     console.log("ProductID",productId, "StandID",standId)
@@ -75,6 +84,7 @@ export class AllProductsComponent {
 
   cerrarModal($event : any){
       this.ventanaModal = $event;
+      this.fixed = true;
   }
   openModal(object:any){
     this.productToSend = object;
@@ -84,5 +94,32 @@ export class AllProductsComponent {
     this.statusModalModal = event;
     this.productToSend = null;
   }
+
+  mostrarTexto(){
+    this.categoryService.searchProducts(this.palabraInput).pipe(tap({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (response) => {
+        this.products = [];
+      }
+    })).subscribe(
+      data => {
+        if(data.length > 0){
+          this.products = data;
+        }
+        else{
+          this.products = [];
+        }
+
+
+      }
+    )
+        this.textoMostrado = this.palabraInput;
+        this.palabra = true;
+        
+      }
+    
+
 
 }

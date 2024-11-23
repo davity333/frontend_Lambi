@@ -1,6 +1,6 @@
 #modal {
-    height: 70vh;
-    width: 130vh;
+    height: 86vh;
+    width: 80vh;
     display: flex;
     position: fixed;
     inset: 0;                
@@ -8,7 +8,7 @@
     background-color: rgb(255, 255, 255);
     transition-duration: 100ms;
     flex-direction: column; 
-    padding: 20px; 
+    padding: 30px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
@@ -17,30 +17,35 @@
     margin-bottom: 9px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold; 
-}
-
 input[type="text"],
+input[type="number"],
 textarea {
-    width: 100%;
     padding: 10px;
-    border: 2px solid rgba(0, 0, 0, 0.281);
+    border: 2px solid rgba(0, 0, 0, 0.136);
     border-radius: 4px;
     box-sizing: border-box;
     transition: border-color 0.3s; 
 }
 
+
+input[type="number"]{
+    width: 33vh;
+}
+
+label{
+    opacity: 60%;
+}
+
+
 input[type="text"]:focus,
+input[type="number"]:focus,
 textarea:focus {
     border-color: #3b82f6;
     outline: none;
 }
 
 textarea {
-    height: 200px;
+    height: 100px;
     resize: none;
 }
 
@@ -64,4 +69,14 @@ textarea {
     position: fixed;
     inset: 0;                
     margin: auto; 
+}
+
+#titulo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    letter-spacing:1px;
+}
+
+#buttonImage{
+ border: 3px dotted rgba(0, 0, 0, 0.174);
 }

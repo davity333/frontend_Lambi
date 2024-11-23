@@ -1,59 +1,84 @@
 <app-header></app-header>
+
+<div id="rectangulo" class="w-[100%] h-[16vh] fix flex justify-center items-center flex-col z-50" [ngClass]="{ 'fixed': fixed }">
+
+  <div class="flex flex-col h-auto">
+  <div class="flex" [formGroup]="searchForm">
+    <input
+type="text"
+class="px-60 bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] 
+border-[#00000049] rounded-l-md h-10"
+placeholder="Buscar puesto"
+id="search-input"
+formControlName="searchProducts"
+[(ngModel)]="palabraInput"
+(input)="searchProduct(palabraInput)"
+(keyup.enter)="mostrarTexto()"
+/>
+<button (click)="mostrarTexto()" class="bg-orange-300 px-10 rounded-r-md">Buscar</button>
+
+</div>
+
+<div class="w-[29.2%] mt-[5.4vh] fixed">
+<ul
+*ngIf="filteredProducts.length > 0"
+class="bg-white border border-gray-300 rounded-md max-h-40 overflow-auto"
+>
+<li
+  *ngFor="let product of filteredProducts"
+  (click)="selectProduct(product)"
+  class="p-2 hover:bg-gray-200 cursor-pointer w-[100%]"
+>
+  {{ product.name }}
+</li>
+</ul>
+</div>
+
+</div>
+</div>
 <app-nothing-in-page *ngIf="products.length === 0" message="No hay productos en este rubro"></app-nothing-in-page>
 <section *ngIf="products.length > 0" class="flex mx-auto gap-4 flex-col w-full ">
-    <div class="w-[100%] h-[20vh] flex justify-center items-center gap-9 flex-col bg-red-500">
-        <input
-  type="text"
-  class="w-[50%] bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] border-[#00000049] border-l-0 rounded-md rounded-l-none"
-  placeholder="Buscar puesto"
-  id="search-input"
-  [(ngModel)]="palabraInput"
-  (input)="searchProduct(palabraInput)"
-/>
-<ul
-  *ngIf="filteredProducts.length > 0"
-  class="bg-white border border-gray-300 rounded-md mt-2 max-h-40 overflow-auto"
->
-  <li
-    *ngFor="let product of filteredProducts"
-    (click)="selectProduct(product)"
-    class="p-2 hover:bg-gray-200 cursor-pointer w-[100%]"
-  >
-    {{ product.name }}
-  </li>
-</ul>
 
-    </div>
+
     <app-modal-view *ngIf="statusModalModal" [product]="productToSend" (statusModalClose)="closeModal($event)"></app-modal-view>
-   
-    <h1 class="text-4xl font-semibold">Productos y servicios</h1>
-    <p class="text-xl">Encuentra la variedad de productos y servicios diseñados para satisfacer tus necesidades</p>
     
-    <div class="flex flex-col xl:flex-row items-center xl:items-start justify-stretch gap-4 xl:gap-4 border-2 border-blue-500 p-4 w-full flex-wrap pl-10 pr-10">
-  
-      <div 
-        class="flex bg-[#ffffff] xl:h-[60vh] h-24 gap-0 shadow-md flex-row xl:flex-col xl:w-[22%] w-full"
-        *ngFor="let object of products; let i = index">
-        
-        <img 
-          class="w-full h-full xl:w-[50vh] xl:h-[30vh] object-cover" 
-          src="https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_s3/image/HF_Y24_R16_W24_ES_ESSGPB21283-2_Main_high-97359b19.jpg" 
-          alt="Producto" (click)="openModal(object)"
-        >
-        
-        <div class="flex flex-col gap-2 p-2 w-full">
-          <h1 id="text" class="text-[3vh] text-sm">Nombre: {{object.name}}</h1>
-          <p id="text" class="text-[3vh] text-sm">
-            Cantidad: {{object.amount}} <br>
-            Precio: {{object.price}}
-          </p>
-        </div>
-  
-        <div class="flex justify-center p-5">
-          <button class="text-center bg-[#ffb66e7e] rounded-lg w-full p-[0.4vh]" (click)="abrirModal(object)">Agregar al carrito</button>
-        </div> 
-        
-      </div>
+    <div class="flex flex-col pl-28 mt-36">   
+    <h1 class="text-4xl font-semibold">Productos y servicios</h1>
+    <p class="text-xl font-light">Encuentra la variedad de productos y servicios diseñados para satisfacer tus necesidades</p>
+    <p class="mt-2" *ngIf="palabra">Busquedas: {{palabraInput}}</p>
+    </div>
+    <div class="flex flex-col xl:flex-row items-center xl:items-start justify-center gap-4 
+    xl:gap-4 p-4 w-full flex-wrap pl-10 pr-10">
+    
+<div class="card flex flex-row xl:flex-col gap-4 p-4 xl:w-[22%] w-full rounded-lg shadow-lg"
+*ngFor="let object of products; let i = index">
+
+<img 
+  class="w-24 h-24 object-cover rounded-lg xl:w-full xl:h-48"
+  src="https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_s3/image/HF_Y24_R16_W24_ES_ESSGPB21283-2_Main_high-97359b19.jpg" 
+  alt="Producto" 
+  (click)="openModal(object)"
+>
+
+<div 
+  class="flex flex-col justify-between w-full overflow-auto h-16 xl:h-20 sm:h-16">
+  <h1 class="text-base font-semibold xl:text-lg">Nombre: {{object.name}}</h1>
+  <p class="text-sm xl:text-base">
+    Cantidad: {{object.amount}} <br>
+    Precio: {{object.price}} <br>
+  </p>
+</div>
+
+<div class="flex justify-center mt-1 sm:mt-4 xl:mt-0">
+  <button 
+    class="bg-orange-200 hover:bg-orange-300 text-center rounded-lg w-full p-2 text-sm duration-100"
+    (click)="abrirModal(object)"
+  >
+    Agregar al carrito
+  </button>
+</div>
+</div>
+
     </div>
   </section>
   <div *ngIf="ventanaModal">

@@ -1,23 +1,50 @@
 <div id="fondo">
     <div id="modal">
-        <form id="body" [formGroup]="messagesForm">
-            <div class="flex justify-between items-center ">
-                <p id="titulo">Noticias sobre la denuncia</p>
-                <p class="font-bold hover:text-gray-800 cursor-pointer" title="Cerrar" (click)="close()">X</p>
+        <form id="body">
+            <div class="">
+                <p id="titulo" class="text-center">Agregar producto</p>
             </div>
-            <p>Mensaje para el usuario con codigo: {{codigoDenuncia}}</p>
+                <div class="flex flex-col mt-3">
+                    <label for="">Nombre del producto</label>
+                    <input type="text" class="h-8">
+                </div>
 
-            <div class="input-group mt-2">
-                <label for="emisor">Nombre del emisor</label>
-                <input type="text" id="emisor" placeholder="Ingresa tu nombre" formControlName="nombreAutoridad">
-            </div>
+                <div class="flex flex-col mt-3">
+                    <label for="">Descripcion</label>
+                    <textarea name="" id="" class="h-10"></textarea>
+                </div>
 
-            <div class="input-group">
-                <label for="informe">Envía algún informe o noticia relevante sobre su denuncia</label>
-                <textarea id="informe" placeholder="Escribe tu mensaje aquí..." formControlName="mensaje"></textarea>
-            </div>
-            <div id="botones" class="gap-6 font-medium mt-2">
-                <button class="bg-sky-400 px-7 py-2 mt-4 rounded-lg" (click)="enviarMensaje()">Enviar mensaje</button> 
-            </div>
+                <div class="mt-3">
+                    <label for="">Categoria</label>
+                    <select class="h-[4vh] border-2 border-[#0000003d] w-full focus:border-[#3b82f6] duration-75">
+                        <option value="" class="text-[#00000041] opacity-65">Selecciona una categoria</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-between mt-3">
+                    <div class="flex flex-col mt-3">
+                        <label for="">Cantidad del producto</label>
+                        <input type="number" class="h-8">
+                    </div>
+
+                    <div class="flex flex-col mt-3">
+                        <label for="">Precio</label>
+                        <input type="number" class="h-8">
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-5"  id="buttonImage">
+                    <img src="./assets/addFoto.png" alt="" class="h-28 opacity-20">
+                </div>
+
+                <div class="flex justify-center mt-4 gap-10">
+                    <button class="bg-[#89e094] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]">
+                    Agregar producto
+                    </button>
+                    <button class="bg-[#cbc8c8] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]" (click)="closeModal()">
+                    Cancelar
+                    </button>
+                </div>
+                
         </form>
 </div>
