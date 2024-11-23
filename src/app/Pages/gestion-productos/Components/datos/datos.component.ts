@@ -101,7 +101,7 @@ export class DatosComponent implements OnInit{
   }
  updateProductWithoutImage(){
 
-    let productUpdate : ProductUpdate =
+    let productUpdatetin : ProductUpdate =
      {
       name:this.productForm.value.name,
       amount:this.productForm.value.amount, 
@@ -109,19 +109,19 @@ export class DatosComponent implements OnInit{
       category:this.productForm.value.category,
       description:this.productForm.value.description
     };
-    console.log("el objeto que voy a actualizar",productUpdate, this.productToUpdate);  
-    this.productService.updateProduct(this.productToUpdate, productUpdate).pipe(tap({
+    console.log(productUpdatetin)
+    this.productService.updateProduct(this.productToUpdate, productUpdatetin).pipe(tap({
     next: (response) => {
       console.log("hola")
       if(response == false){
         alert("Error al actualizar")
       }else{
+        console.log("this is", response)
         alert("Producto actualizado con éxito");
       }
     },
     error: (err) => {
       alert("Ha ocurrido un error al actualizar el producto"+JSON.stringify(err));
-
     }
     })).subscribe()
  }
