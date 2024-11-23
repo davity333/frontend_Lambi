@@ -26,6 +26,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxToastNotifierModule } from 'ngx-toast-notifier';
+import { ModalProductComponent } from './Pages/gestion-productos/Components/modal-product/modal-product.component';
 import { NegociosComponent } from './Pages/negocios/negocios.component';
 import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
 import { HeaderAdminComponent } from './Pages/home/components/header-admin/header-admin.component';
@@ -59,6 +60,7 @@ import { AllProductsComponent } from './Pages/all-products/components/all-produc
 @NgModule({
   declarations: [
     AppComponent,
+    ModalProductComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,

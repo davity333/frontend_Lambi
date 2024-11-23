@@ -7,7 +7,7 @@ import { AgregarPuestoComponent } from './Pages/agregar-puesto/agregar-puesto.co
 import { GestionProductosComponent } from './Pages/gestion-productos/gestion-productos.component';
 import { NegociosComponent } from './Pages/negocios/negocios.component';
 import { BusquedaComponent } from './Pages/busqueda/busqueda.component';
-
+import { ModalProductComponent } from './Pages/gestion-productos/Components/modal-product/modal-product.component';
 import { loginGuard } from '../guards/login.guard';
 import { FavoritesComponent } from './Pages/favorites/favorites.component';
 import { ViewstandComponent } from './Pages/viewstand/components/viewstand/viewstand.component';
