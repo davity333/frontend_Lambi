@@ -17,6 +17,7 @@ export class SectionviewstandComponent {
   statusModalModal:boolean = false;
   isLoading = true;
   isError = false;
+  ratingStand:number = 0;
   constructor(private standByClient : StandByClientService){}
 
   ngOnInit(){
@@ -45,6 +46,8 @@ export class SectionviewstandComponent {
     })).subscribe(
       data => {
         this.standClient = data;
+        this.ratingStand = parseInt(this.standClient.rating);
+        console.log("ratingStand",this.ratingStand);
         console.log("standClient",this.standClient);
       }
     )
@@ -71,6 +74,9 @@ export class SectionviewstandComponent {
     }else{
       this.updateRatingStand()
     }
+  }
+  getStarArrayStand(): boolean[] {
+    return Array(5).fill(false).map((_, index) => index < this.ratingStand);
   }
 
   addRating() {
