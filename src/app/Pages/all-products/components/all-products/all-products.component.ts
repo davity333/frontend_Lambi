@@ -4,6 +4,7 @@ import { tap } from 'rxjs';
 import { Product } from '../../../gestion-productos/Models/product';
 import { Carrito } from '../../../gestion-productos/Models/carrito';
 import { ProductsService } from '../../../gestion-productos/service/products.service';
+import { FormGroup, FormControl ,Validators} from '@angular/forms';
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
@@ -19,7 +20,13 @@ export class AllProductsComponent {
   palabraInput: string = '';
   textoMostrado: string = '';
   palabra: boolean = false;
-  constructor(private categoryService: CategoryService, private product: ProductsService) { }
+  searchForm: FormGroup;
+  productsFound: Product[] = [];
+  constructor(private categoryService: CategoryService, private product: ProductsService) { 
+    this.searchForm = new FormGroup({
+      searchProducts: new FormControl('', Validators.required)
+    })
+  }
   ngOnInit(): void {
     this.categoryService.getAllProducts().pipe(tap({
       next: (response) => {
@@ -87,8 +94,30 @@ export class AllProductsComponent {
   }
 
   mostrarTexto(){
-      this.textoMostrado = this.palabraInput;
-      this.palabra = true;
-  }
+    this.categoryService.searchProducts(this.palabraInput).pipe(tap({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (response) => {
+        this.products = [];
+      }
+    })).subscribe(
+      data => {
+        if(data.length > 0){
+          this.products = data;
+        }
+        else{
+          this.products = [];
+        }
+
+
+      }
+    )
+        this.textoMostrado = this.palabraInput;
+        this.palabra = true;
+        
+      }
+    
+
 
 }
