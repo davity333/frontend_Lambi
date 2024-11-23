@@ -66,5 +66,9 @@ export class TablaComponent implements OnInit {
       this.modal = valor;
   }
 
+  openModal(){
+    
+  }
+
 }
 
