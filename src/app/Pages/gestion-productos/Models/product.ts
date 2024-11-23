@@ -9,7 +9,7 @@ export interface Product {
   idproduct: number
 }
 export interface ProductUpdate{ 
-    name?: string
+    name: string
     description?: string
     price?: number
     amount?: number

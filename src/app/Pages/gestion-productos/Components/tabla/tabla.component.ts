@@ -17,9 +17,6 @@ export class TablaComponent implements OnInit {
   product: Product[] = [];
   indexProduct: number = 0;
   idProduct: number = 0;
-  emitirProducts(){
-    this.enviarProducts.emit(this.products);
-  }
   constructor(private productService:ProductsService) { }
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
@@ -38,12 +35,11 @@ export class TablaComponent implements OnInit {
   }
   @Output() actualizarProducto = new EventEmitter<{index: number, id: number}>
   actualizar(index: number, id: number): void {
-    this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
     this.indexProduct = Number(index);
     this.idProduct = Number(id);
+  this.enviarProducts.emit(this.products);
   this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
   alert("Actualizar en el producto: " + this.indexProduct);
-  this.enviarProducts.emit(this.products);
   }
 
   eliminar(id: number){

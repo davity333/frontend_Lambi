@@ -7,7 +7,6 @@ import { Categoria } from '../../../agregar-puesto/Models/estados';
 import { ProductsService } from '../../service/products.service';
 import { Product, ProductUpdate } from '../../Models/product';
 import { TablaComponent } from '../tabla/tabla.component';
-import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-datos',
   templateUrl: './datos.component.html',
@@ -22,8 +21,7 @@ export class DatosComponent implements OnInit{
   fotos: File[] = [];
   fotosSeleccionadas: number = 0;
   fotosPreview: string[] = []; 
-  imagesToShow: string[] = []; 
-  updateOrNot : boolean = false; 
+
   constructor(private puesto: PuestoService, private productService: ProductsService){
     this.productForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -58,7 +56,7 @@ export class DatosComponent implements OnInit{
     this.category = this.products[this.indexProduct].category
     this.descripcion = this.products[this.indexProduct].description;
   }
-    
+
     ngOnInit(): void {
       const storedSeller = localStorage.getItem('standId');
       this.idstand = storedSeller ? JSON.parse(storedSeller): null;
@@ -71,6 +69,7 @@ export class DatosComponent implements OnInit{
         console.error('Error al obtener las categorias', err);
       }
     })).subscribe();
+    
   }
 
   onFileSelected(event: Event): void {
@@ -87,7 +86,7 @@ export class DatosComponent implements OnInit{
         };
         reader.readAsDataURL(file); 
       }
-      
+
       this.fotosSeleccionadas = this.fotos.length;
     }
   }
@@ -99,35 +98,28 @@ export class DatosComponent implements OnInit{
     this.fotos = fotosActualizadas;
     this.fotosSeleccionadas = this.fotos.length;
   }
- updateProductWithoutImage(){
-
+ updateProductWithoutImages(){
     let productUpdate : ProductUpdate =
      {
-      name:this.productForm.value.name,
+      name:"prueba",
       amount:this.productForm.value.amount, 
       price:this.productForm.value.price, 
       category:this.productForm.value.category,
       description:this.productForm.value.description
     };
     console.log("el objeto que voy a actualizar",productUpdate, this.productToUpdate);  
-    this.productService.updateProduct(this.productToUpdate, productUpdate).pipe(tap({
-    next: (response) => {
-      console.log("hola")
-      if(response == false){
-        alert("Error al actualizar")
+    this.productService.updateProduct(this.productToUpdate, productUpdate).subscribe(value=>{
+      if(value == false){
+        alert("Error al actualizar el producto");
       }else{
-        alert("Producto actualizado con éxito");
+        alert("Actualizado con éxito")
+        console.log(value);
       }
-    },
-    error: (err) => {
-      alert("Ha ocurrido un error al actualizar el producto"+JSON.stringify(err));
-
-    }
-    })).subscribe()
+    })
  }
   agregarProducto(){
     const formData = new FormData();
-  
+
     formData.append('name', this.productForm.get('name')?.value);
     formData.append('category', this.productForm.get('category')?.value);
     formData.append('amount', this.productForm.get('amount')?.value);
@@ -136,9 +128,9 @@ export class DatosComponent implements OnInit{
     formData.append('description', this.productForm.value.description)
     this.fotos.forEach(file => {
       console.log("Se ha agregado");
-      
+
       console.log(file);
-      
+
       formData.append('image', file, file.name); 
     });
 
@@ -155,7 +147,7 @@ export class DatosComponent implements OnInit{
   }
 
 //actualizarProductoWithoutImage(){
-    
+
       //let productUpdate : ProductUpdate; 
       //console.log("el objeto que voy a actualizar",productUpdate);
 
