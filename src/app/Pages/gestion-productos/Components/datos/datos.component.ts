@@ -56,7 +56,6 @@ export class DatosComponent implements OnInit{
     this.category = this.products[this.indexProduct].category
     this.descripcion = this.products[this.indexProduct].description;
   }
-
     ngOnInit(): void {
       const storedSeller = localStorage.getItem('standId');
       this.idstand = storedSeller ? JSON.parse(storedSeller): null;
