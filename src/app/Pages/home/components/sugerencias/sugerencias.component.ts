@@ -22,10 +22,14 @@ export class SugerenciasComponent implements OnInit {
       this.isLoading = false;
     },
     error: (response) => {
-      console.log('Error:', response);
+      console.log('Error soy:', response);
+
       this.isLoading = false;
     }
-  })).subscribe(data => this.stands = data);
+  })).subscribe(data => {
+    this.stands = data
+    console.log(this.stands)
+  });
   }
 
   items = [
