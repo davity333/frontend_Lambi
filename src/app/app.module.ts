@@ -59,7 +59,6 @@ import { AllProductsComponent } from './Pages/all-products/components/all-produc
 import { NothingInPageComponent } from './nothing-in-page/nothing-in-page.component';
 import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
 import { WaitingLocationComponent } from './waiting-location/waiting-location.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,7 +107,7 @@ import { WaitingLocationComponent } from './waiting-location/waiting-location.co
     AllProductsComponent,
     NothingInPageComponent,
     ServicesStandsComponent,
-    WaitingLocationComponent,
+    WaitingLocationComponent
   ],
   
   imports: [

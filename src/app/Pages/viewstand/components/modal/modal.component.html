@@ -7,32 +7,35 @@
 
             </div>
 
-            <div *ngFor="let object of productCarr let i=index">
-                <div class="flex pt-5">
-
-                    <img src={{object.datos.image}} alt="" id="image">
+            <div class="h-[70vh] overflow-y-auto">
+            <div *ngFor="let object of productCarr let i=index" class="flex justify-between items-center mt-5">
+                <div class="flex">
+                    <div>
+                        <img src={{object.datos.image}} alt="" id="image">
+                    </div>
                     <div class="flex flex-col ml-6 leading-7">
-                    <h3 class="text-[3vh] font-bold text-[#252143]">{{ object.datos.name }}</h3>
-                    <p class="text-[3vh] font-light">Price: ${{ object.datos.price }}</p>
-                    <p class="text-[2vh] font-light">Disponible:{{ object.datos.amount }}</p>
+                        <h3 class="text-[2.7vh] font-bold text-[#252143]">{{ object.datos.name }}</h3>
+                        <p class="text-[2.9vh] font-light">Precio: ${{ object.datos.price }}</p>
+                        <p class="text-[2vh] font-light">Disponible: {{ object.datos.amount }}</p>
                     </div>
-
-                    <div class="flex gap-3 items-center ml-5">
-                        <button class="px-4 py-3 " (click)="agregarMenos(object, i)">
-                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]">-</p>
-                        </button>
-                        <p>{{object.amountCantidad}}</p>
-                        
-                        <button class="px-4 py-3 " [disabled]="statusBoton" >
-                            <p class="bg-[#eeeaea] rounded-2xl px-2 text-[2vh]"
-                            (click)="agregarMas(object)">+</p>
-                        </button>
-                    </div>
+                </div>
             
+                <div class="flex gap-3 items-center ml-5">
+                    <button class="w-8 h-8 bg-[#eeeaea] flex items-center justify-center rounded-2xl" (click)="agregarMenos(object, i)">
+                        <p class="text-[2vh]">-</p>
+                    </button>
+                    <p class="text-center w-8">{{object.amountCantidad}}</p>
+                    <button class="w-8 h-8 bg-[#eeeaea] flex items-center justify-center rounded-2xl" [disabled]="statusBoton" (click)="agregarMas(object)">
+                        <p class="text-[2vh]">+</p>
+                    </button>
                 </div>
             </div>
-
-
-        </form>
+            </div>
+            
+            </form>
+            <div class="flex gap-4 justify-center">
+            <button class="bg-[#67be3c] text-white px-10 py-2 w-48 rounded-md">Enviar mensaje</button>
+            <button class="bg-[#bea23c] text-white px-10 py-2 w-48 rounded-md">Pagar</button>
+            </div>
     </div>
 </div>

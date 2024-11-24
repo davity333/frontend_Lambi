@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div id="rectangulo" class="w-[100%] h-[16vh] fix flex justify-center items-center flex-col z-50" [ngClass]="{ 'fixed': fixed }">
+<div class="w-[100%] h-[16vh] fix flex justify-center items-center flex-col z-50 flex">
 
   <div class="flex flex-col h-auto">
   <div class="flex" [formGroup]="searchForm">
@@ -19,7 +19,7 @@ formControlName="searchProducts"
 
 </div>
 
-<div class="w-[29.2%] mt-[5.4vh] fixed">
+<div class="w-[29.2%] fixed z-30">
 <ul
 *ngIf="filteredProducts.length > 0"
 class="bg-white border border-gray-300 rounded-md max-h-40 overflow-auto"
@@ -62,7 +62,7 @@ class="bg-white border border-gray-300 rounded-md max-h-40 overflow-auto"
 
 <div 
   class="flex flex-col justify-between w-full overflow-auto h-16 xl:h-20 sm:h-16">
-  <h1 class="text-base font-semibold xl:text-lg">Nombre: {{object.name}}</h1>
+  <h1 class="text-base font-semibold xl:text-lg">{{object.name}}</h1>
   <p class="text-sm xl:text-base">
     Cantidad: {{object.amount}} <br>
     Precio: {{object.price}} <br>

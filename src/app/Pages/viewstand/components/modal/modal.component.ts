@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { EventEmitter, Output } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { OnInit } from '@angular/core';
@@ -26,6 +26,10 @@ export class ModalComponent implements OnInit {
     this.modal.emit(this.ventanaModalCerrada); 
   }
 
+  cerrarEsc(){
+    this.ventanaModalCerrada = false;
+  }
+
   agregarMas(object: Carrito): void {
     if (object.amountCantidad >= object.datos.amount) {
       alert("Cantidad máxima alcanzada");
@@ -48,7 +52,6 @@ export class ModalComponent implements OnInit {
       this.statusBoton = false; // Activar el botón si aún no se alcanzó el límite
     }
   }
-  
 
   agregarMenos(object: Carrito, index: number): void {
     if (object.amountCantidad > 1) {
@@ -69,6 +72,13 @@ export class ModalComponent implements OnInit {
 
   this.productCarr = carrito;
   console.log("El carrito",this.productCarr)
+}
+
+@HostListener('document:keydown', ['$event'])
+handleKeyboardEvent(event: KeyboardEvent) {
+  if (event.key === 'esc') {
+    this.cerrarEsc();
+  }
 }
 
 }

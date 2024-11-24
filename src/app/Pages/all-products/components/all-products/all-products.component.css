@@ -9,8 +9,3 @@
     transform: translateY(-10px); 
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); 
 }
-
-#rectangulo{
-    background: rgb(209,71,44);
-background: linear-gradient(180deg, rgba(209,71,44,1) 15%, rgba(209,71,44,1) 88%, rgba(209,71,44,1) 94%, rgba(234,170,158,1) 100%);
-}
