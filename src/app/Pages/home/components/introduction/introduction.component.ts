@@ -18,7 +18,10 @@ export class IntroductionComponent {
   }
 
   onSubmit(){
+    if(this.form.value.search !== ''){
     localStorage.setItem('search', this.form.value.search);
     this.router.navigate(['/busqueda']);
+    }
   }
 }
+

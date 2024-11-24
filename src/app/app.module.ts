@@ -58,6 +58,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { AllProductsComponent } from './Pages/all-products/components/all-products/all-products.component';
 import { NothingInPageComponent } from './nothing-in-page/nothing-in-page.component';
 import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
+import { CardSugerantionComponent } from './Pages/home/components/card/card-sugerantion/card-sugerantion.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { ServicesStandsComponent } from './Pages/services/components/services-st
     AllProductsComponent,
     NothingInPageComponent,
     ServicesStandsComponent,
+    CardSugerantionComponent,
   ],
   
   imports: [

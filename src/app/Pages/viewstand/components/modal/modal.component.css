@@ -12,6 +12,11 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     animation-name: modal;
+    transform: translateX(100%);
+    animation-duration: 0.5s;
+    animation-name: carrito;
+    animation-fill-mode: forwards;
+    opacity: 0;
 }
 
 #fondo {
@@ -43,5 +48,15 @@
     #modal {
         width: 80%; /* En pantallas muy pequeñas, el modal ocupará el 90% del ancho */
 
+    }
+}
+
+@keyframes carrito {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
