@@ -38,9 +38,7 @@
 </section>
 
 
-  <div *ngIf="!userLatitude || !userLongitude">
-    <p>Esperando obtener tu ubicación...</p>
-</div>
+  <app-waiting-location *ngIf="!userLatitude || !userLongitude"></app-waiting-location>
 
 
 

@@ -25,8 +25,26 @@ export class RegisterSellerComponent {
       if (this.registerSellerForm.valid) {
         this.userService.createSeller(this.registerSellerForm.value).pipe(tap({
             next: (response) => {
+              const seller = response.body; 
+          const sellerName = seller?.name;
+          localStorage.setItem("userName", sellerName);
+              localStorage.setItem('seller', JSON.stringify(response.body))
+              const authorizationHeader = response.headers?.get('Authorization');
+              console.log("Encabezado Authorization:", authorizationHeader); 
+      
+              if (authorizationHeader?.startsWith('Bearer ')) {
+                const token = authorizationHeader.split(' ')[1];
+                if (token) {
+                  localStorage.setItem('token', token);
+                }
+              }
+              else {
+                console.error("Token no encontrado en el encabezado Authorization");
+              }
               alert("Usuario registrado con éxito");
               console.log(response);
+              this.router.navigate(['/negocios']);
+              
             },
             error: (err) => {
               alert("Error con la API");

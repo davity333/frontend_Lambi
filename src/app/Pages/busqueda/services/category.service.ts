@@ -49,7 +49,7 @@ export class CategoryService {
     return this.http.get<any>(`${this.url}protected/favorite${idBuyer}`, {headers})
   }
   getStands():Observable<any>{
-    return this.http.get<any>(`${this.url}stand`)
+    return this.http.get<any>(`${this.url}favorite`)
   }
   getAllProducts():Observable<any>{
     let token = localStorage.getItem('token');
