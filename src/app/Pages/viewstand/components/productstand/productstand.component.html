@@ -24,9 +24,12 @@
         </p>
       </div>
 
-      <div class="flex justify-center p-5">
+      <div class="flex justify-center p-5" *ngIf="object.amount > 0">
         <button class="text-center bg-[#ffb66e7e] rounded-lg w-full p-[0.4vh]" (click)="abrirModal(object)">Agregar al carrito</button>
       </div> 
+      <div class="flex justify-center p-5" *ngIf="object.amount == 0">
+        <p class="text-center bg-red-400  rounded-lg w-full p-[0.4vh]" disabled>No hay stock</p>
+      </div>
       
     </div>
   </div>
