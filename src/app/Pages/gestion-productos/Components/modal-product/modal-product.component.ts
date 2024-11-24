@@ -2,17 +2,21 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { PuestoService } from '../../../agregar-puesto/Services/puesto.service';
 import { ProductsService } from '../../service/products.service';
+import { Product } from '../../Models/product';
+import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-modal-product',
   templateUrl: './modal-product.component.html',
   styleUrl: './modal-product.component.css'
 })
-export class ModalProductComponent {
+export class ModalProductComponent{
   @Output() cerrarModal: EventEmitter<boolean> = new EventEmitter();
+  products:Product[]= [];
    formProduct: FormGroup;
    fotos: File[] = [];
    fotosPreview: string[] = []; 
    fotosSeleccionadas: number = 0;
+   tamanio: boolean = false;
    constructor(private puesto: PuestoService, private productService: ProductsService){
     this.formProduct = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -46,4 +50,13 @@ export class ModalProductComponent {
   addProduct(){
 
   }
+
+  removeImage(image: string): void {
+    this.fotosPreview = this.fotosPreview.filter(img => img !== image);
+    const fotosActualizadas = this.fotos.filter((img) => img.name !== image);
+    this.fotos = fotosActualizadas;
+    this.fotos = fotosActualizadas;
+    this.fotosSeleccionadas = this.fotos.length;
+  }
+
 }

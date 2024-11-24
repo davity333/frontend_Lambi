@@ -18,7 +18,7 @@ export class TablaComponent implements OnInit {
   product: Product[] = [];
   indexProduct: number = 0;
   idProduct: number = 0;
-  modal:boolean = true;
+  modal:boolean = false;
   constructor(private productService:ProductsService) { }
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
@@ -67,7 +67,7 @@ export class TablaComponent implements OnInit {
   }
 
   openModal(){
-    
+    this.modal = true;
   }
 
 }

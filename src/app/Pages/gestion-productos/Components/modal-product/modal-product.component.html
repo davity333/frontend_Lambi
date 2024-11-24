@@ -1,5 +1,5 @@
 <div id="fondo">
-    <div id="modal">
+    <div id="modal" class="overflow-auto">
         <form id="body" [formGroup]="formProduct">
             <div class="">
                 <p id="titulo" class="text-center">Agregar producto</p>
@@ -33,9 +33,26 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center mt-5"  id="buttonImage">
-                    <img src="./assets/addFoto.png" alt="" class="h-28 opacity-20">
+                <div class="flex flex-col mt-2 mb-4">
+                    <div>
+                        <label for="fileInput" class="file-label text-[#434141]">Subir fotos</label>
+                    </div>
+                    <div>
+                        <label for="fileInput" class="custom-file-upload">
+                            Subir foto
+                        </label>
+                        <input type="file" id="fileInput" class="file-input" multiple (change)="onFileSelected($event)"/>
+                    </div>
                 </div>
+
+                <div *ngIf="this.fotosPreview.length > 0">
+                <div class="image-preview mt-5 grid grid-cols-4 gap-4 mx-auto overflow-auto h-[26vh]">
+                    <div class="image-container" *ngFor="let image of fotosPreview">
+                      <img [src]="image" alt="Vista previa" class="preview-img duration-100 cursor-pointer" 
+                      id="foto" title="Da click para eliminar" (click)="removeImage(image)"/>
+                    </div>
+                </div>
+            </div>
 
                 <div class="flex justify-center mt-4 gap-10">
                     <button class="bg-[#89e094] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]">
