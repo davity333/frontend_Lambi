@@ -9,7 +9,9 @@ import { HttpHeaders } from '@angular/common/http';
 export class StandByClientService {
   private url: string = "http://52.72.44.45:8000/"
   carrito: any[] = [];
-
+  private nameStand:string = "";
+  private nameBuyer:string = "";
+  private phoneBuyer:string = "";
   constructor(private http:HttpClient) { }
 
   getStandByClients(standById: number) {
@@ -42,6 +44,25 @@ export class StandByClientService {
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.put<any>(`${this.url}api/protected/rate?idstand=${idStand}&idbuyer=${idBuyer}`, {stars: rating}, {headers});
   }
+  getNameStand(){
+    return this.nameStand;
+  }
+  getNameBuyer(){
+    return this.nameBuyer;
+  }
+  setNameStand(nameStand:string){
+    this.nameStand = nameStand;
+  }
+  setNameBuyer(nameBuyer:string){
+    this.nameBuyer = nameBuyer;
+  }
+  setPhoneBuyer(phoneBuyer:string){
+    this.phoneBuyer = phoneBuyer;
+  }
+  getPhoneBuyer(){
+    return this.phoneBuyer;
+  }
+
   }
 
 

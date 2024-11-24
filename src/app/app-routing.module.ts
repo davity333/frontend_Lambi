@@ -19,6 +19,7 @@ import { PaymentComponent } from './Pages/payment/payment.component';
 import { ModalViewComponent } from './Pages/products/Components/modal-view/modal-view.component';
 import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
 import { AllProductsComponent } from './Pages/all-products/components/all-products/all-products.component';
+import { SendMessageComponent } from './Pages/sendMessage/send-message/send-message.component';
 const routes: Routes = [
   {path: '', component:RolComponent},
   {path:'home', component:HomeComponent},
@@ -44,7 +45,9 @@ const routes: Routes = [
   {path: 'productModal', component: ModalViewComponent},
 
   {path: 'services', component: ServicesStandsComponent},
-  {path: 'all-products', component: AllProductsComponent}
+  {path: 'all-products', component: AllProductsComponent},
+
+  {path: 'sendMessage', component: SendMessageComponent}  
 ];
 
 @NgModule({
