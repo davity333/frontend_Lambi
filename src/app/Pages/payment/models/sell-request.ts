@@ -2,9 +2,12 @@ export interface SellRequest {
     hour: string;
     date: string;
     description: string;
-    standid: number;
+    sells: Sell[];
+    standid_fk: number;
     idbuyer: number;
-    sells: { idproduct: number; amount: number }[];
-    cardToken?: string;  // Asegúrate de que cardToken sea opcional si lo vas a enviar solo cuando se crea el token
   }
-  
+interface Sell {
+    idproduct: number;
+    amount: number;
+}
+

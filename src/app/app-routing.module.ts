@@ -20,6 +20,7 @@ import { ModalViewComponent } from './Pages/products/Components/modal-view/modal
 import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
 import { AllProductsComponent } from './Pages/all-products/components/all-products/all-products.component';
 import { SendMessageComponent } from './Pages/sendMessage/send-message/send-message.component';
+import { SectionSellComponent } from './Pages/sendMessage/components/section-sell/section-sell.component';
 const routes: Routes = [
   {path: '', component:RolComponent},
   {path:'home', component:HomeComponent},
@@ -47,7 +48,9 @@ const routes: Routes = [
   {path: 'services', component: ServicesStandsComponent},
   {path: 'all-products', component: AllProductsComponent},
 
-  {path: 'sendMessage', component: SendMessageComponent}  
+  {path: 'sendMessage', component: SendMessageComponent},
+  
+  {path: 'sells', component: SectionSellComponent}
 ];
 
 @NgModule({

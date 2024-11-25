@@ -19,30 +19,6 @@ export class PaymentComponent {
   submitPayment(event: Event) {
     event.preventDefault();
 
-    const paymentDetails: SellRequest = {
-      hour: '12:00',
-      date: '2024-11-21',
-      description: 'Compra de prueba',
-      standid: 53,
-      idbuyer: 40,
-      sells: [
-        { idproduct: 14, amount: 1 },
-        { idproduct: 18, amount: 1 }
-      ]
-    };
-
-    this.paymentService.createPayment(paymentDetails).pipe(tap({
-      next: (response) => {
-        this.message = 'Pago iniciado. Confirma el pago en el frontend.';
-        alert(this.message);
-        console.log(response);
-      },
-      error: (err) => {
-        this.message = `Error al procesar el pago: ${err}`;
-        alert(this.message);
-        console.warn(err);
-      },
-    })).subscribe();
   }
 }
 /*export class PaymentComponent implements OnInit {
