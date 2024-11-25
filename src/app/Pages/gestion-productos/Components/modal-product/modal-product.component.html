@@ -1,67 +1,104 @@
 <div id="fondo">
     <div id="modal" class="overflow-auto">
-        <form id="body" [formGroup]="formProduct">
-            <div class="">
-                <p id="titulo" class="text-center">Agregar producto</p>
+      <form id="body" [formGroup]="formProduct">
+        <div>
+          <div *ngIf="!updateOrNot">
+            <p id="titulo" class="text-center">Agregar producto</p>
+          </div>
+          <div *ngIf="updateOrNot">
+            <p id="titulo" class="text-center">Actualizar producto</p>
+          </div>
+        </div>
+  
+        <div class="flex flex-col mt-3">
+          <label for="">Nombre del producto</label>
+          <input type="text" class="h-8" formControlName="name">
+        </div>
+  
+        <div class="flex flex-col mt-3">
+          <label for="">Descripción</label>
+          <textarea class="h-10" formControlName="description"></textarea>
+        </div>
+  
+        <div class="mt-3">
+          <label for="">Categoría</label>
+          <select class="h-[4vh] border-2 border-[#0000003d] w-full focus:border-[#3b82f6] duration-75" formControlName="category">
+            <option value="">Selecciona una categoría</option>
+            <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of categorias" [value]="object.idcategory">
+              {{ object.category }}
+            </option>
+          </select>
+        </div>
+  
+        <div class="flex justify-between mt-3">
+          <div class="flex flex-col mt-3">
+            <label for="">Cantidad del producto</label>
+            <input type="number" class="h-8" formControlName="amount">
+          </div>
+  
+          <div class="flex flex-col mt-3">
+            <label for="">Precio</label>
+            <input type="number" class="h-8" formControlName="price">
+          </div>
+        </div>
+  
+        <div *ngIf="updateOrNot">
+          <!-- Imágenes existentes que se muestran en fila -->
+          <div class="image-preview mt-5 flex flex-wrap gap-4 mx-auto overflow-auto h-[26vh]" *ngFor="let image of images; let i = index">
+            <img class="preview-img duration-100 cursor-pointer w-32 h-32" [src]="image" (click)="deleteImage(i)">
+          </div>
+  
+          <div class="flex flex-col mt-2 mb-4">
+            <div>
+              <label for="fileInput1" class="file-label text-[#434141]">Subir fotos</label>
             </div>
-                <div class="flex flex-col mt-3">
-                    <label for="">Nombre del producto</label>
-                    <input type="text" class="h-8">
-                </div>
-
-                <div class="flex flex-col mt-3">
-                    <label for="">Descripcion</label>
-                    <textarea name="" id="" class="h-10"></textarea>
-                </div>
-
-                <div class="mt-3">
-                    <label for="">Categoria</label>
-                    <select class="h-[4vh] border-2 border-[#0000003d] w-full focus:border-[#3b82f6] duration-75">
-                        <option value="" class="text-[#00000041] opacity-65">Selecciona una categoria</option>
-                    </select>
-                </div>
-
-                <div class="flex justify-between mt-3">
-                    <div class="flex flex-col mt-3">
-                        <label for="">Cantidad del producto</label>
-                        <input type="number" class="h-8">
-                    </div>
-
-                    <div class="flex flex-col mt-3">
-                        <label for="">Precio</label>
-                        <input type="number" class="h-8">
-                    </div>
-                </div>
-
-                <div class="flex flex-col mt-2 mb-4">
-                    <div>
-                        <label for="fileInput" class="file-label text-[#434141]">Subir fotos</label>
-                    </div>
-                    <div>
-                        <label for="fileInput" class="custom-file-upload">
-                            Subir foto
-                        </label>
-                        <input type="file" id="fileInput" class="file-input" multiple (change)="onFileSelected($event)"/>
-                    </div>
-                </div>
-
-                <div *ngIf="this.fotosPreview.length > 0">
-                <div class="image-preview mt-5 grid grid-cols-4 gap-4 mx-auto overflow-auto h-[26vh]">
-                    <div class="image-container" *ngFor="let image of fotosPreview">
-                      <img [src]="image" alt="Vista previa" class="preview-img duration-100 cursor-pointer" 
-                      id="foto" title="Da click para eliminar" (click)="removeImage(image)"/>
-                    </div>
-                </div>
+            <div>
+              <label for="fileInput1" class="custom-file-upload">
+                Subir foto
+              </label>
+              <input type="file" id="fileInput1" class="file-input" multiple (change)="onFileSelected($event)" />
             </div>
-
-                <div class="flex justify-center mt-4 gap-10">
-                    <button class="bg-[#89e094] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]">
-                    Agregar producto
-                    </button>
-                    <button class="bg-[#cbc8c8] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]" (click)="closeModal()">
-                    Cancelar
-                    </button>
-                </div>
-                
-        </form>
-</div>
+          </div>
+        </div>
+  
+        <div *ngIf="!updateOrNot">
+          <div class="flex flex-col mt-2 mb-4">
+            <div>
+              <label for="fileInput2" class="file-label text-[#434141]">Subir fotos</label>
+            </div>
+            <div>
+              <label for="fileInput2" class="custom-file-upload">
+                Subir foto
+              </label>
+              <input type="file" id="fileInput2" class="file-input" multiple (change)="onFileSelected($event)" />
+            </div>
+          </div>
+        </div>
+  
+        <div *ngIf="fotosPreview.length > 0">
+          <div class="image-preview mt-5 grid grid-cols-4 gap-4 mx-auto overflow-auto h-[26vh]">
+            <div class="image-container" *ngFor="let image of fotosPreview">
+              <img [src]="image" alt="Vista previa" class="preview-img duration-100 cursor-pointer w-32 h-32"
+                id="foto" title="Da click para eliminar" (click)="removeImage(image)" />
+            </div>
+          </div>
+        </div>
+  
+        <div class="flex justify-center mt-4 gap-10">
+          <div *ngIf="!updateOrNot">
+            <button type="button" class="bg-[#89e094] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]" (click)="addProduct()">
+              Agregar producto
+            </button>
+          </div>
+          <div *ngIf="updateOrNot">
+            <button type="button" class="bg-[#89e094] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]" (click)="editProduct()">
+              Editar producto
+            </button>
+          </div>
+          <button type="button" class="bg-[#cbc8c8] px-5 py-[1.3vh] text-[#000000a2] font-medium rounded-lg flex-1 max-w-[170px]" (click)="closeModal()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

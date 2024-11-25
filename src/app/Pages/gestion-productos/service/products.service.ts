@@ -20,11 +20,14 @@ export class ProductsService {
   }
 
   addProduct(producto: any): Observable<any>{
-    let url = "http://52.72.44.45:8000/api/products/";
-    return this.httpClient.post<any>(url, producto);
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = "http://52.72.44.45:8000/api/protected/products/";
+    return this.httpClient.post<any>(url, producto, {headers});
   }
 
-  updateProduct( id: number, producto: ProductUpdate): Observable<Product | boolean>{
+  updateProduct( id: number, producto: ProductUpdate): Observable<ProductUpdate | boolean>{
     let token = localStorage.getItem('token');
     let headers; 
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });

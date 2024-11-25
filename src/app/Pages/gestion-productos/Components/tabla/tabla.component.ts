@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from '../../service/products.service';
 import { tap } from 'rxjs';
-import { Product } from '../../Models/product';
+import { EnviarProducto, Product } from '../../Models/product';
 import { stringify } from 'querystring';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -12,13 +12,18 @@ import { CommonModule } from '@angular/common';
 })
 export class TablaComponent implements OnInit {
   @Output() enviarId = new EventEmitter<string>();
-  @Output() enviarProducts = new EventEmitter<Product[]>();
+  enviarProduct : EnviarProducto = {
+    idProduct: 0,
+    indexProduct: 0,
+    arrayProduct: [], 
+    updateOrNot: false
+  }
   products: Product[] = [];
-
   product: Product[] = [];
   indexProduct: number = 0;
   idProduct: number = 0;
   modal:boolean = false;
+  updateOrNot: boolean = false; 
   constructor(private productService:ProductsService) { }
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
@@ -31,22 +36,24 @@ export class TablaComponent implements OnInit {
       error: (err) => {
         console.error('Error al obtener los productos', err);
       }
-    })).subscribe();
-
-    
+    })).subscribe();    
   }
-  @Output() actualizarProducto = new EventEmitter<{index: number, id: number}>
   actualizar(index: number, id: number): void {
     this.indexProduct = Number(index);
     this.idProduct = Number(id);
-  this.enviarProducts.emit(this.products);
-  this.actualizarProducto.emit({index: this.indexProduct, id: this.idProduct});
-  alert("Actualizar en el producto: " + this.indexProduct);
+    this.enviarProduct = {
+      idProduct : this.idProduct,
+      indexProduct : this.indexProduct,
+      arrayProduct: this.products, 
+      updateOrNot: true
+    };
+    alert("Actualizar en el producto: " + this.indexProduct);
+    this.modal = true; 
+    this.updateOrNot = true;
   }
 
   eliminar(id: number){
         this.indexProduct = Number(id);
-
         this.productService.deletedProduct(this.indexProduct).pipe(tap({
           next: (response) => {
             if(response){
@@ -61,7 +68,9 @@ export class TablaComponent implements OnInit {
           }
         })).subscribe()
   }
-
+  agregar($event:boolean){
+     this.updateOrNot = $event
+  }
   closeModal(valor: boolean){
       this.modal = valor;
   }
