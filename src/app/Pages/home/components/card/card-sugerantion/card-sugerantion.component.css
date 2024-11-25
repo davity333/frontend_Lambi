@@ -1,71 +1,90 @@
 /* General container */
 .carousel-container {
-    position: relative;
-    max-width: 80%;
-    margin: auto;
-    overflow: hidden;
-  }
-  
-  /* Wrapper for smooth sliding */
-  .carousel-wrapper {
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  /* Carousel track */
-  .carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  /* Individual items */
-  .carousel-item {
-    flex: 0 0 calc(100% / 3); /* Divide visible space into 3 equal parts */
-    box-sizing: border-box;
-    padding: 10px;
-  }
-  
-  .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .card img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #6200ea;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 10;
-  }
-  
-  .carousel-button.prev {
-    left: 10px;
-  }
-  
-  .carousel-button.next {
-    right: 10px;
-  }
-  
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* Wrapper for smooth sliding */
+.carousel-wrapper {
+  width: 100%;
+}
+
+/* Carousel track */
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Individual items */
+.carousel-item {
+  flex: 0 0 calc(100% / 3); /* Divide visible space into 3 equal parts */
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Ensures content stacks vertically */
+  justify-content: space-between; /* Evenly spaces out the content */
+  height: 40%; /* Make sure all items have the same height */
+}
+
+/* Card styling */
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute content evenly */
+  animation-name: card;
+  animation-duration: 1s;
+  opacity: 1;
+}
+
+/* Card image styling */
+.card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover; /* Ensures images scale properly */
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Carousel buttons */
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #6200ea;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Left and right buttons */
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+@keyframes card {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+

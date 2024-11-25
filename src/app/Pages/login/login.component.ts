@@ -45,7 +45,7 @@ export class LoginComponent {
             const token = authorizationHeader.split(' ')[1];
             if (token) {
               localStorage.setItem('token', token);
-              
+              this.user.setStatusSeller(false)
               this.alertaAfirmacion = true;
               this.mensajeAlerta = "Bienvenido usuario"
               console.log("Token almacenado:", token);

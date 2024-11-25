@@ -7,19 +7,31 @@ shadow-[0px_9px_5px_-1px_rgba(0,0,0,0.13)] z-10 sticky top-0">
         
         <div class="cursor-pointer flex gap-10 font-semibold items-center">
             <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
-            text-[#000000bb] hidden sm:block">Lugares</p>
-            <p class="font-extralight hidden sm:block">|</p>
-            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
-            text-[#000000bb] hidden sm:block" [routerLink]="['/all-products']">Productos</p>
-            <p class="font-extralight hidden sm:block">|</p>
-            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
-            text-[#000000bb] hidden sm:block"
-            [routerLink]="['/services']">Servicios</p>
-            <p class="font-extralight hidden sm:block">|</p>
-            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
-            text-[#000000bb] hidden sm:block"
-            [routerLink]="['/favorites']" *ngIf="usersService.isLogged()">Puestos favoritos</p>
+            text-[#000000bb] hidden sm:block" *ngIf="!usersService.isStatusSeller()">Lugares</p>
 
+            <p class="font-extralight hidden sm:block" *ngIf="!usersService.isStatusSeller()">|</p>
+
+            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
+            text-[#000000bb] hidden sm:block" [routerLink]="['/all-products']" *ngIf="!usersService.isStatusSeller()">Productos</p>
+            <p class="font-extralight hidden sm:block" *ngIf="!usersService.isStatusSeller()">|</p>
+
+            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
+            text-[#000000bb] hidden sm:block"
+            [routerLink]="['/services']" *ngIf="!usersService.isStatusSeller()">Servicios</p>
+
+            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
+            text-[#000000bb] hidden sm:block"
+            [routerLink]="['/negocios']" *ngIf="usersService.isStatusSeller()">Mis negocios</p>
+
+            <p class="font-extralight hidden sm:block">|</p>
+
+            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
+            text-[#000000bb] hidden sm:block"
+            [routerLink]="['/favorites']" *ngIf="!usersService.isStatusSeller()">Puestos favoritos</p>
+
+            <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
+            text-[#000000bb] hidden sm:block"
+            [routerLink]="['/gestionProducto']" *ngIf="usersService.isStatusSeller()">Gestion productos</p>
         </div>
     </div>
     

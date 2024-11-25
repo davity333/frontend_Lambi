@@ -27,36 +27,38 @@ export class SugerenciasComponent implements OnInit {
       this.isLoading = false;
     }
   })).subscribe(data => {
-    this.stands = data
-    console.log(this.stands)
+    this.stands = data.filter((item: any) => item.rating >= 4);
+    console.log("los puestos con mas de 4 estrellas",this.stands)
   });
   }
 
-  items = [
-    { img: 'https://via.placeholder.com/150', name: 'Prem Shahi', description: 'Web Developer' },
-    { img: 'https://via.placeholder.com/150', name: 'Deepa Chand', description: 'App Developer' },
-    { img: 'https://via.placeholder.com/150', name: 'Praka Shahi', description: 'Photographer' },
-    { img: 'https://via.placeholder.com/150', name: 'Nina Patel', description: 'Graphic Designer' },
-    { img: 'https://via.placeholder.com/150', name: 'Ravi Kumar', description: 'SEO Specialist' },
-    { img: 'https://via.placeholder.com/150', name: 'Sara Khan', description: 'Content Writer' }
-  ];
 
   currentSlide = 0;
-  itemsPerView = 3; // Number of items visible at a time
+  itemsPerView = 2.2; // Number of items visible at a time
 
   next() {
-    if (this.currentSlide < this.items.length - this.itemsPerView) {
+    // Avanza al siguiente grupo de elementos
+    if (this.currentSlide < Math.floor(this.stands.length / this.itemsPerView)) {
       this.currentSlide++;
     } else {
-      this.currentSlide = 0; // Loop back to the start
+      this.currentSlide = 0; // Vuelve al primer grupo cuando llegue al final
     }
   }
 
   prev() {
+    // Retrocede al grupo anterior de elementos
     if (this.currentSlide > 0) {
       this.currentSlide--;
     } else {
-      this.currentSlide = this.items.length - this.itemsPerView; // Loop back to the end
+      this.currentSlide = Math.floor(this.stands.length / this.itemsPerView); // Va al último grupo
     }
   }
+
+  // Función para obtener los elementos actuales visibles en el carrusel
+  get visibleStands() {
+    const start = this.currentSlide * this.itemsPerView;
+    const end = start + this.itemsPerView;
+    return this.stands.slice(start, end); // Devuelve los elementos del grupo actual
+  }
+  
 }

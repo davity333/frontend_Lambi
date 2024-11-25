@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
 import { Product } from '../../../gestion-productos/Models/product';
+import { createSellerUsersService } from '../../../Auth/users.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sectionviewstand',
   templateUrl: './sectionviewstand.component.html',
@@ -18,7 +20,9 @@ export class SectionviewstandComponent {
   isLoading = true;
   isError = false;
   ratingStand:number = 0;
-  constructor(private standByClient : StandByClientService){}
+  constructor(private standByClient : StandByClientService, private usersService: createSellerUsersService){}
+  router = inject(Router);
+  usersServices = inject(createSellerUsersService);
 
   ngOnInit(){
     const storedSeller = localStorage.getItem('standId');

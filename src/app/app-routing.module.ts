@@ -19,12 +19,13 @@ import { PaymentComponent } from './Pages/payment/payment.component';
 import { ModalViewComponent } from './Pages/products/Components/modal-view/modal-view.component';
 import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
 import { AllProductsComponent } from './Pages/all-products/components/all-products/all-products.component';
+import { sellerGuard } from '../guards/Seller.guard';
 const routes: Routes = [
   {path: '', component:RolComponent},
   {path:'home', component:HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'crearPuesto', component: AgregarPuestoComponent, canActivate:[loginGuard]},
+  {path: 'crearPuesto', component: AgregarPuestoComponent, canActivate:[sellerGuard]},
   {path: 'gestionProducto', component: GestionProductosComponent},
   {path: 'negocios', component: NegociosComponent},
   {path: 'busqueda', component: BusquedaComponent},

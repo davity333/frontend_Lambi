@@ -49,7 +49,7 @@ import { NegationComponent } from './Pages/Alerts/negation/negation.component';
 import { InterrogationComponent } from './Pages/Alerts/interrogation/interrogation.component';
 
 import { ModalComponent } from './Pages/viewstand/components/modal/modal.component';
-
+import { CardSugerantionComponent } from './Pages/home/components/card/card-sugerantion/card-sugerantion.component';
 import { PaymentComponent } from './Pages/payment/payment.component';
 import { ModalViewComponent } from './Pages/products/Components/modal-view/modal-view.component';
 import { FavoriteByBuyerComponent } from './Pages/agregar-puesto/Components/favorite-by-buyer/favorite-by-buyer.component';
@@ -107,7 +107,8 @@ import { WaitingLocationComponent } from './waiting-location/waiting-location.co
     AllProductsComponent,
     NothingInPageComponent,
     ServicesStandsComponent,
-    WaitingLocationComponent
+    WaitingLocationComponent,
+    CardSugerantionComponent
   ],
   
   imports: [
@@ -119,7 +120,7 @@ import { WaitingLocationComponent } from './waiting-location/waiting-location.co
     CommonModule,
     BrowserAnimationsModule,
     RouterModule,
-    NgxToastNotifierModule.forRoot()
+    NgxToastNotifierModule.forRoot(),
   ],
   exports: [
   ],
