@@ -64,6 +64,8 @@ export class LoginSellerComponent {
               
               this.alertaPositiva = true;
               this.mensajeAlerta = "Usuario encontrado con exito";
+              this.usersService.setStatusSeller(true);
+              console.log("el estado es: ", this.usersService.getStatusSeller());
               setTimeout(() => {
                 this.router.navigate(['/negocios']);
               }, 3000);

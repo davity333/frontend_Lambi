@@ -13,18 +13,7 @@
       [style.transform]="'translateX(-' + currentSlide * 100 / itemsPerView + '%)'"
       [style.transition]="'transform 0.5s ease-in-out'"
     >
-      <div class="carousel-item" *ngFor="let item of stands">
-        <div class="card">
-          <img *ngFor="let image of item.image; let i = index"
-           [src]="image" alt="Card image">
-          <h3>{{ item.name }}</h3>
-          <p>{{ item.description }}</p>
-          <div class="actions">
-            <button>About Me</button>
-            <button>Hire Me</button>
-          </div>
-        </div>
-      </div>
+    <app-card-sugerantion *ngFor="let item of stands" [product]="item"></app-card-sugerantion>
     </div>
   </div>
   <button class="carousel-button next" (click)="next()">›</button>

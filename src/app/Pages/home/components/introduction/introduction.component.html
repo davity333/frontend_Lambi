@@ -1,14 +1,13 @@
 <div id="introduction" class="w-full h-[60vh] flex pt-[8vh] mt-7">
     <div class="text-white w-full">
         <div class="flex ml-[7vh] justify-between sm:justify-normal">
-            <div class="ml-[1vh] max-w-[50%] sm:ml-[8vh]"> 
+            <div class="ml-[1vh] max-w-[50%] sm:ml-[8vh]" *ngIf="!usersService.isStatusSeller()"> 
                 <p class="font-bold text-[4vh] mb-4 text-[#796767] slide-in">LAMBI</p>
                 <p class="text-[2vh] pr-2 text-justify mb-4 text-[#6E6666] sm:text-[2.9vh] sm:pr-8 escribiendo">
                     Lambi es un sitio web que permite ayudar a buscar microtiendas 
                     cerca de tu localidad para adquirir productos o servicios que 
                     los vendedores publican.
                 </p>
-
                 <div class="flex flex-col sm:flex-row items-center" id="buscador" [formGroup]="form">
                     <div class="flex w-full sm:w-auto">
                         <div class="flex w-10 items-center justify-center rounded-tl-lg rounded-bl-lg border-r border-gray-200 bg-white p-5 border-2 border-[#0000002c]">
@@ -20,8 +19,16 @@
                         placeholder="Buscar puesto" id="search-input" formControlName="search" (keyup.enter)="onSubmit()">
                     </div>
                     <input type="button" value="Buscar" class="bg-[#E4C246] p-2 mt-2 sm:mt-0 sm:ml-2 rounded-lg text-white font-semibold px-10 hover:bg-[#bea23c] transition-colors w-full sm:w-auto cursor-pointer"
-                     (click)="onSubmit()" (keyup.enter)="onSubmit()">
+                    (click)="onSubmit()" (keyup.enter)="onSubmit()">
                 </div>
+            </div>
+
+            <div *ngIf="usersService.isStatusSeller()">
+                <p class="font-bold text-[4vh] mb-4 text-[#796767] slide-in">Hola {{nombreUsuario }}</p>
+                <p class="text-[2vh] pr-2 text-justify mb-4 text-[#6E6666] sm:text-[2.9vh] sm:pr-8 escribiendo">
+                    Si tienes algun puesto de cualquier categoría, publícalo y permite que 
+                    los usuarios descubran lo que ofreces
+                </p>
             </div>
             
             <div id="carrusel" class="overflow-hidden w-full sm:w-1/2">
