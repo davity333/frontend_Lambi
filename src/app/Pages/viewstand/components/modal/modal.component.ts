@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { EventEmitter, Output } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { OnInit } from '@angular/core';
@@ -6,6 +6,7 @@ import { Carrito } from '../../../gestion-productos/Models/carrito';
 import { ProductsService } from '../../../gestion-productos/service/products.service';
 import { tap } from 'rxjs';
 import { Sell } from '../Models/sell';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -15,15 +16,25 @@ export class ModalComponent implements OnInit {
   ventanaModalCerrada: boolean = false; 
   @Output() modal = new EventEmitter<boolean>();
 
-  constructor(private stand:StandByClientService, private product: ProductsService){}
+  constructor(private stand:StandByClientService, private product: ProductsService, private router: Router){}
   idProduct:number = 0;
   idStand:number = 0;
+  idBuyer:number = 0;
   statusBoton:boolean = false;
+  standIdFk:number = 0;
 
   productCarr: Carrito []=[];
 
   cerrar() {
     this.modal.emit(this.ventanaModalCerrada); 
+  }
+
+  cerrarEsc(){
+    this.ventanaModalCerrada = false;
+  }
+
+  sendMessage(){
+    this.router.navigate(['/sendMessage']);
   }
 
   agregarMas(object: Carrito): void {
@@ -47,8 +58,8 @@ export class ModalComponent implements OnInit {
     } else {
       this.statusBoton = false; // Activar el botón si aún no se alcanzó el límite
     }
+    
   }
-  
 
   agregarMenos(object: Carrito, index: number): void {
     if (object.amountCantidad > 1) {
@@ -65,10 +76,23 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     const storedProductId = localStorage.getItem('productId');
     const storedStandId = localStorage.getItem('standId');
+    this.standIdFk = Number(storedStandId);
+    const Idbuyer = localStorage.getItem('buyer');
+    this.idBuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
+    
     const carrito = this.product.getCar();
 
   this.productCarr = carrito;
   console.log("El carrito",this.productCarr)
 }
+
+@HostListener('document:keydown', ['$event'])
+handleKeyboardEvent(event: KeyboardEvent) {
+  if (event.key === 'esc') {
+    this.cerrarEsc();
+  }
+}
+
+
 
 }

@@ -21,7 +21,8 @@ export class BusquedaComponent implements OnInit {
   negocios: Puesto[]=[];
   idbuyer:number = 0
   isLoading = true;
-
+  noStands = false;
+  message = "No hay stands que coincidan con tu búsqueda";
   constructor(private categoryService: CategoryService, private route: Router) {
     this.categoryToSearch = new FormGroup({
       idcategory: new FormControl(''),
@@ -42,8 +43,14 @@ export class BusquedaComponent implements OnInit {
       })
     ).subscribe(data=>{
       this.stand = data;
-      this.calculateClosestLocations();
-      this.isLoading = false;
+      if(this.stand.length > 0){
+        this.calculateClosestLocations();
+      }
+      else{
+        this.isLoading = false;
+        this.noStands = true;
+      }
+      
 
     })
   }

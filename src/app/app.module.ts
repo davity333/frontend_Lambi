@@ -59,7 +59,10 @@ import { AllProductsComponent } from './Pages/all-products/components/all-produc
 import { NothingInPageComponent } from './nothing-in-page/nothing-in-page.component';
 import { ServicesStandsComponent } from './Pages/services/components/services-stands/services-stands.component';
 import { WaitingLocationComponent } from './waiting-location/waiting-location.component';
-
+import { SendMessageComponent } from './Pages/sendMessage/send-message/send-message.component';
+import { SucefullComponent } from './Pages/sendMessage/components/sucefull/sucefull.component';
+import { CardSellsComponent } from './Pages/sendMessage/components/card-sells/card-sells.component';
+import { SectionSellComponent } from './Pages/sendMessage/components/section-sell/section-sell.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -109,6 +112,10 @@ import { WaitingLocationComponent } from './waiting-location/waiting-location.co
     NothingInPageComponent,
     ServicesStandsComponent,
     WaitingLocationComponent,
+    SendMessageComponent,
+    SucefullComponent,
+    CardSellsComponent,
+    SectionSellComponent
   ],
   
   imports: [

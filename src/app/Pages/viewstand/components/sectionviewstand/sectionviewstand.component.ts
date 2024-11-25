@@ -18,6 +18,9 @@ export class SectionviewstandComponent {
   isLoading = true;
   isError = false;
   ratingStand:number = 0;
+  nameStand:string = "";
+  nameBuyer:string = "";
+  phoneBuyer:string = "";
   constructor(private standByClient : StandByClientService){}
 
   ngOnInit(){
@@ -27,6 +30,7 @@ export class SectionviewstandComponent {
     this.idSeller = standByClient ? JSON.parse(standByClient): null;
     const idBuyer = localStorage.getItem('buyer');
     this.idBuyer = idBuyer ? JSON.parse(idBuyer).idbuyer: null;
+    this.nameBuyer = idBuyer ? JSON.parse(idBuyer).name: null;
     this.idSeller = standByClient ? JSON.parse(standByClient).idseller: null;
     console.log("la idStand es"+this.idstand)
     if(this.idSeller > 0) {
@@ -46,6 +50,9 @@ export class SectionviewstandComponent {
     })).subscribe(
       data => {
         this.standClient = data;
+        this.standByClient.setNameStand(this.standClient.name);
+        this.standByClient.setNameBuyer(this.nameBuyer);
+        this.standByClient.setPhoneBuyer(this.phoneBuyer);
         this.ratingStand = parseInt(this.standClient.rating);
         console.log("ratingStand",this.ratingStand);
         console.log("standClient",this.standClient);
@@ -121,5 +128,8 @@ export class SectionviewstandComponent {
 
   }
 
+  shoppingCart(){
+   
+  }
 
 }

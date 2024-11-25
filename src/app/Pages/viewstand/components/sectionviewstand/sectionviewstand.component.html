@@ -67,6 +67,9 @@
 
   <!-- Componente debajo del carrusel y texto -->
   <div class="w-full " *ngIf="!isError">
+    <div class="flex justify-end w-full items-end flex-col gap-4">
+      <button class="bg-[#67be3c] text-white px-4 py-2 rounded-md" (click)="shoppingCart()">Carrito de compras</button>
+    </div>
     <app-productstand [standid]="idstand"></app-productstand>
   </div>
 </section>

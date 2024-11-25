@@ -74,10 +74,6 @@ export class AllProductsComponent {
       idproduct: object.idproduct,
     };
 
-    console.log("Datos al Carrito:", carrito);
- 
-      this.product.addCar(carrito);
-
 
     
   }
