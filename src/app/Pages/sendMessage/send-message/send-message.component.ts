@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Carrito } from '../../gestion-productos/service/products.service';
 import { ProductsService } from '../../gestion-productos/service/products.service';
 import { StandByClientService } from '../../negocios/services/stand-by-client.service';
+import { SellRequest } from '../../payment/models/sell-request';
+import { tap } from 'rxjs';
 @Component({
   selector: 'app-send-message',
   templateUrl: './send-message.component.html',
@@ -12,6 +14,8 @@ export class SendMessageComponent {
   productCarr: Carrito[] = [];
   standIdFk: number = 0;
   idBuyer: number = 0;
+  total: number = 0;
+  isSuccess: boolean = false;
   constructor(private router: Router, private productService: ProductsService, private standService: StandByClientService){}
   ngOnInit(): void {
     const storedProductId = localStorage.getItem('productId');
@@ -22,8 +26,19 @@ export class SendMessageComponent {
     const carrito = this.productService.getCar();
     this.productCarr = carrito;
   }
+
   saveShoppingCart(){
     // Aquí calculamos el total del carrito
+    this.standService.createSell(this.nuevoCarrito()).pipe(tap({
+      next: (res) => {
+        console.log(res);
+        this.isSuccess = true;
+        
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })).subscribe();
     const total = this.calcularTotal();
 
     // Crear el mensaje con la estructura profesional
@@ -32,10 +47,12 @@ export class SendMessageComponent {
 
     // Aquí podrías enviar el mensaje a WhatsApp
     this.enviarWhatsApp(mensajeProfesional);
+    this.router.navigate(['/viewstand']);
+
   }
 
+
   calcularTotal(): number {
-    // Calcular el total del carrito sumando el precio de los productos * cantidad
     return this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
   }
 
@@ -71,7 +88,7 @@ export class SendMessageComponent {
   }
 
   nuevoCarrito() {
-    const carritoNuevo = {
+    const carritoNuevo: SellRequest = {
       hour: new Date().toLocaleTimeString(), // Hora actual
       date: new Date().toLocaleDateString(), // Fecha actual
       description: 'Descripción del carrito', // Cambia esto según lo que necesites
@@ -85,6 +102,8 @@ export class SendMessageComponent {
   
     console.log("Nuevo carrito creado:", carritoNuevo);
     return carritoNuevo;
+
+
   }
 
   cancelShoppingCart(){
