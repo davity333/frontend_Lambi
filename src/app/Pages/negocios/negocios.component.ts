@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { StandByClientService } from './services/stand-by-client.service';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { createSellerUsersService } from '../Auth/users.service';
 @Component({
   selector: 'app-negocios',
   templateUrl: './negocios.component.html',
@@ -14,10 +14,11 @@ export class NegociosComponent {
   stands:any[] = [];
   isLoading = true;
 
-  constructor(private standByClientService: StandByClientService, private router : Router){}
+  constructor(private standByClientService: StandByClientService, private router : Router, private userService: createSellerUsersService){}
   ngOnInit(): void {
     const storedSeller = localStorage.getItem('seller');
     this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+    console.log("vendedor con id "+this.idSeller)
     this.standByClientService.getStandByClients(this.idSeller).pipe(tap({
       next: (response) => {
         if(response == false) {

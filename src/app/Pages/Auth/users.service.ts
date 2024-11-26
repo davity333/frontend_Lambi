@@ -18,6 +18,7 @@ export class createSellerUsersService {
   private latitud : number = 0
   private altitud : number = 0
   seller : boolean = false
+  idSeller : number = 0
   private urlSeller : string = "http://52.72.44.45:8000/sellers"
   createUser(user: UserRegister): Observable<any>{
     let url = "http://52.72.44.45:8000/api/registerBuyer/";
@@ -76,7 +77,8 @@ getUser(): Observable<any> {
     this.seller = status;
   }
 
+
   isStatusSeller():boolean{
-    return this.seller ? true : false;
+    return localStorage.getItem('seller') ? true : false;
   }
 }
