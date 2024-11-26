@@ -84,7 +84,7 @@ export class DatosNegocioComponent implements OnInit {
     formData.append('no_house', this.datos.get('no_house')?.value);
     formData.append('estado', this.datos.get('estado')?.value);
     formData.append('horario', this.datos.get('horario')?.value);
-    if(this.datos.get('send_to_house')?.value === true){
+    if(this.datos.get('send_to_house')?.value == 'true'){
       formData.append('send_to_house', 'true');
     }else{
       formData.append('send_to_house', 'false');

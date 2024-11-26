@@ -15,8 +15,11 @@
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     display: flex;
-    align-items: top;
-    justify-content: right;
+    align-items: center; 
+    justify-content: center;
+    background-size: cover;
+    border: 1px solid #000;
+    overflow: hidden;
   }
   
   .save {

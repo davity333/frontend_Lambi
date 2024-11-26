@@ -23,7 +23,7 @@ export class SectionviewstandComponent {
   nameStand:string = "";
   nameBuyer:string = "";
   phoneBuyer:string = "";
-
+  send_to_house:boolean = false;
   constructor(private standByClient : StandByClientService, private usersService: createSellerUsersService){}
   router = inject(Router);
   usersServices = inject(createSellerUsersService);
@@ -56,6 +56,7 @@ export class SectionviewstandComponent {
     })).subscribe(
       data => {
         this.standClient = data;
+        this.send_to_house = this.standClient.send_to_house;
         this.standByClient.setNameStand(this.standClient.name);
         this.standByClient.setNameBuyer(this.nameBuyer);
         this.standByClient.setPhoneBuyer(this.phoneBuyer);
