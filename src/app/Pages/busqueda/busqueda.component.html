@@ -13,7 +13,7 @@
                     </svg>
                 </div>
 
-                <input type="text" class="w-full bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] border-[#00000049] border-l-0 rounded-md rounded-l-none" placeholder="Buscar por categoría" id="search-input" formControlName="category">
+                <input type="text" class="w-full bg-white text-[#696262] pl-2 text-base font-semibold outline-0 border-[0.2vh] border-[#00000049] border-l-0 rounded-md rounded-l-none" placeholder="Buscar por nombre del puesto..." id="search-input" formControlName="category">
             </div>
 
             <select class="w-[40vh] h-[6.3vh] border-[0.2vh] border-[#00000049] rounded-md" formControlName="idcategory">
@@ -35,6 +35,7 @@
             </div>
         </div>
     </div>
+    <app-negation *ngIf="noStands" [mensaje]="message"></app-negation>
 </section>
 <app-nothing-in-page *ngIf="noStands && !isLoading && !closestLocations.length && userLatitude && userLongitude"  [message]="message"></app-nothing-in-page>
 

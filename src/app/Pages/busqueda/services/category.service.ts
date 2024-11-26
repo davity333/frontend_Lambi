@@ -28,7 +28,7 @@ export class CategoryService {
     let token = localStorage.getItem('token');
     let headers; 
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.post<any>(`${this.url}protected/favoriteByIdStand`, {iduser:idBuyer, idstand:idStand}, {headers})
+    return this.http.post<any>(`${this.url}protected/favorites`, {iduser:idBuyer, idstand:idStand}, {headers})
   }
   changeStatusTrue(idBuyer: number ,idStand:number): Observable<any> {
     let token = localStorage.getItem('token');

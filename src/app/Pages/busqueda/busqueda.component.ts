@@ -62,8 +62,25 @@ export class BusquedaComponent implements OnInit {
     if(palabra !== null){
       this.initSearchStands(this.idbuyer,palabra);
     }
-    this.isLoading = true;
-    this.categoryService.getAllCategories().pipe(tap({
+    else{
+      this.categoryService.getStands().pipe(
+        tap({
+          next: (response) => {
+            this.isLoading = false;
+          },
+          error: (response) => {
+            alert("Ha habido un error en la página");
+            this.isLoading = false;
+          }
+        })
+      ).subscribe(data => {
+       this.stand = data;
+       this.calculateClosestLocations();
+      
+      });
+    }
+      this.isLoading = true;
+      this.categoryService.getAllCategories().pipe(tap({
         next: (response) => {
           this.isLoading = false;
         },
@@ -96,7 +113,8 @@ export class BusquedaComponent implements OnInit {
         })
       ).subscribe(data => {
         if (data === false) {
-          alert("No hay stands en esta categoría");
+          this.noStands = true;
+          this.message = "No hay stands que coincidan con tu búsqueda";
         }
         this.stand = data; 
         console.log(this.stand);
@@ -118,7 +136,8 @@ export class BusquedaComponent implements OnInit {
       })).subscribe(
         data => {
         if (data === false) {
-          alert("No hay stands en esta categoría");
+          this.noStands = true;
+          this.message = "No hay stands que coincidan con tu búsqueda";
         }
         this.stand = data; 
         console.log(this.stand);
