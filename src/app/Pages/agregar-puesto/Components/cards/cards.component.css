@@ -5,9 +5,19 @@
 }
 
 #image{
-    height: 20vh;
+    height: 22vh;
     width: 35vh;
-    background-size: cover;
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden;
+}
+
+#multimedia{
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  background-size: cover;
+  overflow: hidden;
 }
 
 /*CORAZON*/
