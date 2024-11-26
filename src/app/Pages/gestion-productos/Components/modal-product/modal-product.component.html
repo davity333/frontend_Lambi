@@ -1,3 +1,5 @@
+<app-confirmation *ngIf="isSuccess" [mensaje]="message"></app-confirmation>
+<app-negation *ngIf="isError" [mensaje]="message"></app-negation>
 <div id="fondo">
     <div id="modal" class="overflow-auto">
       <form id="body" [formGroup]="formProduct">

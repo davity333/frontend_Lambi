@@ -2,23 +2,41 @@
     <div class="text-center">
     <p id="titulo" class="text-[3.9vh]">Gestion de productos</p>
     <p>Añade, actualiza y elimina tus productos en esta sección</p>
-    </div>
 
-    <div class="p-4">
+    </div>
+    
+    <div class="p-4 flex flex-row gap-4">
+      <button
+  class="relative w-[20vh] h-10 cursor-pointer flex items-center border border-blue-400 bg-blue-400 group hover:bg-blue-400 active:bg-blue-400 active:border-blue-400"
+  id="botonPuesto" (click)="goToHome()"
+>
+  <span
+    class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+    >Regresar</span
+  >
+  <span
+  class="absolute right-0 h-full w-10  bg-blue-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+  >
+  <img src="./assets/return.svg" alt="Home" class="w-6 h-6">
+  
+  </span>
+</button>
       <button type="button" class="button" (click)="openModal()">
         <span class="button__text">Agregar</span>
         <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
   </button>
+  
 </div>
 
     <div class="overflow-y-auto w-full max-w-7xl mt-5">
     <table class="min-w-full bg-white border border-gray-300">
         <thead>
-          <tr class="bg-gray-300">
+          <tr class="bg-orange-300">
             <th class="py-3 px-6 border text-center">Nombre</th>
             <th class="py-3 px-6 border text-center">Tipo</th>
             <th class="py-3 px-6 border text-center">Cantidad</th>
             <th class="py-3 px-6 border text-center">Precio</th>
+            <th class="py-3 px-6 border text-center">Número de imágenes</th>
             <th class="py-3 px-6 border text-center">Funciones</th>
           </tr>
         </thead>
@@ -26,8 +44,9 @@
           <tr *ngFor="let object of products; let i = index">
             <td class="py-3 px-6 border text-center">{{object.name}}</td>
             <td class="py-3 px-6 border text-center">{{object.category}}</td>
-            <td class="py-3 px-6 border text-center">{{object.amount}}</td>
-            <td class="py-3 px-6 border text-center">{{object.price}}</td>
+            <td class="py-3 px-6 border text-center" [ngClass]="{'bg-red-400 text-white': object.amount < 1}">{{object.amount}}</td>
+            <td class="py-3 px-6 border text-center text-green-500 font-bold">{{object.price | currency: 'MXN'}}</td>
+            <td class="py-3 px-6 border text-center font-bold">{{object.image.length}}</td>
             <td class="py-3 px-6 border flex justify-center gap-4">
               <img
                 src="./assets/actualizar.png"
