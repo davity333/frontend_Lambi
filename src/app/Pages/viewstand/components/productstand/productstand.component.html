@@ -4,46 +4,49 @@
   <h1 class="text-4xl font-semibold">Productos y servicios</h1>
   <p class="text-xl">Encuentra la variedad de productos y servicios diseñados para satisfacer tus necesidades</p>
   
-  <div class="grid grid-cols-4 xl:flex-row items-center xl:items-start justify-stretch gap-4 xl:gap-4 p-4 w-full">
+  <div class="grid grid-cols-1 xl:grid-cols-4 items-center gap-4 p-4 w-full">
     <div 
-    class="flex bg-white shadow-md gap-4 p-3 flex-col xl:flex-row xl:h-[30vh] rounded-md"
-    *ngFor="let object of products; let i = index">
-    
-    <!-- Imagen -->
-    <img 
-      class="w-full h-[15vh] xl:w-[40%] xl:h-full object-cover rounded-md"
-      [src]="object.image[0]"
-      alt="Producto" 
-      (click)="openModal(object)">
-    
-    <!-- Contenido -->
-    <div class="flex flex-col justify-between w-full p-2">
-      <!-- Título y detalles -->
-      <div>
-        <h1 id="text" class="text-lg font-semibold">{{object.name}}</h1>
-        <p id="text" class="text-sm mt-1">
-          Cantidad: {{object.amount}} <br>
-          Precio: {{object.price | currency}}
-        </p>
+      class="flex flex-col sm:flex-row bg-white shadow-md hover:shadow-xl duration-150 gap-4 p-3 xl:flex-col xl:h-[50vh] md:h-[70vh] rounded-md"
+      *ngFor="let object of products; let i = index">
+      
+      <!-- Imagen -->
+      <div 
+        class="w-full sm:w-[40%] xl:w-full rounded-md bg-cover bg-center aspect-[4/3] sm:aspect-[16/9]"
+        [style.background-image]="'url(' + object.image[0] + ')'"
+        (click)="openModal(object)">
       </div>
-      <!-- Botones -->
-      <div class="mt-4">
-        <button 
-          *ngIf="object.amount > 0" 
-          class="text-center bg-orange-300 hover:bg-orange-400 rounded-lg w-full py-2 text-white"
-          (click)="abrirModal(object)">
-          Agregar al carrito
-        </button>
-        <p 
-          *ngIf="object.amount == 0" 
-          class="text-center bg-red-400 rounded-lg w-full py-2 text-white">
-          No hay stock
-        </p>
+      
+      <!-- Contenido -->
+      <div class="flex flex-col justify-between w-full sm:w-[60%] xl:w-full p-2">
+        <!-- Título y detalles -->
+        <div>
+          <h1 id="text" class="text-lg font-semibold">{{object.name}}</h1>
+          <p id="text" class="text-sm mt-1">
+            Cantidad: {{object.amount}} <br>
+            Precio: {{object.price | currency}}
+          </p>
+        </div>
+        <!-- Botones -->
+        <div class="mt-7">
+          <button 
+            *ngIf="object.amount > 0" 
+            class="text-center bg-orange-300 hover:bg-orange-400 rounded-lg w-full py-2 text-white"
+            (click)="abrirModal(object)">
+            Agregar al carrito
+          </button>
+          <p 
+            *ngIf="object.amount == 0" 
+            class="text-center bg-red-400 rounded-lg w-full py-2 text-white">
+            No hay stock
+          </p>
+        </div>
       </div>
     </div>
   </div>
   
-  </div>
+  
+  
+  
 </section>
 <div *ngIf="ventanaModal">
 <app-modal (modal)="cerrarModal($event)"></app-modal>
