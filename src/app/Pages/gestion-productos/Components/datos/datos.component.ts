@@ -111,12 +111,8 @@ export class DatosComponent implements OnInit{
     this.productService.updateProduct(this.productToUpdate, productUpdatetin).pipe(tap({
     next: (response) => {
       console.log("hola")
-      if(response == false){
-        alert("Error al actualizar")
-      }else{
         console.log("this is", response)
         alert("Producto actualizado con éxito");
-      }
     },
     error: (err) => {
       alert("Ha ocurrido un error al actualizar el producto"+JSON.stringify(err));

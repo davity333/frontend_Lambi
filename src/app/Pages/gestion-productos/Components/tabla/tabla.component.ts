@@ -24,6 +24,7 @@ export class TablaComponent implements OnInit {
   idProduct: number = 0;
   modal:boolean = false;
   updateOrNot: boolean = false; 
+
   constructor(private productService:ProductsService) { }
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
@@ -74,10 +75,14 @@ export class TablaComponent implements OnInit {
   closeModal(valor: boolean){
       this.modal = valor;
   }
-
+  putArray($event: Product[]){
+   this.products = $event; 
+  }
   openModal(){
     this.modal = true;
   }
-
+  addToArray($event: Product){
+    this.products.push($event);
+  }
 }
 
