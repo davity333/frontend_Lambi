@@ -4,10 +4,7 @@
          class="rounded-t-xl" 
          id="image">
 
-    <!-- Contenedor principal de contenido en blanco -->
     <div class="pl-4 pr-4 pb-4 bg-white rounded-b-xl relative">
-        
-        <!-- Contenedor del icono de corazón sobre el fondo blanco -->
         <div class="absolute top-2 right-2" (click)="toggleFavorite()">
             <label class="ui-bookmark">
               <div class="bookmark" [class.filled]="stand.favorite_status && stand.favorite_user">

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card"  (click)="sendIdStand()">
   <div class="img">
     <img [src]="mystand.image[0]" alt="">
 
@@ -8,7 +8,7 @@
     <p class="h3">{{mystand.name}}</p>
     <p class="p"> {{ categori || "null" }} </p>
 
-    <div class="icon-box flex justify-center" (click)="sendIdStand()">
+    <div class="icon-box flex justify-center">
      
       <p class="span">Ver puesto</p>
     </div>
