@@ -3,9 +3,9 @@ import { PaymentService } from './services/payment.service'
 import { SellRequest } from './models/sell-request';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { pipe, tap } from 'rxjs';
-
+import { ProductsService } from '../gestion-productos/service/products.service';
 declare var Stripe: any;
-
+import { StandByClientService } from '../negocios/services/stand-by-client.service';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -13,12 +13,56 @@ declare var Stripe: any;
 })
 export class PaymentComponent {
   message: string | null = null;
-
-  constructor(private paymentService: PaymentService) {}
+  standIdFk: number = 0;
+  idBuyer: number = 0;
+  productCarr: any[] = [];
+  isSuccess: boolean = false;
+  total: number = 0;
+  mensaje: string = '';
+  constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService) {}
+  ngOnInit() {
+    const storedStandId = localStorage.getItem('standId');
+    this.standIdFk = Number(storedStandId);
+    const Idbuyer = localStorage.getItem('buyer');
+    this.idBuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
+    const carrito = this.productService.getCar();
+    this.productCarr = carrito;
+    
+    this.total = this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
+    
+  }
 
   submitPayment(event: Event) {
-    event.preventDefault();
+    this.standService.createSell(this.nuevoCarrito()).pipe(tap({
+      next: (res) => {
+        console.log(res);
+        this.isSuccess = true;
+        this.mensaje = 'Pago realizado correctamente';
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })).subscribe();
 
+  }
+  nuevoCarrito() {
+    const carritoNuevo: SellRequest = {
+      hour: new Date().toLocaleTimeString(), // Hora actual
+      date: new Date().toLocaleDateString(), // Fecha actual
+      description: 'Orden de compra', // Cambia esto según lo que necesites
+      standid_fk: Number(this.standIdFk), // ID del stand
+      idbuyer: Number(this.idBuyer),
+      sells: this.productCarr.map((item) => ({
+        idproduct: item.idproduct,
+        amount: item.amountCantidad
+      }))
+    };
+    return carritoNuevo;
+
+
+  }
+  calcularTotal(): number {
+    return this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
   }
 }
 /*export class PaymentComponent implements OnInit {

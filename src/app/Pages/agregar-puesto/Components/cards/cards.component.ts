@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter} from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit} from '@angular/core';
 import { PuestoService } from '../../Services/puesto.service';
 import { Categoria } from '../../Models/estados';
 import { CategoryService } from '../../../busqueda/services/category.service';
@@ -9,7 +9,7 @@ import { tap } from 'rxjs';
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css'] // Cambié `styleUrl` a `styleUrls` para arreglar el error.
 })
-export class CardsComponent {
+export class CardsComponent implements OnInit {
   @Input() stand: any;
   categories: Categoria[] = [];
   categori = "";

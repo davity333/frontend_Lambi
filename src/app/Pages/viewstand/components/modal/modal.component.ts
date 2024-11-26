@@ -36,6 +36,9 @@ export class ModalComponent implements OnInit {
   sendMessage(){
     this.router.navigate(['/sendMessage']);
   }
+  sendPayment(){
+    this.router.navigate(['/payment']);
+  }
 
   agregarMas(object: Carrito): void {
     if (object.amountCantidad >= object.datos.amount) {

@@ -7,7 +7,7 @@ shadow-[0px_9px_5px_-1px_rgba(0,0,0,0.13)] z-10 sticky top-0">
         
         <div class="cursor-pointer flex gap-10 font-semibold items-center">
             <p class="px-6 py-1 duration-150 hover:bg-[#a75c5c48] hover:duration-150 rounded-xl
-            text-[#000000bb] hidden sm:block" *ngIf="!usersService.isStatusSeller()">Lugares</p>
+            text-[#000000bb] hidden sm:block" *ngIf="!usersService.isStatusSeller()" [routerLink]="['/busqueda']">Todos los puestos</p>
 
             <p class="font-extralight hidden sm:block" *ngIf="!usersService.isStatusSeller()">|</p>
 
