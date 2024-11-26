@@ -27,6 +27,7 @@ export class TablaComponent implements OnInit {
   updateOrNot: boolean = false; 
 
   constructor(private productService:ProductsService, private router: Router) { }
+
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
 

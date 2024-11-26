@@ -112,6 +112,7 @@ onFileSelected(event: Event): void {
         console.log(response);
         this.isSuccess = true;
         this.message = "Producto agregado con éxito";
+
         this.productEvent.emit(response);
       },
       error: (err) => {
@@ -146,6 +147,7 @@ onFileSelected(event: Event): void {
             this.isSuccess = false;
             this.closeModal();
           }, 1000);
+
       },
       error: (err) => {
         console.error('Error al editar el producto', err);
