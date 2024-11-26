@@ -139,4 +139,8 @@ export class SectionviewstandComponent {
    
   }
 
+  agregarProductos(){
+    localStorage.setItem('standId', this.idstand.toString());
+    this.router.navigate(['/gestionProducto']);
+  }
 }

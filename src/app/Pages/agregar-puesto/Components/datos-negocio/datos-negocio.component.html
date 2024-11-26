@@ -110,3 +110,10 @@
 </div>
 </form>
 </div>
+<div *ngIf="alertaConfirmation">
+<app-confirmation [mensaje]="mensajeAlerta"></app-confirmation>
+</div>
+
+<div *ngIf="alertaNegation">
+    <app-negation [mensaje]="mensajeAlerta"></app-negation>
+</div>

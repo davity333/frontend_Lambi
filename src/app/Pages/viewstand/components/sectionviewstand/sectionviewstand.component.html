@@ -25,7 +25,7 @@
         <p class="text-[4.4vh] font-bold">{{standClient.name}}</p>
         <p class="text-[18px] tracking-wide font-light pt-3 pb-3">{{standClient.description}}</p>
         <div *ngIf="send_to_house" class="flex items-center gap-2 flex-wrap flex-row"> 
-          <img src="./assets/delivery.svg" alt="Delivery">
+          <img src="./assets/delivery.svg" alt="Delivery" class="opacity-60">
           <p class="text-[18px] tracking-wide font-light pt-3 pb-3">Este puesto ofrece servicio a domicilio</p>
         </div>
         <div class="flex items-center justify-center md:justify-start gap-2 w-full">
@@ -93,6 +93,7 @@
 <button
   class="rounded-lg relative w-[30vh] h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
   id="botonAgregarProductos"
+  (click)="agregarProductos()"
 >
   <span
     class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"

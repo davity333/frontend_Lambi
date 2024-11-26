@@ -13,18 +13,14 @@ export class NegationComponent implements OnInit {
     setTimeout(() => {
       const modal = document.getElementById('modal');
       if (modal) {
-        // Configurar la transición de opacidad para durar 2 segundos
         modal.style.transition = 'opacity 2s ease';
-        
-        // Iniciar el desvanecimiento
         modal.style.opacity = '0'; 
-        
-        // Después de 2 segundos, ocultar el modal con visibility
+
         setTimeout(() => {
           modal.style.visibility = 'hidden'; 
-        }, 5000); // Esto se ejecuta después de que termine la transición de opacidad
+        }, 3000); 
       }
-    }, 5000); // Espera 5 segundos antes de iniciar el desvanecimiento
+    }, 3000); 
   }
   
 }
