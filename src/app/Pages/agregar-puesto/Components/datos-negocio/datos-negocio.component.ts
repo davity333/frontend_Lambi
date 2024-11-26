@@ -4,6 +4,7 @@ import { PuestoService } from '../../Services/puesto.service';
 import { createSellerUsersService } from '../../../Auth/users.service';
 import { Categoria, Estados } from '../../Models/estados';
 import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-negocio',
@@ -27,11 +28,12 @@ export class DatosNegocioComponent implements OnInit {
   alertaNegation: boolean = false;
   imagenesData:string[] = [];
   idStand: number = 0;
+  isLoading: boolean = false;
   municipio = [
     { nombre: "Tuxtla" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
   ];
 
-  constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef) {
+  constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef, private router: Router) {
     this.datos = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -144,13 +146,20 @@ export class DatosNegocioComponent implements OnInit {
     phones.forEach(phone => {
       formData.append('phone', phone);
     });
+
+    this.isLoading = true;
     this.puesto.agregarPuesto(formData).subscribe({
       next: (response) => {
         this.mensajeAlerta = 'Negocio publicado con éxito';
         this.alertaConfirmation = true;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 2000);
       },
       error: (err) => {
         alert('Error con la API: ' + err.message);
+        this.isLoading = false;
       }
     });
     }else{

@@ -71,6 +71,23 @@
 
   <!-- EDITAR PUESTO -->
   <div class="flex gap-8" *ngIf="idSeller > 0">
+    <button
+  class="rounded-lg relative w-[25vh] h-10 cursor-pointer flex items-center border border-blue-400 bg-blue-400 group hover:bg-blue-400 active:bg-blue-400 active:border-blue-400"
+  id="botonPuesto"
+  (click)="goToHome()"
+>
+  <span
+    class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+    >Ir a inicio</span
+  >
+  <span
+  class="absolute right-0 h-full w-10 rounded-lg bg-blue-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+  >
+  <img src="./assets/return.svg" alt="Home" class="w-6 h-6">
+  
+  </span>
+</button>
+
 <button
   class="rounded-lg relative w-[25vh] h-10 cursor-pointer flex items-center border border-gray-400 bg-gray-400 group hover:bg-gray-400 active:bg-gray-400 active:border-gray-400"
   id="botonPuesto"
@@ -98,7 +115,7 @@
 >
   <span
     class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
-    >Agregar productos</span
+    >Gestionar productos</span
   >
   <span
   class="absolute right-0 h-full w-10 rounded-lg bg-green-600 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"

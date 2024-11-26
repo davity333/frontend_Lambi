@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { EnviarProducto, Product } from '../../Models/product';
 import { stringify } from 'querystring';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tabla',
   templateUrl: './tabla.component.html',
@@ -25,7 +26,8 @@ export class TablaComponent implements OnInit {
   modal:boolean = false;
   updateOrNot: boolean = false; 
 
-  constructor(private productService:ProductsService) { }
+  constructor(private productService:ProductsService, private router: Router) { }
+
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
 
@@ -48,7 +50,6 @@ export class TablaComponent implements OnInit {
       arrayProduct: this.products, 
       updateOrNot: true
     };
-    alert("Actualizar en el producto: " + this.indexProduct);
     this.modal = true; 
     this.updateOrNot = true;
   }
@@ -80,6 +81,9 @@ export class TablaComponent implements OnInit {
   }
   openModal(){
     this.modal = true;
+  }
+  goToHome(){
+    this.router.navigate(['/viewstand']);
   }
   addToArray($event: Product){
     this.products.push($event);

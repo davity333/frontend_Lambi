@@ -72,9 +72,15 @@ class="bg-white border border-gray-300 rounded-md max-h-40 overflow-auto"
 <div class="flex justify-center mt-1 sm:mt-4 xl:mt-0">
   <button 
     class="bg-orange-200 hover:bg-orange-300 text-center rounded-lg w-full p-2 text-sm duration-100"
-    (click)="abrirModal(object)"
+    (click)="abrirModal(object)" *ngIf="!isWindowAllProducts"
   >
     Agregar al carrito
+  </button>
+  <button 
+    class="bg-orange-200 hover:bg-orange-300 text-center rounded-lg w-full p-2 text-sm duration-100"
+    (click)="watchProduct(object)" *ngIf="isWindowAllProducts"
+  >
+    Ver producto
   </button>
 </div>
 </div>

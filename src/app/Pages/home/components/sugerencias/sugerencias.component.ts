@@ -27,7 +27,8 @@ export class SugerenciasComponent implements OnInit {
       this.isLoading = false;
     }
   })).subscribe(data => {
-    this.stands = data.filter((item: any) => item.rating >= 4);
+    //this.stands = data.filter((item: any) => item.rating >= 4);
+    this.stands = data;
     console.log("los puestos con mas de 4 estrellas",this.stands)
   });
   }
