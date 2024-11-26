@@ -23,6 +23,7 @@ import { DatosComponent } from './Pages/gestion-productos/Components/datos/datos
 import { CommonModule } from '@angular/common';
 import { FormControl,ReactiveFormsModule,FormGroup } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxToastNotifierModule } from 'ngx-toast-notifier';
@@ -63,6 +64,7 @@ import { SendMessageComponent } from './Pages/sendMessage/send-message/send-mess
 import { SucefullComponent } from './Pages/sendMessage/components/sucefull/sucefull.component';
 import { CardSellsComponent } from './Pages/sendMessage/components/card-sells/card-sells.component';
 import { SectionSellComponent } from './Pages/sendMessage/components/section-sell/section-sell.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,7 +117,7 @@ import { SectionSellComponent } from './Pages/sendMessage/components/section-sel
     SendMessageComponent,
     SucefullComponent,
     CardSellsComponent,
-    SectionSellComponent
+    SectionSellComponent,
   ],
   
   imports: [
@@ -133,7 +135,8 @@ import { SectionSellComponent } from './Pages/sendMessage/components/section-sel
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient()
+    provideHttpClient(),
+    provideOAuthClient()
   ],
   bootstrap: [AppComponent]
 })

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { UserLogin } from '../register/models/user';
 import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,15 +15,20 @@ export class LoginComponent {
   alertaNegacion:boolean = false;
   alertaAfirmacion: boolean = false;
   mensajeAlerta:string='';
+  isLoggedIn: boolean = false;
 
-  constructor(private user: createSellerUsersService, private navegar: Router) {
+
+  constructor(private user: createSellerUsersService, private navegar: Router, private oauthService: OAuthService) {
     this.users = new FormGroup({
       e_mail: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
+  ngOnInit(): void {
+    this.isLoggedIn = this.oauthService.hasValidAccessToken();
+    this.oauthService.setupAutomaticSilentRefresh();
+  }
   logear() {
-    
     let userLogin: UserLogin = {
       e_mail: this.users.value.e_mail,
       password: this.users.value.password
