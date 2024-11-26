@@ -15,7 +15,7 @@ export class StandByClientService {
   private phoneBuyer:string = "";
   constructor(private http:HttpClient) { }
 
-  getStandByClients(standById: number) {
+  getStandByClients(standById: number): Observable<any>{
     let token = localStorage.getItem('token');
     let headers; 
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });

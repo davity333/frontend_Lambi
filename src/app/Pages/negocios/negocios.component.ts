@@ -30,6 +30,7 @@ export class NegociosComponent {
       },
       error: (err) => {
         console.error('Error getting stands', err);
+        alert(JSON.stringify(err))
         this.isLoading = false;
     
       }
