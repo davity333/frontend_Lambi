@@ -26,7 +26,7 @@ export class DatosNegocioComponent implements OnInit {
   alertaConfirmation: boolean = false;
   alertaNegation: boolean = false;
   imagenesData:string[] = [];
-
+  idStand: number = 0;
   municipio = [
     { nombre: "Tuxtla" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
   ];
@@ -48,8 +48,38 @@ export class DatosNegocioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const storedStand = localStorage.getItem('standId');
+    this.idStand = storedStand ? JSON.parse(storedStand) : null;
     const storedSeller = localStorage.getItem('seller');
     this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+
+    if (this.idStand > 0) {
+      this.puesto.getPuesto(this.idStand).pipe(
+        tap({
+          next: (response) => {
+            console.log("Obteniendo el puesto por el idStand", response);
+            
+            this.datos.patchValue({
+              name: response.name,
+              description: response.description,
+              street: response.street,
+              no_house: response.no_house,
+              colonia: response.colonia,
+              category: response.idcategory,
+              municipio: response.idmunicipio,
+              estado: response.idestado,
+              phone: response.phone,
+              horario: response.horario,
+              send_to_house: response.send_to_house === 1 ? true : null
+            });
+          },
+          error: (err) => {
+            console.error('Error al obtener el puesto', err);
+          }
+        })
+      ).subscribe();
+    }
+    
     alert(this.idSeller);
     this.puesto.getEstados().subscribe(
       (data) => {

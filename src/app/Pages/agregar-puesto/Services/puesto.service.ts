@@ -43,6 +43,11 @@ export class PuestoService {
     return this.httpClient.post<any>(url, puesto, {headers});
   }
 
+  getPuesto(id: number): Observable<any>{
+    let url = `http://52.72.44.45:8000/api/stand/${id}`;
+    return this.httpClient.get<any>(url);
+  }
+
 
   private fotos: File[] = []; // Archivos se almacenan como objetos File
 

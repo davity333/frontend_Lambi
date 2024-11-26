@@ -39,6 +39,7 @@ export class SectionviewstandComponent {
     this.nameBuyer = idBuyer ? JSON.parse(idBuyer).name: null;
     this.idSeller = standByClient ? JSON.parse(standByClient).idseller: null;
     console.log("la idStand es"+this.idstand)
+    
     if(this.idSeller > 0) {
         this.status = false
     }
@@ -142,5 +143,10 @@ export class SectionviewstandComponent {
   agregarProductos(){
     localStorage.setItem('standId', this.idstand.toString());
     this.router.navigate(['/gestionProducto']);
+  }
+
+  editarStand(){
+    localStorage.setItem('standId', this.idstand.toString());
+    this.router.navigate(['/crearPuesto']);
   }
 }

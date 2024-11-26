@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { createSellerUsersService } from '../../../Auth/users.service';
 import { PuestoService } from '../../Services/puesto.service';
-
+import { tap } from 'rxjs';
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.component.html',
@@ -10,27 +10,50 @@ import { PuestoService } from '../../Services/puesto.service';
 export class MapaComponent {
   center: google.maps.LatLngLiteral = { lat: 51.678418, lng: 7.809007 };  
   zoom = 8;
-
+  idStand: number = 0;
   latitude: number | null = null;
   longitude: number | null = null;
 
   ngOnInit(): void {
-    this.obtenerUbicacion();
+    const storedStand = localStorage.getItem('standId');
+    this.idStand = storedStand ? JSON.parse(storedStand) : null;
+
+    if(this.idStand > 0){
+      this.puestoService.getPuesto(this.idStand).pipe(tap({
+        next: (response) => {
+          console.log("obteniendo el puesto por el idStand",response);
+          this.center = { lat: response.latitud, lng: response.longitud };
+          this.latitude = response.latitud;
+          this.longitude = response.altitud;
+          this.zoom = 15;
+          this.obtenerUbicacion();
+        },
+        error: (err) => {
+          console.error("Error al obtener el puesto por el idStand", err);
+        }
+      })).subscribe();
+    }else{
+      this.obtenerUbicacion();
+    }
   }
   constructor(private user: createSellerUsersService, private puestoService: PuestoService){}
 
-  obtenerUbicacion() {
+  obtenerUbicacion(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
-          this.center = { lat, lng }; 
-          this.latitude = lat; 
-          this.longitude = lng; 
-          this.zoom = 15; 
+  
+          // Solo actualizamos las coordenadas si no fueron ya definidas
+          if (!this.latitude || !this.longitude) {
+            this.latitude = lat;
+            this.longitude = lng;
+            this.center = { lat, lng };
+            this.zoom = 15;
+          }
+  
           console.log(`Ubicación obtenida: Lat: ${lat}, Lng: ${lng}`);
-
         },
         (error) => {
           console.error("Error al obtener la ubicación: ", error);

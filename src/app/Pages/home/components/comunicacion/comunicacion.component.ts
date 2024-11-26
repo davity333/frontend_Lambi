@@ -16,5 +16,6 @@ export class ComunicacionComponent{
     ngOnInit(): void {
         const status = this.usersService.getStatusSeller();
         console.log("el estado es: ", status);
+        localStorage.removeItem('standId');
     }
 }
