@@ -21,7 +21,7 @@ export class DatosNegocioComponent implements OnInit {
   altitud: string = "";
   categorias: Categoria[] = [];
   idCategoria: number = 0;
-
+  servicioDomicilio: boolean | null = null;
   
   imagenesData:string[] = [];
 
@@ -41,12 +41,14 @@ export class DatosNegocioComponent implements OnInit {
       estado: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       horario: new FormControl('', [Validators.required]),
+      send_to_house: new FormControl(null, [Validators.required]),
     });
   }
 
   ngOnInit(): void {
     const storedSeller = localStorage.getItem('seller');
     this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+    alert(this.idSeller);
     this.puesto.getEstados().subscribe(
       (data) => {
         this.estados = data;
@@ -82,6 +84,11 @@ export class DatosNegocioComponent implements OnInit {
     formData.append('no_house', this.datos.get('no_house')?.value);
     formData.append('estado', this.datos.get('estado')?.value);
     formData.append('horario', this.datos.get('horario')?.value);
+    if(this.datos.get('send_to_house')?.value === true){
+      formData.append('send_to_house', 'true');
+    }else{
+      formData.append('send_to_house', 'false');
+    }
     formData.append('idseller', this.idSeller);
     this.imageFiles.forEach(file => {
       formData.append('image', file, file.name); 
@@ -95,7 +102,7 @@ export class DatosNegocioComponent implements OnInit {
     if (!isNaN(altitud)) {
       formData.append('altitud', altitud.toString());
     }
-
+    console.log("el arreglo a mandar es "+this.datos.value);
     const phones: string[] = Array.isArray(this.datos.value.phone) ? this.datos.value.phone : [this.datos.value.phone];
     phones.forEach(phone => {
       formData.append('phone', phone);
@@ -110,9 +117,6 @@ export class DatosNegocioComponent implements OnInit {
     });
   }
   
-  
-  
-
   obtenerIdCategoria(event: any) {
     const selectedCategoryId = event.target.value;
     const selectedCategory = this.categorias.find(category => category.idcategory === +selectedCategoryId);

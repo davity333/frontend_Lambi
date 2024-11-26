@@ -35,7 +35,7 @@
 <div class=" mt-3 flex justify-between">
     <div class="flex flex-col gap-y-1">
         <label for="">Calle</label>
-        <input type="text" class="border-[0.2vh] border-[#00000049] w-[50vh] rounded-[4px]" formControlName="street">
+        <input type="text" class="border-[0.2vh] border-[#00000049] w-[30vh] rounded-[4px]" formControlName="street">
     </div>
     
     <div class="flex flex-col gap-y-1">
@@ -65,6 +65,8 @@
 </div>
 </div>
 
+<div class="flex gap-[19.5vh]">
+<div>
 <div class="flex gap-16 mt-3 justify-between">
 <div class="flex flex-col gap-y-1">
     <label for="">Horario</label>
@@ -74,7 +76,22 @@
 
 <div class="flex flex-col gap-y-1 mt-3">
     <label for="" class="text-[#434141]">Numero de telefonico</label>
-    <input type="text" name="" id="" class="border-[0.2vh] border-[#00000049] w-[40vh] rounded-[4px]" formControlName="phone">
+    <input type="text" name="" id="" class="border-[0.2vh] border-[#00000049] w-[30vh] rounded-[4px]" formControlName="phone">
+</div>
+</div>
+
+<div class="mt-3">
+    <p>Servicio a domicilio</p>
+
+    <div class="flex gap-5">
+        <label for="si">Sí</label>
+        <input type="radio" id="si" name="servicio-domicilio" value="true" formControlName="send_to_house">
+        <label for="no">No</label>
+        <input type="radio" id="no" name="servicio-domicilio" value="false" formControlName="send_to_house">
+    </div>
+</div>
+
+
 </div>
 
 <div class="flex justify-between mt-5 pb-4 text-[#494435]">

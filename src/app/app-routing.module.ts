@@ -30,7 +30,7 @@ const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'crearPuesto', component: AgregarPuestoComponent, canActivate:[sellerGuard]},
+  {path: 'crearPuesto', component: AgregarPuestoComponent},
   {path: 'gestionProducto', component: GestionProductosComponent},
   {path: 'negocios', component: NegociosComponent},
   {path: 'busqueda', component: BusquedaComponent},
