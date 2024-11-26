@@ -139,13 +139,21 @@ onFileSelected(event: Event): void {
         alert("Ha ocurrido un error al editar el producto");
       }
     })).subscribe()
-    this.fotos.forEach(file => {
-      console.log("Se ha agregado");
-      console.log(file);
-      let formDataImage = new FormData();
-      formDataImage.append('image', file, file.name); 
-    });
-
+    let formDataImages = new FormData();
+      this.fotos.forEach(file => {
+        console.log("Se ha agregado");
+        console.log(file);
+        formDataImages.append('image', file, file.name); 
+      });
+      console.log(this.productToUpdateNow.idProduct, this.fotos )
+      this.productService.editAddImages(this.productToUpdateNow.idProduct, formDataImages).pipe(tap({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (err) => {
+          console.error('Error al cargar imagenes', err);
+        }
+      })).subscribe();
   }
   removeImage(image: string): void {
     this.fotosPreview = this.fotosPreview.filter(img => img !== image);

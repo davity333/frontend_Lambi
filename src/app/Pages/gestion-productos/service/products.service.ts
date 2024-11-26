@@ -39,7 +39,7 @@ export class ProductsService {
     let token = localStorage.getItem('token');
     let headers; 
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    let url = `http://52.72.44.45:8000/api/protected/categoryProduct`;
+    let url = `http://52.72.44.45:8000/api/protected/categoryProduct/`;
     return this.httpClient.get<CategoryProduct[]>(url, {headers});
   }
   deletedProduct(id: number): Observable<any>{
@@ -49,7 +49,13 @@ export class ProductsService {
     let url = `http://52.72.44.45:8000/api/protected/products?product_id=${id}`;
     return this.httpClient.delete<any>(url, {headers});
   }
-
+  editAddImages(product_id: number, image: any): Observable<any>{
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/products/images/${product_id}`
+    return this.httpClient.put<any>(url,image,{headers})
+  }
   getProductId(index: number): Observable<Product[]> {
     let url = `http://52.72.44.45:8000/api/productsWithStandId/${index}`;
     return this.httpClient.get<Product[]>(url);
