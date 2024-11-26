@@ -24,7 +24,7 @@
           <label for="">Categoría</label>
           <select class="h-[4vh] border-2 border-[#0000003d] w-full focus:border-[#3b82f6] duration-75" formControlName="category">
             <option value="">Selecciona una categoría</option>
-            <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of categorias" [value]="object.idcategory">
+            <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of categorias" [value]="object.idcategoryproduct">
               {{ object.category }}
             </option>
           </select>

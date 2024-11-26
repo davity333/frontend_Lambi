@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product, ProductCarr, ProductUpdate } from '../Models/product';
 import { HttpHeaders } from '@angular/common/http';
 import { BlobOptions } from 'buffer';
+import { CategoryProduct } from '../Models/categoryProduct';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +35,13 @@ export class ProductsService {
     let url = `http://52.72.44.45:8000/api/protected/products/${id}`;
     return this.httpClient.put<Product | boolean>(url, producto, {headers});
   }
-
+  getCategoryProduct(): Observable<CategoryProduct[]>{
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/categoryProduct`;
+    return this.httpClient.get<CategoryProduct[]>(url, {headers});
+  }
   deletedProduct(id: number): Observable<any>{
     let token = localStorage.getItem('token');
     let headers; 

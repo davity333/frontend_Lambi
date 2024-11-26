@@ -5,6 +5,7 @@ import { ProductsService } from '../../service/products.service';
 import { EnviarProducto, Product, ProductUpdate } from '../../Models/product';
 import { tap } from 'rxjs';
 import { Categoria } from '../../../agregar-puesto/Models/estados';
+import { CategoryProduct } from '../../Models/categoryProduct';
 @Component({
   selector: 'app-modal-product',
   templateUrl: './modal-product.component.html',
@@ -25,7 +26,7 @@ export class ModalProductComponent{
    fotosPreview: string[] = []; 
    fotosSeleccionadas: number = 0;
    idstand : number = 0;
-   categorias: Categoria[] = [];
+   categorias: CategoryProduct[] = [];
    tamanio: boolean = false;
    updateOrNot: boolean = false;  
    images: string[] =[];
@@ -42,7 +43,7 @@ export class ModalProductComponent{
   ngOnInit(): void {
     const storedSeller = localStorage.getItem('standId');
     this.idstand = storedSeller ? JSON.parse(storedSeller): null;
-  this.puesto.getCategorias().pipe(tap({
+  this.productService.getCategoryProduct().pipe(tap({
     next: (response) => {
       console.log(response);
       this.categorias = response;

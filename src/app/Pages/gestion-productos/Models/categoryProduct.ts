@@ -1,4 +1,4 @@
 export interface CategoryProduct {
-   idcategoryproduct: string
+   idcategoryproduct: number
    category: string
 }
