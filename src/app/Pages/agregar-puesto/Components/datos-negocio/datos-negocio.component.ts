@@ -22,7 +22,9 @@ export class DatosNegocioComponent implements OnInit {
   categorias: Categoria[] = [];
   idCategoria: number = 0;
   servicioDomicilio: boolean | null = null;
-  
+  mensajeAlerta: string = "";
+  alertaConfirmation: boolean = false;
+  alertaNegation: boolean = false;
   imagenesData:string[] = [];
 
   municipio = [
@@ -70,8 +72,13 @@ export class DatosNegocioComponent implements OnInit {
   publicar(): void {
     const formData = new FormData();
     this.imageFiles = this.puesto.getFotos();
+
+    if(this.datos.valid){
+      
+    
     if (this.imageFiles.length === 0) {
-      alert('Por favor, selecciona al menos una imagen.');
+      this.mensajeAlerta = 'Por favor, selecciona al menos una imagen.';
+      this.alertaNegation = true;
       return;
     }
 
@@ -109,12 +116,19 @@ export class DatosNegocioComponent implements OnInit {
     });
     this.puesto.agregarPuesto(formData).subscribe({
       next: (response) => {
-        alert('Datos del negocio publicados con éxito');
+        this.mensajeAlerta = 'Negocio publicado con éxito';
+        this.alertaConfirmation = true;
       },
       error: (err) => {
         alert('Error con la API: ' + err.message);
       }
     });
+    }else{
+      this.mensajeAlerta = 'Por favor, complete todos los campos.';
+      this.alertaNegation = true;
+      return;
+    }
+    
   }
   
   obtenerIdCategoria(event: any) {

@@ -1,6 +1,6 @@
 #modal {
     height: 6vh;
-    width: 25%;
+    width: auto;
     display: flex;
     position: fixed;
     bottom: 100%; 
@@ -19,6 +19,7 @@
     -moz-box-shadow: 14px -3px 4px -8px rgba(21, 180, 66) inset;
     opacity: 0;
     animation: alerta 0.5s ease forwards;
+    z-index: 1000;
 }
 
 @keyframes alerta {
