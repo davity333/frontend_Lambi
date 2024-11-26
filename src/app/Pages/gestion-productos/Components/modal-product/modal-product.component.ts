@@ -15,6 +15,8 @@ export class ModalProductComponent{
   products:Product[]= [];
   @Output() cerrarModal: EventEmitter<boolean> = new EventEmitter();
   @Output() editar: EventEmitter<boolean> = new EventEmitter();
+  @Output() arrayProduct: EventEmitter<Product[]> = new EventEmitter();
+  @Output() productEvent: EventEmitter<Product> = new EventEmitter();
   @Input() productToUpdateNow : EnviarProducto = {
     idProduct: 0,
     indexProduct: 0,
@@ -108,6 +110,7 @@ onFileSelected(event: Event): void {
       next: (response) => {
         console.log(response);
         alert("Producto agregado con éxito");
+        this.productEvent.emit(response);
       },
       error: (err) => {
         console.error('Error al agregar el producto', err);
@@ -115,7 +118,8 @@ onFileSelected(event: Event): void {
       }
     })).subscribe()
   }
-  editProduct(){
+  editProduct(){ 
+    let produtoActualizado: Product;
     let producto : ProductUpdate ={
       name: this.formProduct.value.name,
       description: this.formProduct.value.description,
@@ -126,20 +130,18 @@ onFileSelected(event: Event): void {
     }
     this.productService.updateProduct(this.productToUpdateNow.idProduct, producto).pipe(tap({
       next: (response) => {
-        if(response == false){
-          alert("Product no encontrado"); 
-        }
-        else {
+          produtoActualizado = response;
+          this.productToUpdateNow.arrayProduct[this.productToUpdateNow.indexProduct] = produtoActualizado;
           console.log(response);
           alert("Producto editado con éxito");
-        }
       },
       error: (err) => {
         console.error('Error al editar el producto', err);
         alert("Ha ocurrido un error al editar el producto");
       }
     })).subscribe()
-    let formDataImages = new FormData();
+    if(this.fotos.length>0){
+      let formDataImages = new FormData();
       this.fotos.forEach(file => {
         console.log("Se ha agregado");
         console.log(file);
@@ -149,11 +151,15 @@ onFileSelected(event: Event): void {
       this.productService.editAddImages(this.productToUpdateNow.idProduct, formDataImages).pipe(tap({
         next: (response) => {
           console.log(response);
+          produtoActualizado = response; 
+          this.productToUpdateNow.arrayProduct[this.productToUpdateNow.indexProduct] = produtoActualizado;
         },
         error: (err) => {
           console.error('Error al cargar imagenes', err);
         }
       })).subscribe();
+    }
+    this.arrayProduct.emit(this.productToUpdateNow.arrayProduct);
   }
   removeImage(image: string): void {
     this.fotosPreview = this.fotosPreview.filter(img => img !== image);

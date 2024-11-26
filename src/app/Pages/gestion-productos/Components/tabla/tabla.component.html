@@ -55,9 +55,9 @@
   </div>
     
   <div *ngIf="modal && updateOrNot==true">
-      <app-modal-product (editar)="agregar($event)" [productToUpdateNow]="enviarProduct" (cerrarModal)="closeModal($event)"></app-modal-product>
+      <app-modal-product (arrayProduct)="putArray($event)" (editar)="agregar($event)" [productToUpdateNow]="enviarProduct" (cerrarModal)="closeModal($event)"></app-modal-product>
   </div>
   <div *ngIf="modal && updateOrNot==false">
-    <app-modal-product (cerrarModal)="closeModal($event)"></app-modal-product>
+    <app-modal-product (productEvent)="addToArray($event)" (cerrarModal)="closeModal($event)"></app-modal-product>
   </div>
 

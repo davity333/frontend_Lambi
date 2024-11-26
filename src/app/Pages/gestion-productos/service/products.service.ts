@@ -28,12 +28,12 @@ export class ProductsService {
     return this.httpClient.post<any>(url, producto, {headers});
   }
 
-  updateProduct( id: number, producto: ProductUpdate): Observable<ProductUpdate | boolean>{
+  updateProduct( id: number, producto: ProductUpdate): Observable<Product>{
     let token = localStorage.getItem('token');
     let headers; 
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     let url = `http://52.72.44.45:8000/api/protected/products/${id}`;
-    return this.httpClient.put<Product | boolean>(url, producto, {headers});
+    return this.httpClient.put<Product>(url, producto, {headers});
   }
   getCategoryProduct(): Observable<CategoryProduct[]>{
     let token = localStorage.getItem('token');
