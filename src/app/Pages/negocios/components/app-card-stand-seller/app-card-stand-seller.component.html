@@ -1,7 +1,16 @@
-<div (click)="sendIdStand()" class="cursor-pointer w-[90%] h-[100px] gap-4 flex shadow-md lg:flex lg:flex-col lg:w-[300px] lg:h-[300px]">
-    <img src="./assets/ejemplo.jpeg" class="w-[150px] lg:w-[300px]" alt="img stand">
-    <div>
-        <p class="text-slate-900 text-xl  p-4 ">{{mystand.name}}</p>
-    <p>{{mystand.calle}}</p>
+<div class="card">
+  <div class="img">
+    <img [src]="mystand.image[0]" alt="">
+
+  </div>
+
+  <div class="text">
+    <p class="h3">{{mystand.name}}</p>
+    <p class="p"> {{ categori || "null" }} </p>
+
+    <div class="icon-box flex justify-center" (click)="sendIdStand()">
+     
+      <p class="span">Ver puesto</p>
     </div>
+  </div>
 </div>

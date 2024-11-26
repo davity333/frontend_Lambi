@@ -1,14 +1,17 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, Validators, } from '@angular/forms';
+import { createSellerUsersService } from '../../../Auth/users.service';
+import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-introduction',
   templateUrl: './introduction.component.html',
   styleUrl: './introduction.component.css'
 })
 
-export class IntroductionComponent {
-
+export class IntroductionComponent implements OnInit {
+  usersService = inject(createSellerUsersService);
+  nombreUsuario:String | null = null;
   form: FormGroup;
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
   constructor(private router: Router){
@@ -23,5 +26,8 @@ export class IntroductionComponent {
     this.router.navigate(['/busqueda']);
     }
   }
+  ngOnInit(): void {
+    this.nombreUsuario = localStorage.getItem('userName')
+}
 }
 

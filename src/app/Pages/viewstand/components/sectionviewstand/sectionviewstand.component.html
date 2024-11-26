@@ -21,10 +21,13 @@
 
     <!-- Columna derecha: Texto -->
     <div class="w-full md:w-1/2 space-y-6">
-      <!-- Detalles del stand -->
       <div>
         <p class="text-[4.4vh] font-bold">{{standClient.name}}</p>
         <p class="text-[18px] tracking-wide font-light pt-3 pb-3">{{standClient.description}}</p>
+        <div *ngIf="send_to_house" class="flex items-center gap-2 flex-wrap flex-row"> 
+          <img src="./assets/delivery.svg" alt="Delivery">
+          <p class="text-[18px] tracking-wide font-light pt-3 pb-3">Este puesto ofrece servicio a domicilio</p>
+        </div>
         <div class="flex items-center justify-center md:justify-start gap-2 w-full">
           <p class="font-bold opacity-60 text-[2.6vh]">Calificación:</p>
           <img 
@@ -65,6 +68,74 @@
     </div>
   </div>
 
+
+  <!-- EDITAR PUESTO -->
+  <div class="flex gap-8" *ngIf="idSeller > 0">
+<button
+  class="rounded-lg relative w-[25vh] h-10 cursor-pointer flex items-center border border-gray-400 bg-gray-400 group hover:bg-gray-400 active:bg-gray-400 active:border-gray-400"
+  id="botonPuesto"
+>
+  <span
+    class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+    >Editar puesto</span
+  >
+  <span
+  class="absolute right-0 h-full w-10 rounded-lg bg-gray-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+  >
+  <svg class="w-[29px] h-[29px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+  </svg>
+  
+  </span>
+</button>
+
+<!-- AGREGAR PRODUCTOS -->
+<button
+  class="rounded-lg relative w-[30vh] h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
+  id="botonAgregarProductos"
+>
+  <span
+    class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+    >Agregar productos</span
+  >
+  <span
+  class="absolute right-0 h-full w-10 rounded-lg bg-green-600 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+  >
+    <svg
+      class="svg w-8 text-white"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="12" x2="12" y1="5" y2="19"></line>
+      <line x1="5" x2="19" y1="12" y2="12"></line>
+    </svg>
+  </span>
+</button>
+
+<!-- VENTAS -->
+<button
+  class="rounded-lg relative w-[30vh] h-10 cursor-pointer flex items-center border border-yellow-500 bg-yellow-500 group hover:bg-yellow-500 active:bg-yellow-500 active:border-yellow-500"
+  id="botonAgregarProductos"
+>
+  <span
+    class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+    >Ver ventas</span
+  >
+  <span
+  class="absolute right-0 h-full w-10 rounded-lg bg-yellow-600 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+  >
+<p class="text-white font-medium">$</p>
+  </span>
+</button>
+</div>
+
   <!-- Componente debajo del carrusel y texto -->
   <div class="w-full " *ngIf="!isError">
     <div class="flex justify-end w-full items-end flex-col gap-4">
@@ -72,4 +143,6 @@
     </div>
     <app-productstand [standid]="idstand"></app-productstand>
   </div>
+
 </section>
+

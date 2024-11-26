@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { StandByClientService } from '../../../negocios/services/stand-by-client.service';
 import { tap } from 'rxjs';
 import { Product } from '../../../gestion-productos/Models/product';
+import { createSellerUsersService } from '../../../Auth/users.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sectionviewstand',
   templateUrl: './sectionviewstand.component.html',
@@ -21,7 +23,11 @@ export class SectionviewstandComponent {
   nameStand:string = "";
   nameBuyer:string = "";
   phoneBuyer:string = "";
-  constructor(private standByClient : StandByClientService){}
+  send_to_house:boolean = false;
+  constructor(private standByClient : StandByClientService, private usersService: createSellerUsersService){}
+  router = inject(Router);
+  usersServices = inject(createSellerUsersService);
+
 
   ngOnInit(){
     const storedSeller = localStorage.getItem('standId');
@@ -50,6 +56,7 @@ export class SectionviewstandComponent {
     })).subscribe(
       data => {
         this.standClient = data;
+        this.send_to_house = this.standClient.send_to_house;
         this.standByClient.setNameStand(this.standClient.name);
         this.standByClient.setNameBuyer(this.nameBuyer);
         this.standByClient.setPhoneBuyer(this.phoneBuyer);
