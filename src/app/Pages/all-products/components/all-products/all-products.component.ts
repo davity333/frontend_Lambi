@@ -5,6 +5,7 @@ import { Product } from '../../../gestion-productos/Models/product';
 import { Carrito } from '../../../gestion-productos/Models/carrito';
 import { ProductsService } from '../../../gestion-productos/service/products.service';
 import { FormGroup, FormControl ,Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
@@ -23,7 +24,8 @@ export class AllProductsComponent {
   searchForm: FormGroup;
   productsFound: Product[] = [];
   fixed:boolean = true;
-  constructor(private categoryService: CategoryService, private product: ProductsService) { 
+  isWindowAllProducts: boolean = true;
+  constructor(private categoryService: CategoryService, private product: ProductsService, private router: Router) { 
     this.searchForm = new FormGroup({
       searchProducts: new FormControl('', Validators.required)
     })
@@ -60,12 +62,15 @@ export class AllProductsComponent {
     this.filteredProducts = []; 
     console.log('Producto seleccionado:', product);
   }
+  watchProduct(object: any): void {
+    localStorage.setItem('standId', JSON.stringify(object.standid));
+    this.router.navigate(['/viewstand']);
+  }
   abrirModal(object: any): void {
     this.ventanaModal=true;
     this.fixed = false
     const productId = localStorage.getItem('productId');
     const standId = localStorage.getItem('standId');
-    console.log("ProductID",productId, "StandID",standId)
 
     const carrito: Carrito = {
       datos: object,
