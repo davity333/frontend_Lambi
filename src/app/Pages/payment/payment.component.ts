@@ -20,6 +20,7 @@ export class PaymentComponent {
   total: number = 0;
   mensaje: string = '';
   direccion_entrega:FormGroup
+  isError: boolean = false;
   constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService) {
     this.direccion_entrega = new FormGroup({
       location: new FormControl('', Validators.required)
@@ -28,13 +29,17 @@ export class PaymentComponent {
   ngOnInit() {
     const storedStandId = localStorage.getItem('standId');
     this.standIdFk = Number(storedStandId);
+
+    // Obtener información del comprador desde localStorage
     const Idbuyer = localStorage.getItem('buyer');
     this.idBuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
+
+    // Obtener carrito de compras desde el servicio
     const carrito = this.productService.getCar();
     this.productCarr = carrito;
-    
-    this.total = this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
-    
+
+    // Calcular el total al entrar
+    this.calcularTotal();
   }
 
   submitPayment(event: Event) {
@@ -48,6 +53,8 @@ export class PaymentComponent {
       },
       error: (err) => {
         console.log(err);
+        this.isError = true;
+        this.mensaje = 'Error al realizar el pago';
       }
     })).subscribe();
 
@@ -69,9 +76,10 @@ export class PaymentComponent {
 
 
   }
-  calcularTotal(): number {
-    return this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
-  }
+  calcularTotal(): void {
+    // Recalcular el total basado en los productos del carrito
+    this.total = this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
+}
 }
 /*export class PaymentComponent implements OnInit {
 
