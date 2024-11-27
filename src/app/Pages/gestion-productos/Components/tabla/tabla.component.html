@@ -1,5 +1,5 @@
 <div class="flex flex-col justify-center items-center w-full px-6 mt-16">
-  <app-question [title]="title" [message]="message"></app-question>
+ <app-question *ngIf="asking" [title]="title" (response)="answer=$event"  [message]="message"></app-question>
     <div class="text-center">
     <p id="titulo" class="text-[3.9vh]">Gestion de productos</p>
     <p>Añade, actualiza y elimina tus productos en esta sección</p>

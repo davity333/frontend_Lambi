@@ -26,6 +26,7 @@ export class TablaComponent implements OnInit {
   modal:boolean = false;
   updateOrNot: boolean = false; 
   answer: boolean = false;
+  asking: boolean = false;
   message: string = '¿Estas seguro de eliminar este producto?';
   title: string = 'Eliminar producto';
 
@@ -58,8 +59,9 @@ export class TablaComponent implements OnInit {
   }
 
   eliminar(id: number){
-       if(this.answer){
-        this.indexProduct = Number(id);
+    this.asking = true;
+        if(this.answer){
+          this.indexProduct = Number(id);
         this.productService.deletedProduct(this.indexProduct).pipe(tap({
           next: (response) => {
             if(response){
@@ -73,7 +75,11 @@ export class TablaComponent implements OnInit {
             console.error('Error al eliminar el producto', err);
           }
         })).subscribe()
-       }
+        }
+        if(!this.answer){
+          this.asking = false;
+        }
+       
   }
   agregar($event:boolean){
      this.updateOrNot = $event
