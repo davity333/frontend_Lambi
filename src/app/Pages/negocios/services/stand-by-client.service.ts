@@ -75,6 +75,14 @@ export class StandByClientService {
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.get<any>(`${this.url}api/sell/products/${standId}`, {headers});
   }
+
+  deleteStand(standId: number): Observable<any>{
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.delete<any>(`${this.url}api/protected/stand/${standId}`, {headers});
+
+  }
   }
 
 

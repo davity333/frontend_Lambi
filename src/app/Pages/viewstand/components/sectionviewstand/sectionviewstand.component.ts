@@ -27,8 +27,13 @@ export class SectionviewstandComponent {
   constructor(private standByClient : StandByClientService, private usersService: createSellerUsersService){}
   router = inject(Router);
   usersServices = inject(createSellerUsersService);
-
-
+  mensajeAlerta:string = "";
+  tituloAlerta:string = "";
+  alertaQuestion:boolean = false;
+  confirmation:boolean = false;
+  negation:boolean = false;
+  mensajeAlertaConfirmation:string = "";
+  mensajeAlertaNegacion:string = "";
   ngOnInit(){
     let edit = 0; 
     localStorage.setItem('edit', edit.toString());
@@ -70,15 +75,11 @@ export class SectionviewstandComponent {
     )
 
   }
-  images: string[] = [
-    'https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_website/es/cms/SEO/recipes/albondigas-caseras-de-cerdo-con-salsa-barbacoa.jpeg',
-    'https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_s3/image/HF_Y24_R16_W02_ES_ESSGB17598-4_Main_high-48eefd40.jpg',
-    'https://img.hellofresh.com/w_3840,q_auto,f_auto,c_fill,fl_lossy/hellofresh_s3/image/HF_Y24_R16_W24_ES_ESSGPB21283-2_Main_high-97359b19.jpg',
-  ];
+ 
   currentImageIndex = 0;
 
   next(): void {
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    this.currentImageIndex = (this.currentImageIndex + 1) % this.standClient.image.length;
   }
   goToHome(){
     this.router.navigate(['/home']);
@@ -86,7 +87,7 @@ export class SectionviewstandComponent {
 
   previous(): void {
     this.currentImageIndex =
-      (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+      (this.currentImageIndex - 1 + this.standClient.image.length) % this.standClient.image.length;
   }
   rating(){
     if(this.standClient.rating == null){
@@ -155,5 +156,41 @@ export class SectionviewstandComponent {
     localStorage.setItem('standId', this.idstand.toString());
     localStorage.setItem('edit', edit.toString());
     this.router.navigate(['/crearPuesto']);
+  }
+
+    mostrarAlerta(): void {
+    this.alertaQuestion = true;
+    this.tituloAlerta = 'Eliminar Puesto';
+    this.mensajeAlerta = '¿Estás seguro de querer eliminar este puesto?';
+  }
+
+  // Manejar respuesta del componente hijo
+  manejarRespuesta(confirmado: boolean): void {
+    this.alertaQuestion = false; 
+    if (confirmado) {
+      this.eliminarPuesto();
+    } else {
+        this.confirmation = true;
+        this.mensajeAlertaConfirmation = "Accion cancelada";
+    }
+  }
+
+  eliminarPuesto(): void {
+  console.log("ESTAS INTENTANDO ELIMINAR EL PUESTO CON EL ID: ",this.idstand);
+
+    this.standByClient.deleteStand(this.idstand).pipe(tap({
+      next: (response) => {
+        this.confirmation = true;
+        this.mensajeAlertaConfirmation = "Puesto eliminado exitosamente";
+            
+            this.router.navigate(['/negocios']);
+          
+      },
+      error: (err) => {
+        this.negation = true;
+        this.mensajeAlertaNegacion = "Error al eliminar el puesto";
+        console.error('Error al eliminar el puesto', err);
+      }
+    })).subscribe();
   }
 }

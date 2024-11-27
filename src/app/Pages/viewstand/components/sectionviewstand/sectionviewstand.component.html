@@ -139,6 +139,27 @@
   </span>
 </button>
 
+<!-- ELIMINAR PUESTO -->
+<button
+  class="rounded-lg relative w-[30vh] h-10 cursor-pointer flex items-center border border-red-500 bg-red-500 group hover:bg-red-500 active:bg-red-500 active:border-red-500"
+  id="botonAgregarProductos"
+  (click)="mostrarAlerta()"
+>
+  <span
+    class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+    >Eliminar puesto</span
+  >
+  <span
+  class="absolute right-0 h-full w-10 rounded-lg bg-red-600 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+  >
+  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 
+    4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+  </svg>
+  
+  </span>
+</button>
+
 <!-- VENTAS -->
 <button routerLink="/sells"
   class="rounded-lg relative w-[30vh] h-10 cursor-pointer flex items-center border border-yellow-500 bg-yellow-500 group hover:bg-yellow-500 active:bg-yellow-500 active:border-yellow-500"
@@ -164,6 +185,17 @@
     </div>
     <app-productstand [standid]="idstand"></app-productstand>
   </div>
-
 </section>
+<app-question
+  [message]="mensajeAlerta"
+  [title]="tituloAlerta"
+  (response)="manejarRespuesta($event)"
+  *ngIf="alertaQuestion"
+></app-question>
+<div *ngIf="confirmation">
+<app-confirmation [mensaje]="mensajeAlertaConfirmation"></app-confirmation>
+</div>
 
+<div *ngIf="negation">
+  <app-negation [mensaje]="mensajeAlertaNegacion"></app-negation>
+  </div>
