@@ -1,10 +1,16 @@
-<div class="bg-[#ffffff] shadow-xl rounded-t-xl relative" *ngIf="stand.favorite_status && stand.favorite_user">
-    <img src="https://lambifile.s3.us-east-1.amazonaws.com/f058f16f-95c6-40eb-b5c3-d805a0669e33.jpg" 
+<app-confirmation *ngIf="isSuccess" [mensaje]="message"></app-confirmation>
+<app-negation *ngIf="isError" [mensaje]="message"></app-negation>
+<div class="bg-[#ffffff] shadow-xl rounded-t-xl relative"  *ngIf="stand.favorite_status && stand.favorite_user">
+    <div class="multimedia">
+    <img [src]="stand.image[0]" 
          alt="" 
          class="rounded-t-xl" 
          id="image">
-
+    </div>
+    <!-- Contenedor principal de contenido en blanco -->
     <div class="pl-4 pr-4 pb-4 bg-white rounded-b-xl relative">
+        
+        <!-- Contenedor del icono de corazón sobre el fondo blanco -->
         <div class="absolute top-2 right-2" (click)="toggleFavorite()">
             <label class="ui-bookmark">
               <div class="bookmark" [class.filled]="stand.favorite_status && stand.favorite_user">
@@ -27,8 +33,10 @@
         <div>
             <h1 class="mt-2 font-semibold">{{ stand.name || null }}</h1>
             <h2 class="font-normal">{{ stand.municipio || "No existe" }}</h2>
-            <h2 class="font-normal hover:text-blue-600 cursor-pointer" (click)="watchStand()">{{ stand.distance  || "No existe" | number}} km</h2>
-            <h3 class="font-light text-center mt-2">{{ categori || "null" }} </h3>
+            <div class="flex flex-row cursor-pointer items-center justify-center h-[20px] gap-2 rounded-lg hover:text-blue-600" (click)="watchStand()">
+              <h3 class="font-light text-center ">{{ stand.distance || "No existe" | number }} km cerca de ti</h3>
+              <img src="./assets/map.svg" alt="icon location" class="w-[15px] h-[15px]">
+            </div>
         </div>
 
         <div class="flex justify-center mt-4">
