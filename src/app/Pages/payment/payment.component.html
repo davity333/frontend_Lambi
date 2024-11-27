@@ -1,5 +1,5 @@
 <app-header></app-header>
-<section class="flex justify-center w-[100%] items-center h-screen"  >
+<section class="flex justify-center w-[100%] items-center h-screen"  [formGroup]="direccion_entrega"  >
   <div class="w-[80%] h-[80%] flex-col shadow-lg rounded-lg bg-gray-200">
   <div class=" justify-center pt-4 pb-4 gap-10 flex-row flex items-center p-10 ">
  
@@ -67,7 +67,7 @@
       />
       
     </div>
-    <div class="flex flex-row justify-between" [formGroup]="direccion_entrega">
+    <div class="flex flex-row justify-between">
       <input type="text" class="w-full h-10 border-none outline-none text-sm bg-orange-300 text-white font-semibold caret-orange-500 pl-2" placeholder="Direccion de entrega" formControlName="location">
       <p>Total: {{total | currency:'MXN'}}</p>
      

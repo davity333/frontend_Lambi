@@ -36,6 +36,7 @@ export class SectionSellComponent implements OnInit {
               description: sell.sell_description,
               total_price: 0,
               hour: sell.hour,
+              direccion_entrega: sell.direccion_entrega,
               products: [] // Arreglo para los productos relacionados
             });
           }

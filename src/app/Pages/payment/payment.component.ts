@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { pipe, tap } from 'rxjs';
 import { ProductsService } from '../gestion-productos/service/products.service';
 declare var Stripe: any;
+import { Router } from '@angular/router';
 import { StandByClientService } from '../negocios/services/stand-by-client.service';
 @Component({
   selector: 'app-payment',
@@ -21,7 +22,7 @@ export class PaymentComponent {
   mensaje: string = '';
   direccion_entrega:FormGroup
   isError: boolean = false;
-  constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService) {
+  constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService, private router: Router ) {
     this.direccion_entrega = new FormGroup({
       location: new FormControl('', Validators.required)
     });
@@ -50,6 +51,7 @@ export class PaymentComponent {
           this.isSuccess = true;
           this.mensaje = 'Pago realizado correctamente';
         }, 1000);
+        this.router.navigate(['/viewstand']);
       },
       error: (err) => {
         console.log(err);
@@ -66,7 +68,7 @@ export class PaymentComponent {
       description: 'Orden de compra', // Cambia esto según lo que necesites
       standid_fk: Number(this.standIdFk), // ID del stand
       idbuyer: Number(this.idBuyer),
-      direccion_entrega: this.direccion_entrega.get('location')?.value || '',
+      direccion_entrega: this.direccion_entrega.get('location')?.value,
       sells: this.productCarr.map((item) => ({
         idproduct: item.idproduct,
         amount: item.amountCantidad

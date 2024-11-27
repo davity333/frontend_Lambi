@@ -114,7 +114,7 @@ export class SendMessageComponent {
   enviarWhatsApp(mensaje: string): void {
     
     const mensajeCodificado = encodeURIComponent(mensaje);
-    const urlWhatsApp = `https://wa.me/529661605775?text=${mensajeCodificado}`;
+    const urlWhatsApp = `https://wa.me/52${this.standService.getPhoneBuyer()}?text=${mensajeCodificado}`;
 
     // Abrir la URL en una nueva ventana (esto abre WhatsApp con el mensaje prellenado)
     window.open(urlWhatsApp, '_blank');

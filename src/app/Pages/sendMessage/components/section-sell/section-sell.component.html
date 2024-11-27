@@ -12,6 +12,7 @@
           <th class="px-4 py-2 border border-gray-300">Total (MXN)</th>
           <th class="px-4 py-2 border border-gray-300">Productos</th>
           <th class="px-4 py-2 border border-gray-300">Fecha</th>
+          <th class="px-4 py-2 border border-gray-300">Domicilio de entrega</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +28,7 @@
             </button>
           </td>
           <td class="px-4 py-2 border border-gray-300">{{ sell.hour | timeFormat }}</td>
+          <td class="px-4 py-2 border border-gray-300">{{ sell.direccion_entrega }}</td>
         </tr>
       </tbody>
       <tfoot>
