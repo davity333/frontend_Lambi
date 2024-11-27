@@ -23,7 +23,6 @@ export class MapaComponent {
   ngOnInit(): void {
     const storedStand = localStorage.getItem('standId');
     this.idStand = storedStand ? JSON.parse(storedStand) : null;
-    
     if(this.idStand > 0){
       this.puestoService.getPuesto(this.idStand).pipe(tap({
         next: (response) => {
@@ -86,7 +85,6 @@ export class MapaComponent {
   }
   guardarCoordenadas(event: Event) {
     event.preventDefault(); 
-    
     
     if (this.latitude !== null && this.longitude !== null) {
       let latitudString = this.latitude;

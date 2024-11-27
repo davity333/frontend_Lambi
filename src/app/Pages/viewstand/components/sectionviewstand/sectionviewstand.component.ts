@@ -73,7 +73,7 @@ export class SectionviewstandComponent {
         this.send_to_house = this.standClient.send_to_house;
         this.standByClient.setNameStand(this.standClient.name);
         this.standByClient.setNameBuyer(this.nameBuyer);
-        this.standByClient.setPhoneBuyer(this.phoneBuyer);
+        this.standByClient.setPhoneBuyer(data.phone);
         this.ratingStand = parseInt(this.standClient.rating);
         console.log("ratingStand",this.ratingStand);
         console.log("standClient",this.standClient);

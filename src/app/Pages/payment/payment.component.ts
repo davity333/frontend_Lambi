@@ -50,8 +50,9 @@ export class PaymentComponent {
         setTimeout(() => {
           this.isSuccess = true;
           this.mensaje = 'Pago realizado correctamente';
+          this.router.navigate(['/viewstand']);
         }, 1000);
-        this.router.navigate(['/viewstand']);
+        
       },
       error: (err) => {
         console.log(err);
@@ -68,7 +69,7 @@ export class PaymentComponent {
       description: 'Orden de compra', // Cambia esto según lo que necesites
       standid_fk: Number(this.standIdFk), // ID del stand
       idbuyer: Number(this.idBuyer),
-      direccion_entrega: this.direccion_entrega.get('location')?.value,
+      direccion_entrega: this.direccion_entrega.get('location')?.value || '',
       sells: this.productCarr.map((item) => ({
         idproduct: item.idproduct,
         amount: item.amountCantidad

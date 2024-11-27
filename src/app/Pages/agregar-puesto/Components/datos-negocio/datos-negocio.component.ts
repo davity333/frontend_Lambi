@@ -56,6 +56,9 @@ export class DatosNegocioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const storedSeller = localStorage.getItem('seller');
+    this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+
     this.estadosChiapas = [
       { nombre: "Chiapas" }
     ];
@@ -180,10 +183,11 @@ export class DatosNegocioComponent implements OnInit {
     }, 3000);
   }
   publicar(): void {
+  console.log("hola")
     const formData = new FormData();
     this.imageFiles = this.puesto.getFotos();
 
-    if(this.datos.valid){
+    
       
     
     if (this.imageFiles.length === 0) {
@@ -199,7 +203,7 @@ export class DatosNegocioComponent implements OnInit {
     formData.append('colonia', this.datos.get('colonia')?.value);
     formData.append('street', this.datos.get('street')?.value);
     formData.append('no_house', this.datos.get('no_house')?.value);
-    formData.append('estado', this.datos.get('estado')?.value);
+    formData.append('estado', this.datos.get('estado')?.value || 'Chiapas');
     formData.append('horario', this.datos.get('horario')?.value);
     if(this.datos.get('send_to_house')?.value == 'true'){
       formData.append('send_to_house', 'true');
@@ -226,6 +230,8 @@ export class DatosNegocioComponent implements OnInit {
     });
 
     this.isLoading = true;
+    alert("entro aqui")
+    alert("cordenadas"+ latitud + altitud)
     this.puesto.agregarPuesto(formData).subscribe({
       next: (response) => {
         this.mensajeAlerta = 'Negocio publicado con éxito';
@@ -240,11 +246,7 @@ export class DatosNegocioComponent implements OnInit {
         this.isLoading = false;
       }
     });
-    }else{
-      this.mensajeAlerta = 'Por favor, complete todos los campos.';
-      this.alertaNegation = true;
-      return;
-    }
+ 
     
   }
   regresar(){
