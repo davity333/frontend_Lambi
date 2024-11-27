@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { createSellerUsersService } from '../Auth/users.service';
 import { tap } from 'rxjs';
 import { UserRegister } from './models/user';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,9 +14,11 @@ export class RegisterComponent {
 
   users:FormGroup;
   userInterface:UserRegister[]=[];
-  
+  alertaNegative:boolean = false;
+  alertaPositiva: boolean = false;
+  mensajeAlerta:string='';
 
-  constructor(private user:createSellerUsersService) {
+  constructor(private user:createSellerUsersService, private navegar: Router) {
     this.users = new FormGroup({
       name: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
@@ -29,17 +31,23 @@ export class RegisterComponent {
     if (this.users.valid) {
       this.user.createUser(this.users.value).pipe(tap({
           next: (response) => {
-            alert("Usuario registrado con éxito");
+            this.alertaPositiva = true;
+            this.mensajeAlerta = "Usuario registrado con éxito";
             console.log(response);
+                setTimeout(() => {
+                this.navegar.navigate(['/login'])
+              }, 2000);
           },
           error: (err) => {
-            alert("Error con la API");
+            this.alertaNegative = true;
+            this.mensajeAlerta = "Error con la API";
             console.error('Error creating user', err);
           }
         })
       ).subscribe();
     } else {
-      alert("Por favor llene todos los campos correctamente");
+      this.alertaNegative = true;
+      this.mensajeAlerta = "Por favor llene todos los campos correctamente";  
     }
   }
 

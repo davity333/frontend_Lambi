@@ -1,13 +1,16 @@
 <div class="min-h-screen relative" id="fondo">
-    <app-loader *ngIf="isLoading"></app-loader>
     <img src="./assets/logo.png" alt="logo" 
         class="h-[7vh] transition-all duration-150 hover:h-20 hover:cursor-pointer absolute  left-4" 
         title="Home" id="logo" [routerLink]="['/']">
+        <div class="absolute inset-0 -z-50 shine-effect"></div>
 
     <div class="flex items-center justify-center min-h-screen">
         <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 sm:w-96" [formGroup]="userSeller">
             <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center 
-            mb-[76vh] sm:mt-[5vh] md:top-[4vh] lg:top-[4vh]  xl:top-[4vh] 2xl:top-[4vh]">
+            mb-[60vh] sm:mt-[15%] md:mb-[50%] lg:mb-[42%]  xl:mb-[40%] 2xl:mb-[40%]" 
+            [ngClass]="{
+                  'sm:mt-[13%] && mb-[81%]': userSeller.get('password')?.invalid && userSeller.get('password')?.touched
+                }">
                 <img src="./assets/logosolo.png" class="h-16 sm:h-20" alt="Logotipo"
                 [ngClass]="{
                     'top-12': (userSeller.get('password')?.invalid && userSeller.get('password')?.touched)
@@ -87,17 +90,6 @@
                 <a routerLink="/registerSeller" class="text-sky-500 hover:underline">Regístrate</a>
             </p>
 
-            <!-- Botón de Google -->
-            <button
-                class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
-                <img src="./assets/google.png" class="h-5 mr-2" alt="">Continuar con Google
-            </button>
-
-            <!-- Botón de Facebook -->
-            <button
-                class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
-                <img src="./assets/faceebok.png" class="h-5 mr-2" alt="">Continuar con Facebook
-            </button>
         </form>
         <div *ngIf="alertaNegative">
         <app-negation [mensaje]="mensajeAlerta"></app-negation>
@@ -108,5 +100,5 @@
         </div>
     </div>
 </div>
-
+    <app-loader *ngIf="isLoading"></app-loader>
 
