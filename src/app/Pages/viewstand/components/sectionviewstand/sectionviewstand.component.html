@@ -70,7 +70,6 @@
 
 
   <!-- EDITAR PUESTO -->
-  < class=" gap-8 grid grid-cols-2 md:flex" *ngIf="idSeller > 0">
 
   <div class="flex gap-8" *ngIf="idSeller > 0">
     <button
@@ -141,7 +140,7 @@
 </button>
 
 <!-- VENTAS -->
-<button
+<button routerLink="/sells"
   class="rounded-lg relative w-[30vh] h-10 cursor-pointer flex items-center border border-yellow-500 bg-yellow-500 group hover:bg-yellow-500 active:bg-yellow-500 active:border-yellow-500"
   id="botonAgregarProductos"
 >

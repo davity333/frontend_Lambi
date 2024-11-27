@@ -73,7 +73,7 @@ export class StandByClientService {
     let token = localStorage.getItem('token');
     let headers; 
     headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<any>(`${this.url}api/protected/sells/${standId}`, {headers});
+    return this.http.get<any>(`${this.url}api/sell/products/${standId}`, {headers});
   }
   }
 

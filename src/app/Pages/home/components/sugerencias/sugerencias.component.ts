@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../../busqueda/services/category.service';
 import { tap } from 'rxjs';
-
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-sugerencias',
   templateUrl: './sugerencias.component.html',
@@ -13,9 +13,9 @@ export class SugerenciasComponent implements OnInit {
   isLoading = true;
   stands: any[] = [];
   itemsPerView: number = 0;
-  constructor(private categoryService: CategoryService){}
+  constructor(private categoryService: CategoryService, private titleService: Title){}
   ngOnInit(): void {
-    // Ajusta itemsPerView según el tamaño de la ventana
+    this.titleService.setTitle('Home | Lambi');
     if (window.innerWidth <= 640) {
       this.itemsPerView = 1.03;
     } else {

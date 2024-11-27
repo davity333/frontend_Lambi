@@ -11,3 +11,14 @@ export const loginGuard = () =>{
         return false;
     }
 }
+
+export const loginSellerGuard = () =>{
+    const router = inject(Router);
+
+    if(localStorage.getItem('token')){
+        return true;
+    }else{
+        router.navigate(['/loginSeller']);
+        return false;
+    }
+}

@@ -61,9 +61,11 @@ import { ServicesStandsComponent } from './Pages/services/components/services-st
 import { WaitingLocationComponent } from './waiting-location/waiting-location.component';
 import { SendMessageComponent } from './Pages/sendMessage/send-message/send-message.component';
 import { SucefullComponent } from './Pages/sendMessage/components/sucefull/sucefull.component';
-import { CardSellsComponent } from './Pages/sendMessage/components/card-sells/card-sells.component';
 import { SectionSellComponent } from './Pages/sendMessage/components/section-sell/section-sell.component';
 import { QuestionComponent } from './question/question.component';
+
+
+import { TimeFormatPipe } from './pipes/time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -116,10 +118,10 @@ import { QuestionComponent } from './question/question.component';
     WaitingLocationComponent,
     SendMessageComponent,
     SucefullComponent,
-    CardSellsComponent,
     SectionSellComponent,
     CardSugerantionComponent,
     QuestionComponent,
+    TimeFormatPipe,
   ],
   
   imports: [

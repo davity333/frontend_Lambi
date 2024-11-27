@@ -3,7 +3,58 @@
   <div class="flex flex-col items-center justify-center mt-9">
     <h1 class="text-2xl font-bold">Ventas</h1>
   </div>
-  <div class="flex flex-row items-center justify-center gap-4 w-full h-[80vh] overflow-y-auto">
-    <app-card-sells *ngFor="let sell of sells" [sell]="sell"></app-card-sells>
+  <div class="container mx-auto p-4">
+    <table class="table-auto w-full text-left border-collapse border border-gray-300 shadow-md">
+      <thead class="bg-gray-800 text-white">
+        <tr>
+          <th class="px-4 py-2 border border-gray-300">#</th>
+          <th class="px-4 py-2 border border-gray-300">Descripción</th>
+          <th class="px-4 py-2 border border-gray-300">Total (MXN)</th>
+          <th class="px-4 py-2 border border-gray-300">Productos</th>
+          <th class="px-4 py-2 border border-gray-300">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sell of sells; let i = index" class="hover:bg-gray-100">
+          <td class="px-4 py-2 border border-gray-300">{{ i + 1 }}</td>
+          <td class="px-4 py-2 border border-gray-300">{{ sell.description }}</td>
+          <td class="px-4 py-2 border border-gray-300">{{ sell.total_price | currency:'MXN' }}</td>
+          <td class="px-4 py-2 border border-gray-300">
+            <button 
+              (click)="openModal(sell.products)" 
+              class="text-blue-600 underline hover:text-blue-800">
+              {{ sell.products.length }} producto(s)
+            </button>
+          </td>
+          <td class="px-4 py-2 border border-gray-300">{{ sell.hour | timeFormat }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="bg-gray-100 font-bold">
+          <td colspan="2" class="px-4 py-2 border border-gray-300 text-right">Total General:</td>
+          <td colspan="2" class="px-4 py-2 border border-gray-300">{{ calculateTotal() | currency:'MXN' }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  
+    <!-- Modal -->
+    <div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white p-6 rounded-lg w-96 shadow-lg">
+        <h2 class="text-xl font-bold mb-4">Detalles de Productos</h2>
+        <ul class="list-disc pl-5">
+          <li *ngFor="let product of modalProducts">
+            <strong>{{ product.name }}</strong> - {{ product.amount }} unidad(es)
+          </li>
+        </ul>
+        <div class="mt-4 flex justify-end">
+          <button (click)="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="flex flex-col items-center justify-center mt-9 gap-4 h-[80vh]" *ngIf="sells.length === 0">
+    <h1 class="text-2xl font-bold">Tu puesto no tiene ventas por el momento...</h1>
+    <button routerLink="/viewstand" class="bg-blue-500 text-white px-4 py-2 rounded-md">Volver</button>
   </div>
 </section>

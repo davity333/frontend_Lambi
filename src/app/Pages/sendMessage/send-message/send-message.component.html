@@ -7,10 +7,14 @@
     </div>
     <div class="flex justify-center items-center flex-col gap-4">
         <p>Agrega tu direccion de envio, para que el vendedor pueda enviarte tu pedido</p>
-        <input type="text" class="w-full p-2 rounded-md" placeholder="Direccion de envio">
+        <input type="text" class="w-full p-2 rounded-md border-2" placeholder="Direccion de envio" formControlName="mensaje" (focusout)="validateMessage()">
+
+        <p *ngIf="mensajeError" class="text-red-500 text-sm mt-1 pl-1">
+            Ingresa una direccion de envio
+        </p>
     </div>
 
-    <div class="flex justify-center items-center flex-row  gap-4">
+    <div class="flex justify-center items-center flex-row mt-2 gap-4">
         <button class="bg-blue-500 text-white px-4 py-2 rounded-md" (click)="saveShoppingCart()">Enviar pedido</button>
         <button class="bg-red-500 text-white px-4 py-2 rounded-md" (click)="cancelShoppingCart()">Cancelar pedido</button>
     </div>
