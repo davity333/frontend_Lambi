@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { createSellerUsersService } from '../../../Auth/users.service';
 import { PuestoService } from '../../Services/puesto.service';
 import { tap } from 'rxjs';
@@ -8,16 +8,18 @@ import { tap } from 'rxjs';
   styleUrl: './mapa.component.css'
 })
 export class MapaComponent {
+  @Input() imagesToShow = [""];
+  @Output() imagesToEdit = new EventEmitter<string[]>();
   center: google.maps.LatLngLiteral = { lat: 51.678418, lng: 7.809007 };  
   zoom = 8;
   idStand: number = 0;
   latitude: number | null = null;
   longitude: number | null = null;
-
+  
   ngOnInit(): void {
     const storedStand = localStorage.getItem('standId');
     this.idStand = storedStand ? JSON.parse(storedStand) : null;
-
+    
     if(this.idStand > 0){
       this.puestoService.getPuesto(this.idStand).pipe(tap({
         next: (response) => {
@@ -73,7 +75,11 @@ export class MapaComponent {
     }
   }
 
-
+  deleteImage(index: number){
+    this.imagesToShow.splice(index, 1);
+    console.log('Imagen eliminada:', this.imagesToShow);
+    this.imagesToEdit.emit(this.imagesToShow)// Eliminar la imagen del puesto en la base de datos
+  }
   guardarCoordenadas(event: Event) {
     event.preventDefault(); 
     alert("Se guardaron las coordenadas");

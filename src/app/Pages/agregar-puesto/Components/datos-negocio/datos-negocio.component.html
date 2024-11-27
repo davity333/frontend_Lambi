@@ -49,8 +49,8 @@
 <div class="flex flex-col gap-y-1">
     <label for="">Estado</label>
     <select class="w-[30vh] h-[5vh] border-[0.2vh] border-[#00000049]" formControlName="estado">
-        <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of estados">
-            {{object.nom_agee}}
+        <option class="bg-[#c5bfbf] text-gray-800" *ngFor="let object of estadosChiapas">
+            {{object.nombre}}
         </option>
     </select>
 </div>
@@ -95,9 +95,15 @@
 </div>
 
 <div class="flex justify-between mt-5 pb-4 text-[#494435]">
-    <button class="bg-[#FFDA83] py-2 px-5 rounded-md hover:bg-[#e5c373]" (click)="publicar()">Publicar negocio</button>
-    <button class="bg-[#B6E4DD] py-2 px-5 rounded-md hover:bg-[#a3d0c9]">Actualizar negocio</button>
-    <button class="bg-[#E4B6B6] py-2 px-5 rounded-md hover:bg-[#d1a4a4]">Eliminar negocio</button>
+    <div *ngIf=" edit == 1 ">
+        <button class="bg-[#B6E4DD] py-2 px-5 rounded-md hover:bg-[#a3d0c9]" (click)="actualizarPuesto()">Actualizar negocio</button>
+        <button class="bg-[#E4B6B6] py-2 px-5 rounded-md hover:bg-[#d1a4a4]">Eliminar negocio</button>
+    </div>
+    <div *ngIf="edit==0">
+        <button class="bg-[#FFDA83] py-2 px-5 rounded-md hover:bg-[#e5c373]" (click)="publicar()">Publicar negocio</button>
+        <button class="bg-[#E4B6B6] py-2 px-5 rounded-md hover:bg-[#d1a4a4]">Eliminar negocio</button>
+    </div>
+
 
     
 </div>
@@ -106,7 +112,7 @@
 </div>
 
 <div class="file-upload flex flex-col gap-2">
-<app-mapa></app-mapa>
+<app-mapa (imagesToEdit)="deleteImage($event)" [imagesToShow]="imagesToShow"></app-mapa>
 </div>
 </form>
 </div>
