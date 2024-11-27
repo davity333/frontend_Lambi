@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PuestoService } from '../../Services/puesto.service';
 import { createSellerUsersService } from '../../../Auth/users.service';
 import { Categoria, Estados } from '../../Models/estados';
-import { tap } from 'rxjs';
+import { tap, forkJoin } from 'rxjs';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,11 +30,16 @@ export class DatosNegocioComponent implements OnInit {
   imagenesData:string[] = [];
   idStand: number = 0;
   isLoading: boolean = false;
+  edit: number = 0; 
+  imagesToShow = [""]
   municipio = [
     { nombre: "Tuxtla Gutiérrez" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
   ];
+  estadosChiapas = [
+    { nombre: "Chiapas"}
+  ]
 
-  constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef, private router: Router) {
+  constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef, private router: Router, private location: Location) {
     this.datos = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -231,6 +237,9 @@ export class DatosNegocioComponent implements OnInit {
       return;
     }
     
+  }
+  regresar(){
+   this.location.back()
   }
   deleteImage($event: string[]){
     this.imagesToShow= $event;

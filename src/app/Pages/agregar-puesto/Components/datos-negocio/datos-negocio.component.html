@@ -98,11 +98,11 @@
 <div class="flex justify-between mt-5 pb-4 text-[#494435]">
     <div *ngIf=" edit == 1 ">
         <button class="bg-[#B6E4DD] py-2 px-5 rounded-md hover:bg-[#a3d0c9]" (click)="actualizarPuesto()">Actualizar negocio</button>
-        <button class="bg-[#E4B6B6] py-2 px-5 rounded-md hover:bg-[#d1a4a4]">Eliminar negocio</button>
+        <button class="bg-[#E4B6B6] py-2 px-5 rounded-md hover:bg-[#d1a4a4]" (click)="regresar()">Regresar</button>
     </div>
     <div *ngIf="edit==0">
         <button class="bg-[#FFDA83] py-2 px-5 rounded-md hover:bg-[#e5c373]" (click)="publicar()">Publicar negocio</button>
-        <button class="bg-[#E4B6B6] py-2 px-5 rounded-md hover:bg-[#d1a4a4]">Eliminar negocio</button>
+        <button class="bg-[#E4B6B6] py-2 px-5 rounded-md hover:bg-[#d1a4a4]" (click)="regresar()">Regresar</button>
     </div>
 
 
