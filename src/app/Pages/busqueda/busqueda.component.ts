@@ -69,7 +69,6 @@ export class BusquedaComponent implements OnInit {
             this.isLoading = false;
           },
           error: (response) => {
-            alert("Ha habido un error en la página");
             this.isLoading = false;
           }
         })
@@ -85,7 +84,6 @@ export class BusquedaComponent implements OnInit {
           this.isLoading = false;
         },
         error: (response) => {
-          alert("Ha habido un error en la página");
           this.isLoading = false;
         }
       })
@@ -106,8 +104,6 @@ export class BusquedaComponent implements OnInit {
             this.isLoading = false;
           },
           error: (response) => {
-            alert("Ha habido un error en la búsqueda");
-            console.log(response);
             this.isLoading = false;
           }
         })
@@ -130,7 +126,6 @@ export class BusquedaComponent implements OnInit {
           this.isLoading = false;
         },
         error: (response) => {
-          alert("Ha habido un error en la búsqueda");
           this.isLoading = false;
         }
       })).subscribe(
@@ -159,7 +154,7 @@ export class BusquedaComponent implements OnInit {
         console.error("Error getting location:", error);
       });
     } else {
-      alert("La Geolocalización no está soportada por este navegador.");
+      this.message = "La Geolocalización no está soportada por este navegador.";
     }
   }
   getDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {

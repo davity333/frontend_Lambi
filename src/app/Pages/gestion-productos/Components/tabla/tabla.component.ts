@@ -3,6 +3,9 @@ import { OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from '../../service/products.service';
 import { tap } from 'rxjs';
 import { EnviarProducto, Product } from '../../Models/product';
+import { stringify } from 'querystring';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tabla',
   templateUrl: './tabla.component.html',
@@ -22,8 +25,12 @@ export class TablaComponent implements OnInit {
   idProduct: number = 0;
   modal:boolean = false;
   updateOrNot: boolean = false; 
+  answer: boolean = false;
+  message: string = '¿Estas seguro de eliminar este producto?';
+  title: string = 'Eliminar producto';
 
-  constructor(private productService:ProductsService) { }
+  constructor(private productService:ProductsService, private router: Router) { }
+
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
 
@@ -46,12 +53,12 @@ export class TablaComponent implements OnInit {
       arrayProduct: this.products, 
       updateOrNot: true
     };
-    alert("Actualizar en el producto: " + this.indexProduct);
     this.modal = true; 
     this.updateOrNot = true;
   }
 
   eliminar(id: number){
+       if(this.answer){
         this.indexProduct = Number(id);
         this.productService.deletedProduct(this.indexProduct).pipe(tap({
           next: (response) => {
@@ -66,6 +73,7 @@ export class TablaComponent implements OnInit {
             console.error('Error al eliminar el producto', err);
           }
         })).subscribe()
+       }
   }
   agregar($event:boolean){
      this.updateOrNot = $event
@@ -78,6 +86,9 @@ export class TablaComponent implements OnInit {
   }
   openModal(){
     this.modal = true;
+  }
+  goToHome(){
+    this.router.navigate(['/viewstand']);
   }
   addToArray($event: Product){
     this.products.push($event);

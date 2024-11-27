@@ -1,13 +1,15 @@
 <div class="carousel-item">
   <div class="w-[45vh] border-2 shadow-xl duration-100 hover:shadow-2xl card ">
-    <img [src]="product.image" alt="Card image">
+    <div class="flex justify-center items-center">
+    <img [src]="product.image[0]" alt="Card image">
+  </div>
     <h3 class="font-medium text-start">{{ product.name }}</h3>
     <div class="overflow-auto h-[10vh]">
       <!-- Aplicar clase adicional para limitar correctamente el texto -->
       <p class="text-start h-10">{{ product.description }}</p>
     </div>
     <div id="boton">
-      <button class="bg-[#9177b3] text-white px-24 py-2 rounded-md">Ver puesto</button>
+      <button (click)="goToStand()" class="bg-[#9177b3] text-white px-24 py-2 rounded-md">Ver puesto</button>
     </div>
   </div>
 </div>

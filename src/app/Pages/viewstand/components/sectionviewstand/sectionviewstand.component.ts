@@ -80,6 +80,9 @@ export class SectionviewstandComponent {
   next(): void {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
   }
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
 
   previous(): void {
     this.currentImageIndex =

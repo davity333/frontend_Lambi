@@ -6,7 +6,7 @@
 
 #image{
     height: 20vh;
-    width: 35vh;
+    width: full;
     background-size: cover;
 }
 

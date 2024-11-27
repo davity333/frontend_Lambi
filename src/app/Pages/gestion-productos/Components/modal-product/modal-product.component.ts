@@ -32,6 +32,9 @@ export class ModalProductComponent{
    updateOrNot: boolean = false;  
    images: string[] =[];
    imageDelete: boolean = false
+   message: string = "";
+   isSuccess: boolean = false;
+   isError: boolean = false;
    constructor(private puesto: PuestoService, private productService: ProductsService){
     this.formProduct = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -46,7 +49,6 @@ export class ModalProductComponent{
     this.idstand = storedSeller ? JSON.parse(storedSeller): null;
   this.productService.getCategoryProduct().pipe(tap({
     next: (response) => {
-      console.log(response);
       this.categorias = response;
     },
     error: (err) => {
@@ -64,7 +66,6 @@ export class ModalProductComponent{
       description: product.description
     });
     this.images = product.image;
-    console.log("imagenes", this.images)
   }
 }
 onFileSelected(event: Event): void {
@@ -108,12 +109,19 @@ onFileSelected(event: Event): void {
     this.productService.addProduct(formData).pipe(tap({
       next: (response) => {
         console.log(response);
-        alert("Producto agregado con éxito");
+        this.isSuccess = true;
+        this.message = "Producto agregado con éxito";
+
         this.productEvent.emit(response);
       },
       error: (err) => {
         console.error('Error al agregar el producto', err);
-        alert("Ha ocurrido un error al agregar el producto");
+
+        this.isError = true;
+        setTimeout(() => {
+          this.isError = false;
+        }, 1000);
+        this.message = "Ha ocurrido un error al agregar el producto";
       }
     })).subscribe()
   }
@@ -132,11 +140,18 @@ onFileSelected(event: Event): void {
           produtoActualizado = response;
           this.productToUpdateNow.arrayProduct[this.productToUpdateNow.indexProduct] = produtoActualizado;
           console.log(response);
-          alert("Producto editado con éxito");
+          this.isSuccess = true;
+          this.message = "Producto editado con éxito";
+          setTimeout(() => {
+            this.isSuccess = false;
+            this.closeModal();
+          }, 1000);
+
       },
       error: (err) => {
         console.error('Error al editar el producto', err);
-        alert("Ha ocurrido un error al editar el producto");
+        this.isError = true;
+        this.message = "Ha ocurrido un error al editar el producto";
       }
     })).subscribe()
     if(this.fotos.length>0){
@@ -170,6 +185,5 @@ onFileSelected(event: Event): void {
   deleteImage(index: number): void {
     this.images.splice(index, 1);
     this.imageDelete= true ;
-    console.log('Imagen eliminada:', this.images);
   }
 }

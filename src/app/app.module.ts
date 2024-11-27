@@ -63,6 +63,7 @@ import { SendMessageComponent } from './Pages/sendMessage/send-message/send-mess
 import { SucefullComponent } from './Pages/sendMessage/components/sucefull/sucefull.component';
 import { CardSellsComponent } from './Pages/sendMessage/components/card-sells/card-sells.component';
 import { SectionSellComponent } from './Pages/sendMessage/components/section-sell/section-sell.component';
+import { QuestionComponent } from './question/question.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,6 +118,7 @@ import { SectionSellComponent } from './Pages/sendMessage/components/section-sel
     CardSellsComponent,
     SectionSellComponent,
     CardSugerantionComponent,
+    QuestionComponent,
   ],
   
   imports: [

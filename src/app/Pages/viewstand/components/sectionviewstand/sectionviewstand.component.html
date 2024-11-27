@@ -20,7 +20,7 @@
     </div>
 
     <!-- Columna derecha: Texto -->
-    <div class="w-full md:w-1/2 space-y-6">
+    <div class="w-full md:w-1/2 space-y-6 pl-4 sm:pl-0">
       <div>
         <p class="text-[4.4vh] font-bold">{{standClient.name}}</p>
         <p class="text-[18px] tracking-wide font-light pt-3 pb-3">{{standClient.description}}</p>
@@ -28,7 +28,7 @@
           <img src="./assets/delivery.svg" alt="Delivery" class="opacity-60">
           <p class="text-[18px] tracking-wide font-light pt-3 pb-3">Este puesto ofrece servicio a domicilio</p>
         </div>
-        <div class="flex items-center justify-center md:justify-start gap-2 w-full">
+        <div class="flex items-center gap-2 w-full">
           <p class="font-bold opacity-60 text-[2.6vh]">Calificación:</p>
           <img 
             *ngFor="let isFilled of getStarArrayStand(); let i = index" 
@@ -44,7 +44,7 @@
           <p class="font-light opacity-90 tracking-wider text-[2.6vh]">{{standClient.estado}}, {{standClient.municipio}}</p>
         </div>
 
-        <div class="flex flex-col md:flex-row md:items-center md:space-x-2 pt-2 pb-2">
+        <div class="flex  md:flex-row md:items-center space-x-2 md:space-x-2 pt-2 pb-2">
           <p class="font-bold opacity-60 text-[2.6vh]">Contacto:</p>
           <img class="w-6 h-6" src="./assets/logo_whatsap.svg" alt="WhatsApp logo">
           <p class="font-light opacity-90 tracking-wider text-[2.6vh]">{{standClient.phone}}</p>
@@ -70,7 +70,26 @@
 
 
   <!-- EDITAR PUESTO -->
+  < class=" gap-8 grid grid-cols-2 md:flex" *ngIf="idSeller > 0">
+
   <div class="flex gap-8" *ngIf="idSeller > 0">
+    <button
+  class="rounded-lg relative w-[25vh] h-10 cursor-pointer flex items-center border border-blue-400 bg-blue-400 group hover:bg-blue-400 active:bg-blue-400 active:border-blue-400"
+  id="botonPuesto"
+  (click)="goToHome()"
+>
+  <span
+    class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+    >Ir a inicio</span
+  >
+  <span
+  class="absolute right-0 h-full w-10 rounded-lg bg-blue-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+  >
+  <img src="./assets/return.svg" alt="Home" class="w-6 h-6">
+  
+  </span>
+</button>
+
 <button
   class="rounded-lg relative w-[25vh] h-10 cursor-pointer flex items-center border border-gray-400 bg-gray-400 group hover:bg-gray-400 active:bg-gray-400 active:border-gray-400"
   id="botonPuesto"
@@ -98,7 +117,7 @@
 >
   <span
     class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
-    >Agregar productos</span
+    >Gestionar productos</span
   >
   <span
   class="absolute right-0 h-full w-10 rounded-lg bg-green-600 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
@@ -137,6 +156,7 @@
   </span>
 </button>
 </div>
+
 
   <!-- Componente debajo del carrusel y texto -->
   <div class="w-full " *ngIf="!isError">

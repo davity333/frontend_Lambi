@@ -12,29 +12,33 @@ import { tap } from 'rxjs';
 export class SugerenciasComponent implements OnInit {
   isLoading = true;
   stands: any[] = [];
+  itemsPerView: number = 0;
   constructor(private categoryService: CategoryService){}
   ngOnInit(): void {
-
-  this.categoryService.getStands().pipe(tap({
-    next: (response) => {
-      console.log('Estandar:', response);
-      // TODO: Implement your logic here to display the stands.
-      this.isLoading = false;
-    },
-    error: (response) => {
-      console.log('Error soy:', response);
-
-      this.isLoading = false;
+    // Ajusta itemsPerView según el tamaño de la ventana
+    if (window.innerWidth <= 640) {
+      this.itemsPerView = 1.03;
+    } else {
+      this.itemsPerView = 2;
     }
-  })).subscribe(data => {
-    this.stands = data.filter((item: any) => item.rating >= 4);
-    console.log("los puestos con mas de 4 estrellas",this.stands)
-  });
+  
+    this.categoryService.getStands().pipe(tap({
+      next: (response) => {
+        console.log('Estandar:', response);
+        this.isLoading = false;
+      },
+      error: (response) => {
+        console.log('Error soy:', response);
+        this.isLoading = false;
+      }
+    })).subscribe(data => {
+      this.stands = data;
+      console.log("los puestos con mas de 4 estrellas", this.stands);
+    });
   }
 
 
   currentSlide = 0;
-  itemsPerView = 2.2; // Number of items visible at a time
 
   next() {
     // Avanza al siguiente grupo de elementos

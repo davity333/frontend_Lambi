@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PuestoService } from '../../Services/puesto.service';
 import { createSellerUsersService } from '../../../Auth/users.service';
 import { Categoria, Estados } from '../../Models/estados';
-import { tap, forkJoin } from 'rxjs';
+import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,14 +28,11 @@ export class DatosNegocioComponent implements OnInit {
   alertaNegation: boolean = false;
   imagenesData:string[] = [];
   idStand: number = 0;
-  edit: number = 0; 
-  imagesToShow : string[] = [];
+  isLoading: boolean = false;
   municipio = [
     { nombre: "Tuxtla Gutiérrez" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
   ];
-  estadosChiapas = [
-    {nombre: "Chiapas"}
-  ]
+
   constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef, private router: Router) {
     this.datos = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -212,13 +209,20 @@ export class DatosNegocioComponent implements OnInit {
     phones.forEach(phone => {
       formData.append('phone', phone);
     });
+
+    this.isLoading = true;
     this.puesto.agregarPuesto(formData).subscribe({
       next: (response) => {
         this.mensajeAlerta = 'Negocio publicado con éxito';
         this.alertaConfirmation = true;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 2000);
       },
       error: (err) => {
         alert('Error con la API: ' + err.message);
+        this.isLoading = false;
       }
     });
     }else{
