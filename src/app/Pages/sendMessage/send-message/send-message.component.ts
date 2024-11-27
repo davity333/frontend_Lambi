@@ -5,6 +5,8 @@ import { ProductsService } from '../../gestion-productos/service/products.servic
 import { StandByClientService } from '../../negocios/services/stand-by-client.service';
 import { SellRequest } from '../../payment/models/sell-request';
 import { tap } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-send-message',
   templateUrl: './send-message.component.html',
@@ -16,7 +18,15 @@ export class SendMessageComponent {
   idBuyer: number = 0;
   total: number = 0;
   isSuccess: boolean = false;
-  constructor(private router: Router, private productService: ProductsService, private standService: StandByClientService){}
+  mensaje:FormGroup;
+  mensajeError:boolean = false;
+
+  constructor(private router: Router, private productService: ProductsService, private standService: StandByClientService){
+    this.mensaje = new FormGroup({
+      mensaje: new FormControl('', [Validators.required])
+    });
+  }
+  
   ngOnInit(): void {
     const storedProductId = localStorage.getItem('productId');
     const storedStandId = localStorage.getItem('standId');
@@ -27,8 +37,16 @@ export class SendMessageComponent {
     this.productCarr = carrito;
   }
 
+  validateMessage(){
+      this.mensajeError = false;
+  }
+
+  
+
   saveShoppingCart(){
-    // Aquí calculamos el total del carrito
+    
+    if(this.mensaje.valid){
+      
     this.standService.createSell(this.nuevoCarrito()).pipe(tap({
       next: (res) => {
         console.log(res);
@@ -38,11 +56,8 @@ export class SendMessageComponent {
         setTimeout(() => {
           const total = this.calcularTotal();
     
-        // Crear el mensaje con la estructura profesional
         const mensajeProfesional = this.crearMensajeProfesional(total);
-    
-    
-        // Aquí podrías enviar el mensaje a WhatsApp
+
           this.enviarWhatsApp(mensajeProfesional);
           this.router.navigate(['/viewstand']);
         }, 2000);
@@ -55,7 +70,10 @@ export class SendMessageComponent {
 
       }
     })).subscribe();
-   
+   }
+   else{
+    this.mensajeError = true;
+   }
 
   }
 
@@ -87,13 +105,14 @@ export class SendMessageComponent {
   }
 
   enviarWhatsApp(mensaje: string): void {
-    // Codificar el mensaje para la URL
+    
     const mensajeCodificado = encodeURIComponent(mensaje);
     const urlWhatsApp = `https://wa.me/529661605775?text=${mensajeCodificado}`;
 
     // Abrir la URL en una nueva ventana (esto abre WhatsApp con el mensaje prellenado)
     window.open(urlWhatsApp, '_blank');
   }
+  
 
   nuevoCarrito() {
     const carritoNuevo: SellRequest = {
