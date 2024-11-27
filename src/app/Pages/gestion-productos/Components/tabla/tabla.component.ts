@@ -29,7 +29,11 @@ export class TablaComponent implements OnInit {
   asking: boolean = false;
   message: string = '¿Estas seguro de eliminar este producto?';
   title: string = 'Eliminar producto';
-
+  isSuccess: boolean = false;
+  isError: boolean = false;
+  isLoading: boolean = false;
+  messageSuccess: string = '';
+  messageError: string = '';
   constructor(private productService:ProductsService, private router: Router) { }
 
   ngOnInit(): void {
@@ -60,27 +64,50 @@ export class TablaComponent implements OnInit {
 
   eliminar(id: number){
     this.asking = true;
-        if(this.answer){
-          this.indexProduct = Number(id);
-        this.productService.deletedProduct(this.indexProduct).pipe(tap({
-          next: (response) => {
-            if(response){
-              console.log('Producto eliminado con éxito');
-            }else{
-              console.log('Este producto no existe');
-            }
-            this.ngOnInit();
-          },
-          error: (err) => {
-            console.error('Error al eliminar el producto', err);
-          }
-        })).subscribe()
-        }
-        if(!this.answer){
-          this.asking = false;
-        }
-       
+    this.idProduct = Number(id);
+               
   }
+  receiveAnswer(answer: boolean){
+    this.answer = answer;
+    this.isLoading = true;
+    if(this.answer){
+      this.productService.deletedProduct(this.idProduct).pipe(tap({
+        next: (response) => {
+          if(response){
+            console.log('Producto eliminado con éxito');
+            this.messageSuccess = 'Producto eliminado con éxito';
+            this.isSuccess = true;
+            this.isLoading = false;
+            
+          }
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.error('Error al eliminar el producto', err);
+          this.messageError = 'Error al eliminar el producto';
+          this.isError = true;
+          this.isLoading = false;
+          
+        }
+      })).subscribe()
+    }
+    if(!this.answer){
+      this.asking = false;
+      this.message = '¿Estas seguro de eliminar este producto?';
+      this.title = 'Eliminar producto';
+      this.isSuccess = false;
+      this.isLoading = false;
+      this.messageSuccess = '';
+      this.enviarProduct = {
+        idProduct: 0,
+        indexProduct: 0,
+        arrayProduct: [], 
+        updateOrNot: false
+      };
+      this.modal = false;
+    }
+  }
+
   agregar($event:boolean){
      this.updateOrNot = $event
   }
