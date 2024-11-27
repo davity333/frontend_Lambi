@@ -91,11 +91,9 @@ export class SectionviewstandComponent {
   }
   rating(){
     if(this.standClient.rating == null){
-      this.addRating() 
-      this.ngOnInit()
+      this.addRating()  
     }else{
       this.updateRatingStand()
-      this.ngOnInit()
     }
   }
   getStarArrayStand(): boolean[] {
@@ -112,7 +110,6 @@ export class SectionviewstandComponent {
           alert("Rating enviando exitosamente!")
           console.log("Rating enviado correctamente", response);
           this.isLoading = false;
-          this.ngOnInit()
         },
         error: (err) => {
           console.error('Error al calificar el stand', err);
@@ -170,6 +167,7 @@ export class SectionviewstandComponent {
   // Manejar respuesta del componente hijo
   manejarRespuesta(confirmado: boolean): void {
     this.alertaQuestion = false; 
+
     if (confirmado) {
       this.eliminarPuesto();
     } else {
@@ -180,14 +178,13 @@ export class SectionviewstandComponent {
 
   eliminarPuesto(): void {
   console.log("ESTAS INTENTANDO ELIMINAR EL PUESTO CON EL ID: ",this.idstand);
-
     this.standByClient.deleteStand(this.idstand).pipe(tap({
       next: (response) => {
         this.confirmation = true;
         this.mensajeAlertaConfirmation = "Puesto eliminado exitosamente";
-            
+            setTimeout(() => {
             this.router.navigate(['/negocios']);
-          
+            }, 3000);
       },
       error: (err) => {
         this.negation = true;
