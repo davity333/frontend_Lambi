@@ -3,72 +3,102 @@
     <img src="./assets/logo.png" alt="logo" 
          class="h-[7vh] transition-all duration-150 hover:h-20 hover:cursor-pointer absolute  left-4" 
          title="Home" id="logo" [routerLink]="['/']">
+         <div class="absolute inset-0 -z-50 shine-effect"></div>
 
-    <div class="flex items-center justify-center min-h-screen">
-        <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 sm:w-96" [formGroup]="users">
-            <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center 
-            mb-[76vh] sm:mt-[5vh] md:top-[4vh] lg:top-[4vh]  xl:top-[4vh] 2xl:top-[4vh]">
+         <div class="flex items-center justify-center min-h-screen">
+            <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 sm:w-96" [formGroup]="users">
+                <div class="absolute bg-white rounded-full w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center 
+                       mb-[60vh] sm:mt-[15%] md:mb-[50%] lg:mb-[42%] xl:mb-[40%] 2xl:mb-[40%]"
+                [ngClass]="{
+                  'sm:mt-[13%] && mb-[81%]': users.get('password')?.invalid && users.get('password')?.touched
+                }"
+              >
                 <img src="./assets/logosolo.png" class="h-16 sm:h-20" alt="Logotipo">
+              </div>
+              
+                <div class="pt-9 pb-5">
+                    <p class="text-2xl font-semibold">Iniciar sesión</p>
+                    <p class="text-center">Comprador</p>
+                    </div>
+                <!-- Input para Email -->
+                <div class="w-full relative flex flex-col rounded-xl mb-5">
+                    <!-- Input con corrección para evitar el color azul interno -->
+                    <input
+                        required=""
+                        [ngClass]="{
+                            'border-red-500': users.get('e_mail')?.invalid && users.get('e_mail')?.touched, 
+                            'border-[#4070f4]': !(users.get('e_mail')?.invalid && users.get('e_mail')?.touched)
+                        }"
+                        class="peer w-full bg-white outline-none px-4 py-2 text-base rounded-md border focus:shadow-md focus:ring-0"
+                        id="email"
+                        type="email"
+                        formControlName="e_mail"
+                        style="appearance: none;" />
+                
+                    <!-- Label dinámico -->
+                    <label
+                        class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
+                        for="email"
+                        [ngClass]="{
+                            'top-5 hidden': users.get('e_mail')?.invalid && users.get('e_mail')?.touched, 
+                        }">
+                        Email
+                    </label>
+                
+                    <!-- Mensaje de error debajo del input -->
+                    <p *ngIf="users.get('e_mail')?.invalid && users.get('e_mail')?.touched" class="text-red-500 text-sm mt-1 pl-1">
+                        Correo no válido
+                    </p>
+                </div>
+                
+                <!-- Input para Contraseña -->
+                <div class="w-full relative flex rounded-xl mb-4 flex-col">
+                    <input
+                        required=""
+                        [ngClass]="{
+                            'border-red-500': users.get('password')?.invalid && users.get('password')?.touched, 
+                            'border-[#4070f4]': !(users.get('password')?.invalid && users.get('password')?.touched)
+                        }"
+                        class="peer w-full bg-white outline-none px-4 py-2 text-base rounded-md border focus:shadow-md focus:ring-0"
+                        id="password"
+                        type="password"
+                        formControlName="password"/>
+                        <label
+                        class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
+                        for="email"
+                        [ngClass]="{
+                            'top-5 hidden': users.get('password')?.invalid && users.get('password')?.touched, 
+                        }">
+                        Contraseña
+                    </label>
+                
+                    <!-- Mensaje de error debajo del input -->
+                    <p *ngIf="users.get('password')?.invalid && users.get('password')?.touched" class="text-red-500 text-sm mt-1 pl-1">
+                        Campo requerido
+                    </p>
+                </div>
+    
+                <!-- Botón de Login -->
+                <button
+                    class="w-full bg-[#C8AB6F] text-white py-2 rounded-md shadow-md hover:bg-[#a58c5a] transition duration-300 mt-2 font-bold text-[#4d4747]" 
+                    (click)="logear()">
+                    Entrar
+                </button>
+    
+                <!-- Botón de Registro -->
+                <p class="text-sm text-gray-800 mt-4">¿Aún no tienes cuenta? 
+                    <a routerLink="/register" class="text-sky-500 hover:underline">Regístrate</a>
+                </p>
+    
+            </form>
+            <div *ngIf="alertaNegative">
+            <app-negation [mensaje]="mensajeAlerta"></app-negation>
             </div>
-            <div class="pt-9 pb-5">
-            <p class="text-2xl font-semibold">Iniciar sesión</p>
-            <p class="text-center">Comprador</p>
+            
+            <div *ngIf="alertaPositiva">
+                <app-confirmation [mensaje]="mensajeAlerta"></app-confirmation>
             </div>
-            <!-- Input para Email -->
-            <div class="w-full relative flex rounded-xl mb-5">
-                <input
-                    required=""
-                    class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
-                    id="email"
-                    type="email"
-                    formControlName="e_mail"/>
-                <label
-                    class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
-                    for="email">
-                    Email
-                </label>
-            </div>
-
-            <!-- Input para Contraseña -->
-            <div class="w-full relative flex rounded-xl mb-4">
-                <input
-                    required=""
-                    class="peer w-full bg-transparent outline-none px-4 py-2 text-base rounded-md bg-white border border-[#4070f4] focus:shadow-md"
-                    id="password"
-                    type="password"
-                    formControlName="password"/>
-                <label
-                    class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#4070f4] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#4070f4] duration-150"
-                    for="password">
-                    Contraseña
-                </label>
-            </div>
-
-            <!-- Botón de Login -->
-            <button
-                class="w-full bg-[#C8AB6F] text-white py-2 rounded-md shadow-md hover:bg-[#a58c5a] transition duration-300 mt-2 font-bold text-[#4d4747]" 
-                (click)="logear()">
-                Entrar
-            </button>
-
-            <!-- Botón de Registro -->
-            <p class="text-sm text-gray-800 mt-4">¿Aún no tienes cuenta? 
-                <a routerLink="/register" class="text-sky-500 hover:underline">Regístrate</a>
-            </p>
-
-            <!-- Botón de Google -->
-            <button
-                class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
-                <img src="./assets/google.png" class="h-5 mr-2" alt="">Continuar con Google
-            </button>
-
-            <!-- Botón de Facebook -->
-            <button
-                class="w-full bg-white text-black py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 border border-gray-300 mt-4 flex items-center justify-center">
-                <img src="./assets/faceebok.png" class="h-5 mr-2" alt="">Continuar con Facebook
-            </button>
-        </form>
-    </div>
+        </div>
     <div *ngIf="alertaNegacion">
     <app-negation [mensaje]="mensajeAlerta"></app-negation>
     </div>
@@ -76,3 +106,4 @@
         <app-confirmation [mensaje]="mensajeAlerta"></app-confirmation>
         </div>
 </div>
+<app-loader *ngIf="isLoading"></app-loader>

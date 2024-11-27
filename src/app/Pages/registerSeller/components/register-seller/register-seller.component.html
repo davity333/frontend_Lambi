@@ -1,10 +1,11 @@
 
-<div class="flex items-center justify-center min-h-screen " id="fondo" >
+<div class="min-h-screen " id="fondo" >
+    <img src="./assets/logo.png" alt="logo" 
+         class="h-[7vh] transition-all duration-150 hover:h-20 hover:cursor-pointer absolute  left-4" 
+         title="Home" id="logo" [routerLink]="['/']">
     <div class="absolute inset-0 -z-50 shine-effect"></div>
     
-    <img src="./assets/logo.png" alt="logo" class="h-[7vh] transition-all duration-150 hover:h-20 
-    hover:cursor-pointer absolute" title="Home" id="logo">
-    
+    <div class="flex items-center justify-center min-h-screen">
     <form action="#" class="flex flex-col justify-center p-8 items-center bg-white shadow-lg rounded-xl w-80 z-50 space-y-5
         sm:w-96" [formGroup]="registerSellerForm">
 
@@ -82,6 +83,13 @@
         <p class="text-sm text-gray-800 mt-4">¿Ya cuentas con una cuenta? 
             <a routerLink="/loginSeller" class="text-sky-500 hover:underline">Inicia sesión</a>
         </p>
-
     </form>
 </div>
+</div>
+        <div *ngIf="alertaNegative">
+        <app-negation [mensaje]="mensajeAlerta"></app-negation>
+        </div>
+        
+        <div *ngIf="alertaPositiva">
+            <app-confirmation [mensaje]="mensajeAlerta"></app-confirmation>
+        </div>

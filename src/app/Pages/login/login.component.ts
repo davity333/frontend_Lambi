@@ -4,22 +4,29 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { UserLogin } from '../register/models/user';
 import { Router } from '@angular/router';
+import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   users: FormGroup;
   alertaNegacion:boolean = false;
   alertaAfirmacion: boolean = false;
   mensajeAlerta:string='';
-
+  isLoading = true;
   constructor(private user: createSellerUsersService, private navegar: Router) {
     this.users = new FormGroup({
       e_mail: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     });
+  }
+
+  alertaNegative:boolean = false;
+  alertaPositiva:boolean = false;
+  ngOnInit(){
+    this.isLoading = false;
   }
   logear() {
     
@@ -27,9 +34,11 @@ export class LoginComponent {
       e_mail: this.users.value.e_mail,
       password: this.users.value.password
     };
-  
+    this.isLoading = true;
     console.log("Datos que se van a enviar:", userLogin);
   
+    if(this.users.valid){
+
     this.user.login(userLogin).pipe(
       tap({
         next: (response) => {
@@ -46,7 +55,7 @@ export class LoginComponent {
             if (token) {
               localStorage.setItem('token', token);
               this.user.setStatusSeller(false)
-              this.alertaAfirmacion = true;
+              this.alertaPositiva = true;
               this.mensajeAlerta = "Bienvenido usuario"
               console.log("Token almacenado:", token);
               setTimeout(() => {
@@ -79,6 +88,10 @@ export class LoginComponent {
         }
       })
     ).subscribe();
+    }else{
+      this.alertaNegacion = true;
+      this.mensajeAlerta = "Campos incompletos";
+    }
   }
   
   

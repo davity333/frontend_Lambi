@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
   styleUrl: './register-seller.component.css'
 })
 export class RegisterSellerComponent {
+  alertaNegative:boolean = false;
+  alertaPositiva: boolean = false;
+  mensajeAlerta:string='';
     registerSellerForm: FormGroup;
     constructor(private userService: createSellerUsersService, private router:Router){
       this.registerSellerForm = new FormGroup({
@@ -31,6 +34,8 @@ export class RegisterSellerComponent {
               localStorage.setItem('seller', JSON.stringify(response.body))
               const authorizationHeader = response.headers?.get('Authorization');
               console.log("Encabezado Authorization:", authorizationHeader); 
+              this.alertaPositiva = true;
+              this.mensajeAlerta = "Vendedor registrado con éxito";
       
               if (authorizationHeader?.startsWith('Bearer ')) {
                 const token = authorizationHeader.split(' ')[1];
@@ -41,9 +46,10 @@ export class RegisterSellerComponent {
               else {
                 console.error("Token no encontrado en el encabezado Authorization");
               }
-              alert("Usuario registrado con éxito");
               console.log(response);
-              this.router.navigate(['/negocios']);
+                               setTimeout(() => {
+                this.router.navigate(['/negocios'])
+              }, 2000);
               
             },
             error: (err) => {
@@ -53,7 +59,8 @@ export class RegisterSellerComponent {
           })
         ).subscribe();
       } else {
-        alert("Por favor llene todos los campos correctamente");
+        this.alertaNegative = true;
+        this.mensajeAlerta = "Por favor llene todos los campos correctamente";
       }
     }
 }
