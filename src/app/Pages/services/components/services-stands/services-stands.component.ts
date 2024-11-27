@@ -15,13 +15,16 @@ export class ServicesStandsComponent implements OnInit {
   userLatitude: number | null = null;
   userLongitude: number | null = null;
   closestLocations: any[] = [];
+  message: string = '';
+  noStands: boolean = false;
+  isSuccess: boolean = false;
   constructor(private router: Router, private categoryService: CategoryService  ) {
    }
   ngOnInit(): void {
     
     const Idbuyer = localStorage.getItem('buyer');
     this.idbuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
-    this.categoryService.searchStandByCategory(4, this.idbuyer).pipe(tap({
+    this.categoryService.searchStandByCategory(9, this.idbuyer).pipe(tap({
       next: (response) => {
         console.log(response);
       },
@@ -33,9 +36,12 @@ export class ServicesStandsComponent implements OnInit {
         this.standsService = data;
 
         if(this.standsService.length > 0){
+          this.noStands = false;
         }
         else{
-          alert("No hay estandares en este rubro.");
+          this.message = "No hay estandares en este rubro.";
+          this.isSuccess = true;
+          this.noStands = true;
         }
         this.calculateClosestLocations();
         this.getUserLocation();
