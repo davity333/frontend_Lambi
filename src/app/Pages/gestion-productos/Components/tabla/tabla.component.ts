@@ -25,6 +25,9 @@ export class TablaComponent implements OnInit {
   idProduct: number = 0;
   modal:boolean = false;
   updateOrNot: boolean = false; 
+  answer: boolean = false;
+  message: string = '¿Estas seguro de eliminar este producto?';
+  title: string = 'Eliminar producto';
 
   constructor(private productService:ProductsService, private router: Router) { }
 
@@ -55,6 +58,7 @@ export class TablaComponent implements OnInit {
   }
 
   eliminar(id: number){
+       if(this.answer){
         this.indexProduct = Number(id);
         this.productService.deletedProduct(this.indexProduct).pipe(tap({
           next: (response) => {
@@ -69,6 +73,7 @@ export class TablaComponent implements OnInit {
             console.error('Error al eliminar el producto', err);
           }
         })).subscribe()
+       }
   }
   agregar($event:boolean){
      this.updateOrNot = $event
