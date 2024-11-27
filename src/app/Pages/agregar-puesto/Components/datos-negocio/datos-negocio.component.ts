@@ -122,8 +122,6 @@ export class DatosNegocioComponent implements OnInit {
             error: (err) => console.error('Error al cargar datos iniciales', err),
           });
         }
-
-        alert(this.idSeller);
       }
     }
   }

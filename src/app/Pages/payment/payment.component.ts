@@ -19,7 +19,12 @@ export class PaymentComponent {
   isSuccess: boolean = false;
   total: number = 0;
   mensaje: string = '';
-  constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService) {}
+  direccion_entrega:FormGroup
+  constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService) {
+    this.direccion_entrega = new FormGroup({
+      location: new FormControl('', Validators.required)
+    });
+  }
   ngOnInit() {
     const storedStandId = localStorage.getItem('standId');
     this.standIdFk = Number(storedStandId);
@@ -36,8 +41,10 @@ export class PaymentComponent {
     this.standService.createSell(this.nuevoCarrito()).pipe(tap({
       next: (res) => {
         console.log(res);
-        this.isSuccess = true;
-        this.mensaje = 'Pago realizado correctamente';
+        setTimeout(() => {
+          this.isSuccess = true;
+          this.mensaje = 'Pago realizado correctamente';
+        }, 1000);
       },
       error: (err) => {
         console.log(err);
@@ -52,6 +59,7 @@ export class PaymentComponent {
       description: 'Orden de compra', // Cambia esto según lo que necesites
       standid_fk: Number(this.standIdFk), // ID del stand
       idbuyer: Number(this.idBuyer),
+      direccion_entrega: this.direccion_entrega.get('location')?.value || '',
       sells: this.productCarr.map((item) => ({
         idproduct: item.idproduct,
         amount: item.amountCantidad

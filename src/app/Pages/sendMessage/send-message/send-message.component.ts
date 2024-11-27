@@ -101,7 +101,7 @@ export class SendMessageComponent {
     \u{23F0} Hora: ${new Date().toLocaleTimeString()}
     📌 Nombre del puesto: ${this.standService.getNameStand()}
     👤 Nombre del comprador: ${this.standService.getNameBuyer()}
-    
+    📍 Dirección de entrega: ${this.mensaje.value.mensaje}
     🛍️ *Productos:*
     ${productosDetalles}
     
@@ -128,6 +128,7 @@ export class SendMessageComponent {
       description: 'Descripción del carrito', // Cambia esto según lo que necesites
       standid_fk: Number(this.standIdFk), // ID del stand
       idbuyer: Number(this.idBuyer),
+      direccion_entrega: this.mensaje.value.mensaje,
       sells: this.productCarr.map((item) => ({
         idproduct: item.idproduct,
         amount: item.amountCantidad

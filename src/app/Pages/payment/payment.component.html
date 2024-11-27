@@ -74,8 +74,12 @@
 <div class="flex flex-row w-[100%] justify-between">
   <p class="text-violet-500 text-2xl font-bold">Total: {{total | currency:'MXN'}}</p>
 </div>
+<div class="flex justify-center items-center" [formGroup]="direccion_entrega">
+<input type="text" class="w-[320px] h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2" placeholder="Direccion de entrega" formControlName="location">
+</div>
 <app-confirmation *ngIf="isSuccess" [mensaje]="mensaje"></app-confirmation>
 
   </div>
+
 
 </section>
