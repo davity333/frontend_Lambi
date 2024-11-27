@@ -262,5 +262,8 @@ export class DatosNegocioComponent implements OnInit {
         alert(`Seleccionaste la categoría con ID: ${selectedCategoryId} y nombre: ${selectedCategory.category}`);
     }
   }
-
+  showError(fieldName: string): boolean {
+    const control = this.datos.get(fieldName);
+    return !!control?.invalid && (control.touched || this.datos.touched || this.datos.dirty);
+  }
 }
