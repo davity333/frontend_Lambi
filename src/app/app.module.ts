@@ -63,7 +63,9 @@ import { SendMessageComponent } from './Pages/sendMessage/send-message/send-mess
 import { SucefullComponent } from './Pages/sendMessage/components/sucefull/sucefull.component';
 import { SectionSellComponent } from './Pages/sendMessage/components/section-sell/section-sell.component';
 import { QuestionComponent } from './question/question.component';
+
 import { TimeFormatPipe } from './pipes/time-format.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,

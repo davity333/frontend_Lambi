@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PuestoService } from '../../Services/puesto.service';
 import { createSellerUsersService } from '../../../Auth/users.service';
 import { Categoria, Estados } from '../../Models/estados';
-import { tap } from 'rxjs';
+import { tap, forkJoin } from 'rxjs';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,11 +30,16 @@ export class DatosNegocioComponent implements OnInit {
   imagenesData:string[] = [];
   idStand: number = 0;
   isLoading: boolean = false;
+  edit: number = 0; 
+  imagesToShow = [""]
   municipio = [
-    { nombre: "Tuxtla" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
+    { nombre: "Tuxtla Gutiérrez" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
   ];
+  estadosChiapas = [
+    { nombre: "Chiapas"}
+  ]
 
-  constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef, private router: Router) {
+  constructor(private puesto: PuestoService, private user: createSellerUsersService, private cdRef: ChangeDetectorRef, private router: Router, private location: Location) {
     this.datos = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -50,57 +56,120 @@ export class DatosNegocioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const storedStand = localStorage.getItem('standId');
-    this.idStand = storedStand ? JSON.parse(storedStand) : null;
-    const storedSeller = localStorage.getItem('seller');
-    this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+    // Inicializar manualmente los estados si no quieres llamadas al servicio
+    this.estadosChiapas = [
+      { nombre: "Chiapas" }
+    ];
 
-    if (this.idStand > 0) {
-      this.puesto.getPuesto(this.idStand).pipe(
-        tap({
-          next: (response) => {
-            console.log("Obteniendo el puesto por el idStand", response);
-            
-            this.datos.patchValue({
-              name: response.name,
-              description: response.description,
-              street: response.street,
-              no_house: response.no_house,
-              colonia: response.colonia,
-              category: response.idcategory,
-              municipio: response.idmunicipio,
-              estado: response.idestado,
-              phone: response.phone,
-              horario: response.horario,
-              send_to_house: response.send_to_house === 1 ? true : null
-            });
-          },
-          error: (err) => {
-            console.error('Error al obtener el puesto', err);
-          }
-        })
-      ).subscribe();
-    }
-    
-    alert(this.idSeller);
-    this.puesto.getEstados().subscribe(
-      (data) => {
-        this.estados = data;
-        console.log(this.estados);
+    const traer = localStorage.getItem("edit"); 
+    if (traer) {
+      this.edit = JSON.parse(traer); 
+      if (this.edit === 1) {
+        const storedStand = localStorage.getItem('standId');
+        this.idStand = storedStand ? JSON.parse(storedStand) : null;
+
+        const storedSeller = localStorage.getItem('seller');
+        this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+
+        if (this.idStand > 0) {
+          forkJoin({
+            categorias: this.puesto.getCategorias(),
+            puesto: this.puesto.getPuesto(this.idStand)
+          }).pipe(
+            tap(({ categorias, puesto }) => {
+              // Cargar categorías
+              this.categorias = categorias;
+
+              // Encontrar estado y municipio seleccionados
+              const estadoSeleccionado = this.estadosChiapas.find(e => e.nombre === puesto.estado);
+              const municipioSeleccionado = this.municipio.find(m => m.nombre === puesto.municipio);
+
+              this.datos.patchValue({
+                name: puesto.name,
+                description: puesto.description,
+                street: puesto.street,
+                no_house: puesto.no_house,
+                colonia: puesto.colonia,
+                category: puesto.idcategory,
+                municipio: municipioSeleccionado ? municipioSeleccionado.nombre : '',
+                estado: estadoSeleccionado ? estadoSeleccionado.nombre : 'Chiapas',
+                phone: puesto.phone,
+                horario: puesto.horario,
+                send_to_house: puesto.send_to_house === 1 ? true : null,
+              });
+
+              // Guardar imágenes iniciales
+              this.imagesToShow = puesto.image;
+
+              // Depuración
+              console.log('Formulario actualizado con puesto:', puesto);
+              console.log('Estados disponibles:', this.estadosChiapas);
+              console.log('Categorías disponibles:', this.categorias);
+            })
+          ).subscribe({
+            next: () => console.log('Datos iniciales cargados.'),
+            error: (err) => console.error('Error al cargar datos iniciales', err),
+          });
+        }
+
+        alert(this.idSeller);
       }
-    );
+    }
+  }
+  actualizarPuesto(){
+    let standUpdate ={
+      name: this.datos.value.name,
+      description: this.datos.value.description,
+      street: this.datos.value.street,
+      no_house: this.datos.value.no_house,
+      colonia: this.datos.value.colonia, 
+      image: this.imagesToShow, 
+      category: this.datos.value.category, 
+      municipio: this.datos.value.municipio,
+      estado: this.datos.value.estado,
+      phone: this.datos.value.phone,
+      send_to_house: this.datos.value.send_to_house === true? 1 : 0,
+      idseller: this.idSeller,
+    }
 
-    this.puesto.getCategorias().pipe(tap({
+    this.puesto.updatePuesto(this.idStand, standUpdate).pipe(tap(
+      {
       next: (response) => {
-        console.log(response);
-        this.categorias = response;
+        console.log("actualizado el puesto",response);
+        this.mensajeAlerta = 'Puesto actualizado correctamente.';
+        this.alertaConfirmation = true;
+        this.cdRef.detectChanges();
       },
       error: (err) => {
-        console.error('Error al obtener las categorias', err);
+        console.error('Error al actualizar el puesto', err);
+        this.mensajeAlerta = 'Error al actualizar el puesto.';
+        this.alertaNegation = true;
+        this.cdRef.detectChanges();
       }
-    })).subscribe();
+  })).subscribe();
+  this.imageFiles = this.puesto.getFotos()
+     if(this.imageFiles){ 
+      let formImages = new FormData(); 
+      this.imageFiles.forEach(file => {
+        formImages.append('image', file, file.name); 
+      });
+      this.puesto.updateImagesStand(this.idStand, formImages).pipe(tap({
+        next: (response) => {
+          console.log("actualizado las imagenes del puesto",response);
+        },
+        error: (err) => {
+          console.error('Error al actualizar las imagenes del puesto', err);
+          this.mensajeAlerta = 'Error al actualizar las imagenes del puesto.';
+          this.alertaNegation = true;
+          this.cdRef.detectChanges();
+        }
+      })).subscribe();
+     }
+     setTimeout(() => {
+      console.log('Redirigiendo a /viewStand...');
+      this.router.navigate(['/viewstand']);
+    }, 3000);
   }
-
   publicar(): void {
     const formData = new FormData();
     this.imageFiles = this.puesto.getFotos();
@@ -169,7 +238,12 @@ export class DatosNegocioComponent implements OnInit {
     }
     
   }
-  
+  regresar(){
+   this.location.back()
+  }
+  deleteImage($event: string[]){
+    this.imagesToShow= $event;
+  }
   obtenerIdCategoria(event: any) {
     const selectedCategoryId = event.target.value;
     const selectedCategory = this.categorias.find(category => category.idcategory === +selectedCategoryId);

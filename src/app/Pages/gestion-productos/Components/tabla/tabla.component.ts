@@ -3,8 +3,6 @@ import { OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from '../../service/products.service';
 import { tap } from 'rxjs';
 import { EnviarProducto, Product } from '../../Models/product';
-import { stringify } from 'querystring';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-tabla',

@@ -48,7 +48,13 @@ export class PuestoService {
     return this.httpClient.get<any>(url);
   }
 
-
+  updatePuesto(id: number, stand: any):Observable<any> {
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/stand/${id}`;
+    return this.httpClient.put<any>(url, stand, {headers});
+  }
   private fotos: File[] = []; // Archivos se almacenan como objetos File
 
   // Agregar una foto a la lista
@@ -65,7 +71,13 @@ export class PuestoService {
   getFotos(): File[] {
     return this.fotos;
   }
-
+  updateImagesStand(idstand: number, images: any){
+    let token = localStorage.getItem('token');
+    let headers; 
+    headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    let url = `http://52.72.44.45:8000/api/protected/stand/images/${idstand}`;
+    return this.httpClient.put<any>(url, images, {headers});
+  }
   // Limpiar todas las fotos
   clearFotos(): void {
     this.fotos = [];

@@ -4,7 +4,6 @@ import { PuestoService } from '../../../agregar-puesto/Services/puesto.service';
 import { ProductsService } from '../../service/products.service';
 import { EnviarProducto, Product, ProductUpdate } from '../../Models/product';
 import { tap } from 'rxjs';
-import { Categoria } from '../../../agregar-puesto/Models/estados';
 import { CategoryProduct } from '../../Models/categoryProduct';
 @Component({
   selector: 'app-modal-product',

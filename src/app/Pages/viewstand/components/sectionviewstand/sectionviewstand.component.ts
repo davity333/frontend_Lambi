@@ -30,6 +30,8 @@ export class SectionviewstandComponent {
 
 
   ngOnInit(){
+    let edit = 0; 
+    localStorage.setItem('edit', edit.toString());
     const storedSeller = localStorage.getItem('standId');
     this.idstand = storedSeller ? JSON.parse(storedSeller): null;
     const standByClient = localStorage.getItem('seller');
@@ -149,7 +151,9 @@ export class SectionviewstandComponent {
   }
 
   editarStand(){
+    let edit : number = 1;
     localStorage.setItem('standId', this.idstand.toString());
+    localStorage.setItem('edit', edit.toString());
     this.router.navigate(['/crearPuesto']);
   }
 }
