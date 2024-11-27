@@ -24,6 +24,9 @@ export class SectionviewstandComponent {
   nameBuyer:string = "";
   phoneBuyer:string = "";
   send_to_house:boolean = false;
+  message:string = "";
+  isSuccess:boolean = false;
+  isErrorRating:boolean = false;
   constructor(private standByClient : StandByClientService, private usersService: createSellerUsersService){}
   router = inject(Router);
   usersServices = inject(createSellerUsersService);
@@ -34,6 +37,9 @@ export class SectionviewstandComponent {
   negation:boolean = false;
   mensajeAlertaConfirmation:string = "";
   mensajeAlertaNegacion:string = "";
+
+
+
   ngOnInit(){
     let edit = 0; 
     localStorage.setItem('edit', edit.toString());
@@ -109,7 +115,8 @@ export class SectionviewstandComponent {
     this.standByClient.addRating(this.idBuyer, this.idstand, this.stars).pipe(
       tap({
         next: (response) => {
-          alert("Rating enviando exitosamente!")
+            this.isSuccess = true;
+            this.message = "Rating enviado exitosamente!";
           console.log("Rating enviado correctamente", response);
           this.isLoading = false;
           this.ngOnInit()
@@ -117,6 +124,8 @@ export class SectionviewstandComponent {
         error: (err) => {
           console.error('Error al calificar el stand', err);
           this.isLoading = false;
+          this.isErrorRating = true;
+          this.message = "Error al calificar el stand";
         }
       })
     ).subscribe();
@@ -134,7 +143,8 @@ export class SectionviewstandComponent {
     this.standByClient.updateRatingStand(this.idstand, this.idBuyer, this.stars).pipe(
       tap({
         next: (response) => {
-          alert("Rating enviando exitosamente!")
+          this.isSuccess = true;
+          this.message = "Rating enviado exitosamente!";
           console.log("Rating enviado correctamente", response);
         },
         error: (err) => {
