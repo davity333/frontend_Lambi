@@ -56,11 +56,22 @@ export class DatosNegocioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Inicializar manualmente los estados si no quieres llamadas al servicio
     this.estadosChiapas = [
       { nombre: "Chiapas" }
     ];
-
+    this.municipio = [
+      { nombre: "Tuxtla Gutiérrez" }, { nombre: "Suchiapa" }, { nombre: "San Cristóbal de las Casas" }
+    ];
+    this.puesto.getCategorias().pipe(tap(
+      {
+        next: (response) => { 
+           this.categorias = response;
+      },
+      error: (err) => {
+       console.error('Error al cargar datos iniciales', err)
+      }
+    }
+    )).subscribe()
     const traer = localStorage.getItem("edit"); 
     if (traer) {
       this.edit = JSON.parse(traer); 
