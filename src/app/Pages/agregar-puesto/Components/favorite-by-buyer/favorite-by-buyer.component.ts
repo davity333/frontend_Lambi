@@ -13,6 +13,9 @@ export class FavoriteByBuyerComponent {
   categories: Categoria[] = [];
   categori = "";
   idbuyer: number = 0;
+  isSuccess: boolean = false;
+  message: string = "";
+  isError: boolean = false;
 
   constructor(
     readonly puestoService: PuestoService,
@@ -53,6 +56,7 @@ export class FavoriteByBuyerComponent {
     }
       if(this.stand.favorite_status === null && this.stand.favorite_user === null){
         this.addFavorite()
+        
       }
     
   }
@@ -66,11 +70,15 @@ export class FavoriteByBuyerComponent {
         tap({
           next: (response) => {
             this.stand.favorite_status = true;
-            alert(" agregado a favoritos");
+            this.isSuccess = true;
+            this.message = "Agregado a favoritos";
+            this.ngOnInit()
           },
           error: (err) => {
             console.error('Error al agregar a favoritos', err);
-            alert("Ha ocurrido un error al agregar este stand a favoritos");
+            this.isError = true;
+            this.message = "Ha ocurrido un error al agregar este stand a favoritos";
+           
           },
         })
       )
@@ -82,30 +90,29 @@ export class FavoriteByBuyerComponent {
     const idstand = this.stand.idstand;
     this.categoryService.changeStatusFalse(this.idbuyer,idstand).pipe(tap({
       next: (response) => {
-        console.log("id:",response);
         this.stand.favorite_status = false;
-        alert("Quitado a favoritos");
+        this.ngOnInit()
       },
       error: (err) => {
         console.error('Error al quitar de favoritos', err);
-        alert("Ha ocurrido un error al quitar este stand de favoritos");
+        this.isError = true;
+        this.message = "Ha ocurrido un error al quitar este stand de favoritos";
       },
     })).subscribe()
   }
   
   changeStatusFavoriteTrue(){
     const idstand = this.stand.idstand;
-    alert(this.stand.idstand)
     this.categoryService.changeStatusTrue(this.idbuyer,idstand).pipe(tap({
       next: (response) => {
-        console.log("id agregada",response);
-        console.log("idbuyer:",this.idbuyer, "idStand:",idstand);
         this.stand.favorite_status = true
-        alert("Agregado a favoritos");
+        this.ngOnInit()
+
       },
       error: (err) => {
         console.error('Error al quitar de favoritos', err);
-        alert("Ha ocurrido un error al quitar este stand");
+        this.isError = true;
+        this.message = "Ha ocurrido un error al quitar este stand";
       },
     })).subscribe()
   }

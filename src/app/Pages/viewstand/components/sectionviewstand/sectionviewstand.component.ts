@@ -91,9 +91,11 @@ export class SectionviewstandComponent {
   }
   rating(){
     if(this.standClient.rating == null){
-      this.addRating()  
+      this.addRating() 
+      this.ngOnInit()
     }else{
       this.updateRatingStand()
+      this.ngOnInit()
     }
   }
   getStarArrayStand(): boolean[] {
@@ -110,6 +112,7 @@ export class SectionviewstandComponent {
           alert("Rating enviando exitosamente!")
           console.log("Rating enviado correctamente", response);
           this.isLoading = false;
+          this.ngOnInit()
         },
         error: (err) => {
           console.error('Error al calificar el stand', err);

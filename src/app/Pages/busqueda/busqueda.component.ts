@@ -32,6 +32,7 @@ export class BusquedaComponent implements OnInit {
 
   categories: Category[] = [];
   initSearchStands(idbuyer:number,palabra:string){
+    localStorage.removeItem('search');
     this.categoryService.searchStandByName(palabra,idbuyer).pipe(
       tap({
         next: (response) => {

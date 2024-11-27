@@ -1,3 +1,5 @@
+<app-confirmation *ngIf="isSuccess" [mensaje]="message"></app-confirmation>
+<app-negation *ngIf="isError" [mensaje]="message"></app-negation>
 <div class="bg-[#ffffff] shadow-xl rounded-t-xl relative">
     <div class="multimedia">
     <img [src]="stand.image[0]" 

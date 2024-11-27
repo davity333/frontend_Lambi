@@ -3,8 +3,8 @@
 
 <section *ngIf="standsService.length > 0" class="w-[100%] h-[80vh] flex justify-center items-center flex-col  ">
   <div class="w-[80%] flex flex-col gap-4 ml-10 mt-[8vh]">
-    <h1 class="text-4xl font-semibold" id="titulo">Estandares</h1>
-    <p class="text-xl font-light">Encuentra la variedad de estandares diseñados para satisfacer tus necesidades</p>
+    <h1 class="text-4xl font-semibold" id="titulo">Servicios en puestos</h1>
+    <p class="text-xl font-light">Encuentra la variedad de servicios en puestos diseñados para satisfacer tus necesidades</p>
   </div>
   <div class="w-[80%] h-[80%] flex flex-wrap gap-4 justify-center items-center">
     <app-cards *ngFor="let item of closestLocations" [stand]="item" (idStand)="receiveIdStand($event)"></app-cards>

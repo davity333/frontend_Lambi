@@ -56,8 +56,13 @@ export class SendMessageComponent {
         setTimeout(() => {
           const total = this.calcularTotal();
     
-        const mensajeProfesional = this.crearMensajeProfesional(total);
 
+
+        // Crear el mensaje con la estructura profesional
+        const mensajeProfesional = this.crearMensajeProfesional(total);
+    
+    
+        // Aquí podrías enviar el mensaje a WhatsApp
           this.enviarWhatsApp(mensajeProfesional);
           this.router.navigate(['/viewstand']);
         }, 2000);
@@ -74,6 +79,8 @@ export class SendMessageComponent {
    else{
     this.mensajeError = true;
    }
+
+  
 
   }
 
