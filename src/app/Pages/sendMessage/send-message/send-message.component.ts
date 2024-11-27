@@ -32,22 +32,30 @@ export class SendMessageComponent {
     this.standService.createSell(this.nuevoCarrito()).pipe(tap({
       next: (res) => {
         console.log(res);
-        this.isSuccess = true;
+        setTimeout(() => {
+          this.isSuccess = true;
+        }, 1000);
+        setTimeout(() => {
+          const total = this.calcularTotal();
+    
+        // Crear el mensaje con la estructura profesional
+        const mensajeProfesional = this.crearMensajeProfesional(total);
+    
+    
+        // Aquí podrías enviar el mensaje a WhatsApp
+          this.enviarWhatsApp(mensajeProfesional);
+          this.router.navigate(['/viewstand']);
+        }, 2000);
+        
         
       },
       error: (err) => {
+
         console.log(err);
+
       }
     })).subscribe();
-    const total = this.calcularTotal();
-
-    // Crear el mensaje con la estructura profesional
-    const mensajeProfesional = this.crearMensajeProfesional(total);
-
-
-    // Aquí podrías enviar el mensaje a WhatsApp
-    this.enviarWhatsApp(mensajeProfesional);
-    this.router.navigate(['/viewstand']);
+   
 
   }
 

@@ -1,11 +1,14 @@
-<div class="flex flex-col justify-center items-center w-full px-6 mt-16">
-  <app-question [title]="title" [message]="message"></app-question>
+<app-loader *ngIf="isLoading"></app-loader>
+<app-negation *ngIf="isError" [mensaje]="messageError"></app-negation>
+<div class="flex flex-col justify-center items-center w-full px-6 mt-16" *ngIf="!isLoading">
+
     <div class="text-center">
     <p id="titulo" class="text-[3.9vh]">Gestion de productos</p>
     <p>Añade, actualiza y elimina tus productos en esta sección</p>
 
     </div>
-    
+    <app-confirmation [mensaje]="messageSuccess" *ngIf="isSuccess"></app-confirmation>
+   
     <div class="p-4 flex flex-row gap-4">
       <button
   class="relative w-[20vh] h-10 cursor-pointer flex items-center border border-blue-400 bg-blue-400 group hover:bg-blue-400 active:bg-blue-400 active:border-blue-400"
@@ -26,10 +29,12 @@
         <span class="button__text">Agregar</span>
         <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
   </button>
-  
+
 </div>
 
     <div class="overflow-y-auto w-full max-w-7xl mt-5">
+      <app-question *ngIf="asking" [title]="title" (response)="receiveAnswer($event)"  [message]="message"></app-question>
+    
     <table class="min-w-full bg-white border border-gray-300">
         <thead>
           <tr class="bg-orange-300">
