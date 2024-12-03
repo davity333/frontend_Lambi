@@ -4,6 +4,7 @@ import { ProductsService } from '../../service/products.service';
 import { tap } from 'rxjs';
 import { EnviarProducto, Product } from '../../Models/product';
 import { Router } from '@angular/router';
+import { CategoryService } from '../../../busqueda/services/category.service';
 @Component({
   selector: 'app-tabla',
   templateUrl: './tabla.component.html',
@@ -32,15 +33,27 @@ export class TablaComponent implements OnInit {
   isLoading: boolean = false;
   messageSuccess: string = '';
   messageError: string = '';
-  constructor(private productService:ProductsService, private router: Router) { }
+  categories: any[] = [];
+  constructor(private productService:ProductsService, private router: Router,private categoryService:CategoryService) { }
 
   ngOnInit(): void {
     const idStand = Number(localStorage.getItem('standId'));
+    this.productService.getCategoryProduct().pipe(tap({
+      next: (response) => {
+        this.categories = response
+        console.log("las categorias son",this.categories);
+      }
+    })).subscribe();
 
     this.productService.getProductId(idStand).pipe(tap({
       next: (response) => {
         console.log("los productos del usuario es",response);
         this.products = response;
+        this.products.forEach(product => {
+          //quiero obtener el nombre de la categoria y colocarlo en el producto pero solo el nombre 
+          product.category = this.categories.find(category => category.idcategoryproduct === product.category)?.category || '';
+        });
+
       },
       error: (err) => {
         console.error('Error al obtener los productos', err);

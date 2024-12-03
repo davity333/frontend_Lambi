@@ -35,6 +35,7 @@ export class ModalProductComponent{
    message: string = "";
    isSuccess: boolean = false;
    isError: boolean = false;
+   nameCategory: string[] = [];
    constructor(private puesto: PuestoService, private productService: ProductsService){
     this.formProduct = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -50,6 +51,7 @@ export class ModalProductComponent{
   this.productService.getCategoryProduct().pipe(tap({
     next: (response) => {
       this.categorias = response;
+      this.nameCategory = this.categorias.map(categoria => categoria.category);
     },
     error: (err) => {
       console.error('Error al obtener las categorias', err);
@@ -111,6 +113,7 @@ onFileSelected(event: Event): void {
         console.log(response);
         this.isSuccess = true;
         this.message = "Producto agregado con éxito";
+        this.closeModal();
 
         this.productEvent.emit(response);
       },

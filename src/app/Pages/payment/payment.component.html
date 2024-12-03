@@ -1,23 +1,24 @@
 <app-header></app-header>
-<section class="flex justify-center w-[100%] items-center h-screen"  >
+<section class="flex justify-center w-[100%] items-center h-screen"  [formGroup]="direccion_entrega"  >
   <div class="w-[80%] h-[80%] flex-col shadow-lg rounded-lg bg-gray-200">
-  <div class=" justify-around pt-4 pb-4 flex-row flex gap-2 items-center ">
-    <h1 class="text-black text-2xl font-bold ">Pago</h1>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png" class="w-10" alt="">
+  <div class=" justify-center pt-4 pb-4 gap-10 flex-row flex items-center p-10 ">
+ 
+    <h2 class="text-black text-2xl font-bold ">Bienvenido a la plataforma de pago</h2>
+
   </div>
     <div
-  class="flex flex-col justify-around bg-gray-800 p-4 border border-white border-opacity-30 rounded-lg shadow-md max-w-xs mx-auto"
+  class="flex flex-col justify-around bg-orange-300 p-4 border border-white border-opacity-30 rounded-lg shadow-md max-w-xs mx-auto"
   >
   <div class="flex flex-row items-center justify-between mb-3">
     <input
-      class="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2 mb-3 flex-grow"
+      class="w-full h-10 border-none outline-none text-sm bg-orange-300 text-white font-semibold caret-orange-500 pl-2 mb-3 flex-grow"
       type="text"
       name="cardName"
       id="cardName"
       placeholder="Full Name" formControlName="titular"
     />
     <div
-      class="flex items-center justify-center relative w-14 h-9 bg-gray-800 border border-white border-opacity-20 rounded-md"
+      class="flex items-center justify-center relative w-14 h-9 bg-orange-300 border border-white border-opacity-20 rounded-md"
     >
       <svg
         class="text-white fill-current"
@@ -43,7 +44,7 @@
   </div>
   <div class="flex flex-col space-y-3">
     <input
-      class="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+      class="w-full h-10 border-none outline-none text-sm bg-orange-300 text-white font-semibold caret-orange-500 pl-2"
       type="text"
       name="cardNumber"
       id="cardNumber"
@@ -51,31 +52,54 @@
     />
     <div class="flex flex-row justify-between">
       <input
-        class="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+        class="w-full h-10 border-none outline-none text-sm bg-orange-300 text-white font-semibold caret-orange-500 pl-2"
         type="text"
         name="expiryDate"
         id="expiryDate"
         placeholder="MM/AA" formControlName="fechaExpiracion"
       />
       <input
-        class="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+        class="w-full h-10 border-none outline-none text-sm bg-orange-300 text-white font-semibold caret-orange-500 pl-2"
         type="text"
         name="cvv"
         id="cvv"
         placeholder="CVV" formControlName="cvv"
       />
+      
+    </div>
+    <div class="flex flex-row justify-between">
+      <input type="text" class="w-full h-10 border-none outline-none text-sm bg-orange-300 text-white font-semibold caret-orange-500 pl-2" placeholder="Direccion de entrega" formControlName="location">
+      <p>Total: {{total | currency:'MXN'}}</p>
+     
     </div>
   </div>
   <div class="flex flex-row w-[100%] justify-between">
     <button class=" bg-gray-800 text-white p-2 rounded-md">Cancelar</button>
     <button class="Btn bg-gray-800 text-white p-2 rounded-md" (click)="submitPayment($event)">Pagar   <svg viewBox="0 0 576 512" class="svgIcon"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg></button>
   </div>
-</div>
-<div class="flex flex-row w-[100%] justify-between">
-  <p class="text-violet-500 text-2xl font-bold">Total: {{total | currency:'MXN'}}</p>
-</div>
-<app-confirmation *ngIf="isSuccess" [mensaje]="mensaje"></app-confirmation>
-
+  <div class="flex flex-row w-[100%] justify-between pt-4">
+    <button
+    class="rounded-lg relative w-[25vh] h-10 cursor-pointer flex items-center border border-orange-400 bg-orange-400 group hover:bg-orange-400 active:bg-orange-400 active:border-orange-400"
+    id="botonPuesto" [routerLink]="'/viewstand'"
+   
+  >
+    <span
+      class="text-white font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300 text-center"
+      >Regresar</span
+    >
+    <span
+    class="absolute right-0 h-full w-10 rounded-lg bg-orange-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+    >
+    <img src="./assets/return.svg" alt="Home" class="w-6 h-6">
+    
+    </span>
+  </button>
   </div>
+</div>
+
+<app-confirmation *ngIf="isSuccess" [mensaje]="mensaje"></app-confirmation>
+<app-negation *ngIf="isError" [mensaje]="mensaje"></app-negation>
+  </div>
+
 
 </section>

@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { pipe, tap } from 'rxjs';
 import { ProductsService } from '../gestion-productos/service/products.service';
 declare var Stripe: any;
+import { Router } from '@angular/router';
 import { StandByClientService } from '../negocios/services/stand-by-client.service';
 @Component({
   selector: 'app-payment',
@@ -19,28 +20,44 @@ export class PaymentComponent {
   isSuccess: boolean = false;
   total: number = 0;
   mensaje: string = '';
-  constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService) {}
+  direccion_entrega:FormGroup
+  isError: boolean = false;
+  constructor(private paymentService: PaymentService, private productService: ProductsService, private standService: StandByClientService, private router: Router ) {
+    this.direccion_entrega = new FormGroup({
+      location: new FormControl('', Validators.required)
+    });
+  }
   ngOnInit() {
     const storedStandId = localStorage.getItem('standId');
     this.standIdFk = Number(storedStandId);
+
+    // Obtener información del comprador desde localStorage
     const Idbuyer = localStorage.getItem('buyer');
     this.idBuyer = Idbuyer ? JSON.parse(Idbuyer).idbuyer : null;
+
+    // Obtener carrito de compras desde el servicio
     const carrito = this.productService.getCar();
     this.productCarr = carrito;
-    
-    this.total = this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
-    
+
+    // Calcular el total al entrar
+    this.calcularTotal();
   }
 
   submitPayment(event: Event) {
     this.standService.createSell(this.nuevoCarrito()).pipe(tap({
       next: (res) => {
         console.log(res);
-        this.isSuccess = true;
-        this.mensaje = 'Pago realizado correctamente';
+        setTimeout(() => {
+          this.isSuccess = true;
+          this.mensaje = 'Pago realizado correctamente';
+          this.router.navigate(['/viewstand']);
+        }, 1000);
+        
       },
       error: (err) => {
         console.log(err);
+        this.isError = true;
+        this.mensaje = 'Error al realizar el pago';
       }
     })).subscribe();
 
@@ -52,6 +69,7 @@ export class PaymentComponent {
       description: 'Orden de compra', // Cambia esto según lo que necesites
       standid_fk: Number(this.standIdFk), // ID del stand
       idbuyer: Number(this.idBuyer),
+      direccion_entrega: this.direccion_entrega.get('location')?.value || '',
       sells: this.productCarr.map((item) => ({
         idproduct: item.idproduct,
         amount: item.amountCantidad
@@ -61,9 +79,10 @@ export class PaymentComponent {
 
 
   }
-  calcularTotal(): number {
-    return this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
-  }
+  calcularTotal(): void {
+    // Recalcular el total basado en los productos del carrito
+    this.total = this.productCarr.reduce((acc, item) => acc + (item.amountCantidad * item.datos.price), 0);
+}
 }
 /*export class PaymentComponent implements OnInit {
 

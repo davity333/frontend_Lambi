@@ -11,20 +11,25 @@
 </google-map>
 <p>Latitud: {{latitude}}</p>
 <p>Longitud: {{longitude}}</p>
-<button (click)="guardarCoordenadas($event)">Guardar Coordenadas</button>
 
-<section class="mt-3 ">
+<button (click)="guardarCoordenadas($event)">Guardar Ubicación</button>
+<p class="text-center font-normal pb-3 text-red-800">Da click en la ubicación para guardar</p>
+
+<section class=" ">
   <div class="flex flex-col">
-    <div class="flex justify-between">
-      <div *ngFor="let image of imagesToShow; let i=index;">
-        <img src={{image}} alt="" (click)="deleteImage(i)">
+    <div *ngIf="idStand > 0" class="image-preview mt-3 grid grid-cols-4 gap-4 w-full max-w-3xl mx-auto overflow-auto h-[36vh]">
+      <div *ngFor="let image of imagesToShow; let i=index;" class="image-container">
+        <img src={{image}} alt="" (click)="deleteImage(i)" title="da un click para eliminar la foto" class="preview-img duration-100 cursor-pointer">
       </div>
-    <label for="fileInput" class="file-label">Subir fotos</label>
+    </div>
     <p class="font-light">Fotos seleccionadas: {{fotosSeleccionadas}}</p>
+
+  <div *ngIf="idStand < 1">
+    <label for="fileInput" class="custom-file-upload mt-2">Subir fotos</label>
+
   </div>
-    <label for="fileInput" class="custom-file-upload mt-2">
-      Subir fotos
-    </label>
+
+    <label for="fileInput" *ngIf="idStand > 0" class="custom-file-upload mt-2">Subir mas fotos</label>
     <div *ngIf="fotos.length >0">
       <p class="text-center font-extralight pb-3">Da click en la foto para eliminar</p>
     </div>
@@ -34,10 +39,10 @@
   <div class="image-preview mt-3 grid grid-cols-4 gap-4 w-full max-w-3xl mx-auto overflow-auto h-[36vh]">
     <div class="image-container" *ngFor="let image of fotosPreview">
       <img [src]="image" alt="Vista previa" class="preview-img duration-100 cursor-pointer" 
-      id="foto" title="Da click para eliminar" (click)="removeImage(image)"/>
+      id="foto" title="Da click para eliminar la foto" (click)="removeImage(image)"/>
     </div>
   </div>
   
 </section>
-
 </div>
+<app-confirmation [mensaje]="mensajeAlerta" *ngIf="alertaPositiva"></app-confirmation>

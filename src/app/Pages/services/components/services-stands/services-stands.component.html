@@ -1,7 +1,7 @@
 <app-header></app-header>
-<app-nothing-in-page *ngIf="standsService.length === 0" message="No hay estandares en este rubro"></app-nothing-in-page>
+<app-nothing-in-page *ngIf="standsService.length === 0 || noStands" message="No hay estandares en este rubro"></app-nothing-in-page>
 
-<section *ngIf="standsService.length > 0" class="w-[100%] h-[80vh] flex justify-center items-center flex-col  ">
+<section *ngIf="standsService.length > 0 && !noStands" class="w-[100%] h-[80vh] flex justify-center items-center flex-col  ">
   <div class="w-[80%] flex flex-col gap-4 ml-10 mt-[8vh]">
     <h1 class="text-4xl font-semibold" id="titulo">Servicios en puestos</h1>
     <p class="text-xl font-light">Encuentra la variedad de servicios en puestos diseñados para satisfacer tus necesidades</p>

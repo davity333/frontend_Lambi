@@ -1,6 +1,6 @@
 <app-header></app-header> 
 <app-sucefull *ngIf="isSuccess"></app-sucefull>
-<section class="flex justify-center items-center gap-4 w-full h-[80vh] flex-col">
+<section class="flex justify-center items-center gap-4 w-full h-[80vh] flex-col" [formGroup]="mensaje">
     <div class="flex flex-col justify-center items-center gap-4 p-4">
         <h1 class="text-4xl font-bold">Estas a un paso de mandar tu pedido al vendedor</h1>
         <p class="text-lg font-light">Recuerda que puedes cancelar el pedido en cualquier momento</p>

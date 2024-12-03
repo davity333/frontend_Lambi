@@ -56,6 +56,9 @@ export class DatosNegocioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const storedSeller = localStorage.getItem('seller');
+    this.idSeller = storedSeller ? JSON.parse(storedSeller).idseller : null;
+
     this.estadosChiapas = [
       { nombre: "Chiapas" }
     ];
@@ -122,8 +125,6 @@ export class DatosNegocioComponent implements OnInit {
             error: (err) => console.error('Error al cargar datos iniciales', err),
           });
         }
-
-        alert(this.idSeller);
       }
     }
   }
@@ -182,10 +183,11 @@ export class DatosNegocioComponent implements OnInit {
     }, 3000);
   }
   publicar(): void {
+  console.log("hola")
     const formData = new FormData();
     this.imageFiles = this.puesto.getFotos();
 
-    if(this.datos.valid){
+    
       
     
     if (this.imageFiles.length === 0) {
@@ -201,7 +203,7 @@ export class DatosNegocioComponent implements OnInit {
     formData.append('colonia', this.datos.get('colonia')?.value);
     formData.append('street', this.datos.get('street')?.value);
     formData.append('no_house', this.datos.get('no_house')?.value);
-    formData.append('estado', this.datos.get('estado')?.value);
+    formData.append('estado', this.datos.get('estado')?.value || 'Chiapas');
     formData.append('horario', this.datos.get('horario')?.value);
     if(this.datos.get('send_to_house')?.value == 'true'){
       formData.append('send_to_house', 'true');
@@ -228,6 +230,8 @@ export class DatosNegocioComponent implements OnInit {
     });
 
     this.isLoading = true;
+    alert("entro aqui")
+    alert("cordenadas"+ latitud + altitud)
     this.puesto.agregarPuesto(formData).subscribe({
       next: (response) => {
         this.mensajeAlerta = 'Negocio publicado con éxito';
@@ -242,11 +246,7 @@ export class DatosNegocioComponent implements OnInit {
         this.isLoading = false;
       }
     });
-    }else{
-      this.mensajeAlerta = 'Por favor, complete todos los campos.';
-      this.alertaNegation = true;
-      return;
-    }
+ 
     
   }
   regresar(){
@@ -264,5 +264,8 @@ export class DatosNegocioComponent implements OnInit {
         alert(`Seleccionaste la categoría con ID: ${selectedCategoryId} y nombre: ${selectedCategory.category}`);
     }
   }
-
+  showError(fieldName: string): boolean {
+    const control = this.datos.get(fieldName);
+    return !!control?.invalid && (control.touched || this.datos.touched || this.datos.dirty);
+  }
 }

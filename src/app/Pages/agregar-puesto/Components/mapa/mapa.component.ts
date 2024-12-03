@@ -15,11 +15,14 @@ export class MapaComponent {
   idStand: number = 0;
   latitude: number | null = null;
   longitude: number | null = null;
-  
+  fotos: File[] = [];
+  fotosSeleccionadas: number = 0;
+  fotosPreview: string[] = []; 
+  alertaPositiva: boolean = false;
+  mensajeAlerta: string = "";
   ngOnInit(): void {
     const storedStand = localStorage.getItem('standId');
     this.idStand = storedStand ? JSON.parse(storedStand) : null;
-    
     if(this.idStand > 0){
       this.puestoService.getPuesto(this.idStand).pipe(tap({
         next: (response) => {
@@ -82,7 +85,6 @@ export class MapaComponent {
   }
   guardarCoordenadas(event: Event) {
     event.preventDefault(); 
-    alert("Se guardaron las coordenadas");
     
     if (this.latitude !== null && this.longitude !== null) {
       let latitudString = this.latitude;
@@ -94,10 +96,6 @@ export class MapaComponent {
       console.log("No se han seleccionado coordenadas aún.");
     }
   }
-
-  fotos: File[] = [];
-  fotosSeleccionadas: number = 0;
-  fotosPreview: string[] = []; 
   
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -128,8 +126,8 @@ export class MapaComponent {
     this.puestoService.setFotos(fotosActualizadas);
   
     this.fotos = fotosActualizadas;
-    this.fotosSeleccionadas = this.fotos.length;
 
+    this.fotosSeleccionadas = this.fotosSeleccionadas - 1;
   }
   
   
