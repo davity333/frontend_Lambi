@@ -14,7 +14,6 @@ export const loginGuard = () =>{
 
 export const loginSellerGuard = () =>{
     const router = inject(Router);
-
     if(localStorage.getItem('token')){
         return true;
     }else{
